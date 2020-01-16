@@ -1,3 +1,4 @@
+#include "cocos_framework.h"
 #include "MindForest_Stage1.h"
 
 
