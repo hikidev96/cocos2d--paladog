@@ -1,0 +1,8 @@
+
+eff_blend_01.plist ->
+		팔라독 (Hero)본체  오라 eff_aura_0001.png    ~ eff_aura_0006.png
+
+		오라효과받는유닛   오라 eff_aura2_0001.png  ~ eff_aura2_0006.png
+
+eff_blend_02.plist->
+		유닛죽을때 영혼 eff_die_0001.png ~ eff_die_0034.png

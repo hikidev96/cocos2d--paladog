@@ -1,0 +1,13 @@
+btn_exit.plist ->
+		x버튼 눌림 btn_exit_down.png
+		x버튼   뗌  btn_exit_up.png
+btn_pause.plist->
+		pause버튼 눌림 btn_pause_down.png
+		pause버튼   땜  btn_pause_up.png
+btn_retry.plist ->
+		retry버튼 눌림 btn_retry_down.png
+		retry버튼   땜 btn_retry_up.png
+btn_timespeed->
+		가속버튼 1배속 btn_timespeed_01_down.png  ,  btn_timespeed_01_up.png
+		가속버튼 2배속 btn_timespeed_02_down.png  ,  btn_timespeed_02_up.png
+		가속버튼 3배속 btn_timespeed_03_down.png  ,  btn_timespeed_03_up.png

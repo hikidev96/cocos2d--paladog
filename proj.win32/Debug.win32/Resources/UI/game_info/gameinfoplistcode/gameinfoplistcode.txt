@@ -1,0 +1,22 @@
+ui_game_info.plist	->
+		게임 미니맵 화살표  		 pointer_0000.png ~ pointer_0020.png
+
+		게임 exp bar / exp back bar 	 ui_exp.png / ui_exp_back.png
+
+		게임 체력정보 레이아웃   		ui_hp_info_layout.png
+		게임 체력정보 레이아웃back 		ui_hp_info_back.png
+===================================================================
+
+ui_gameplay.plist->
+		
+		왼쪽 무브 터치버튼 다운 / 업  	  btn_left_down.png  / btn_left_up.png
+		오른쪽 무브 터치버튼 다운/업	btn_right_down.png / btn_right_up.png
+		
+		식량 게이지			gauge_food.png
+		식량 아이콘 			gauge_icon_food.png
+		
+		마나 게이지			gauge_mana.png
+		마나 아이콘			gauge_icon_mana.png
+
+		메인 대시보드 			ui_game_dashboard.png
+		메인 대시보드 메이스 케이스 	ui_macebtn_case.png (메인대시보드 동그라미있는곳에 끼우면될듯)

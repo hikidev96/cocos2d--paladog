@@ -1,0 +1,17 @@
+opening_ending_03.plist ->
+
+		팻말고양이 누름 / 뗌	 btn_cat_down.png / btn_cat_up.png
+		notice 버튼 		msg_notice.png
+		2011 타이틀  		title_2010_fazecat.png
+
+		페북 좋아요 버튼 누름/뗌     title_btn_facebooklike_down.png
+					title_btn_facebooklike_up.png
+		
+
+		플레이 버튼 누름 / 뗌 	title_btn_newgame_down.png
+					title_btn_newgame_up.png
+
+		설정 버튼 누름 / 뗌   	title_btn_info_down.png / title_btn_info_up.png
+
+==================================================================
+

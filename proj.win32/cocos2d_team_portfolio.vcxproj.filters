@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\프레임워크">
+      <UniqueIdentifier>{c887dd16-a648-4606-b549-41c044837b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\영웅">
+      <UniqueIdentifier>{0ef252fd-f869-4cb7-a886-2ddca3a11f18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\유닛">
+      <UniqueIdentifier>{f72198ce-3935-4ece-b976-2abab6236aac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\몬스터">
+      <UniqueIdentifier>{c39f18fb-800a-4624-9bc6-5a71e5dcded0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\배경">
+      <UniqueIdentifier>{34bb7676-42d5-496c-8ec9-8890faa79b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\UI">
+      <UniqueIdentifier>{61bc3649-eb65-4443-b0dc-cc960916d772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{fa434f4d-348f-4976-b13b-e0e2e705d3a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GameDelegate">
+      <UniqueIdentifier>{f96cf258-eceb-416e-b645-73978dd78de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\MainGame">
+      <UniqueIdentifier>{84be032e-5fd4-40d9-ab3c-4a0863a2517d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Shopping">
+      <UniqueIdentifier>{79716ed1-2e2e-47a1-aef8-f0bd6dcd8b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Upgrade">
+      <UniqueIdentifier>{877ce346-5568-4f61-92b0-2b15b878c9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Hero">
+      <UniqueIdentifier>{ab59fc29-0bdb-44ed-b427-c41d35c24070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Map">
+      <UniqueIdentifier>{f6f267b4-d377-4780-841c-a110e8c6ac5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Map\스테이지">
+      <UniqueIdentifier>{3d008ba3-9bd1-4e82-93f0-13a710a0d096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\아이템">
+      <UniqueIdentifier>{a0453bd8-5786-4d9a-af5b-c88491097499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\Intro">
+      <UniqueIdentifier>{bb5f61ca-9f26-411b-a20b-795a4bddbdd2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Unit.cpp">
+      <Filter>src\유닛</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Monster.cpp">
+      <Filter>src\몬스터</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Hero.cpp">
+      <Filter>src\영웅</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapMindForest.cpp">
+      <Filter>src\Scene\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MindForest_Stage1.cpp">
+      <Filter>src\Scene\Map\스테이지</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MindForest_Stage2.cpp">
+      <Filter>src\Scene\Map\스테이지</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MindForest_Stage3.cpp">
+      <Filter>src\Scene\Map\스테이지</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameDelegate.cpp">
+      <Filter>src\GameDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainGameScene.cpp">
+      <Filter>src\Scene\MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="cocos_framework.cpp">
+      <Filter>src\프레임워크</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HeroControl.cpp">
+      <Filter>src\영웅</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HeroUnit.cpp">
+      <Filter>src\영웅</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IntroScene.cpp">
+      <Filter>src\Scene\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UI.cpp">
+      <Filter>src\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Background.cpp">
+      <Filter>src\배경</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>src\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\cocos_framework.h">
+      <Filter>src\프레임워크</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Unit.h">
+      <Filter>src\유닛</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Monster.h">
+      <Filter>src\몬스터</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Hero.h">
+      <Filter>src\영웅</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapMindForest.h">
+      <Filter>src\Scene\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MindForest_Stage1.h">
+      <Filter>src\Scene\Map\스테이지</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MindForest_Stage2.h">
+      <Filter>src\Scene\Map\스테이지</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MindForest_Stage3.h">
+      <Filter>src\Scene\Map\스테이지</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameDelegate.h">
+      <Filter>src\GameDelegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainGameScene.h">
+      <Filter>src\Scene\MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeroControl.h">
+      <Filter>src\영웅</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeroUnit.h">
+      <Filter>src\영웅</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IntroScene.h">
+      <Filter>src\Scene\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UI.h">
+      <Filter>src\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Background.h">
+      <Filter>src\배경</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

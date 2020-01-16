@@ -1,0 +1,29 @@
+	Hero , bear , Kangaroo <-> 일단 세개 정리
+==========================================================
+
+u_01.plist ->
+		팔라독 대기 hero_wait_0001.png   ~ hero_wait_0012.png
+		팔라독 무브 hero_walk_0001.png   ~ hero_walk_0012.png
+		팔라독 공격 hero_attack_0001.png ~ hero_attack_0010.png
+		팔라독 죽음 hero_dead_0001.png  ~ hero_dead_0020.png
+
+
+		쥐      공격 u01_att1_0001.png     ~  u01_att1_0010.png
+		쥐   강공격 u01_att2_0001.png     ~  u01_att2_0016.png
+		쥐      죽음 u01_dead_0001.png    ~  u01_dead_0016.png
+		쥐      무브 u01_walk_0001.png     ~  u01_walk_0011.png
+
+		
+		곰      공격  u03_att1_0001.png     ~  u03_att1_0010.png
+		곰    강공격 u03_att2_0001.png     ~ u03_att2_0016.png
+
+==========================================================
+u_02.plist ->
+		곰      죽음  u03_dead_0001.png ~ u03_dead_0016.png
+		곰      무브  u03_walk_0001.png  ~ u03_walk_0012.png
+
+		
+		캥거루    공격 u04_att1_0001.png ~ u04_att1_0010.png
+		캥거루 강공격 u04_att2_0001.png ~ u04_att2_0016.png
+		캥거루    죽음 u04_dead_0001.png ~ u04_dead_0016.png
+		캥거루    무브 u04_walk_0001.png  ~ u04_walk_0012.png

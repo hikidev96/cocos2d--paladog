@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>background_04_a.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,0},{1024,234}}</string>
+                <key>offset</key>
+                <string>{0,11}</string>
+                <key>sourceSize</key>
+                <string>{1024,256}</string>
+            </dict>
+            <key>background_04_b.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,308},{752,60}}</string>
+                <key>offset</key>
+                <string>{-136,43}</string>
+                <key>sourceSize</key>
+                <string>{1024,256}</string>
+            </dict>
+            <key>background_04_c.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,235},{480,72}}</string>
+                <key>offset</key>
+                <string>{-272,92}</string>
+                <key>sourceSize</key>
+                <string>{1024,256}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>1</integer>
+            <key>size</key>
+            <string>{1024,512}</string>
+            <key>textureFileName</key>
+            <string>background_04.png</string>
+        </dict>
+    </dict>
+</plist>

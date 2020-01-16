@@ -1,0 +1,16 @@
+eff_e_base.plist ->
+		건물 부서지는 먼지 이펙트 crash_0001.png  ~ crash_0020.png
+		건물 맞는 이펙트 (필요없어보임) tower_hit_0001.png ~ tower_hit_0010.png
+=================================================================
+enemybase.plist ->
+		건물 검은 연기 이펙트 (입에서나오는거)
+		eft_enemy_base_01.png~eft_enemy_base_18.png
+
+		건물 	   앞 enemy_base_full_front.png
+		건물	   뒤 enemy_base_full_back.png
+
+		건물 갈라짐 앞 enemy_base_damaged_front.png
+		건물 갈라짐 뒤 enemy_base_damaged_back.png
+
+		건물 무너짐 앞 enemy_base_broken_front.png
+		건물 무너짐 뒤 enemy_base_broken_back.png
