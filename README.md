@@ -1,5 +1,4 @@
 # Cocos2d_Team_Portfolio
 paladog
 
-// GIT Test
-
+깃허브 테스트
