@@ -7,7 +7,7 @@ class Background
 {
  public:
   static cocos2d::Sprite* GetIntroBackground();
-  static cocos2d::RepeatForever* GetIntroAnimation();
+  static cocos2d::Animation* GetIntroDarkCloud();
   static cocos2d::Sprite* GetIntroSelectBG();
   cocos2d::Sprite* GetShopBackground();
   cocos2d::Sprite* GetHeroBackground();
@@ -16,7 +16,9 @@ class Background
   cocos2d::Sprite* GetStage3Background();
  private:
   static cocos2d::Sprite* _introBg;
-  static cocos2d::SpriteFrameCache* _introAniCache;
+  static cocos2d::SpriteFrameCache* _cache;
+  //static cocos2d::Sprite* _introDarkCloud;
+  //static cocos2d::Animation* _introDarkCloudAni;
   static cocos2d::Sprite* _introSelectBG;
   cocos2d::Sprite* _shopBg;
   cocos2d::Sprite* _heroBg;

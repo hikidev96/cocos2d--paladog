@@ -12,13 +12,13 @@ bool IntroScene::init() {
     return false;
   }
 
-  _bgLayer = Layer::create();
+  /*_bgLayer = Layer::create();
   _bgLayer->addChild(Background::GetIntroBackground());
-  this->addChild(_bgLayer);
+  this->addChild(_bgLayer);*/
+
+  this->addChild(Background::GetIntroBackground());
 
   this->scheduleOnce(schedule_selector(IntroScene::changeIntroBG), 3.0f);
-  _bgLayer->removeChild(Background::GetIntroBackground());
-
   /*_uiLayer = Layer::create();
   _uiLayer->addChild(UI::GetIntroConfigButton());
   _uiLayer->addChild(UI::GetIntroPlayButton());
@@ -29,6 +29,8 @@ bool IntroScene::init() {
 
   _isSelectPlay = false;
   _isSelectConfig = false;
+  _isSelectPaladog = false;
+  _isSelectDarkdog = false;
 
   return true;
 }
@@ -78,6 +80,8 @@ bool IntroScene::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event) {
     this->removeChild(UI::GetIntroPlayButton());
     this->addChild(UI::GetIntroSelectedPlayButton());
     this->addChild(UI::GetIntroModeSelectBox());
+    this->addChild(UI::GetIntroPaladogButton());
+    this->addChild(UI::GetIntroDarkdogButton());
     _isSelectPlay = true;
 
   } else if (playTouch&& _isSelectPlay) {
@@ -86,9 +90,16 @@ bool IntroScene::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event) {
     _isSelectPlay = false;
   }
 
+  
+
   return true;
 }
 
 void IntroScene::changeIntroBG(float f) {
-  
+  this->removeChild(Background::GetIntroBackground());
+  log("check");
+  auto animate = Animate::create(Background::GetIntroDarkCloud());
+  auto rep = RepeatForever::create(animate);
+
+  this->runAction(rep);
 }

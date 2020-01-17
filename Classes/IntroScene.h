@@ -18,6 +18,8 @@ class IntroScene : public cocos2d::Scene
   cocos2d::EventListenerTouchOneByOne* _listener;
   bool _isSelectPlay;
   bool _isSelectConfig;
+  bool _isSelectPaladog;
+  bool _isSelectDarkdog;
   void changeIntroBG(float f);
 };
 

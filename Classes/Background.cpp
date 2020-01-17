@@ -2,8 +2,10 @@
 #include "Background.h"
 
 Sprite* Background::_introBg = nullptr;
-SpriteFrameCache* Background::_introAniCache = nullptr;
 Sprite* Background::_introSelectBG = nullptr;
+SpriteFrameCache* Background::_cache = nullptr;
+//Animation* Background::_introDarkCloudAni = nullptr;
+//Sprite* Background::_introDarkCloud = nullptr;
 
 Sprite* Background::GetIntroBackground() {
   _introBg = Sprite::create("UI/15age.png");
@@ -12,25 +14,30 @@ Sprite* Background::GetIntroBackground() {
   return _introBg;
 }
 
-RepeatForever* Background::GetIntroAnimation() {
-  _introAniCache = SpriteFrameCache::getInstance();
-  _introAniCache->addSpriteFramesWithFile("opening_ending_01.plist");
+Animation* Background::GetIntroDarkCloud() {
+  _cache = SpriteFrameCache::getInstance();
+  _cache->addSpriteFramesWithFile("opening_ending_01.plist");
   Vector<SpriteFrame*> aniFrames;
 
-  for (int i = 1; i < 10; i++) {
-    std::string _frames = StringUtils::format("", i);
-    SpriteFrame* frame = _introAniCache->getSpriteFrameByName(_frames);
+  for (int i = 0; i < 6; i++) {
+    std::string _frames = StringUtils::format("title_dark_cloud2_%02d.png", i);
+    SpriteFrame* frame = _cache->getSpriteFrameByName(_frames);
     aniFrames.pushBack(frame);
   }
 
-  auto sprite = Sprite::createWithSpriteFrameName("");
-  sprite->setPosition(Vec2(840, 360));
+  auto sprite = Sprite::createWithSpriteFrameName("title_dark_cloud2_00.png");
+  sprite->setPosition(Vec2(240, 160));
 
   auto animation = Animation::createWithSpriteFrames(aniFrames, 0.06f);
-  auto animate = Animate::create(animation);
-  auto rep = RepeatForever::create(animate);
 
-  return rep;
+  return animation;
+
+  /*_introDarkCloud = Sprite::createWithSpriteFrameName("title_dark_cloud2_00.png");
+  _introDarkCloud->setPosition(Vec2(240, 160));
+
+  _introDarkCloudAni = Animation::createWithSpriteFrames(aniFrames, 0.06f);
+
+  return _introDarkCloudAni;*/
 }
 
 Sprite* Background::GetIntroSelectBG() {
