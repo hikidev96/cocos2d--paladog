@@ -600,6 +600,15 @@
 			<key>originalHeight</key>
 			<integer>170</integer>
 		</dict>
+<key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>1</integer>
+            <key>size</key>
+            <string>{256,512}</string>
+            <key>textureFileName</key>
+            <string>Pmummy.png</string>
+        </dict>
 	</dict>
 </dict>
 </plist>
