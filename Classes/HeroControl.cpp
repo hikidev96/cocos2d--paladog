@@ -19,13 +19,22 @@ HeroControl::HeroControl(Scene* scene, Hero* hero)
 
 	_leftButton = Sprite::createWithSpriteFrameName("btn_left_up.png");
 	_leftButton->setAnchorPoint({ 0,0 });
-	_leftButton->setPosition({ 0,0 });
+	_leftButton->setPosition({ 10,5 });
 	_rightButton = Sprite::createWithSpriteFrameName("btn_right_up.png");
 	_rightButton->setAnchorPoint({ 0,0 });
-	_rightButton->setPosition({ 110,0 });
+	_rightButton->setPosition({ 125,5 });
 
-	_scene->addChild(_leftButton);
-	_scene->addChild(_rightButton);
+	_mainDashbord = Sprite::createWithSpriteFrameName("ui_game_dashboard.png");
+	_mainDashbord->setAnchorPoint({ 0,0 });
+	_mainDashbord->setPosition({ 0,0 });
+	_mainDashbordCase = Sprite::createWithSpriteFrameName("ui_macebtn_case.png");
+	_mainDashbordCase->setAnchorPoint({ 0,0 });
+	_mainDashbordCase->setPosition({ 237,2 });
+
+	_scene->addChild(_leftButton,1);
+	_scene->addChild(_rightButton,1);
+	_scene->addChild(_mainDashbord);
+	_scene->addChild(_mainDashbordCase,2);
 
 	_right = false;
 	_left = false;
