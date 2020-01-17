@@ -90,9 +90,6 @@
     <ClCompile Include="..\Classes\MainGameScene.cpp">
       <Filter>src\Scene\MainGame</Filter>
     </ClCompile>
-    <ClCompile Include="cocos_framework.cpp">
-      <Filter>src\프레임워크</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\HeroControl.cpp">
       <Filter>src\영웅</Filter>
     </ClCompile>
