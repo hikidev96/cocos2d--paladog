@@ -41,7 +41,7 @@ bool GameDelegate::applicationDidFinishLaunching() {
 
   glview->setDesignResolutionSize(480, 320, ResolutionPolicy::EXACT_FIT);
 
-  auto scene = MainGameScene::createScene();
+  auto scene = IntroScene::createScene();
 
   director->runWithScene(scene);
 

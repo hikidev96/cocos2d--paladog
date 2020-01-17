@@ -5,13 +5,20 @@
 
 class UI
 {
-public:
-	static cocos2d::Sprite* GetIntroPlayButton();
-	static cocos2d::Sprite* GetIntroConfigButton();
-private:
-	static cocos2d::Sprite* _introPlayButton;
-	static cocos2d::Sprite* _introConfigButton;
-	static cocos2d::Sprite* _introPaladogButton;
+ public:
+  static cocos2d::Sprite* GetIntroPlayButton();
+  static cocos2d::Sprite* GetIntroSelectedPlayButton();
+  static cocos2d::Sprite* GetIntroConfigButton();
+  static cocos2d::Sprite* GetIntroSelectedConfigButton();
+  static cocos2d::Sprite* GetIntroModeSelectBox();
+ private:
+  static cocos2d::SpriteFrameCache* _cache;
+  static cocos2d::Sprite* _introPlayButton;
+  static cocos2d::Sprite* _introSelectedPlayButton;
+  static cocos2d::Sprite* _introConfigButton;
+  static cocos2d::Sprite* _introSelectedConfigButton;
+  static cocos2d::Sprite* _introModeSelectBox;
+  static cocos2d::Sprite* _introPaladogButton;
 };
 
 #endif // __UI_H__
