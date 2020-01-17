@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "UI.h"
 
 Sprite* UI::_introPlayButton = nullptr;

@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "Background.h"
 
 Sprite* Background::_introBg = nullptr;

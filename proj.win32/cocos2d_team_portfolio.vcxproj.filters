@@ -28,12 +28,6 @@
     <Filter Include="src\Scene">
       <UniqueIdentifier>{fa434f4d-348f-4976-b13b-e0e2e705d3a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\GameDelegate">
-      <UniqueIdentifier>{f96cf258-eceb-416e-b645-73978dd78de3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Scene\MainGame">
-      <UniqueIdentifier>{84be032e-5fd4-40d9-ab3c-4a0863a2517d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Scene\Shopping">
       <UniqueIdentifier>{79716ed1-2e2e-47a1-aef8-f0bd6dcd8b50}</UniqueIdentifier>
     </Filter>
@@ -52,17 +46,17 @@
     <Filter Include="src\아이템">
       <UniqueIdentifier>{a0453bd8-5786-4d9a-af5b-c88491097499}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\win32">
-      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Scene\Intro">
       <UniqueIdentifier>{bb5f61ca-9f26-411b-a20b-795a4bddbdd2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\AppDelegate">
+      <UniqueIdentifier>{f96cf258-eceb-416e-b645-73978dd78de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win32">
+      <UniqueIdentifier>{7bd26e5b-6cd4-49b4-b47f-b0fcfb225396}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>src\win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Unit.cpp">
       <Filter>src\유닛</Filter>
     </ClCompile>
@@ -84,12 +78,6 @@
     <ClCompile Include="..\Classes\MindForest_Stage3.cpp">
       <Filter>src\Scene\Map\스테이지</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameDelegate.cpp">
-      <Filter>src\GameDelegate</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MainGameScene.cpp">
-      <Filter>src\Scene\MainGame</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\HeroControl.cpp">
       <Filter>src\영웅</Filter>
     </ClCompile>
@@ -105,11 +93,14 @@
     <ClCompile Include="..\Classes\Background.cpp">
       <Filter>src\배경</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src\AppDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>src\win32</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\cocos_framework.h">
       <Filter>src\프레임워크</Filter>
     </ClInclude>
@@ -134,12 +125,6 @@
     <ClInclude Include="..\Classes\MindForest_Stage3.h">
       <Filter>src\Scene\Map\스테이지</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameDelegate.h">
-      <Filter>src\GameDelegate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MainGameScene.h">
-      <Filter>src\Scene\MainGame</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\HeroControl.h">
       <Filter>src\영웅</Filter>
     </ClInclude>
@@ -154,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Background.h">
       <Filter>src\배경</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src\AppDelegate</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
