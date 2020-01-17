@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "MainGameScene.h"
 
 Scene* MainGameScene::createScene() {

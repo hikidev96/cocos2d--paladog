@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "main.h"
 #include "GameDelegate.h"
 #include "cocos2d.h"

@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "GameDelegate.h"
 #include "MainGameScene.h"
 #include "MindForest_Stage1.h"

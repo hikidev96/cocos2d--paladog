@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "HeroControl.h"
 
 HeroControl::HeroControl(Scene* scene, Hero* hero)

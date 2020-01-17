@@ -1,6 +1,7 @@
 #ifndef  _GAME_DELEGATE_H_
 #define  _GAME_DELEGATE_H_
 
+#include "cocos_framework.h"
 #include "cocos2d.h"
 
 class  GameDelegate : private cocos2d::Application

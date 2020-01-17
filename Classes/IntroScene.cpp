@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "IntroScene.h"
 #include "Background.h"
 #include "UI.h"
