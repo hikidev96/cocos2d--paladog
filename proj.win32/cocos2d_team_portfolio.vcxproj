@@ -156,6 +156,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\HeroControl.cpp" />
     <ClCompile Include="..\Classes\HeroUnit.cpp" />
     <ClCompile Include="..\Classes\IntroScene.cpp" />
+    <ClCompile Include="..\Classes\MainGameScene.cpp" />
     <ClCompile Include="..\Classes\MapMindForest.cpp" />
     <ClCompile Include="..\Classes\MindForest_Stage1.cpp" />
     <ClCompile Include="..\Classes\MindForest_Stage2.cpp" />
@@ -175,6 +176,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\HeroControl.h" />
     <ClInclude Include="..\Classes\HeroUnit.h" />
     <ClInclude Include="..\Classes\IntroScene.h" />
+    <ClInclude Include="..\Classes\MainGameScene.h" />
     <ClInclude Include="..\Classes\MapMindForest.h" />
     <ClInclude Include="..\Classes\MindForest_Stage1.h" />
     <ClInclude Include="..\Classes\MindForest_Stage2.h" />

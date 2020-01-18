@@ -4,22 +4,23 @@
 #include "cocos_framework.h"
 #include "cocos2d.h"
 
-class IntroScene : public cocos2d::Scene
+class IntroScene : public Scene
 {
  public:
-  static cocos2d::Scene* createScene();
+  static Scene* createScene();
   virtual bool init();
   CREATE_FUNC(IntroScene);
-  void onEnter();
-  void onExit();
-  bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+  //void onEnter();
+  //void onExit();
+  //bool onTouchBegan(Touch* touch, Event* event);
  private:
-  cocos2d::Layer* _bgLayer;
-  cocos2d::Layer* _uiLayer;
-  cocos2d::EventListenerTouchOneByOne* _listener;
-  bool _isSelectPlay;
-  bool _isSelectConfig;
-  void changeIntroBG(float f);
+  //EventListenerTouchOneByOne* _listener;
+  //bool _isSelectPlay;
+  //bool _isSelectConfig;
+  //bool _isChangeScene;
+  //short _num;
+  void changeIntroBG(float t);
+  //void callEveryFrame(float t);
 };
 
 #endif // __INTRO_SCENE_H__

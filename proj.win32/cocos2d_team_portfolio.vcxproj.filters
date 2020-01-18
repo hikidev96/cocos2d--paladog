@@ -43,9 +43,6 @@
     <Filter Include="src\Scene\Map\스테이지">
       <UniqueIdentifier>{3d008ba3-9bd1-4e82-93f0-13a710a0d096}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\아이템">
-      <UniqueIdentifier>{a0453bd8-5786-4d9a-af5b-c88491097499}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\win32">
       <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
     </Filter>
@@ -54,6 +51,9 @@
     </Filter>
     <Filter Include="src\AppDelegate">
       <UniqueIdentifier>{f96cf258-eceb-416e-b645-73978dd78de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene\MainGameScene">
+      <UniqueIdentifier>{791cd081-7dcb-4882-bd39-d920e3dd2e25}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,11 +93,14 @@
     <ClCompile Include="..\Classes\UI.cpp">
       <Filter>src\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Background.cpp">
-      <Filter>src\배경</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src\AppDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainGameScene.cpp">
+      <Filter>src\Scene\MainGameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Background.cpp">
+      <Filter>src\배경</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,11 +143,14 @@
     <ClInclude Include="..\Classes\UI.h">
       <Filter>src\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Background.h">
-      <Filter>src\배경</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src\AppDelegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainGameScene.h">
+      <Filter>src\Scene\MainGameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Background.h">
+      <Filter>src\배경</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
