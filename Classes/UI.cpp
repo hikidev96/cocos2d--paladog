@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "UI.h"
 
 cocos2d::Sprite* UI::_introPlayButton = nullptr;
