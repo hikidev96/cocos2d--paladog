@@ -15,6 +15,8 @@ class HeroControl : Scene
 	Scene* _scene;
 	Sprite* _leftButton;
 	Sprite* _rightButton;
+	Sprite* _mainDashbord;
+	Sprite* _mainDashbordCase;
 
 	bool _right;
 	bool _left;

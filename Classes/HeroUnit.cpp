@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "HeroUnit.h"
 
 void HeroUnit::createUnitMouse(Scene* scene)
