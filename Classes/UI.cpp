@@ -12,10 +12,21 @@ Sprite* UI::_introDarkdogButton = nullptr;
 Sprite* UI::_introCampaignButton = nullptr;
 Sprite* UI::_introSurvivalButton = nullptr;
 Sprite* UI::_introSelectSlot = nullptr;
+Sprite* UI::_introDataSlot = nullptr;
+Sprite* UI::_introMSGBox = nullptr;
+Sprite* UI::_introDataSlotBottom = nullptr;
+Sprite* UI::_introCancelButton = nullptr;
+
+SpriteFrameCache * UI::GetCache() {
+  _cache->addSpriteFramesWithFile("UI/startMapUI/opening_ending_03.plist");
+  _cache->addSpriteFramesWithFile("UI/startMapUI/option_msg_02.plist");
+  _cache->addSpriteFramesWithFile("UI/startMapUI/option_msg_01.plist");
+  _cache->addSpriteFramesWithFile("UI/button/btn_exit.plist");
+
+  return _cache;
+}
 
 Sprite* UI::GetIntroPlayButton() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/opening_ending_03.plist");
-
   _introPlayButton = Sprite::createWithSpriteFrameName("title_btn_newgame_up.png");
   _introPlayButton->setAnchorPoint(Vec2(0, 0));
   _introPlayButton->setPosition(Vec2(0, 0));
@@ -23,8 +34,6 @@ Sprite* UI::GetIntroPlayButton() {
 }
 
 Sprite* UI::GetIntroSelectedPlayButton() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/opening_ending_03.plist");
-
   _introSelectedPlayButton =
     Sprite::createWithSpriteFrameName("title_btn_newgame_down.png");
   _introSelectedPlayButton->setAnchorPoint(Vec2(0, 0));
@@ -33,8 +42,6 @@ Sprite* UI::GetIntroSelectedPlayButton() {
 }
 
 Sprite* UI::GetIntroConfigButton() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/opening_ending_03.plist");
-
   _introConfigButton = 
     Sprite::createWithSpriteFrameName("title_btn_info_up.png");
   _introConfigButton->setAnchorPoint(Vec2(1, 0));
@@ -43,8 +50,6 @@ Sprite* UI::GetIntroConfigButton() {
 }
 
 Sprite * UI::GetIntroSelectedConfigButton() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/opening_ending_03.plist");
-
   _introSelectedConfigButton = 
     Sprite::createWithSpriteFrameName("title_btn_info_down.png");
   _introSelectedConfigButton->setAnchorPoint(Vec2(1, 0));
@@ -53,8 +58,6 @@ Sprite * UI::GetIntroSelectedConfigButton() {
 }
 
 Sprite* UI::GetIntroModeSelectBox() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/option_msg_02.plist");
-
   _introModeSelectBox =
     Sprite::createWithSpriteFrameName("modeselect_box.png");
   _introModeSelectBox->setAnchorPoint(Vec2(1, 0));
@@ -63,8 +66,6 @@ Sprite* UI::GetIntroModeSelectBox() {
 }
 
 Sprite * UI::GetIntroPaladogButton() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/option_msg_02.plist");
-
   _introPaladogButton =
     Sprite::createWithSpriteFrameName("hero_paladog_up.png");
   _introPaladogButton->setScale(0.85f);
@@ -74,8 +75,6 @@ Sprite * UI::GetIntroPaladogButton() {
 }
 
 Sprite * UI::GetIntroDarkdogButton() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/option_msg_02.plist");
-
   _introDarkdogButton =
     Sprite::createWithSpriteFrameName("hero_darkdog_up.png");
   _introDarkdogButton->setScale(0.85f);
@@ -85,8 +84,6 @@ Sprite * UI::GetIntroDarkdogButton() {
 }
 
 Sprite * UI::GetIntroCampaignButton() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/option_msg_02.plist");
-
   _introCampaignButton =
     Sprite::createWithSpriteFrameName("btn_campaign_up.png");
   _introCampaignButton->setScale(0.8f);
@@ -96,8 +93,6 @@ Sprite * UI::GetIntroCampaignButton() {
 }
 
 Sprite * UI::GetIntroSurvivalButton() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/option_msg_02.plist");
-
   _introSurvivalButton =
     Sprite::createWithSpriteFrameName("btn_survival_up.png");
   _introSurvivalButton->setScale(0.8f);
@@ -106,12 +101,54 @@ Sprite * UI::GetIntroSurvivalButton() {
   return _introSurvivalButton;
 }
 
-Sprite * UI::GetIntroSelectSlot() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/option_msg_01.plist");
-
+Sprite* UI::GetIntroSelectSlot() {
   _introSelectSlot =
     Sprite::createWithSpriteFrameName("msg_select_slot.png");
+  _introSelectSlot->setScale(0.9f);
   _introSelectSlot->setAnchorPoint(Vec2(0, 0));
-  _introSelectSlot->setPosition(Vec2(0, 0));
+  _introSelectSlot->setPosition(Vec2(45, 20));
   return _introSelectSlot;
 }
+
+Sprite * UI::GetIntroDataSlot() {
+  _introDataSlot =
+    Sprite::createWithSpriteFrameName("data_slot.png");
+  _introDataSlot->setAnchorPoint(Vec2(0, 0));
+  _introDataSlot->setPosition(Vec2(-5, -35));
+  return _introDataSlot;
+}
+
+Sprite * UI::GetIntroDataSlotBottom() {
+  _introDataSlotBottom =
+    Sprite::createWithSpriteFrameName("slot_info_empty.png");
+  _introDataSlotBottom->setAnchorPoint(Vec2(0, 0));
+  _introDataSlotBottom->setPosition(Vec2(-5, -130));
+  return _introDataSlotBottom;
+}
+
+Sprite * UI::GetIntroMSGBox() {
+  _introMSGBox =
+    Sprite::createWithSpriteFrameName("msg_box_01.png");
+  _introMSGBox->setFlippedY(true);
+  _introMSGBox->setScaleX(1.1f);
+  _introMSGBox->setAnchorPoint(Vec2(0, 0));
+  _introMSGBox->setPosition(Vec2(45, 65));
+  return _introMSGBox;
+}
+
+Sprite * UI::GetIntroCancelButton() {
+  _introCancelButton =
+    Sprite::createWithSpriteFrameName("btn_exit_up.png");
+  _introCancelButton->setAnchorPoint(Vec2(0, 0));
+  _introCancelButton->setPosition(Vec2(0, 0));
+  return _introCancelButton;
+}
+
+//Sprite * UI::GetIntroMSGBoxBottom() {
+//  _introMSGBoxBottom =
+//    Sprite::createWithSpriteFrameName("msg_box_01.png");
+//  _introMSGBoxBottom->setScaleX(1.1f);
+//  _introMSGBoxBottom->setAnchorPoint(Vec2(0, 0));
+//  _introMSGBoxBottom->setPosition(Vec2(45, 0));
+//  return _introMSGBoxBottom;
+//}

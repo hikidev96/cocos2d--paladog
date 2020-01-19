@@ -10,17 +10,8 @@ class IntroScene : public Scene
   static Scene* createScene();
   virtual bool init();
   CREATE_FUNC(IntroScene);
-  //void onEnter();
-  //void onExit();
-  //bool onTouchBegan(Touch* touch, Event* event);
  private:
-  //EventListenerTouchOneByOne* _listener;
-  //bool _isSelectPlay;
-  //bool _isSelectConfig;
-  //bool _isChangeScene;
-  //short _num;
   void changeIntroBG(float t);
-  //void callEveryFrame(float t);
 };
 
 #endif // __INTRO_SCENE_H__
