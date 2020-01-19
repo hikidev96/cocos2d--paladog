@@ -2,26 +2,32 @@
 
 #include "cocos_framework.h"
 
+enum HeroKind
+{
+	»ýÁã = 100,
+	°õ,
+	Ä»°Å·ç,
+};
+
 class HeroUnit
 {
-	vector<HeroUnit*> _unitVec;
+	SpriteFrameCache* cache;
 
-	Sprite* _UnitSprite;
+	vector<HeroUnit*> _unitVec; // ¹éÅÍ
 
-	float _Hp;
-	float _Atk;
-	float _Speed;
+	Sprite* _UnitSprite; // À¯´Ö½ºÇÁ¶óÀÌÆ®
 
-	HeroUnit* _heroUnit;
+	float _Hp; // Ã¼·Â
+	float _Atk; // °ø°Ý·Â
+	float _Speed; // ½ºÇÇµå
+	HeroKind _unitKind; // À¯´ÖÁ¾·ù
+	HeroUnit* _heroUnit; // À¯´Ö°´Ã¼
 
 public:
-	HeroUnit() {};
-	void createUnitMouse(Scene* scene);
-	void createUnitBear(Scene* scene);
-	void createUnitKangaroo(Scene* scene);
-	void MoveUnit();
+	HeroUnit(Scene* scene, HeroKind herokind);
 
 	vector<HeroUnit*> getUnitVec() { return _unitVec; }
+	HeroKind getHeroKind() { return _unitKind; }
 	Sprite* getSprite() { return _UnitSprite; }
 	void setSprite(Sprite* pSprite) { _UnitSprite = pSprite; }
 	float getHp() { return _Hp; }

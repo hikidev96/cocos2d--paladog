@@ -1,4 +1,3 @@
-#include "cocos_framework.h"
 #include "MindForest_Stage1.h"
 
 
@@ -15,6 +14,8 @@ bool MindForest_Stage1::init() {
 	_heroControl = new HeroControl(this, _hero);
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
+	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), _hero->getManaRegenSpeed());
+	this->schedule(schedule_selector(MindForest_Stage1::HeroMeatRegen), _hero->getMeatRegenSpeed());
 
 
 	return true;
@@ -23,4 +24,15 @@ bool MindForest_Stage1::init() {
 void MindForest_Stage1::tick(float delta)
 {
 	_heroControl->HeroMove();
+	_heroControl->UnitMove();
+}
+
+void MindForest_Stage1::HeroManaRegen(float delta)
+{
+	_heroControl->HeroManaRegen();
+}
+
+void MindForest_Stage1::HeroMeatRegen(float delta)
+{
+	_heroControl->HeroMeatRegen();
 }

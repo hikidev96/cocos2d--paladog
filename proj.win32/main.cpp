@@ -1,9 +1,10 @@
-#include "cocos_framework.h"
 #include "main.h"
-#include "GameDelegate.h"
+#include "AppDelegate.h"
 #include "cocos2d.h"
 
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
+
+USING_NS_CC;
 
 int WINAPI _tWinMain(HINSTANCE hInstance,
                        HINSTANCE hPrevInstance,
@@ -13,6 +14,6 @@ int WINAPI _tWinMain(HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    GameDelegate app;
+    AppDelegate app;
     return Application::getInstance()->run();
 }
