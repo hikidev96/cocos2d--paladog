@@ -33,6 +33,7 @@ private:
 
 	Sprite* _hero;
 	ProgressTimer* _manaGauge;
+	ProgressTimer* _meatGauge;
 
 	Movement _movement;
 
@@ -41,10 +42,13 @@ private:
 	float _mana;
 	float _maxmana;
 	float _manaRegenSpeed;
+	float _meat;
+	float _maxmeat;
+	float _meatRegenSpeed;
 
-	float _skillOneManaUse; 
-	float _skillTwoManaUse; 
-	float _skillThreeManaUse; 
+	float _skillOneManaUse;
+	float _skillTwoManaUse;
+	float _skillThreeManaUse;
 
 public:
 
@@ -60,6 +64,12 @@ public:
 	void setMaxMana(float maxmana) { _maxmana = maxmana; }
 	float getManaRegenSpeed() { return _manaRegenSpeed; }
 	void setManaRegenSpeed(float manaregenspeed) { _manaRegenSpeed = manaregenspeed; }
+	float getMeat() { return _meat; }
+	void setMeat(float meat) { _meat = meat; }
+	float getMaxMeat() { return _maxmeat; }
+	void setMaxMeat(float maxmeat) { _maxmeat = maxmeat; }
+	float getMeatRegenSpeed() { return _meatRegenSpeed; }
+	void setMeatRegenSpeed(float meatregenspeed) { _meatRegenSpeed = meatregenspeed; }
 	float getSkillOneManaUse() { return _skillOneManaUse; }
 	void setSkillOneManaUse(float skillonemanause) { _skillOneManaUse = skillonemanause; }
 	float getSkillTwoManaUse() { return _skillTwoManaUse; }
@@ -69,6 +79,7 @@ public:
 	float getLv() { return _lv; }
 	void setLv(float lv) { _lv = lv; }
 	ProgressTimer* getManaGauge() { return _manaGauge; }
+	ProgressTimer* getMeatGauge() { return _meatGauge; }
 	RepeatForever* getWaitingAction() { return _heroWaitingAction; }
 	RepeatForever* getWalkingAction() { return _heroWalkingAction; }
 	Animate* getAttackAction() { return _animate3; }

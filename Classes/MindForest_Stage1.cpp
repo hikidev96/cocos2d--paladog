@@ -15,6 +15,7 @@ bool MindForest_Stage1::init() {
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
 	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), _hero->getManaRegenSpeed());
+	this->schedule(schedule_selector(MindForest_Stage1::HeroMeatRegen), _hero->getMeatRegenSpeed());
 
 
 	return true;
@@ -29,4 +30,9 @@ void MindForest_Stage1::tick(float delta)
 void MindForest_Stage1::HeroManaRegen(float delta)
 {
 	_heroControl->HeroManaRegen();
+}
+
+void MindForest_Stage1::HeroMeatRegen(float delta)
+{
+	_heroControl->HeroMeatRegen();
 }
