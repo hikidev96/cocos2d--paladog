@@ -20,6 +20,8 @@ class MainGameScene : public Scene
   bool _isSelectPaladog;
   bool _isSelectDarkdog;
   bool _isSelectCampaign;
+  bool _isSelectDataSlot;
+  bool _isSelectCancel;
   //void changeIntroBG(float t);
   //void callEveryFrame(float t);
 };
