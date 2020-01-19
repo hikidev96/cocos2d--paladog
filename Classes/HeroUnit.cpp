@@ -1,51 +1,42 @@
 #include "HeroUnit.h"
 
-void HeroUnit::createUnitMouse(Scene* scene)
+HeroUnit::HeroUnit(Scene * scene, HeroKind herokind)
 {
-	_heroUnit = new HeroUnit;
-	_heroUnit->_UnitSprite = nullptr;
+	cache = SpriteFrameCache::getInstance();
+	cache->addSpriteFramesWithFile("Player/Unit/u_01.plist");
+	cache->addSpriteFramesWithFile("Player/Unit/u_02.plist");
+	cache->addSpriteFramesWithFile("Player/Unit/u_03.plist");
 
-	_unitVec.push_back(_heroUnit);
-
-	for (int i = 0; i < _unitVec.size(); i++)
+	switch (herokind)
 	{
-		if (_unitVec[i]->_UnitSprite == nullptr)
-		{
-			_unitVec[i]->_UnitSprite = Sprite::create("HelloWorld.png");
-			_unitVec[i]->_UnitSprite->setPosition(100,150);
-			_unitVec[i]->_UnitSprite->setScale(0.2f);
-			_unitVec[i]->_Speed = 0.6f;
-			_unitVec[i]->_Hp = 1.0f;
-			_unitVec[i]->_Atk = 0.6f;
-			scene->addChild(_unitVec[i]->_UnitSprite);
-
-		}
-	}
-
-
-
-
-	
-
-	//for (int i = 0; i < _unitVec.size(); ++i)
-	//{
-	//	if ()
-	//		scene->addChild(_unitVec[i]->getSprite());
-	//}
-}
-
-void HeroUnit::createUnitBear(Scene* scene)
-{
-}
-
-void HeroUnit::createUnitKangaroo(Scene* scene)
-{
-}
-
-void HeroUnit::MoveUnit()
-{
-	for (int i = 0; i < _unitVec.size(); i++)
-	{
-		_unitVec[i]->getSprite()->setPosition(_unitVec[i]->getSprite()->getPosition() + Vec2(_unitVec[i]->getSpeed(), 0));
+	case »ýÁã:
+		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
+		_UnitSprite->setPosition(100, 200);
+		_Speed = 0.6f;
+		_Hp = 1.0f;
+		_Atk = 0.6f;
+		_unitKind = »ýÁã;
+		scene->addChild(_UnitSprite);
+		break;
+	case °õ:
+		_UnitSprite = Sprite::createWithSpriteFrameName("HelloWorld.png");
+		_UnitSprite->setPosition(100, 200);
+		_Speed = 0.6f;
+		_Hp = 1.0f;
+		_Atk = 0.6f;
+		_unitKind = °õ;
+		scene->addChild(_UnitSprite);
+		break;
+	case Ä»°Å·ç:
+		_UnitSprite = Sprite::createWithSpriteFrameName("HelloWorld.png");
+		_UnitSprite->setPosition(100, 200);
+		_Speed = 0.6f;
+		_Hp = 1.0f;
+		_Atk = 0.6f;
+		_unitKind = Ä»°Å·ç;
+		scene->addChild(_UnitSprite);
+		break;
+	default:
+		break;
 	}
 }
