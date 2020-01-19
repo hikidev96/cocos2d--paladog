@@ -17,4 +17,5 @@ public:
 
 	void tick(float delta);
 	void HeroManaRegen(float delta);
+	void HeroMeatRegen(float delta);
 };

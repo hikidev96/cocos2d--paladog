@@ -19,7 +19,7 @@ HeroUnit::HeroUnit(Scene * scene, HeroKind herokind)
 		scene->addChild(_UnitSprite);
 		break;
 	case °õ:
-		_UnitSprite = Sprite::createWithSpriteFrameName("HelloWorld.png");
+		_UnitSprite = Sprite::createWithSpriteFrameName("u03_walk_0001.png");
 		_UnitSprite->setPosition(100, 200);
 		_Speed = 0.6f;
 		_Hp = 1.0f;
@@ -28,7 +28,7 @@ HeroUnit::HeroUnit(Scene * scene, HeroKind herokind)
 		scene->addChild(_UnitSprite);
 		break;
 	case Ä»°Å·ç:
-		_UnitSprite = Sprite::createWithSpriteFrameName("HelloWorld.png");
+		_UnitSprite = Sprite::createWithSpriteFrameName("u04_walk_0001.png");
 		_UnitSprite->setPosition(100, 200);
 		_Speed = 0.6f;
 		_Hp = 1.0f;

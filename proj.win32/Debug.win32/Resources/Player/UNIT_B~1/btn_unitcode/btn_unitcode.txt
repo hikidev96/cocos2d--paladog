@@ -1,0 +1,37 @@
+btn_unit-hd.plist->
+
+		쥐 unlock 	btn_unit_00_disable.png
+		쥐 	누름	btn_unit_00_down.png
+		쥐 (평상시) 뗌	btn_unit_00_up.png
+
+		토끼 unlock 	btn_unit_01_disable.png
+		토끼 	누름	btn_unit_01_down.png
+		토끼 (평상시) 뗌	btn_unit_01_up.png
+
+		곰 unlock 	btn_unit_02_disable.png
+		곰 	누름	btn_unit_02_down.png
+		곰 (평상시) 뗌	btn_unit_02_up.png
+
+		캥거루 unlock 	btn_unit_03_disable.png
+		캥거루 	누름	btn_unit_03_down.png
+		캥거루 (평상시) 뗌	btn_unit_03_up.png
+
+		몽키 unlock 	btn_unit_04_disable.png
+		몽키 	누름	btn_unit_04_down.png
+		몽키 (평상시) 뗌	btn_unit_04_up.png
+
+		거북이 unlock 	btn_unit_05_disable.png
+		거북이 	누름	btn_unit_05_down.png
+		거북이 (평상시) 뗌	btn_unit_05_up.png
+
+		코뿔소 unlock 	btn_unit_06_disable.png
+		코뿔소 	누름	btn_unit_06_down.png
+		코뿔소 (평상시) 뗌	btn_unit_06_up.png
+
+		펭귄 unlock 	btn_unit_07_disable.png
+		펭귄 	누름	btn_unit_07_down.png
+		펭귄 (평상시) 뗌	btn_unit_07_up.png
+
+		용 unlock 	btn_unit_08_disable.png
+		용 	누름	btn_unit_08_down.png
+		용 (평상시) 뗌	btn_unit_08_up.png

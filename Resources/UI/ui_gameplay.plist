@@ -135,18 +135,18 @@
                 <key>frame</key>
                 <string>{{460,194},{38,38}}</string>
                 <key>offset</key>
-                <string>{-220,-36}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{38,38}</string>
             </dict>
             <key>gauge_icon_mana.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{466,238},{32,36}}</string>
                 <key>offset</key>
-                <string>{221,-36}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{38,38}</string>
             </dict>
             <key>gauge_mana.png</key>
             <dict>
