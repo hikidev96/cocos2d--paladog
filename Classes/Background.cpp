@@ -7,6 +7,20 @@ Sprite* Background::_introVolcanoCloudBg = nullptr;
 Sprite* Background::_introDarkCloudBg = nullptr;
 Sprite* Background::_introFaladogLogo = nullptr;
 SpriteFrameCache* Background::_cache = SpriteFrameCache::getInstance();
+Animation* Background::_introDarkCloudAnimation = nullptr;
+Animate* Background::_introDarkCloudAnimate = nullptr;
+RepeatForever* Background::_introDarkCloudRepeatForever = nullptr;
+Sprite* Background::_introWoodBg = nullptr;
+Sprite* Background::_introStoneBg = nullptr;
+
+SpriteFrameCache * Background::GetCache() {
+  _cache->addSpriteFramesWithFile("UI/opening_ending_01.plist");
+  _cache->addSpriteFramesWithFile("UI/startMapUI/opening_ending_03.plist");
+  _cache->addSpriteFramesWithFile("UI/title_wood.plist");
+  _cache->addSpriteFramesWithFile("UI/opening_ending_04.plist");
+
+  return _cache;
+}
 
 Sprite* Background::GetIntroBackground() {
   _introBg = Sprite::create("UI/15age.png");
@@ -16,8 +30,6 @@ Sprite* Background::GetIntroBackground() {
 }
 
 Sprite * Background::GetIntroVolcanoBg() {
-  _cache->addSpriteFramesWithFile("UI/opening_ending_01.plist");
-
   _introVolcanoBg =
     Sprite::createWithSpriteFrameName("title_volcano.png");
   _introVolcanoBg->setAnchorPoint(Vec2(0, 0));
@@ -26,8 +38,6 @@ Sprite * Background::GetIntroVolcanoBg() {
 }
 
 Sprite * Background::GetIntroSkyBg() {
-  _cache->addSpriteFramesWithFile("UI/opening_ending_01.plist");
-
   _introSkyBg =
     Sprite::createWithSpriteFrameName("title_sky_02.png");
   _introSkyBg->setAnchorPoint(Vec2(0, 0));
@@ -36,8 +46,6 @@ Sprite * Background::GetIntroSkyBg() {
 }
 
 Sprite * Background::GetIntroVolcanoCloudBg() {
-  _cache->addSpriteFramesWithFile("UI/opening_ending_01.plist");
-
   _introVolcanoCloudBg =
     Sprite::createWithSpriteFrameName("title_volcano_cloud.png");
   _introVolcanoCloudBg->setAnchorPoint(Vec2(0, 0));
@@ -46,18 +54,34 @@ Sprite * Background::GetIntroVolcanoCloudBg() {
 }
 
 Sprite * Background::GetIntroDarkCloudBg() {
-  _cache->addSpriteFramesWithFile("UI/opening_ending_01.plist");
-
   _introDarkCloudBg =
     Sprite::createWithSpriteFrameName("title_dark_cloud_00.png");
   _introDarkCloudBg->setAnchorPoint(Vec2(0, 0));
   _introDarkCloudBg->setPosition(Vec2(0, 0));
+  
+  _introDarkCloudAnimation = Animation::create();
+  _introDarkCloudAnimation->setDelayPerUnit(0.06f);
+  _introDarkCloudAnimation->
+    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_00.png"));
+  _introDarkCloudAnimation->
+    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_01.png"));
+  _introDarkCloudAnimation->
+    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_02.png"));
+  _introDarkCloudAnimation->
+    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_03.png"));
+  _introDarkCloudAnimation->
+    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_04.png"));
+  _introDarkCloudAnimation->
+    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_05.png"));
+
+  _introDarkCloudAnimate = Animate::create(_introDarkCloudAnimation);
+  _introDarkCloudRepeatForever = RepeatForever::create(_introDarkCloudAnimate);
+  _introDarkCloudRepeatForever->retain();
+
   return _introDarkCloudBg;
 }
 
 Sprite * Background::GetIntroLogo() {
-  _cache->addSpriteFramesWithFile("UI/startMapUI/opening_ending_03.plist");
-
   _introFaladogLogo =
     Sprite::createWithSpriteFrameName("title_logo.png");
   _introFaladogLogo->setScale(0.7f);
@@ -66,21 +90,41 @@ Sprite * Background::GetIntroLogo() {
   return _introFaladogLogo;
 }
 
-RepeatForever* Background::GetIntroDarkCloudBgRep() {
-  _cache->addSpriteFramesWithFile("UI/opening_ending_01.plist");
-  Vector<SpriteFrame*> animFrames;
-  string _frames = "";
-  SpriteFrame* frame = nullptr;
-
-  for (int i = 0; i < 6; i++) {
-    _frames = StringUtils::format("title_dark_cloud_%02d.png", i);
-    frame = _cache->getSpriteFrameByName(_frames);
-    animFrames.pushBack(frame);
-  }
-
-  auto animation = Animation::createWithSpriteFrames(animFrames, 0.06f);
-  auto animate = Animate::create(animation);
-  auto rep = RepeatForever::create(animate);
-
-  return rep;
+Sprite * Background::GetIntroWoodBg() {
+  _introWoodBg =
+    Sprite::createWithSpriteFrameName("tree_a_01.png");
+  _introWoodBg->setAnchorPoint(Vec2(0, 0));
+  _introWoodBg->setPosition(Vec2(0, 0));
+  return _introWoodBg;
 }
+
+Sprite * Background::GetIntroStoneBg() {
+  _introStoneBg =
+    Sprite::createWithSpriteFrameName("title_mountain_00.png");
+  _introStoneBg->setAnchorPoint(Vec2(0, 0));
+  _introStoneBg->setPosition(Vec2(-150, 0));
+  return _introStoneBg;
+}
+
+//RepeatForever * Background::GetIntroDarkCloudBgRepeatForever() {
+//  _introDarkCloudAnimation = Animation::create();
+//  _introDarkCloudAnimation->setDelayPerUnit(0.06f);
+//  _introDarkCloudAnimation->
+//    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_00.png"));
+//  _introDarkCloudAnimation->
+//    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_01.png"));
+//  _introDarkCloudAnimation->
+//    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_02.png"));
+//  _introDarkCloudAnimation->
+//    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_03.png"));
+//  _introDarkCloudAnimation->
+//    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_04.png"));
+//  _introDarkCloudAnimation->
+//    addSpriteFrame(_cache->getSpriteFrameByName("title_dark_cloud_05.png"));
+//
+//  _introDarkCloudAnimate = Animate::create(_introDarkCloudAnimation);
+//  _introDarkCloudRepeatForever = RepeatForever::create(_introDarkCloudAnimate);
+//  _introDarkCloudRepeatForever->retain();
+//
+//  return _introDarkCloudRepeatForever;
+//}

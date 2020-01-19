@@ -1,6 +1,7 @@
 #include "MainGameScene.h"
 #include "Background.h"
 #include "UI.h"
+#include "MapMindForest.h"
 
 Scene* MainGameScene::createScene() {
   return MainGameScene::create();
@@ -10,13 +11,17 @@ bool MainGameScene::init() {
   if (!Scene::init()) {
     return false;
   }
-  
+
+  Background::GetCache();
+  UI::GetCache();
+
   this->addChild(Background::GetIntroVolcanoBg());
   this->addChild(Background::GetIntroSkyBg());
   this->addChild(Background::GetIntroVolcanoCloudBg());
   this->addChild(Background::GetIntroDarkCloudBg());
   /*Background::GetIntroDarkCloudBg()->
-    runAction(Background::GetIntroDarkCloudBgRep());*/
+    runAction(Background::GetIntroDarkCloudBgRepeatForever());*/
+  this->addChild(Background::GetIntroStoneBg());
   this->addChild(Background::GetIntroLogo());
   this->addChild(UI::GetIntroConfigButton());
   this->addChild(UI::GetIntroPlayButton());
@@ -28,6 +33,8 @@ bool MainGameScene::init() {
   _isSelectPaladog = false;
   _isSelectDarkdog = false;
   _isSelectCampaign = false;
+  _isSelectDataSlot = false;
+  _isSelectCancel = false;
 
   return true;
 }
@@ -60,44 +67,75 @@ bool MainGameScene::onTouchBegan(Touch * touch, Event * event) {
     getBoundingBox().containsPoint(touchPoint);
   bool touchCampaign = UI::GetIntroCampaignButton()->
     getBoundingBox().containsPoint(touchPoint);
+  bool touchDataSlot = UI::GetIntroDataSlot()->
+    getBoundingBox().containsPoint(touchPoint);
 
   if (touchConfig && !_isSelectConfig) {
     this->removeChild(UI::GetIntroConfigButton());
     this->addChild(UI::GetIntroSelectedConfigButton());
     _isSelectConfig = true;
-
-  } else if (touchConfig &&_isSelectConfig) {
+  } else if (touchConfig && _isSelectConfig) {
     this->removeChild(UI::GetIntroSelectedConfigButton());
     this->addChild(UI::GetIntroConfigButton());
     _isSelectConfig = false;
-
-  } else if (touchPlay && !_isSelectPlay) {
-    this->removeChild(UI::GetIntroPlayButton());
-    this->addChild(UI::GetIntroSelectedPlayButton());
+  }
+  
+  if (touchPlay && !_isSelectPlay) {
+    this->removeAllChildren();
+    this->addChild(Background::GetIntroVolcanoBg());
+    this->addChild(Background::GetIntroSkyBg());
+    this->addChild(Background::GetIntroVolcanoCloudBg());
+    this->addChild(Background::GetIntroDarkCloudBg());
+    this->addChild(Background::GetIntroStoneBg());
+    this->addChild(Background::GetIntroLogo());
+    this->addChild(UI::GetIntroConfigButton());
     this->addChild(UI::GetIntroModeSelectBox());
     this->addChild(UI::GetIntroPaladogButton());
     this->addChild(UI::GetIntroDarkdogButton());
     _isSelectPlay = true;
 
   } else if (touchPaladog && !_isSelectPaladog) {
-    this->removeChild(UI::GetIntroDarkdogButton());
+    _isSelectPaladog = true;
+    this->removeAllChildren();
+    this->addChild(Background::GetIntroVolcanoBg());
+    this->addChild(Background::GetIntroSkyBg());
+    this->addChild(Background::GetIntroVolcanoCloudBg());
+    this->addChild(Background::GetIntroDarkCloudBg());
+    this->addChild(Background::GetIntroStoneBg());
+    this->addChild(Background::GetIntroLogo());
+    this->addChild(UI::GetIntroConfigButton());
+    this->addChild(UI::GetIntroModeSelectBox());
+    this->addChild(UI::GetIntroPaladogButton());
     this->addChild(UI::GetIntroCampaignButton());
     this->addChild(UI::GetIntroSurvivalButton());
-    _isSelectPaladog = true;
 
   } else if (touchDarkdog && !_isSelectDarkdog) {
     _isSelectDarkdog = true;
+  }
 
-  } else if (touchCampaign && !_isSelectCampaign) {
+  if (touchCampaign && !_isSelectCampaign) {
     _isSelectCampaign = true;
     this->removeAllChildren();
     this->addChild(Background::GetIntroVolcanoBg());
     this->addChild(Background::GetIntroSkyBg());
     this->addChild(Background::GetIntroVolcanoCloudBg());
     this->addChild(Background::GetIntroDarkCloudBg());
+    this->addChild(Background::GetIntroStoneBg());
+    this->addChild(UI::GetIntroMSGBox());
     this->addChild(UI::GetIntroSelectSlot());
+    this->addChild(UI::GetIntroDataSlot());
+    this->addChild(UI::GetIntroDataSlotBottom());
+    //this->addChild(UI::GetIntroCancelButton());
 
-  } else if (!touchPaladog && !touchDarkdog) {
+  } else if (touchDataSlot && !_isSelectDataSlot && _isSelectCampaign) {
+    _isSelectDataSlot = true;
+  } 
+  if (_isSelectDataSlot) {
+    auto scene = MapMindForest::createScene();
+    Director::getInstance()->replaceScene(scene);
+  }
+
+  if (!touchPaladog && !touchDarkdog && !touchDataSlot) {
     // 왜 안되는 걸까?
     //this->removeChild(UI::GetIntroModeSelectBox());
     //this->removeChild(UI::GetIntroPaladogButton());
@@ -107,6 +145,7 @@ bool MainGameScene::onTouchBegan(Touch * touch, Event * event) {
     this->addChild(Background::GetIntroSkyBg());
     this->addChild(Background::GetIntroVolcanoCloudBg());
     this->addChild(Background::GetIntroDarkCloudBg());
+    this->addChild(Background::GetIntroStoneBg());
     this->addChild(Background::GetIntroLogo());
     this->addChild(UI::GetIntroConfigButton());
     this->addChild(UI::GetIntroPlayButton());
@@ -114,8 +153,24 @@ bool MainGameScene::onTouchBegan(Touch * touch, Event * event) {
     _isSelectPaladog = false;
     _isSelectDarkdog = false;
     _isSelectCampaign = false;
+    _isSelectDataSlot = false;
 
-  }
+  } /*else if (!touchDataSlot && _isSelectDataSlot) {
+    this->removeAllChildren();
+    this->addChild(Background::GetIntroVolcanoBg());
+    this->addChild(Background::GetIntroSkyBg());
+    this->addChild(Background::GetIntroVolcanoCloudBg());
+    this->addChild(Background::GetIntroDarkCloudBg());
+    this->addChild(Background::GetIntroStoneBg());
+    this->addChild(Background::GetIntroLogo());
+    this->addChild(UI::GetIntroConfigButton());
+    this->addChild(UI::GetIntroPlayButton());
+    _isSelectPlay = false;
+    _isSelectPaladog = false;
+    _isSelectDarkdog = false;
+    _isSelectCampaign = false;
+    _isSelectDataSlot = false;
+  }*/
 
   return true;
 }
