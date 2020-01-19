@@ -9,54 +9,54 @@
                 <key>frame</key>
                 <string>{{176,250},{52,52}}</string>
                 <key>offset</key>
-                <string>{42,-129}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{52,52}</string>
             </dict>
             <key>btn_fist_down.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{118,250},{52,52}}</string>
                 <key>offset</key>
-                <string>{42,-129}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{52,52}</string>
             </dict>
             <key>btn_fist_up.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{60,250},{52,52}}</string>
                 <key>offset</key>
-                <string>{42,-129}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{52,52}</string>
             </dict>
             <key>btn_heal_disable.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{176,250},{52,52}}</string>
                 <key>offset</key>
-                <string>{119,-129}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{52,52}</string>
             </dict>
             <key>btn_heal_down.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,406},{52,52}}</string>
                 <key>offset</key>
-                <string>{119,-129}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{52,52}</string>
             </dict>
             <key>btn_heal_up.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,348},{52,52}}</string>
                 <key>offset</key>
-                <string>{119,-129}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{52,52}</string>
             </dict>
             <key>btn_left_down.png</key>
             <dict>
@@ -99,27 +99,27 @@
                 <key>frame</key>
                 <string>{{176,250},{52,52}}</string>
                 <key>offset</key>
-                <string>{193,-129}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{52,52}</string>
             </dict>
             <key>btn_turnundead_down.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,290},{52,52}}</string>
                 <key>offset</key>
-                <string>{193,-129}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{52,52}</string>
             </dict>
             <key>btn_turnundead_up.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{422,136},{52,52}}</string>
                 <key>offset</key>
-                <string>{193,-129}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{52,52}</string>
             </dict>
             <key>gauge_food.png</key>
             <dict>
@@ -216,9 +216,9 @@
                 <key>frame</key>
                 <string>{{2,158},{236,34}}</string>
                 <key>offset</key>
-                <string>{115,-142}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{236,34}</string>
             </dict>
         </dict>
         <key>metadata</key>

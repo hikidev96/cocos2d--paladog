@@ -1,62 +1,82 @@
-#include "cocos_framework.h"
 #include "IntroScene.h"
 #include "Background.h"
-#include "UI.h"
+#include "MainGameScene.h"
+//#include "UI.h"
 
 Scene* IntroScene::createScene() {
-	return IntroScene::create();
+  return IntroScene::create();
 }
 
 bool IntroScene::init() {
-	if (!Scene::init()) {
-		return false;
-	}
-	
-	_bgLayer = Layer::create();
-	_bgLayer->addChild(Background::GetIntroBackground()); // 배경 애니메이션 추가할 것
-	this->addChild(_bgLayer);
-	auto act = Sequence::create(DelayTime::create(2), nullptr);
-	this->runAction(act);
-	//_bgLayer->removeChild(Background::GetIntroBackground());  
+  if (!Scene::init()) {
+    return false;
+  }
 
-	_uiLayer = Layer::create();
-	_uiLayer->addChild(UI::GetIntroConfigButton());
-	_uiLayer->addChild(UI::GetIntroPlayButton());
-	this->addChild(_uiLayer);
+  this->addChild(Background::GetIntroBackground());  
+  //this->addChild(UI::GetIntroConfigButton());
+  //this->addChild(UI::GetIntroPlayButton());
 
-	return true;
+  this->scheduleOnce(schedule_selector(IntroScene::changeIntroBG), 3.0f);
+  //this->schedule(schedule_selector(IntroScene::callEveryFrame));
+
+  //_isSelectPlay = false;
+  //_isSelectConfig = false;
+  //_isChangeScene = false;
+
+  /*if (_isChangeScene) {
+  }*/
+
+  return true;
 }
 
-void IntroScene::onEnter() {
-	Scene::onEnter();
+//void IntroScene::onEnter() {
+//  Scene::onEnter();
+//
+//  _listener = EventListenerTouchOneByOne::create();
+//  _listener->onTouchBegan = CC_CALLBACK_2(IntroScene::onTouchBegan, this);
+//  _listener->setSwallowTouches(true);
+//  _eventDispatcher->addEventListenerWithSceneGraphPriority(_listener, this);
+//}
+//
+//void IntroScene::onExit() {
+//  _eventDispatcher->removeEventListener(_listener);
+//
+//  Scene::onExit();
+//}
+//
+//bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
+//  auto touchPoint = touch->getLocation();
+//
+//  bool configTouch = UI::GetIntroConfigButton()
+//    ->getBoundingBox().containsPoint(touchPoint);
+//  if (configTouch && !_isSelectConfig) {
+//    this->removeChild(UI::GetIntroConfigButton());
+//    this->addChild(UI::GetIntroSelectedConfigButton());
+//    _isSelectConfig = true;
+//  } 
+//
+//  bool playTouch = UI::GetIntroPlayButton()
+//    ->getBoundingBox().containsPoint(touchPoint);
+//  if (playTouch && !_isSelectPlay) {
+//    this->removeChild(UI::GetIntroPlayButton());
+//    this->addChild(UI::GetIntroSelectedPlayButton());
+//    this->addChild(UI::GetIntroModeSelectBox());
+//    this->addChild(UI::GetIntroPaladogButton());
+//    this->addChild(UI::GetIntroDarkdogButton());
+//    _isSelectPlay = true;
+//  }
+//
+//  return true;
+//}
 
-	_listener = EventListenerTouchOneByOne::create();
-	_listener->onTouchBegan = CC_CALLBACK_2(IntroScene::onTouchBegan, this);
-	_listener->setSwallowTouches(true);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(_listener, this);
+void IntroScene::changeIntroBG(float t) {
+  auto scene = MainGameScene::createScene();
+  Director::getInstance()->replaceScene(scene);
+  //log("check");
+  //_isChangeScene = true;
 }
 
-void IntroScene::onExit() {
-	_eventDispatcher->removeEventListener(_listener);
-
-	Scene::onExit();
-}
-
-bool IntroScene::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event) {
-	auto touchPoint = touch->getLocation();
-
-	bool configTouch = UI::GetIntroConfigButton()->getBoundingBox().containsPoint(touchPoint);
-	if (configTouch) {
-		log("check1");
-	}
-
-	bool playTouch = UI::GetIntroPlayButton()->getBoundingBox().containsPoint(touchPoint);
-	if (playTouch) {
-		log("check2");
-	}
-
-	return true;
-}
-
-void IntroScene::onTouchCancelled(cocos2d::Touch * touch, cocos2d::Event * event) {
-}
+//void IntroScene::callEveryFrame(float t) {
+//  this->addChild(Background::GetIntroDarkCloudBg());
+//  log("check");
+//}
