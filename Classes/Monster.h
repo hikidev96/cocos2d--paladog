@@ -50,8 +50,10 @@ public:
 	void MonsterMove();
 	void Hit(float atk); //매개 변수에 공격력 삽입
 	void setSummunPositionX(float x);
+	void setUnit(vector<HeroUnit*> unit) { _unit = unit; }
 
 	Sprite* getMonster() { return _monster; }
+	int getUnitSize() { return _unit.size(); }
 	float getHp() { return _hp; }
 	float getRange() { return _range; }
 	int getExp() { return _exp; }

@@ -63,16 +63,16 @@ Monster::Monster(Scene* scene, Hero* hero, vector<HeroUnit*> unit, Mob mob)
 void Monster::MonsterMove()
 {
 	_isSummonX = 0;
+	bool _isAttack = false;
 	for (int i = 0; i < _unit.size(); i++) {
 		if (_unit[i]->getSprite()->getPositionX() < _monster->getPositionX() &&
 			_unit[i]->getSprite()->getPositionX() > _monster->getPositionX() - _range) {
 			if (_state != ATTACK && _state != DEAD) {
 				_moveChange = true;
 				_state = ATTACK;
-				log(i);
 				break;
 			}
-			log("size : %d, i : %d", _unit.size(), i);
+			_isAttack = true;
 		}
 	}
 	if (_hero->getHero()->getPositionX() < _monster->getPositionX() &&
@@ -81,8 +81,9 @@ void Monster::MonsterMove()
 			_moveChange = true;
 			_state = ATTACK;
 		}
+		_isAttack = true;
 	}
-	else if (_state == ATTACK && !_moveChange) {
+	if (_state == ATTACK && !_moveChange && !_isAttack) {
 		_moveChange = true;
 		_state = WALK;
 	}
@@ -173,7 +174,12 @@ void Monster::Walk()
 {
 	_monster->setPosition(_monster->getPosition() + Vec2(-_speed, 0));
 	if (getMonster()->getPosition().x < 0) {
-		_isRemove = true;
+		if (_monsterCode == "b01") {
+			_monster->setPositionX(400);
+		}
+		else {
+			_isRemove = true;
+		}
 	}
 }
 
@@ -181,7 +187,6 @@ void Monster::Attack()
 {
 	float distance = _monster->getPositionX() - _hero->getHero()->getPositionX() < 0 ? 0 :
 		_monster->getPositionX() - _hero->getHero()->getPositionX();
-	//가장 가까운 유닛 검사
 	int target = -1;
 	float temp;
 	for (int i = 0; i < _unit.size(); i++) {
@@ -215,7 +220,6 @@ void Monster::ZomkingSummon()
 	for (int i = 1; i <= 15; i++) {
 		frame.pushBack(SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(StringUtils::format("b01_summon_%04d.png", i)));
 	}
-
 	auto animation = Animation::createWithSpriteFrames(frame, 0.03f);
 	auto animate = Animate::create(animation);
 	_summon->runAction(Sequence::create(animate, CallFunc::create(CC_CALLBACK_0(Monster::ZomkingSummonRemove, this)), nullptr));
