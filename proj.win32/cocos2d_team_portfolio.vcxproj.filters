@@ -102,6 +102,9 @@
     <ClCompile Include="..\Classes\Background.cpp">
       <Filter>src\배경</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Dungeon.cpp">
+      <Filter>src\몬스터</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Background.h">
       <Filter>src\배경</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Dungeon.h">
+      <Filter>src\몬스터</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
