@@ -48,7 +48,7 @@ class HeroUnit
 
 
 public:
-	HeroUnit(Scene* scene, UnitKind herokind);
+	HeroUnit(Scene* scene, UnitKind herokind, Layer* layer);
 
 	vector<HeroUnit*> getUnitVec() { return _unitVec; }
 	UnitKind getHeroKind() { return _unitKind; }

@@ -1,6 +1,6 @@
 #include "HeroUnit.h"
 
-HeroUnit::HeroUnit(Scene * scene, UnitKind herokind)
+HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 {
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Player/Unit/u_01.plist");
@@ -11,13 +11,13 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind)
 	{
 	case »ýÁã:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
-		_UnitSprite->setPosition(100, 200);
+		_UnitSprite->setPosition(100, 420);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
 		_Atk = 0.6f;
 		_unitKind = »ýÁã;
-		scene->addChild(_UnitSprite);
+		layer->addChild(_UnitSprite, 100);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);
@@ -78,13 +78,13 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind)
 		break;
 	case °õ:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u03_walk_0001.png");
-		_UnitSprite->setPosition(100, 200);
+		_UnitSprite->setPosition(100, 420);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
 		_Atk = 0.6f;
 		_unitKind = °õ;
-		scene->addChild(_UnitSprite);
+		layer->addChild(_UnitSprite);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);
@@ -146,13 +146,13 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind)
 		break;
 	case Ä»°Å·ç:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u04_walk_0001.png");
-		_UnitSprite->setPosition(100, 200);
+		_UnitSprite->setPosition(100, 420);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
 		_Atk = 0.6f;
 		_unitKind = Ä»°Å·ç;
-		scene->addChild(_UnitSprite);
+		layer->addChild(_UnitSprite);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);

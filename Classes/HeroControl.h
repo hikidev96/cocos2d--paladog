@@ -14,6 +14,8 @@ class HeroControl : Scene
 
 	EventListenerTouchOneByOne* listener;
 
+	Layer* _layer;
+
 	Scene* _scene;
 	Sprite* _leftButton; // 왼쪽Move버튼
 	Sprite* _rightButton; // 오른쪽Move버튼
@@ -41,7 +43,7 @@ class HeroControl : Scene
 	bool _kangarooSummonsClick;
 
 public:
-	HeroControl(Scene* scene, Hero* hero);
+	HeroControl(Scene* scene, Hero* hero, Layer* layer);
 	void HeroMove();
 	void UnitMove();
 	void HeroManaRegen();
