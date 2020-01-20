@@ -1,10 +1,11 @@
 #include "cocos_framework.h"
 #include "Monster.h"
 
-Monster::Monster(Scene* scene, Hero* hero, Mob mob)
+Monster::Monster(Scene* scene, Hero* hero, vector<HeroUnit*> unit, Mob mob)
 {
 	_scene = scene;
 	_hero = hero;
+	_unit = unit;
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Player/effect/eff_blend_02.plist");
@@ -62,6 +63,18 @@ Monster::Monster(Scene* scene, Hero* hero, Mob mob)
 void Monster::MonsterMove()
 {
 	_isSummonX = 0;
+	for (int i = 0; i < _unit.size(); i++) {
+		if (_unit[i]->getSprite()->getPositionX() < _monster->getPositionX() &&
+			_unit[i]->getSprite()->getPositionX() > _monster->getPositionX() - _range) {
+			if (_state != ATTACK && _state != DEAD) {
+				_moveChange = true;
+				_state = ATTACK;
+				log(i);
+				break;
+			}
+			log("size : %d, i : %d", _unit.size(), i);
+		}
+	}
 	if (_hero->getHero()->getPositionX() < _monster->getPositionX() &&
 		_hero->getHero()->getPositionX() > _monster->getPositionX() - _range) {
 		if (_state != ATTACK && _state != DEAD) {
@@ -69,7 +82,7 @@ void Monster::MonsterMove()
 			_state = ATTACK;
 		}
 	}
-	else if (_state == ATTACK) {
+	else if (_state == ATTACK && !_moveChange) {
 		_moveChange = true;
 		_state = WALK;
 	}
@@ -170,12 +183,20 @@ void Monster::Attack()
 		_monster->getPositionX() - _hero->getHero()->getPositionX();
 	//가장 가까운 유닛 검사
 	int target = -1;
+	float temp;
+	for (int i = 0; i < _unit.size(); i++) {
+		temp = _monster->getPositionX() - _unit[i]->getSprite()->getPositionX() < 0 ? 0 :
+			_monster->getPositionX() - _unit[i]->getSprite()->getPositionX();
+		distance = min(distance, temp);
+		if (temp == distance) target = i;
+	}
 	switch (target) {
 	case -1:
 		//_hero->setHp(_hero->getHp() - _atk); 
 		Hit(_atk);
 		break;
 	default:
+		Hit(_atk);
 		//유닛 공격
 		break;
 	}

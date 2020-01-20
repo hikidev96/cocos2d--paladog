@@ -18,7 +18,7 @@ class MindForest_Stage1 : public Scene
 {
 	Hero* _hero;
 	HeroControl* _heroControl;
-	HeroUnit* _heroUnit;
+	vector<HeroUnit*> _heroUnit;
 	vector<Monster*> _monster;
 	Dungeon* _dungeon;
 

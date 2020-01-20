@@ -1,6 +1,7 @@
 #pragma once
 #include "cocos_framework.h"
 #include "Hero.h"
+#include "HeroUnit.h"
 
 enum Mob {
 	걷는좀비,
@@ -18,6 +19,7 @@ class Monster : Scene
 
 	Scene* _scene;
 	Hero* _hero;
+	vector<HeroUnit*> _unit;
 
 	SpriteFrameCache* cache;
 
@@ -43,7 +45,7 @@ class Monster : Scene
 	float _isSummonX; //몬스터 소환좌표
 
 public:
-	Monster(Scene* scene, Hero* hero, Mob mob);
+	Monster(Scene* scene, Hero* hero, vector<HeroUnit*> unit, Mob mob);
 
 	void MonsterMove();
 	void Hit(float atk); //매개 변수에 공격력 삽입
