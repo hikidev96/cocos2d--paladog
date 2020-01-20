@@ -32,6 +32,7 @@ void MindForest_Stage1::tick(float delta)
 	_heroControl->UnitMove();
 
 	MonsterTick();
+
 }
 
 void MindForest_Stage1::HeroManaRegen(float delta)

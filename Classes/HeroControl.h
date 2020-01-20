@@ -3,6 +3,7 @@
 #include "cocos_framework.h"
 #include "Hero.h"
 #include "HeroUnit.h"
+#include "Monster.h"
 
 class HeroControl : Scene
 {

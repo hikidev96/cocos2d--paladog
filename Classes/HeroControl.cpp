@@ -220,9 +220,20 @@ void HeroControl::UnitMove()
 	// 유닛 이동
 	for (int i = 0; i < _heroUnitVec.size(); ++i)
 	{
-		_heroUnitVec[i]->getSprite()->setPosition(_heroUnitVec[i]->getSprite()->getPosition() +
-			Vec2(_heroUnitVec[i]->getSpeed(), 0));
-	}
+		// 포지션 이동
+		if (_heroUnitVec[i]->getUnitAction() == UnitWalk)
+		{
+			_heroUnitVec[i]->getSprite()->setPosition(_heroUnitVec[i]->getSprite()->getPosition() +
+				Vec2(_heroUnitVec[i]->getSpeed(), 0));
+		}
+
+		// Walk 액션(애니메이션)
+		if (_heroUnitVec[i]->getUnitAction() != UnitCollision && !_heroUnitVec[i]->getSprite()->getNumberOfRunningActions())
+		{
+			_heroUnitVec[i]->setUnitAction(UnitWalk);
+			_heroUnitVec[i]->getSprite()->runAction(_heroUnitVec[i]->getWalkAction());
+		}
+	}	
 }
 
 void HeroControl::HeroManaRegen()
@@ -247,6 +258,8 @@ void HeroControl::HeroMeatRegen()
 
 bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 {
+
+	// 좌우 이동
 	if (_leftButton->getBoundingBox().containsPoint(touch->getLocation()))
 	{
 
