@@ -7,11 +7,13 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	cache->addSpriteFramesWithFile("Player/Unit/u_02.plist");
 	cache->addSpriteFramesWithFile("Player/Unit/u_03.plist");
 
+
 	switch (herokind)
 	{
 	case »ýÁã:
+		srand(time(NULL));
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
-		_UnitSprite->setPosition(100, 420);
+		_UnitSprite->setPosition(100, 400 + rand() % 80);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
