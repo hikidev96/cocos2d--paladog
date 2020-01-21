@@ -1,9 +1,10 @@
 #include "cocos_framework.h"
 #include "Monster.h"
 
-Monster::Monster(Scene* scene, Hero* hero, vector<HeroUnit*> unit, Mob mob)
+Monster::Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit, Mob mob)
 {
 	_scene = scene;
+	_layer = layer;
 	_hero = hero;
 	_unit = unit;
 
@@ -54,10 +55,10 @@ Monster::Monster(Scene* scene, Hero* hero, vector<HeroUnit*> unit, Mob mob)
 	_isRemove = false;
 	_isSummonX = 0;
 
-	int zorder = rand() % 20;
+	int zorder = rand() % 30;
 	_monster = Sprite::createWithSpriteFrameName(StringUtils::format("%s_walk_0001.png", _monsterCode));
-	_monster->setPosition(500, zorder + 190);
-	_scene->addChild(_monster, 60 - zorder);
+	_monster->setPosition(500, zorder + 405);
+	_layer->addChild(_monster, 65 - zorder);
 }
 
 void Monster::MonsterMove()
@@ -213,7 +214,7 @@ void Monster::ZomkingSummon()
 
 	_summon = Sprite::createWithSpriteFrameName("b01_summon_0001.png");
 	_summon->setPosition(_monster->getPosition());
-	_scene->addChild(_summon, 60 - _monster->getZOrder());
+	_layer->addChild(_summon, 65);
 
 	Vector<SpriteFrame*> frame;
 
@@ -227,7 +228,7 @@ void Monster::ZomkingSummon()
 
 void Monster::ZomkingSummonRemove()
 {
-	_scene->removeChild(_summon);
+	_layer->removeChild(_summon);
 }
 
 void Monster::Dead()

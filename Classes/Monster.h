@@ -18,6 +18,7 @@ class Monster : Scene
 	};
 
 	Scene* _scene;
+	Layer* _layer;
 	Hero* _hero;
 	vector<HeroUnit*> _unit;
 
@@ -45,7 +46,7 @@ class Monster : Scene
 	float _isSummonX; //몬스터 소환좌표
 
 public:
-	Monster(Scene* scene, Hero* hero, vector<HeroUnit*> unit, Mob mob);
+	Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit, Mob mob);
 
 	void MonsterMove();
 	void Hit(float atk); //매개 변수에 공격력 삽입
