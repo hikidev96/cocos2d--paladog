@@ -36,10 +36,10 @@ class HeroControl : Scene
 	Sprite* _meatIcon; // 고기아이콘
 	Sprite* _manaIcon; // 마나아이콘
 	Sprite* _meatBackGround; // 고기,마나 게이지 배경(검정)
-	Sprite* _hpInfoLayout;
-	Sprite* _hpInfoBack;
-	Sprite* _expBar;
-	Sprite* _expBarBack;
+	Sprite* _hpInfoLayout; // 체력정보(상단중앙)
+	Sprite* _hpInfoBack; // 체력정보배경(검정)
+	Sprite* _expBar; // 경험치바
+	Sprite* _expBarBack; // 경험치바배경(검정)
 
 	Label* _currentMeat;
 	Label* _MaxMeat;

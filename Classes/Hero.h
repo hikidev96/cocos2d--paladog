@@ -35,10 +35,15 @@ private:
 	ProgressTimer* _manaGauge;
 	ProgressTimer* _meatGauge;
 
+	ProgressTimer* _hpInfoGauge;
+	ProgressTimer* _MonsterBaseHpGauge;
+
 	Movement _movement;
 
 	float _speed;
 	float _lv;
+	float _hp;
+	float _maxhp;
 	float _mana;
 	float _maxmana;
 	float _manaRegenSpeed;
@@ -58,6 +63,10 @@ public:
 	Sprite* getHero() { return _hero; }
 	float getSpeed() { return _speed; }
 	void setSpeed(float speed) { _speed = speed; }
+	float getHp() { return _hp; }
+	void setHp(float hp) { _hp = hp; }
+	float getMaxHp() { return _maxhp; }
+	void setMaxHp(float maxhp) { _maxhp = maxhp; }
 	float getMana() { return _mana; }
 	void setMana(float mana) { _mana = mana; }
 	float getMaxMana() { return _maxmana; }
@@ -80,6 +89,8 @@ public:
 	void setLv(float lv) { _lv = lv; }
 	ProgressTimer* getManaGauge() { return _manaGauge; }
 	ProgressTimer* getMeatGauge() { return _meatGauge; }
+	ProgressTimer* getHeroHpInfo() { return _hpInfoGauge; }
+	ProgressTimer* getMonsterBaseInfo() { return _MonsterBaseHpGauge; }
 	RepeatForever* getWaitingAction() { return _heroWaitingAction; }
 	RepeatForever* getWalkingAction() { return _heroWalkingAction; }
 	Animate* getAttackAction() { return _animate3; }

@@ -314,6 +314,9 @@ void HeroControl::HeroMove()
 
 	_hero->getManaGauge()->setPercentage((_hero->getMana() / _hero->getMaxMana()) * 100); // 마나게이지를 Bar 로 보여준다
 	_hero->getMeatGauge()->setPercentage((_hero->getMeat() / _hero->getMaxMeat()) * 100); // 고기게이지를 Bar 로 보여준다
+	_hero->getHeroHpInfo()->setPercentage((_hero->getHp() / _hero->getMaxHp()) * 100); // 플레이어의 체력을 보여줌
+	_hero->getMonsterBaseInfo()->setPercentage(100);
+
 
 	// 마나,고기 게이지를 숫자로 보여준다
 	_currentMeat->setString(String::createWithFormat("%d", (int)_hero->getMeat())->_string.c_str());
@@ -350,7 +353,6 @@ void HeroControl::HeroManaRegen()
 	if (_hero->getMana() < _hero->getMaxMana())
 	{
 		_hero->setMana(_hero->getMana() + 1);
-		log("Mana : %f", _hero->getMana());
 	}
 }
 
@@ -360,7 +362,6 @@ void HeroControl::HeroMeatRegen()
 	if (_hero->getMeat() < _hero->getMaxMeat())
 	{
 		_hero->setMeat(_hero->getMeat() + 1);
-		log("Meat : %f", _hero->getMeat());
 	}
 }
 
