@@ -9,6 +9,7 @@ class Dungeon : Scene
 		¹«³ÊÁü
 	};
 	Scene* _scene;
+	Layer* _layer;
 
 	SpriteFrameCache* cache;
 
@@ -22,9 +23,10 @@ class Dungeon : Scene
 
 public:
 
-	Dungeon(Scene* scene, float hp);
+	Dungeon(Scene* scene, Layer* layer, float hp);
 
 	void Hit(float atk);
+	float getHp() { return _hp; }
 
 	void test();
 };
