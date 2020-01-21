@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-Hero::Hero(Scene * scene)
+Hero::Hero(Scene * scene, Layer* layer)
 {
 	// plist 파일 추가
 	cache = SpriteFrameCache::getInstance();
@@ -8,8 +8,8 @@ Hero::Hero(Scene * scene)
 
 	// 영웅 만들기
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
-	_hero->setPosition(100, 200);
-	scene->addChild(_hero);
+	_hero->setPosition(100, 420);
+	layer->addChild(_hero);
 
 	//마나 게이지 만들기
 	_manaGauge = ProgressTimer::create(Sprite::create("UI/Mana.png"));

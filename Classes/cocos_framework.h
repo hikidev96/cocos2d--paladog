@@ -8,6 +8,8 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <time.h>
+#include <stdlib.h>
 #include "cocos2d.h"
 #include "ui/UIEditBox/UIEditBox.h"
 #include "ui/CocosGUI.h"

@@ -207,9 +207,9 @@
                 <key>frame</key>
                 <string>{{2,136},{414,16}}</string>
                 <key>offset</key>
-                <string>{0,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{414,16}</string>
             </dict>
             <key>ui_macebtn_case.png</key>
             <dict>
