@@ -119,27 +119,13 @@ void IntroBg::SetTitleWood(Scene * pScene) {
   _woodR->setPosition(Vec2(0, 0));
   pScene->addChild(_woodR);
 
-  _treeA[0] = Sprite::createWithSpriteFrameName("tree_a_01.png");
-  _treeA[1] = Sprite::createWithSpriteFrameName("tree_a_02.png");
-  _treeA[2] = Sprite::createWithSpriteFrameName("tree_a_03.png");
-  _treeA[3] = Sprite::createWithSpriteFrameName("tree_a_04.png");
-  _treeB[0] = Sprite::createWithSpriteFrameName("tree_b_01.png");
-  _treeB[1] = Sprite::createWithSpriteFrameName("tree_b_02.png");
-  _treeB[2] = Sprite::createWithSpriteFrameName("tree_b_03.png");
-  _treeB[3] = Sprite::createWithSpriteFrameName("tree_b_04.png");
-  _treeC[0] = Sprite::createWithSpriteFrameName("tree_c_01.png");
-  _treeC[1] = Sprite::createWithSpriteFrameName("tree_c_02.png");
-  _treeC[2] = Sprite::createWithSpriteFrameName("tree_c_03.png");
-  _treeC[3] = Sprite::createWithSpriteFrameName("tree_c_04.png");
-  for (byte i = 0; i < 4; i++) {
-    _treeA[i]->setAnchorPoint(Vec2(0, 0));
-    _treeA[i]->setPosition(Vec2(0, 0));
-    _treeB[i]->setAnchorPoint(Vec2(0, 0));
-    _treeB[i]->setPosition(Vec2(0, 0));
-    _treeC[i]->setAnchorPoint(Vec2(0, 0));
-    _treeC[i]->setPosition(Vec2(0, 0));
-    pScene->addChild(_treeA[i]);
-    pScene->addChild(_treeB[i]);
-    pScene->addChild(_treeC[i]);
-  }
+  _treeA = Sprite::create("Intro/Bg/tree_A.png");
+  _treeA->setAnchorPoint(Vec2(0, 0));
+  _treeA->setPosition(Vec2(0, 0));
+  pScene->addChild(_treeA);
+
+  _treeB = Sprite::create("Intro/Bg/tree_B.png");
+  _treeB->setAnchorPoint(Vec2(0, 0));
+  _treeB->setPosition(Vec2(0, 0));
+  pScene->addChild(_treeB);
 }

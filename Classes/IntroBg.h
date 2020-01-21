@@ -53,6 +53,12 @@ class IntroBg
   Sprite* GetWoodR() {
     return _woodR;
   }
+  Sprite* GetTreeA() {
+    return _treeA;
+  }
+  Sprite* GetTreeB() {
+    return _treeB;
+  }
  private:
   SpriteFrameCache* _cache;
   Sprite* _15Age;
@@ -67,9 +73,8 @@ class IntroBg
   Sprite* _titleMountain2;
   Sprite* _woodL;
   Sprite* _woodR;
-  Sprite* _treeA[4];
-  Sprite* _treeB[4];
-  Sprite* _treeC[4];  
+  Sprite* _treeA;
+  Sprite* _treeB;
 };
 
 #endif // __INTROBG_H__

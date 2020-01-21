@@ -1,4 +1,5 @@
 #include "IntroScene.h"
+#include "MapMindForest.h"
 
 Scene* IntroScene::createScene() {
   return IntroScene::create();
@@ -42,23 +43,61 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
     getBoundingBox().containsPoint(touchPoint);
   bool touchCampaign = _introUI->GetBtnCampaignUp()->
     getBoundingBox().containsPoint(touchPoint);
+  bool touchExit = _introUI->GetBtnExitUp()->
+    getBoundingBox().containsPoint(touchPoint);
+  bool touchDataSlot = _introUI->GetDataSlot()->
+    getBoundingBox().containsPoint(touchPoint);
+  bool touchStart = _introUI->GetBtnSlotStartUp()->
+    getBoundingBox().containsPoint(touchPoint);
 
-
+  // Play 버튼 클릭
   if (touchPlay && !_isPlay) {
     _introUI->GetModeSelectBox()->setVisible(true);
     _introUI->GetTxtHeroSelect()->setVisible(true);
     _introUI->GetHeroPaladogUp()->setVisible(true);
     _introUI->GetHeroDarkdogUp()->setVisible(true);
+
     _isPlay = true;
   }
 
-  if (_isPlay && touchPaladog && !_isPaladog) {
+  // 팔라독 버튼 클릭
+  else if (_isPlay && touchPaladog && !_isPaladog) {
     _introUI->GetHeroDarkdogUp()->setVisible(false);
     _introUI->GetBtnCampaignUp()->setVisible(true);
+    _introUI->GetBtnCampaignUp()->
+      runAction(RotateBy::create(1, Vec3(0, 180, 0)));
     _introUI->GetBtnSurvivalUp()->setVisible(true);
+    _introUI->GetBtnSurvivalUp()->
+      runAction(RotateBy::create(1, Vec3(0, 180, 0)));
+
     _isPaladog = true;
   }
 
+  // Play 버튼 클릭 후 배경 클릭
+  if (_isPlay && !_isPaladog && !touchCampaign && !touchPaladog &&
+      !_isCampaign) {
+    _introUI->GetModeSelectBox()->setVisible(false);
+    _introUI->GetTxtHeroSelect()->setVisible(false);
+    _introUI->GetHeroPaladogUp()->setVisible(false);
+    _introUI->GetHeroDarkdogUp()->setVisible(false);
+    _introUI->GetBtnCampaignUp()->setVisible(false);
+    _introUI->GetBtnSurvivalUp()->setVisible(false);
+    _introUI->GetTitleBtnNewgameUp()->setVisible(true);
+    _introUI->GetTitleBtnInfoUp()->setVisible(true);
+
+    _isPlay = false;
+    _isPaladog = false;
+
+  } else if (_isPaladog && (!touchCampaign && !touchPaladog && !_isCampaign)) {
+    _introUI->GetHeroDarkdogUp()->setVisible(true);
+    _introUI->GetBtnCampaignUp()->setVisible(false);
+    _introUI->GetBtnSurvivalUp()->setVisible(false);
+
+    _isPlay = true;
+    _isPaladog = false;
+  }
+
+  // 캠페인 버튼 클릭
   if (_isPaladog && touchCampaign && !_isCampaign) {
     _introUI->GetModeSelectBox()->setVisible(false);
     _introUI->GetTxtHeroSelect()->setVisible(false);
@@ -68,12 +107,49 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
     _introUI->GetTitleBtnNewgameUp()->setVisible(false);
     _introUI->GetTitleBtnInfoUp()->setVisible(false);
     _introUI->GetBtnCampaignUp()->setVisible(false);
-    _introUI->GetBtnSurvivalUp()->setVisible(false);
-    
+    _introUI->GetBtnSurvivalUp()->setVisible(false);    
+    // 슬롯
     _introUI->GetMsgSelectSlot()->setVisible(true);
     _introUI->GetDataSlot()->setVisible(true);
     _introUI->GetSlotInfoEmpty()->setVisible(true);
+    _introUI->GetBtnExitUp()->setVisible(true);
+
     _isCampaign = true;
+  }
+
+  // X 버튼 클릭
+  if (_isCampaign && touchExit && !_isExit) {
+    _introUI->GetMsgSelectSlot()->setVisible(false);
+    _introUI->GetDataSlot()->setVisible(false);
+    _introUI->GetSlotInfoEmpty()->setVisible(false);
+    _introUI->GetBtnExitUp()->setVisible(false);
+    // 초기화면
+    _introUI->GetTitleLogo()->setVisible(true);
+    _introUI->GetTitleBtnNewgameUp()->setVisible(true);
+    _introUI->GetTitleBtnInfoUp()->setVisible(true);
+
+    _isCampaign = false;
+    _isExit = false;
+    _isPaladog = false;
+    _isPlay = false;
+  }
+
+  // 슬롯 선택
+  if (_isCampaign && touchDataSlot && !_isDataSlot) {
+    _introUI->GetDataSlot()->runAction(MoveBy::create(1, Vec2(-20, 0)));
+    _introUI->GetBtnSlotStartUp()->setVisible(true);
+    _introUI->GetBtnSlotDeleteUp()->setVisible(true);
+
+    _isDataSlot = true;
+  }
+
+  // Start 클릭
+  if (_isDataSlot && touchStart && _isStart) {    
+    _isStart = true;
+
+    // 씬 전환
+    auto pScene = MapMindForest::createScene();
+    Director::getInstance()->replaceScene(pScene);
   }
 
   return true;
@@ -126,8 +202,17 @@ void IntroScene::changeBg15AgeToVolcano(float time) {
   _introUI->GetDataSlot()->setVisible(false);
   _introUI->SetSlotInfoEmpty(this);
   _introUI->GetSlotInfoEmpty()->setVisible(false);
+  _introUI->SetBtnExitUp(this);
+  _introUI->GetBtnExitUp()->setVisible(false);
+  _introUI->SetBtnSlotStartUp(this);
+  _introUI->GetBtnSlotStartUp()->setVisible(false);
+  _introUI->SetBtnSlotDeleteUp(this);
+  _introUI->GetBtnSlotDeleteUp()->setVisible(false);
 
   _isPlay = false;
   _isPaladog = false;
   _isCampaign = false;
+  _isExit = false;
+  _isDataSlot = false;
+  _isStart = false;
 }

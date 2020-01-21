@@ -81,9 +81,6 @@
     <ClCompile Include="..\Classes\HeroUnit.cpp">
       <Filter>src\영웅</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\IntroScene.cpp">
-      <Filter>src\Scene\Intro</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src\AppDelegate</Filter>
     </ClCompile>
@@ -94,6 +91,9 @@
       <Filter>src\Scene\Intro</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\IntroBg.cpp">
+      <Filter>src\Scene\Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IntroScene.cpp">
       <Filter>src\Scene\Intro</Filter>
     </ClCompile>
   </ItemGroup>

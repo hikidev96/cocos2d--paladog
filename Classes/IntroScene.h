@@ -24,6 +24,9 @@ class IntroScene : public Scene
   bool _isPlay;
   bool _isPaladog;
   bool _isCampaign;
+  bool _isExit;
+  bool _isDataSlot;
+  bool _isStart;
 };
 
 #endif // __INTRO_SCENE_H__

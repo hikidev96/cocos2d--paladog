@@ -6,6 +6,7 @@ IntroUI::IntroUI(Scene * pScene) {
   _cache->addSpriteFramesWithFile("Intro/UI/opening_ending_03.plist");
   _cache->addSpriteFramesWithFile("Intro/UI/option_msg_02.plist");
   _cache->addSpriteFramesWithFile("Intro/UI/option_msg_01.plist");
+  _cache->addSpriteFramesWithFile("Intro/UI/btn_exit.plist");
 }
 
 void IntroUI::SetTitleLogo(Scene * pScene) {
@@ -44,7 +45,7 @@ void IntroUI::SetTxtHeroSelect(Scene * pScene) {
     Sprite::createWithSpriteFrameName("txt_heroselect.png");
   _txtHeroSelect->setScale(0.65f);
   _txtHeroSelect->setAnchorPoint(Vec2(0, 0));
-  _txtHeroSelect->setPosition(Vec2(40, 52));
+  _txtHeroSelect->setPosition(Vec2(56.5f, 150));
   pScene->addChild(_txtHeroSelect);
 }
 
@@ -70,8 +71,8 @@ void IntroUI::SetBtnCampaignUp(Scene * pScene) {
   _btnCampaignUp =
     Sprite::createWithSpriteFrameName("btn_campaign_up.png");
   _btnCampaignUp->setScale(0.8f);
-  _btnCampaignUp->setAnchorPoint(Vec2(0, 0));
-  _btnCampaignUp->setPosition(Vec2(127, 78));
+  _btnCampaignUp->setAnchorPoint(Vec2(0.5f, 0.5f));
+  _btnCampaignUp->setPosition(Vec2(183, 110));
   pScene->addChild(_btnCampaignUp);
 }
 
@@ -79,8 +80,8 @@ void IntroUI::SetBtnSurvivalUp(Scene * pScene) {
   _btnSurvivalUp =
     Sprite::createWithSpriteFrameName("btn_survival_up.png");
   _btnSurvivalUp->setScale(0.8f);
-  _btnSurvivalUp->setAnchorPoint(Vec2(0, 0));
-  _btnSurvivalUp->setPosition(Vec2(127, 15));
+  _btnSurvivalUp->setAnchorPoint(Vec2(0.5f, 0.5f));
+  _btnSurvivalUp->setPosition(Vec2(183, 47));
   pScene->addChild(_btnSurvivalUp);
 }
 
@@ -103,7 +104,32 @@ void IntroUI::SetSlotInfoEmpty(Scene * pScene) {
 void IntroUI::SetMsgSelectSlot(Scene * pScene) {
   _msgSelectSlot =
     Sprite::createWithSpriteFrameName("msg_select_slot.png");
+  _msgSelectSlot->setScale(0.7f);
   _msgSelectSlot->setAnchorPoint(Vec2(0, 0));
-  _msgSelectSlot->setPosition(Vec2(150, 280));
+  _msgSelectSlot->setPosition(Vec2(180, 280));
   pScene->addChild(_msgSelectSlot);
+}
+
+void IntroUI::SetBtnExitUp(Scene * pScene) {
+  _btnExitUp =
+    Sprite::createWithSpriteFrameName("btn_exit_up.png");
+  _btnExitUp->setAnchorPoint(Vec2(0, 0));
+  _btnExitUp->setPosition(Vec2(438, 275));
+  pScene->addChild(_btnExitUp);
+}
+
+void IntroUI::SetBtnSlotStartUp(Scene * pScene) {
+  _btnSlotStartUp =
+    Sprite::createWithSpriteFrameName("btn_slot_start_up.png");
+  _btnSlotStartUp->setAnchorPoint(Vec2(0, 0));
+  _btnSlotStartUp->setPosition(Vec2(240, 180));
+  pScene->addChild(_btnSlotStartUp);
+}
+
+void IntroUI::SetBtnSlotDeleteUp(Scene * pScene) {
+  _btnSlotDeleteUp =
+    Sprite::createWithSpriteFrameName("btn_slot_delete_up.png");
+  _btnSlotDeleteUp->setAnchorPoint(Vec2(0, 0));
+  _btnSlotDeleteUp->setPosition(Vec2(360, 280));
+  pScene->addChild(_btnSlotDeleteUp);
 }

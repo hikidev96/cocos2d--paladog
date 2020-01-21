@@ -56,10 +56,19 @@ class IntroUI
   Sprite* GetMsgSelectSlot() {
     return _msgSelectSlot;
   }
+  void SetBtnExitUp(Scene* pScene);
+  Sprite* GetBtnExitUp() {
+    return _btnExitUp;
+  }
+  void SetBtnSlotStartUp(Scene* pScene);
+  Sprite* GetBtnSlotStartUp() {
+    return _btnSlotStartUp;
+  }
+  void SetBtnSlotDeleteUp(Scene* pScene);
+  Sprite* GetBtnSlotDeleteUp() {
+    return _btnSlotDeleteUp;
+  }
 
-
-  Sprite* GetIntroDataSlotBottom();
-  Sprite* GetIntroMSGBox();
  private:
   SpriteFrameCache* _cache;
   Sprite* _titleLogo;
@@ -74,7 +83,9 @@ class IntroUI
   Sprite* _dataSlot;
   Sprite* _slotInfoEmpty;
   Sprite* _msgSelectSlot;
-
+  Sprite* _btnExitUp;
+  Sprite* _btnSlotStartUp;
+  Sprite* _btnSlotDeleteUp;
 };
 
 #endif // __INTROUI_H__
