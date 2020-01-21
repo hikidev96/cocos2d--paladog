@@ -52,7 +52,7 @@ private:
 
 public:
 
-	Hero(Scene* scene);
+	Hero(Scene* scene, Layer* layer);
 	Movement getMoveWay() { return _movement; }
 	void setMoveWay(Movement movement) { _movement = movement; }
 	Sprite* getHero() { return _hero; }

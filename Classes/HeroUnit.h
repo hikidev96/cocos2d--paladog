@@ -2,11 +2,20 @@
 
 #include "cocos_framework.h"
 
-enum HeroKind
+enum UnitKind
 {
 	»ýÁã = 100,
 	°õ,
 	Ä»°Å·ç,
+};
+
+enum UnitAction
+{
+	UnitWalk = 50,
+	UnitAttack1,
+	UnitAttack2,
+	UnitDead,
+	UnitCollision,
 };
 
 class HeroUnit
@@ -20,14 +29,34 @@ class HeroUnit
 	float _Hp; // Ã¼·Â
 	float _Atk; // °ø°Ý·Â
 	float _Speed; // ½ºÇÇµå
-	HeroKind _unitKind; // À¯´ÖÁ¾·ù
+	UnitKind _unitKind; // À¯´ÖÁ¾·ù
+	UnitAction _unitAction;
 	HeroUnit* _heroUnit; // À¯´Ö°´Ã¼
 
+	// Walk ¾×¼Ç
+	Animation* _animation1;
+	Animate* _animate1;
+	RepeatForever* _walkAction;
+
+	// Attak ¾×¼Ç
+	Animation* _animation2;
+	Animate* _animate2;
+
+	// Dead ¾×¼Ç
+	Animation* _animation3;
+	Animate* _animate3;
+
+
 public:
-	HeroUnit(Scene* scene, HeroKind herokind);
+	HeroUnit(Scene* scene, UnitKind herokind, Layer* layer);
 
 	vector<HeroUnit*> getUnitVec() { return _unitVec; }
-	HeroKind getHeroKind() { return _unitKind; }
+	UnitKind getHeroKind() { return _unitKind; }
+	UnitAction getUnitAction() { return _unitAction; }
+	void setUnitAction(UnitAction unitaction) { _unitAction = unitaction; }
+	RepeatForever* getWalkAction() { return _walkAction; }
+	Animate* getAttackAction() { return _animate2; }
+	Animate* getDeadAction() { return _animate3; }
 	Sprite* getSprite() { return _UnitSprite; }
 	void setSprite(Sprite* pSprite) { _UnitSprite = pSprite; }
 	float getHp() { return _Hp; }

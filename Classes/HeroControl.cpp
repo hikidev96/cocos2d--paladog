@@ -1,9 +1,10 @@
 #include "HeroControl.h"
 
-HeroControl::HeroControl(Scene* scene, Hero* hero)
+HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 {
 	_hero = hero; // 히어로 메모리주소 받아오기
 	_scene = scene; // Scene 메모리주소 받아오기
+	_layer = layer;
 
 	cache = SpriteFrameCache::getInstance(); // 캐쉬생성
 	cache->addSpriteFramesWithFile("UI/ui_gameplay.plist"); // plist 추가
@@ -220,9 +221,20 @@ void HeroControl::UnitMove()
 	// 유닛 이동
 	for (int i = 0; i < _heroUnitVec.size(); ++i)
 	{
-		_heroUnitVec[i]->getSprite()->setPosition(_heroUnitVec[i]->getSprite()->getPosition() +
-			Vec2(_heroUnitVec[i]->getSpeed(), 0));
-	}
+		// 포지션 이동
+		if (_heroUnitVec[i]->getUnitAction() == UnitWalk)
+		{
+			_heroUnitVec[i]->getSprite()->setPosition(_heroUnitVec[i]->getSprite()->getPosition() +
+				Vec2(_heroUnitVec[i]->getSpeed(), 0));
+		}
+
+		// Walk 액션(애니메이션)
+		if (_heroUnitVec[i]->getUnitAction() != UnitCollision && !_heroUnitVec[i]->getSprite()->getNumberOfRunningActions())
+		{
+			_heroUnitVec[i]->setUnitAction(UnitWalk);
+			_heroUnitVec[i]->getSprite()->runAction(_heroUnitVec[i]->getWalkAction());
+		}
+	}	
 }
 
 void HeroControl::HeroManaRegen()
@@ -247,6 +259,8 @@ void HeroControl::HeroMeatRegen()
 
 bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 {
+
+	// 좌우 이동
 	if (_leftButton->getBoundingBox().containsPoint(touch->getLocation()))
 	{
 
@@ -314,7 +328,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 		{
 			_mouseSummonsClick = true;
 
-			_heroUnit = new HeroUnit(_scene, 생쥐);
+			_heroUnit = new HeroUnit(_scene, 생쥐, _layer);
 			_heroUnitVec.push_back(_heroUnit);
 
 			_hero->setMeat(_hero->getMeat() - 10);
@@ -328,7 +342,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 		{
 			_bearSummonsClick = true;
 
-			_heroUnit = new HeroUnit(_scene, 곰);
+			_heroUnit = new HeroUnit(_scene, 곰, _layer);
 			_heroUnitVec.push_back(_heroUnit);
 
 			_hero->setMeat(_hero->getMeat() - 30);
@@ -342,7 +356,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 		{
 			_kangarooSummonsClick = true;
 
-			_heroUnit = new HeroUnit(_scene, 캥거루);
+			_heroUnit = new HeroUnit(_scene, 캥거루, _layer);
 			_heroUnitVec.push_back(_heroUnit);
 
 			_hero->setMeat(_hero->getMeat() - 40);

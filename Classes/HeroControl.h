@@ -3,6 +3,7 @@
 #include "cocos_framework.h"
 #include "Hero.h"
 #include "HeroUnit.h"
+#include "Monster.h"
 
 class HeroControl : Scene
 {
@@ -12,6 +13,8 @@ class HeroControl : Scene
 	vector<HeroUnit*> _heroUnitVec; // 백터
 
 	EventListenerTouchOneByOne* listener;
+
+	Layer* _layer;
 
 	Scene* _scene;
 	Sprite* _leftButton; // 왼쪽Move버튼
@@ -40,7 +43,7 @@ class HeroControl : Scene
 	bool _kangarooSummonsClick;
 
 public:
-	HeroControl(Scene* scene, Hero* hero);
+	HeroControl(Scene* scene, Hero* hero, Layer* layer);
 	void HeroMove();
 	void UnitMove();
 	void HeroManaRegen();
