@@ -96,7 +96,7 @@ void IntroBg::SetTitleDarkCloud2(Scene * pScene) {
 void IntroBg::SetTitleMountain(Scene * pScene) {
   _titleMountain = Sprite::createWithSpriteFrameName("title_mountain_00.png");
   _titleMountain->setAnchorPoint(Vec2(0, 0));
-  _titleMountain->setPosition(Vec2(0, 0));
+  _titleMountain->setPosition(Vec2(-110, 0));
   pScene->addChild(_titleMountain);
 }
 
@@ -104,7 +104,7 @@ void IntroBg::SetTitleMountain2(Scene * pScene) {
   _titleMountain2 =
     Sprite::createWithSpriteFrameName("title_mountain_01.png");
   _titleMountain2->setAnchorPoint(Vec2(0, 0));
-  _titleMountain2->setPosition(Vec2(0, 0));
+  _titleMountain2->setPosition(Vec2(345, 0));
   pScene->addChild(_titleMountain2);
 }
 

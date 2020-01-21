@@ -414,9 +414,9 @@
                 <key>frame</key>
                 <string>{{452,12},{342,44}}</string>
                 <key>offset</key>
-                <string>{48,137}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{342,44}</string>
             </dict>
             <key>paper_option.png</key>
             <dict>
@@ -450,9 +450,9 @@
                 <key>frame</key>
                 <string>{{2,260},{294,94}}</string>
                 <key>offset</key>
-                <string>{71,72}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{294,94}</string>
             </dict>
             <key>slot_info_hard.png</key>
             <dict>

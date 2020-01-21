@@ -21,6 +21,9 @@ class IntroScene : public Scene
   void changeBg15AgeToVolcano(float time);
   EventListenerTouchOneByOne* _listener;
   IntroUI* _introUI;
+  bool _isPlay;
+  bool _isPaladog;
+  bool _isCampaign;
 };
 
 #endif // __INTRO_SCENE_H__

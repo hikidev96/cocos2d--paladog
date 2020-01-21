@@ -10,7 +10,7 @@ bool IntroScene::init() {
   }
   
   _introBg = new (std::nothrow) IntroBg;
-  _introBg->Set15Age(this);
+  _introBg->Set15Age(this);  
   
   this->scheduleOnce(schedule_selector(IntroScene::changeBg15AgeToVolcano), 3);
 
@@ -44,21 +44,36 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
     getBoundingBox().containsPoint(touchPoint);
 
 
-  if (touchPlay) {
-    log("play");
-    _introUI->GetModeSelectBox()->setVisible(true);    
+  if (touchPlay && !_isPlay) {
+    _introUI->GetModeSelectBox()->setVisible(true);
+    _introUI->GetTxtHeroSelect()->setVisible(true);
     _introUI->GetHeroPaladogUp()->setVisible(true);
     _introUI->GetHeroDarkdogUp()->setVisible(true);
+    _isPlay = true;
   }
 
-  if (touchPaladog) {
-    log("paladog");
+  if (_isPlay && touchPaladog && !_isPaladog) {
+    _introUI->GetHeroDarkdogUp()->setVisible(false);
     _introUI->GetBtnCampaignUp()->setVisible(true);
     _introUI->GetBtnSurvivalUp()->setVisible(true);
+    _isPaladog = true;
   }
 
-  if (touchCampaign) {
-    log("campaign");
+  if (_isPaladog && touchCampaign && !_isCampaign) {
+    _introUI->GetModeSelectBox()->setVisible(false);
+    _introUI->GetTxtHeroSelect()->setVisible(false);
+    _introUI->GetHeroPaladogUp()->setVisible(false);
+    _introUI->GetHeroDarkdogUp()->setVisible(false);
+    _introUI->GetTitleLogo()->setVisible(false);
+    _introUI->GetTitleBtnNewgameUp()->setVisible(false);
+    _introUI->GetTitleBtnInfoUp()->setVisible(false);
+    _introUI->GetBtnCampaignUp()->setVisible(false);
+    _introUI->GetBtnSurvivalUp()->setVisible(false);
+    
+    _introUI->GetMsgSelectSlot()->setVisible(true);
+    _introUI->GetDataSlot()->setVisible(true);
+    _introUI->GetSlotInfoEmpty()->setVisible(true);
+    _isCampaign = true;
   }
 
   return true;
@@ -101,8 +116,18 @@ void IntroScene::changeBg15AgeToVolcano(float time) {
   _introUI->GetBtnCampaignUp()->setVisible(false);
   _introUI->SetBtnSurvivalUp(this);
   _introUI->GetBtnSurvivalUp()->setVisible(false);
+  _introUI->SetTxtHeroSelect(this);
+  _introUI->GetTxtHeroSelect()->setVisible(false);
 
   // ½½·Ô ¼±ÅÃ
+  _introUI->SetMsgSelectSlot(this);
+  _introUI->GetMsgSelectSlot()->setVisible(false);
   _introUI->SetDataSlot(this);
   _introUI->GetDataSlot()->setVisible(false);
+  _introUI->SetSlotInfoEmpty(this);
+  _introUI->GetSlotInfoEmpty()->setVisible(false);
+
+  _isPlay = false;
+  _isPaladog = false;
+  _isCampaign = false;
 }

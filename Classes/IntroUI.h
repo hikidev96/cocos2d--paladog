@@ -24,6 +24,10 @@ class IntroUI
   Sprite* GetModeSelectBox() {
     return _modeSelectBox;
   }
+  void SetTxtHeroSelect(Scene* pScene);
+  Sprite* GetTxtHeroSelect() {
+    return _txtHeroSelect;
+  }
   void SetHeroPaladogUp(Scene* pScene);
   Sprite* GetHeroPaladogUp() {
     return _heroPaladogUp;
@@ -44,8 +48,16 @@ class IntroUI
   Sprite* GetDataSlot() {
     return _dataSlot;
   }
-  Sprite* GetIntroSelectSlot();
-  
+  void SetSlotInfoEmpty(Scene* pScene);
+  Sprite* GetSlotInfoEmpty() {
+    return _slotInfoEmpty;
+  }
+  void SetMsgSelectSlot(Scene* pScene);
+  Sprite* GetMsgSelectSlot() {
+    return _msgSelectSlot;
+  }
+
+
   Sprite* GetIntroDataSlotBottom();
   Sprite* GetIntroMSGBox();
  private:
@@ -54,16 +66,15 @@ class IntroUI
   Sprite* _titleBtnNewgameUp;
   Sprite* _titleBtnInfoUp;
   Sprite* _modeSelectBox;
+  Sprite* _txtHeroSelect;
   Sprite* _heroPaladogUp;
   Sprite* _heroDarkdogUp;
   Sprite* _btnCampaignUp;
   Sprite* _btnSurvivalUp;
   Sprite* _dataSlot;
+  Sprite* _slotInfoEmpty;
+  Sprite* _msgSelectSlot;
 
-
-  Sprite* _introSelectSlot;
-  Sprite* _introDataSlotBottom;
-  Sprite* _introMSGBox;
 };
 
 #endif // __INTROUI_H__

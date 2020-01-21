@@ -99,9 +99,9 @@
                 <key>frame</key>
                 <string>{{258,40},{216,34}}</string>
                 <key>offset</key>
-                <string>{-106,7}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{216,34}</string>
             </dict>
             <key>txt_modeselect.png</key>
             <dict>
