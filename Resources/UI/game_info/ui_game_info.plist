@@ -421,13 +421,13 @@
 			<key>height</key>
 			<integer>26</integer>
 			<key>offsetX</key>
-			<real>-227</real>
+			<real>0</real>
 			<key>offsetY</key>
-			<real>147</real>
+			<real>0</real>
 			<key>originalWidth</key>
-			<integer>480</integer>
+			<integer>26</integer>
 			<key>originalHeight</key>
-			<integer>320</integer>
+			<integer>26</integer>
 		</dict>
 		<key>ui_exp_back.png</key>
 		<dict>
@@ -440,13 +440,13 @@
 			<key>height</key>
 			<integer>12</integer>
 			<key>offsetX</key>
-			<real>-227</real>
+			<real>0</real>
 			<key>offsetY</key>
-			<real>143</real>
+			<real>0</real>
 			<key>originalWidth</key>
-			<integer>480</integer>
+			<integer>18</integer>
 			<key>originalHeight</key>
-			<integer>320</integer>
+			<integer>12</integer>
 		</dict>
 		<key>ui_hp_info_back.png</key>
 		<dict>
@@ -461,11 +461,11 @@
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
-			<real>150</real>
+			<real>0</real>
 			<key>originalWidth</key>
-			<integer>480</integer>
+			<integer>136</integer>
 			<key>originalHeight</key>
-			<integer>320</integer>
+			<integer>8</integer>
 		</dict>
 		<key>ui_hp_info_layout.png</key>
 		<dict>
@@ -478,13 +478,13 @@
 			<key>height</key>
 			<integer>17</integer>
 			<key>offsetX</key>
-			<real>0.5</real>
+			<real>0</real>
 			<key>offsetY</key>
-			<real>150.5</real>
+			<real>0</real>
 			<key>originalWidth</key>
-			<integer>480</integer>
+			<integer>181</integer>
 			<key>originalHeight</key>
-			<integer>320</integer>
+			<integer>17</integer>
 		</dict>
 	</dict>
 </dict>

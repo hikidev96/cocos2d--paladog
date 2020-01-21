@@ -27,9 +27,24 @@ class HeroControl : Scene
 	Sprite* _mouseSummonsButton; // 생쥐 소환 버튼
 	Sprite* _bearSummonsButton; // 곰 소환 버튼
 	Sprite* _kangarooSummonsButton; // 캥거루 소환 버튼
-	Sprite* _meatIcon;
-	Sprite* _manaIcon;
+	Sprite* _unitLock1; // 잠긴 유닛 버튼
+	Sprite* _unitLock2; // 잠긴 유닛 버튼
+	Sprite* _unitLock3; // 잠긴 유닛 버튼
+	Sprite* _unitLock4; // 잠긴 유닛 버튼
+	Sprite* _unitLock5; // 잠긴 유닛 버튼
+	Sprite* _unitLock6; // 잠긴 유닛 버튼
+	Sprite* _meatIcon; // 고기아이콘
+	Sprite* _manaIcon; // 마나아이콘
+	Sprite* _meatBackGround; // 고기,마나 게이지 배경(검정)
+	Sprite* _hpInfoLayout;
+	Sprite* _hpInfoBack;
+	Sprite* _expBar;
+	Sprite* _expBarBack;
 
+	Label* _currentMeat;
+	Label* _MaxMeat;
+	Label* _currentMana;
+	Label* _MaxMana;
 
 	bool _right;
 	bool _left;

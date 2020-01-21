@@ -252,9 +252,9 @@
                 <key>frame</key>
                 <string>{{2,2},{100,100}}</string>
                 <key>offset</key>
-                <string>{-408,-156}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{960,640}</string>
+                <string>{100,100}</string>
             </dict>
         </dict>
         <key>metadata</key>

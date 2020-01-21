@@ -9,6 +9,7 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	cache = SpriteFrameCache::getInstance(); // 캐쉬생성
 	cache->addSpriteFramesWithFile("UI/ui_gameplay.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("Player/UNIT_B~1/btn_unit-hd.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
 
 	// 리스너 등록
 	listener = EventListenerTouchOneByOne::create();
@@ -47,23 +48,70 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	// 생쉬 소환 버튼
 	_mouseSummonsButton = Sprite::createWithSpriteFrameName("btn_unit_00_disable.png");
 	_mouseSummonsButton->setAnchorPoint({ 0,0 });
-	_mouseSummonsButton->setPosition({ 10,53 });
+	_mouseSummonsButton->setPosition({ 10,55 });
 	_mouseSummonsButton->setScale(0.5f);
+	_mouseSummonsButton->setScaleY(0.48f);
 	_scene->addChild(_mouseSummonsButton, 1);
 
 	// 곰 소환 버튼
 	_bearSummonsButton = Sprite::createWithSpriteFrameName("btn_unit_02_disable.png");
 	_bearSummonsButton->setAnchorPoint({ 0,0 });
-	_bearSummonsButton->setPosition({ 60,53 });
+	_bearSummonsButton->setPosition({ 61,55 });
 	_bearSummonsButton->setScale(0.5f);
+	_bearSummonsButton->setScaleY(0.48f);
 	_scene->addChild(_bearSummonsButton, 1);
 
 	// 캥거루 소환 버튼
 	_kangarooSummonsButton = Sprite::createWithSpriteFrameName("btn_unit_03_disable.png");
 	_kangarooSummonsButton->setAnchorPoint({ 0,0 });
-	_kangarooSummonsButton->setPosition({ 110,53 });
+	_kangarooSummonsButton->setPosition({ 112,55 });
 	_kangarooSummonsButton->setScale(0.5f);
+	_kangarooSummonsButton->setScaleY(0.48f);
 	_scene->addChild(_kangarooSummonsButton, 1);
+
+	// 소환 버튼 잠김
+	_unitLock1 = Sprite::createWithSpriteFrameName("btn_unit_lock.png");
+	_unitLock1->setAnchorPoint({ 0, 0 });
+	_unitLock1->setPosition({ 163,55 });
+	_unitLock1->setScale(0.5f);
+	_unitLock1->setScaleY(0.48f);
+	_scene->addChild(_unitLock1, 1);
+
+	_unitLock2 = Sprite::createWithSpriteFrameName("btn_unit_lock.png");
+	_unitLock2->setAnchorPoint({ 0, 0 });
+	_unitLock2->setPosition({ 214,55 });
+	_unitLock2->setScale(0.5f);
+	_unitLock2->setScaleY(0.48f);
+	_scene->addChild(_unitLock2, 1);
+
+	_unitLock3 = Sprite::createWithSpriteFrameName("btn_unit_lock.png");
+	_unitLock3->setAnchorPoint({ 0, 0 });
+	_unitLock3->setPosition({ 265,55 });
+	_unitLock3->setScale(0.5f);
+	_unitLock3->setScaleY(0.48f);
+	_scene->addChild(_unitLock3, 1);
+
+	_unitLock4 = Sprite::createWithSpriteFrameName("btn_unit_lock.png");
+	_unitLock4->setAnchorPoint({ 0, 0 });
+	_unitLock4->setPosition({ 316,55 });
+	_unitLock4->setScale(0.5f);
+	_unitLock4->setScaleY(0.48f);
+	_scene->addChild(_unitLock4, 1);
+
+	_unitLock5 = Sprite::createWithSpriteFrameName("btn_unit_lock.png");
+	_unitLock5->setAnchorPoint({ 0, 0 });
+	_unitLock5->setPosition({ 367,55 });
+	_unitLock5->setScale(0.5f);
+	_unitLock5->setScaleY(0.48f);
+	_scene->addChild(_unitLock5, 1);
+
+	_unitLock6 = Sprite::createWithSpriteFrameName("btn_unit_lock.png");
+	_unitLock6->setAnchorPoint({ 0, 0 });
+	_unitLock6->setPosition({ 418,55 });
+	_unitLock6->setScale(0.5f);
+	_unitLock6->setScaleY(0.48f);
+	_scene->addChild(_unitLock6, 1);
+	
 
 	//고기,마나 아이콘
 	_meatIcon = Sprite::createWithSpriteFrameName("gauge_icon_food.png");
@@ -74,7 +122,59 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_manaIcon->setAnchorPoint({ 0,0 });
 	_manaIcon->setPosition({ 445,107 });
 	_scene->addChild(_manaIcon, 1);
+	_meatBackGround = Sprite::createWithSpriteFrameName("ui_gauge_back.png");
+	_meatBackGround->setAnchorPoint({ 0,0 });
+	_meatBackGround->setPosition(33, 105);
+	_scene->addChild(_meatBackGround, -10);
 
+	// 현재 고기량 폰트
+	_currentMeat = Label::createWithTTF("", "fonts/arial.ttf", 14);
+	_currentMeat->setPosition(73, 113);
+	_currentMeat->setAnchorPoint({ 1, 0 });
+	_currentMeat->enableBold();
+	_scene->addChild(_currentMeat,100);
+
+	// 최대 고기량 폰트
+	_MaxMeat = Label::createWithTTF("", "fonts/arial.ttf", 14);
+	_MaxMeat->setPosition(80, 113);
+	_MaxMeat->setAnchorPoint({ 0, 0 });
+	_MaxMeat->enableBold();
+	_scene->addChild(_MaxMeat, 100);
+
+	// 현재 마나량 폰트
+	_currentMana = Label::createWithTTF("", "fonts/arial.ttf", 14);
+	_currentMana->setPosition(400, 113);
+	_currentMana->setAnchorPoint({ 1,0 });
+	_currentMana->enableBold();
+	_scene->addChild(_currentMana, 100);
+
+	// 최대 마냐량 폰트
+	_MaxMana = Label::createWithTTF("", "fonts/arial.ttf", 14);
+	_MaxMana->setPosition(407, 113);
+	_MaxMana->setAnchorPoint({ 0,0 });
+	_MaxMana->enableBold();
+	_scene->addChild(_MaxMana, 100);
+
+	// 체력 정보(상단중앙)
+	_hpInfoLayout = Sprite::createWithSpriteFrameName("ui_hp_info_layout.png");
+	_hpInfoLayout->setAnchorPoint({ 0.5, 1 });
+	_hpInfoLayout->setPosition(240,320);
+	_scene->addChild(_hpInfoLayout);
+	_hpInfoBack = Sprite::createWithSpriteFrameName("ui_hp_info_back.png");
+	_hpInfoBack->setAnchorPoint({ 0.5, 1 });
+	_hpInfoBack->setPosition(240, 315);
+	_scene->addChild(_hpInfoBack, -10);
+
+	_expBar = Sprite::createWithSpriteFrameName("ui_exp.png");
+	_expBar->setAnchorPoint({ 0,1 });
+	_expBar->setPosition(0, 320);
+	_scene->addChild(_expBar);
+
+	_expBarBack = Sprite::createWithSpriteFrameName("ui_exp_back.png");
+	_expBarBack->setAnchorPoint({ 0,1 });
+	_expBarBack->setPosition(4, 308);
+	_scene->addChild(_expBarBack, -10);
+	
 	// addchild
 	_scene->addChild(_leftButton, 1);
 	_scene->addChild(_rightButton, 1);
@@ -212,8 +312,15 @@ void HeroControl::HeroMove()
 		_kangarooSummonsButton->setSpriteFrame("btn_unit_03_down.png");
 	}
 
-	_hero->getManaGauge()->setPercentage((_hero->getMana() / _hero->getMaxMana()) * 100); // 마나게이지를 보여준다
-	_hero->getMeatGauge()->setPercentage((_hero->getMeat() / _hero->getMaxMeat()) * 100); // 고기게이지를 보여준다
+	_hero->getManaGauge()->setPercentage((_hero->getMana() / _hero->getMaxMana()) * 100); // 마나게이지를 Bar 로 보여준다
+	_hero->getMeatGauge()->setPercentage((_hero->getMeat() / _hero->getMaxMeat()) * 100); // 고기게이지를 Bar 로 보여준다
+
+	// 마나,고기 게이지를 숫자로 보여준다
+	_currentMeat->setString(String::createWithFormat("%d", (int)_hero->getMeat())->_string.c_str());
+	_MaxMeat->setString(String::createWithFormat("%d", (int)_hero->getMaxMeat())->_string.c_str());
+	_currentMana->setString(String::createWithFormat("%d", (int)_hero->getMana())->_string.c_str());
+	_MaxMana->setString(String::createWithFormat("%d", (int)_hero->getMaxMana())->_string.c_str());
+	
 }
 
 void HeroControl::UnitMove()
