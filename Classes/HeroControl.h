@@ -14,7 +14,7 @@ class HeroControl : Scene
 
 	EventListenerTouchOneByOne* listener;
 
-	Layer* _layer;
+	Layer* _layer; // 히어로,유닛,몬스터 레이어
 
 	Scene* _scene;
 	Sprite* _leftButton; // 왼쪽Move버튼
