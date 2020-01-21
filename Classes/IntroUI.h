@@ -86,6 +86,7 @@ class IntroUI
   Sprite* _btnExitUp;
   Sprite* _btnSlotStartUp;
   Sprite* _btnSlotDeleteUp;
+  Sprite* _test;
 };
 
 #endif // __INTROUI_H__
