@@ -6,8 +6,6 @@ IntroUI::IntroUI(Scene * pScene) {
   _cache->addSpriteFramesWithFile("Intro/UI/opening_ending_03.plist");
   _cache->addSpriteFramesWithFile("Intro/UI/option_msg_02.plist");
   _cache->addSpriteFramesWithFile("Intro/UI/option_msg_01.plist");
-
-
 }
 
 void IntroUI::SetTitleLogo(Scene * pScene) {
@@ -32,48 +30,56 @@ void IntroUI::SetTitleBtnInfoUp(Scene * pScene) {
   pScene->addChild(_titleBtnInfoUp);
 }
 
-Sprite* IntroUI::GetIntroModeSelectBox() {
-  _introModeSelectBox =
+void IntroUI::SetModeSelectBox(Scene * pScene) {
+  _modeSelectBox =
     Sprite::createWithSpriteFrameName("modeselect_box.png");
-  _introModeSelectBox->setAnchorPoint(Vec2(1, 0));
-  _introModeSelectBox->setPosition(Vec2(480, 0));
-  return _introModeSelectBox;
+  _modeSelectBox->setAnchorPoint(Vec2(0, 0));
+  _modeSelectBox->setPosition(Vec2(0, 0));
+  pScene->addChild(_modeSelectBox);
 }
 
-Sprite * IntroUI::GetIntroPaladogButton() {
-  _introPaladogButton =
+void IntroUI::SetHeroPaladogUp(Scene * pScene) {
+  _heroPaladogUp =
     Sprite::createWithSpriteFrameName("hero_paladog_up.png");
-  _introPaladogButton->setScale(0.85f);
-  _introPaladogButton->setAnchorPoint(Vec2(0, 0));
-  _introPaladogButton->setPosition(Vec2(24, 23));
-  return _introPaladogButton;
+  //_heroPaladogUp->setScale(0.85f);
+  _heroPaladogUp->setAnchorPoint(Vec2(0, 0));
+  _heroPaladogUp->setPosition(Vec2(0, 0));
+  pScene->addChild(_heroPaladogUp);
 }
 
-Sprite * IntroUI::GetIntroDarkdogButton() {
-  _introDarkdogButton =
+void IntroUI::SetHeroDarkdogUp(Scene * pScene) {
+  _heroDarkdogUp =
     Sprite::createWithSpriteFrameName("hero_darkdog_up.png");
-  _introDarkdogButton->setScale(0.85f);
-  _introDarkdogButton->setAnchorPoint(Vec2(0, 0));
-  _introDarkdogButton->setPosition(Vec2(134, 23));
-  return _introDarkdogButton;
+ // _heroDarkdogUp->setScale(0.85f);
+  _heroDarkdogUp->setAnchorPoint(Vec2(0, 0));
+  _heroDarkdogUp->setPosition(Vec2(0, 0));
+  pScene->addChild(_heroDarkdogUp);
 }
 
-Sprite * IntroUI::GetIntroCampaignButton() {
-  _introCampaignButton =
+void IntroUI::SetBtnCampaignUp(Scene * pScene) {
+  _btnCampaignUp =
     Sprite::createWithSpriteFrameName("btn_campaign_up.png");
-  _introCampaignButton->setScale(0.8f);
-  _introCampaignButton->setAnchorPoint(Vec2(0, 0));
-  _introCampaignButton->setPosition(Vec2(134, 85));
-  return _introCampaignButton;
+  //_btnCampaignUp->setScale(0.8f);
+  _btnCampaignUp->setAnchorPoint(Vec2(0, 0));
+  _btnCampaignUp->setPosition(Vec2(0, 0));
+  pScene->addChild(_btnCampaignUp);
 }
 
-Sprite * IntroUI::GetIntroSurvivalButton() {
-  _introSurvivalButton =
+void IntroUI::SetBtnSurvivalUp(Scene * pScene) {
+  _btnSurvivalUp =
     Sprite::createWithSpriteFrameName("btn_survival_up.png");
-  _introSurvivalButton->setScale(0.8f);
-  _introSurvivalButton->setAnchorPoint(Vec2(0, 0));
-  _introSurvivalButton->setPosition(Vec2(134, 24));
-  return _introSurvivalButton;
+  //_btnSurvivalUp->setScale(0.8f);
+  _btnSurvivalUp->setAnchorPoint(Vec2(0, 0));
+  _btnSurvivalUp->setPosition(Vec2(0, 0));
+  pScene->addChild(_btnSurvivalUp);
+}
+
+void IntroUI::SetDataSlot(Scene * pScene) {
+  _dataSlot =
+    Sprite::createWithSpriteFrameName("data_slot.png");
+  _dataSlot->setAnchorPoint(Vec2(0, 0));
+  _dataSlot->setPosition(Vec2(0, 0));
+  pScene->addChild(_dataSlot);
 }
 
 Sprite* IntroUI::GetIntroSelectSlot() {
@@ -83,14 +89,6 @@ Sprite* IntroUI::GetIntroSelectSlot() {
   _introSelectSlot->setAnchorPoint(Vec2(0, 0));
   _introSelectSlot->setPosition(Vec2(45, 20));
   return _introSelectSlot;
-}
-
-Sprite * IntroUI::GetIntroDataSlot() {
-  _introDataSlot =
-    Sprite::createWithSpriteFrameName("data_slot.png");
-  _introDataSlot->setAnchorPoint(Vec2(0, 0));
-  _introDataSlot->setPosition(Vec2(-5, -35));
-  return _introDataSlot;
 }
 
 Sprite * IntroUI::GetIntroDataSlotBottom() {

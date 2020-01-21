@@ -315,9 +315,9 @@
                 <key>frame</key>
                 <string>{{2,358},{294,94}}</string>
                 <key>offset</key>
-                <string>{71,72}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{294,94}</string>
             </dict>
             <key>icon_easy_off.png</key>
             <dict>

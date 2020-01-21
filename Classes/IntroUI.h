@@ -20,13 +20,32 @@ class IntroUI
   Sprite* GetTitleBtnInfoUp() {
     return _titleBtnInfoUp;
   }
-  Sprite* GetIntroModeSelectBox();
-  Sprite* GetIntroPaladogButton();
-  Sprite* GetIntroDarkdogButton();
-  Sprite* GetIntroCampaignButton();
-  Sprite* GetIntroSurvivalButton();
+  void SetModeSelectBox(Scene* pScene);
+  Sprite* GetModeSelectBox() {
+    return _modeSelectBox;
+  }
+  void SetHeroPaladogUp(Scene* pScene);
+  Sprite* GetHeroPaladogUp() {
+    return _heroPaladogUp;
+  }
+  void SetHeroDarkdogUp(Scene* pScene);
+  Sprite* GetHeroDarkdogUp() {
+    return _heroDarkdogUp;
+  }
+  void SetBtnCampaignUp(Scene* pScene);
+  Sprite* GetBtnCampaignUp() {
+    return _btnCampaignUp;
+  }
+  void SetBtnSurvivalUp(Scene* pScene);
+  Sprite* GetBtnSurvivalUp() {
+    return _btnSurvivalUp;
+  }
+  void SetDataSlot(Scene* pScene);
+  Sprite* GetDataSlot() {
+    return _dataSlot;
+  }
   Sprite* GetIntroSelectSlot();
-  Sprite* GetIntroDataSlot();
+  
   Sprite* GetIntroDataSlotBottom();
   Sprite* GetIntroMSGBox();
  private:
@@ -34,13 +53,15 @@ class IntroUI
   Sprite* _titleLogo;
   Sprite* _titleBtnNewgameUp;
   Sprite* _titleBtnInfoUp;
-  Sprite* _introModeSelectBox;
-  Sprite* _introPaladogButton;
-  Sprite* _introDarkdogButton;
-  Sprite* _introCampaignButton;
-  Sprite* _introSurvivalButton;
+  Sprite* _modeSelectBox;
+  Sprite* _heroPaladogUp;
+  Sprite* _heroDarkdogUp;
+  Sprite* _btnCampaignUp;
+  Sprite* _btnSurvivalUp;
+  Sprite* _dataSlot;
+
+
   Sprite* _introSelectSlot;
-  Sprite* _introDataSlot;
   Sprite* _introDataSlotBottom;
   Sprite* _introMSGBox;
 };
