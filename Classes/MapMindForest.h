@@ -2,7 +2,6 @@
 #define __MAP_MINDFOREST_H__
 
 #include "cocos_framework.h"
-#include "cocos2d.h"
 
 class MapMindForest : public Scene
 {
