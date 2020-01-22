@@ -63,6 +63,8 @@ public:
 	void HeroMove();
 	void HeroManaRegen();
 	void HeroMeatRegen();
+	void UnitVecErase();
+	void UnitZorder();
 
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);

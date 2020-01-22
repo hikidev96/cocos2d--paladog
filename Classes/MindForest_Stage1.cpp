@@ -77,27 +77,27 @@ bool MindForest_Stage1::init() {
 
 void MindForest_Stage1::tick(float delta)
 {
-	_heroControl->HeroMove();
-	//_heroControl->UnitMove();
-
 	MonsterTick();
 
-
-	for (int i = 0; i < _heroControl->getHeroUnitVec().size(); ++i)
+	for (int i = 0; i < _heroControl->getHeroUnitVec().size(); i++)
 	{
 		_heroControl->getHeroUnitVec()[i]->BringMonsterVec(_monster);
 	}
+
+	_heroControl->HeroMove(); // 히어로 각종 조작
+	_heroControl->UnitZorder(); // 제트오더 설정
+	_heroControl->UnitVecErase();
 
 }
 
 void MindForest_Stage1::HeroManaRegen(float delta)
 {
-	_heroControl->HeroManaRegen();
+	_heroControl->HeroManaRegen(); // 마나리젠
 }
 
 void MindForest_Stage1::HeroMeatRegen(float delta)
 {
-	_heroControl->HeroMeatRegen();
+	_heroControl->HeroMeatRegen(); // 고기리젠
 }
 
 void MindForest_Stage1::MonsterTick()

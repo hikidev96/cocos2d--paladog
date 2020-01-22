@@ -10,7 +10,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 
 	srand((unsigned)time(NULL));
 
-	switch (herokind)
+	switch (herokind) 
 	{
 	case ª˝¡„:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
@@ -18,11 +18,23 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
-		_Atk = 0.6f;
+		_Atk = 500.f;
+		_Range = 50;
 		_unitKind = ª˝¡„;
+		_Dead = false;
 		layer->addChild(_UnitSprite, 100);
 
-		log("%f", _UnitSprite->getPosition().y);
+		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
+		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setMidpoint({ 0, 0 });
+		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
+		_HeroUnitHpBar->setPercentage(100);
+		_UnitSprite->addChild(_HeroUnitHpBar);
+
+		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);
@@ -87,9 +99,23 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
-		_Atk = 0.6f;
+		_Atk = 500.f;
+		_Range = 50;
 		_unitKind = ∞ı;
+		_Dead = false;
 		layer->addChild(_UnitSprite);
+
+		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
+		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setMidpoint({ 0, 0 });
+		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
+		_HeroUnitHpBar->setPercentage(100);
+		_UnitSprite->addChild(_HeroUnitHpBar);
+
+		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);
@@ -122,6 +148,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_animation2->addSpriteFrame(cache->getSpriteFrameByName("u03_att1_0008.png"));
 		_animation2->addSpriteFrame(cache->getSpriteFrameByName("u03_att1_0009.png"));
 		_animation2->addSpriteFrame(cache->getSpriteFrameByName("u03_att1_0010.png"));
+
 		_animate2 = Animate::create(_animation2);
 		_animate2->retain();
 		_animate2->setTag(UnitAttack1);
@@ -155,9 +182,23 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
-		_Atk = 0.6f;
+		_Atk = 500.f;
+		_Range = 50;
 		_unitKind = ƒª∞≈∑Á;
+		_Dead = false;
 		layer->addChild(_UnitSprite);
+
+		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
+		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setMidpoint({ 0, 0 });
+		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
+		_HeroUnitHpBar->setPercentage(100);
+		_UnitSprite->addChild(_HeroUnitHpBar);
+
+		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);
@@ -224,25 +265,15 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 
 void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
 {
+	_monsterVec = monstervec;
+
+	UnitDeadCheck();
 	UnitMove(); // ¿Ø¥÷ ¿Ãµø
+	UnitCollisionCheck();
 
-
-	for (int i = 0; i < monstervec.size(); ++i)
-	{
-		if (_UnitSprite->getBoundingBox().intersectsRect(monstervec[i]->getMonster()->getBoundingBox()))
-		{
-			if (_unitAction != UnitCollision)
-			{
-				_unitAction = UnitCollision;
-				log("√Êµπ!!");
-			}
-		}
-
-		//log("%f", monstervec[1]->getMonster()->getContentSize().width);
-		//log("%f", _UnitSprite->getPosition().y);
-	}
 }
 
+// ¿Ø¥÷ ¿Ãµø
 void HeroUnit::UnitMove()
 {
 	// ∆˜¡ˆº« ¿Ãµø
@@ -252,17 +283,73 @@ void HeroUnit::UnitMove()
 	}
 
 	// Walk æ◊º«(æ÷¥œ∏ﬁ¿Ãº«)
-	if (_unitAction != UnitCollision && !_UnitSprite->getNumberOfRunningActions())
+	if (_unitAction == UnitWalk && !_UnitSprite->getNumberOfRunningActionsByTag(UnitWalk))
 	{
-		_unitAction = UnitWalk;
+		_UnitSprite->stopActionByTag(UnitAttack1);
 		_UnitSprite->runAction(_walkAction);
 	}
-	
 }
-
-
-
-void HeroUnit::HeroUnit_VS_MonsterUnit()
+void HeroUnit::UnitCollisionCheck()
 {
+	// ¿Ø¥÷ √Êµπ √º≈©
+	for (int i = 0; i < _monsterVec.size(); ++i)
+	{
+		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
+		{
+			_UnitSprite->stopActionByTag(UnitWalk);
 
+
+			if (_unitAction != UnitCollision && _Dead == false)
+			{
+				_unitAction = UnitCollision;
+			}
+
+			if (_unitAction == UnitCollision)
+			{
+				AttackAct = RepeatForever::create(Sequence::create
+				(_animate2,
+				CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
+				DelayTime::create(1.f),
+				nullptr));
+				AttackAct->setTag(UnitAttack1);
+
+				if (!_UnitSprite->getNumberOfRunningActionsByTag(UnitAttack1))
+				{
+					_UnitSprite->runAction(AttackAct);
+				}
+			}
+
+			return;
+		}
+		else
+		{
+			_unitAction = UnitWalk;
+		}
+	}
 }
+void HeroUnit::UnitAttack()
+{
+	//for (int i = 0; i < _monsterVec.size(); ++i)
+	//{
+	//	if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
+	//	{
+	//		_monsterVec[i]->Hit(_Atk);
+	//		return;
+	//	}
+	//}
+
+	_Hp = 0;
+}
+
+void HeroUnit::UnitDeadCheck()
+{
+	if (_Hp <= 0 && !_UnitSprite->getNumberOfRunningActionsByTag(UnitDead) && _Dead == false)
+	{
+		_unitAction = UnitDead;
+		_UnitSprite->stopAllActions();
+		DeadAct = Sequence::create(_animate3, RemoveSelf::create(true), nullptr);
+		_UnitSprite->runAction(DeadAct);
+		_Dead = true;
+	}
+}
+
