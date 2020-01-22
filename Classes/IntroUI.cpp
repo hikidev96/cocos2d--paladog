@@ -121,15 +121,17 @@ void IntroUI::SetBtnExitUp(Scene * pScene) {
 void IntroUI::SetBtnSlotStartUp(Scene * pScene) {
   _btnSlotStartUp =
     Sprite::createWithSpriteFrameName("btn_slot_start_up.png");
+  _btnSlotStartUp->setScaleX(0.6f);
   _btnSlotStartUp->setAnchorPoint(Vec2(0, 0));
-  _btnSlotStartUp->setPosition(Vec2(240, 180));
+  _btnSlotStartUp->setPosition(Vec2(410, 220));
   pScene->addChild(_btnSlotStartUp);
 }
 
 void IntroUI::SetBtnSlotDeleteUp(Scene * pScene) {
   _btnSlotDeleteUp =
     Sprite::createWithSpriteFrameName("btn_slot_delete_up.png");
+  _btnSlotDeleteUp->setScaleX(0.6f);
   _btnSlotDeleteUp->setAnchorPoint(Vec2(0, 0));
-  _btnSlotDeleteUp->setPosition(Vec2(360, 280));
+  _btnSlotDeleteUp->setPosition(Vec2(410, 175));
   pScene->addChild(_btnSlotDeleteUp);
 }

@@ -64,11 +64,14 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
   else if (_isPlay && touchPaladog && !_isPaladog) {
     _introUI->GetHeroDarkdogUp()->setVisible(false);
     _introUI->GetBtnCampaignUp()->setVisible(true);
-    _introUI->GetBtnCampaignUp()->
-      runAction(RotateBy::create(1, Vec3(0, 180, 0)));
+    _introUI->GetBtnCampaignUp()->runAction(
+      Sequence::create(RotateBy::create(0.15f, Vec3(0, 90, 0)),
+                       CallFunc::create(CC_CALLBACK_0(IntroScene::flippedX, this)),
+                       RotateBy::create(0.15f, Vec3(0, 90, 0)), nullptr));
     _introUI->GetBtnSurvivalUp()->setVisible(true);
-    _introUI->GetBtnSurvivalUp()->
-      runAction(RotateBy::create(1, Vec3(0, 180, 0)));
+    _introUI->GetBtnSurvivalUp()->runAction(
+      Sequence::create(RotateBy::create(0.15f, Vec3(0, 90, 0)),
+                       RotateBy::create(0.15f, Vec3(0, 90, 0)), nullptr));
 
     _isPaladog = true;
   }
@@ -111,8 +114,6 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
     // ½½·Ô
     _introUI->GetMsgSelectSlot()->setVisible(true);
     _introUI->GetDataSlot()->setVisible(true);
-    _introUI->GetSlotInfoEmpty()->setVisible(true);
-    _introUI->GetBtnExitUp()->setVisible(true);
 
     _isCampaign = true;
   }
@@ -136,7 +137,9 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
 
   // ½½·Ô ¼±ÅÃ
   if (_isCampaign && touchDataSlot && !_isDataSlot) {
-    _introUI->GetDataSlot()->runAction(MoveBy::create(1, Vec2(-20, 0)));
+    _introUI->GetDataSlot()->runAction(
+      Sequence::create(MoveBy::create(0.15f, Vec2(-20, 0)),
+                       CallFunc::create(CC_CALLBACK_0(IntroScene::slotMove, this)), nullptr));
     _introUI->GetBtnSlotStartUp()->setVisible(true);
     _introUI->GetBtnSlotDeleteUp()->setVisible(true);
 
@@ -215,4 +218,14 @@ void IntroScene::changeBg15AgeToVolcano(float time) {
   _isExit = false;
   _isDataSlot = false;
   _isStart = false;
+}
+
+void IntroScene::flippedX() {
+  _introUI->GetBtnCampaignUp()->setFlippedX(true);
+  _introUI->GetBtnSurvivalUp()->setFlippedX(true);
+}
+
+void IntroScene::slotMove() {
+  _introUI->GetSlotInfoEmpty()->setVisible(true);
+  _introUI->GetBtnExitUp()->setVisible(true);
 }
