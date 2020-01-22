@@ -14,7 +14,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	{
 	case »ýÁã:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
-		_UnitSprite->setPosition(0, 416);
+		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
@@ -238,7 +238,7 @@ void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
 			}
 		}
 
-		log("%f", monstervec[1]->getMonster()->getContentSize().width);
+		//log("%f", monstervec[1]->getMonster()->getContentSize().width);
 		//log("%f", _UnitSprite->getPosition().y);
 	}
 }

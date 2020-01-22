@@ -72,12 +72,6 @@ bool MindForest_Stage1::init() {
 	// Follow 액션으로 화면이동구현
 	_bgLayer->runAction(Follow::create(_hero->getHero(), Rect(0, 0, 1024, 512)));
 
-	
-	
-	
-	
-	
-
 	return true;
 }
 

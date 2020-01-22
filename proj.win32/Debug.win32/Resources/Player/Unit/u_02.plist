@@ -9,630 +9,630 @@
                 <key>frame</key>
                 <string>{{574,238},{86,82}}</string>
                 <key>offset</key>
-                <string>{9,-32}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,82}</string>
             </dict>
             <key>u03_dead_0002.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{688,288},{86,80}}</string>
                 <key>offset</key>
-                <string>{10,-15}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,80}</string>
             </dict>
             <key>u03_dead_0003.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{356,266},{86,74}}</string>
                 <key>offset</key>
-                <string>{10,6}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,74}</string>
             </dict>
             <key>u03_dead_0004.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{882,180},{90,66}}</string>
                 <key>offset</key>
-                <string>{9,27}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{90,66}</string>
             </dict>
             <key>u03_dead_0005.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{0,230},{98,58}}</string>
                 <key>offset</key>
-                <string>{6,44}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{98,58}</string>
             </dict>
             <key>u03_dead_0006.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{378,54},{104,58}}</string>
                 <key>offset</key>
-                <string>{4,52}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{104,58}</string>
             </dict>
             <key>u03_dead_0007.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{268,172},{102,58}}</string>
                 <key>offset</key>
-                <string>{2,50}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{102,58}</string>
             </dict>
             <key>u03_dead_0008.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{774,318},{84,80}}</string>
                 <key>offset</key>
-                <string>{-9,33}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{84,80}</string>
             </dict>
             <key>u03_dead_0009.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{858,318},{78,76}}</string>
                 <key>offset</key>
-                <string>{-11,-2}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{78,76}</string>
             </dict>
             <key>u03_dead_0010.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{258,486},{84,54}}</string>
                 <key>offset</key>
-                <string>{-11,-52}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{84,54}</string>
             </dict>
             <key>u03_dead_0011.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{252,540},{80,62}}</string>
                 <key>offset</key>
-                <string>{-16,-52}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{80,62}</string>
             </dict>
             <key>u03_dead_0012.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{186,368},{82,66}}</string>
                 <key>offset</key>
-                <string>{-17,-51}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{82,66}</string>
             </dict>
             <key>u03_dead_0013.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{80,588},{80,72}}</string>
                 <key>offset</key>
-                <string>{-17,-47}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{80,72}</string>
             </dict>
             <key>u03_dead_0014.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{0,516},{80,74}}</string>
                 <key>offset</key>
-                <string>{-17,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{80,74}</string>
             </dict>
             <key>u03_dead_0015.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{0,658},{80,68}}</string>
                 <key>offset</key>
-                <string>{-17,-49}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{80,68}</string>
             </dict>
             <key>u03_dead_0016.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{160,598},{80,60}}</string>
                 <key>offset</key>
-                <string>{-17,-52}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{80,60}</string>
             </dict>
             <key>u03_walk_0001.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{0,374},{86,72}}</string>
                 <key>offset</key>
-                <string>{9,-43}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,72}</string>
             </dict>
             <key>u03_walk_0002.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{268,414},{86,72}}</string>
                 <key>offset</key>
-                <string>{11,-41}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,72}</string>
             </dict>
             <key>u03_walk_0003.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{354,412},{86,72}}</string>
                 <key>offset</key>
-                <string>{11,-40}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,72}</string>
             </dict>
             <key>u03_walk_0004.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{440,446},{84,72}}</string>
                 <key>offset</key>
-                <string>{11,-41}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{84,72}</string>
             </dict>
             <key>u03_walk_0005.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{440,374},{86,72}}</string>
                 <key>offset</key>
-                <string>{10,-43}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,72}</string>
             </dict>
             <key>u03_walk_0006.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{268,342},{86,72}}</string>
                 <key>offset</key>
-                <string>{9,-44}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,72}</string>
             </dict>
             <key>u03_walk_0007.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{0,446},{86,70}}</string>
                 <key>offset</key>
-                <string>{10,-43}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,70}</string>
             </dict>
             <key>u03_walk_0008.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{354,340},{86,72}}</string>
                 <key>offset</key>
-                <string>{11,-40}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,72}</string>
             </dict>
             <key>u03_walk_0009.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{86,444},{86,70}}</string>
                 <key>offset</key>
-                <string>{12,-39}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,70}</string>
             </dict>
             <key>u03_walk_0010.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{574,320},{86,72}}</string>
                 <key>offset</key>
-                <string>{11,-40}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,72}</string>
             </dict>
             <key>u03_walk_0011.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{172,434},{86,70}}</string>
                 <key>offset</key>
-                <string>{10,-43}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,70}</string>
             </dict>
             <key>u03_walk_0012.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{442,302},{86,72}}</string>
                 <key>offset</key>
-                <string>{9,-44}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,72}</string>
             </dict>
             <key>u04_att1_0001.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{914,804},{62,70}}</string>
                 <key>offset</key>
-                <string>{-5,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{62,72}</string>
             </dict>
             <key>u04_att1_0002.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{664,952},{60,72}}</string>
                 <key>offset</key>
-                <string>{-4,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{60,72}</string>
             </dict>
             <key>u04_att1_0003.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{782,926},{58,72}}</string>
                 <key>offset</key>
-                <string>{-3,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{58,72}</string>
             </dict>
             <key>u04_att1_0004.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{760,852},{58,74}}</string>
                 <key>offset</key>
-                <string>{-3,-44}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{58,74}</string>
             </dict>
             <key>u04_att1_0005.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{724,950},{58,74}}</string>
                 <key>offset</key>
-                <string>{-3,-44}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{58,74}</string>
             </dict>
             <key>u04_att1_0006.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{574,392},{84,72}}</string>
                 <key>offset</key>
-                <string>{10,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{84,72}</string>
             </dict>
             <key>u04_att1_0007.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{354,484},{84,70}}</string>
                 <key>offset</key>
-                <string>{12,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{84,70}</string>
             </dict>
             <key>u04_att1_0008.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{784,248},{88,70}}</string>
                 <key>offset</key>
-                <string>{13,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{88,70}</string>
             </dict>
             <key>u04_att1_0009.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{892,0},{94,70}}</string>
                 <key>offset</key>
-                <string>{12,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{94,70}</string>
             </dict>
             <key>u04_att1_0010.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{918,596},{64,70}}</string>
                 <key>offset</key>
-                <string>{-5,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{64,70}</string>
             </dict>
             <key>u04_att2_0001.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{604,952},{60,72}}</string>
                 <key>offset</key>
-                <string>{-4,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{60,72}</string>
             </dict>
             <key>u04_att2_0002.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{860,596},{58,72}}</string>
                 <key>offset</key>
-                <string>{-3,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{58,72}</string>
             </dict>
             <key>u04_att2_0003.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{422,742},{66,72}}</string>
                 <key>offset</key>
-                <string>{-1,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{66,72}</string>
             </dict>
             <key>u04_att2_0004.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{770,398},{78,70}}</string>
                 <key>offset</key>
-                <string>{8,-47}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{78,70}</string>
             </dict>
             <key>u04_att2_0005.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{268,270},{86,72}}</string>
                 <key>offset</key>
-                <string>{8,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,72}</string>
             </dict>
             <key>u04_att2_0006.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{792,142},{90,72}}</string>
                 <key>offset</key>
-                <string>{12,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{90,72}</string>
             </dict>
             <key>u04_att2_0007.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{798,0},{94,72}}</string>
                 <key>offset</key>
-                <string>{13,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{94,72}</string>
             </dict>
             <key>u04_att2_0008.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{798,72},{92,70}}</string>
                 <key>offset</key>
-                <string>{16,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{92,70}</string>
             </dict>
             <key>u04_att2_0009.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{438,518},{76,72}}</string>
                 <key>offset</key>
-                <string>{4,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{76,72}</string>
             </dict>
             <key>u04_att2_0010.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{686,368},{84,72}}</string>
                 <key>offset</key>
-                <string>{9,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{84,72}</string>
             </dict>
             <key>u04_att2_0011.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{876,246},{88,72}}</string>
                 <key>offset</key>
-                <string>{10,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{88,72}</string>
             </dict>
             <key>u04_att2_0012.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{86,374},{86,70}}</string>
                 <key>offset</key>
-                <string>{13,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{86,70}</string>
             </dict>
             <key>u04_att2_0013.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{696,216},{88,72}}</string>
                 <key>offset</key>
-                <string>{11,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{88,72}</string>
             </dict>
             <key>u04_att2_0014.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{890,108},{90,72}}</string>
                 <key>offset</key>
-                <string>{12,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{90,72}</string>
             </dict>
             <key>u04_att2_0015.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{544,952},{60,72}}</string>
                 <key>offset</key>
-                <string>{-4,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{60,72}</string>
             </dict>
             <key>u04_att2_0016.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{884,734},{64,70}}</string>
                 <key>offset</key>
-                <string>{-5,-46}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{64,70}</string>
             </dict>
             <key>u04_dead_0001.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{948,734},{62,70}}</string>
                 <key>offset</key>
-                <string>{-4,-40}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{62,70}</string>
             </dict>
             <key>u04_dead_0002.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{948,874},{60,68}}</string>
                 <key>offset</key>
-                <string>{-2,-24}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{60,68}</string>
             </dict>
             <key>u04_dead_0003.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{898,668},{60,66}}</string>
                 <key>offset</key>
-                <string>{0,-4}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{60,66}</string>
             </dict>
             <key>u04_dead_0004.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{554,752},{66,66}}</string>
                 <key>offset</key>
-                <string>{-1,17}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{66,66}</string>
             </dict>
             <key>u04_dead_0005.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{488,804},{66,64}}</string>
                 <key>offset</key>
-                <string>{1,35}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{66,64}</string>
             </dict>
             <key>u04_dead_0006.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{420,814},{66,62}}</string>
                 <key>offset</key>
-                <string>{3,47}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{66,62}</string>
             </dict>
             <key>u04_dead_0007.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{574,608},{68,58}}</string>
                 <key>offset</key>
-                <string>{4,47}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{68,58}</string>
             </dict>
             <key>u04_dead_0008.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{718,552},{72,54}}</string>
                 <key>offset</key>
-                <string>{4,23}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{72,54}</string>
             </dict>
             <key>u04_dead_0009.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{240,602},{70,54}}</string>
                 <key>offset</key>
-                <string>{1,-15}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{70,54}</string>
             </dict>
             <key>u04_dead_0010.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{848,466},{78,50}}</string>
                 <key>offset</key>
-                <string>{1,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{78,50}</string>
             </dict>
             <key>u04_dead_0011.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{786,214},{90,34}}</string>
                 <key>offset</key>
-                <string>{-3,-62}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{90,34}</string>
             </dict>
             <key>u04_dead_0012.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{98,338},{88,36}}</string>
                 <key>offset</key>
-                <string>{-3,-59}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{88,36}</string>
             </dict>
             <key>u04_dead_0013.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{696,178},{90,38}}</string>
                 <key>offset</key>
-                <string>{-4,-54}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{90,38}</string>
             </dict>
             <key>u04_dead_0014.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{268,230},{88,40}}</string>
                 <key>offset</key>
-                <string>{-4,-51}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{88,40}</string>
             </dict>
             <key>u04_dead_0015.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{98,300},{88,38}}</string>
                 <key>offset</key>
-                <string>{-4,-57}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{88,38}</string>
             </dict>
             <key>u04_dead_0016.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{0,340},{88,34}}</string>
                 <key>offset</key>
-                <string>{-4,-64}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{88,34}</string>
             </dict>
             <key>u04_fist_0001.png</key>
             <dict>
@@ -684,108 +684,108 @@
                 <key>frame</key>
                 <string>{{256,942},{64,76}}</string>
                 <key>offset</key>
-                <string>{-5,-45}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{64,76}</string>
             </dict>
             <key>u04_walk_0002.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{160,658},{68,78}}</string>
                 <key>offset</key>
-                <string>{-6,-39}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{68,78}</string>
             </dict>
             <key>u04_walk_0003.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{80,660},{68,76}}</string>
                 <key>offset</key>
-                <string>{-5,-30}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{68,76}</string>
             </dict>
             <key>u04_walk_0004.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{192,942},{64,76}}</string>
                 <key>offset</key>
-                <string>{-1,-29}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{64,76}</string>
             </dict>
             <key>u04_walk_0005.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{514,554},{60,78}}</string>
                 <key>offset</key>
-                <string>{2,-28}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{60,78}</string>
             </dict>
             <key>u04_walk_0006.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{320,942},{58,76}}</string>
                 <key>offset</key>
-                <string>{3,-27}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{58,76}</string>
             </dict>
             <key>u04_walk_0007.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{888,904},{60,70}}</string>
                 <key>offset</key>
-                <string>{2,-25}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{60,70}</string>
             </dict>
             <key>u04_walk_0008.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{632,694},{66,68}}</string>
                 <key>offset</key>
-                <string>{0,-24}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{66,68}</string>
             </dict>
             <key>u04_walk_0009.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{428,590},{72,66}}</string>
                 <key>offset</key>
-                <string>{-3,-26}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{72,66}</string>
             </dict>
             <key>u04_walk_0010.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{574,542},{72,66}}</string>
                 <key>offset</key>
-                <string>{-3,-33}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{72,66}</string>
             </dict>
             <key>u04_walk_0011.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{354,760},{66,68}}</string>
                 <key>offset</key>
-                <string>{-4,-41}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{66,68}</string>
             </dict>
             <key>u04_walk_0012.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{958,666},{64,68}}</string>
                 <key>offset</key>
-                <string>{-4,-47}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{220,170}</string>
+                <string>{64,68}</string>
             </dict>
             <key>u05_att1_0001.png</key>
             <dict>
