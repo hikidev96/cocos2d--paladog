@@ -472,9 +472,6 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 
 	}
 
-	/*log("터치좌표 : %f , %f", touch->getLocation().x, touch->getLocation().y);
-	log("유닛백터사이즈 : %d", _heroUnitVec.size());*/
-
 	return true;
 }
 

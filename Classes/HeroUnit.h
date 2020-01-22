@@ -1,6 +1,8 @@
 #pragma once
 
 #include "cocos_framework.h"
+class Monster;
+
 
 enum UnitKind
 {
@@ -46,6 +48,7 @@ class HeroUnit
 	Animation* _animation3;
 	Animate* _animate3;
 
+	vector<Monster*> _monsterVec;
 
 public:
 	HeroUnit(Scene* scene, UnitKind herokind, Layer* layer);
@@ -65,5 +68,8 @@ public:
 	void setAtk(float atk) { _Atk = atk; }
 	float getSpeed() { return _Speed; }
 	void setSpeed(float speed) { _Speed = speed; }
+
+	void BringMonsterVec(vector<Monster*> monstervec);
+	void HeroUnit_VS_MonsterUnit();
 
 };

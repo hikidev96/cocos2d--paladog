@@ -71,6 +71,10 @@ bool MindForest_Stage1::init() {
 	
 	// Follow 액션으로 화면이동구현
 	_bgLayer->runAction(Follow::create(_hero->getHero(), Rect(0, 0, 1024, 512)));
+
+	
+	
+	
 	
 	
 
@@ -83,6 +87,12 @@ void MindForest_Stage1::tick(float delta)
 	_heroControl->UnitMove();
 
 	MonsterTick();
+
+
+	for (int i = 0; i < _heroControl->getHeroUnitVec().size(); ++i)
+	{
+		_heroControl->getHeroUnitVec()[i]->BringMonsterVec(_monster);
+	}
 
 }
 

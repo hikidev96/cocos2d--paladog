@@ -8,7 +8,7 @@ Hero::Hero(Scene * scene, Layer* layer)
 
 	// 영웅 만들기
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
-	_hero->setPosition(100, 430);
+	_hero->setPosition(100, 400);
 	layer->addChild(_hero);
 
 	//마나 게이지 만들기
@@ -46,8 +46,8 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_lv = 1; // 레벨
 	_speed = 1.0f; // 이동스피드
 
-	_hp = 200;
-	_maxhp = 200;
+	_maxhp = 200; // 최대체력
+	_hp = 200; // 현재체력
 
 	_maxmana = 100; // 최대마나량
 	_mana = 0; // 현재마나량
@@ -117,6 +117,5 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_animate3 = Animate::create(_animation3);
 	_animate3->retain();
 	_animate3->setTag(Attack);
-
 
 }

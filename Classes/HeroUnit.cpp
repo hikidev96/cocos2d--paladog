@@ -1,4 +1,5 @@
 #include "HeroUnit.h"
+#include "Monster.h"
 
 HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 {
@@ -13,7 +14,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	{
 	case »ýÁã:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
-		_UnitSprite->setPosition(0, 415 + rand() % 50);
+		_UnitSprite->setPosition(0, 416);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
@@ -82,7 +83,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case °õ:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u03_walk_0001.png");
-		_UnitSprite->setPosition(0, 415 + rand() % 50);
+		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
@@ -150,7 +151,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case Ä»°Å·ç:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u04_walk_0001.png");
-		_UnitSprite->setPosition(0, 415 + rand() % 50);
+		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
@@ -219,4 +220,24 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	default:
 		break;
 	}
+}
+
+void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
+{
+	for (int i = 0; i < monstervec.size(); ++i)
+	{
+		if (_UnitSprite->getBoundingBox().intersectsRect(monstervec[i]->getMonster()->getBoundingBox()))
+		{
+			_unitAction = UnitCollision;
+			log("Ãæµ¹!!");
+		}
+
+		log("%f", monstervec[1]->getMonster()->getContentSize().width);
+		//log("%f", _UnitSprite->getPosition().y);
+	}
+}
+
+void HeroUnit::HeroUnit_VS_MonsterUnit()
+{
+
 }
