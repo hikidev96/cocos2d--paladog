@@ -70,6 +70,7 @@ public:
 	void setSpeed(float speed) { _Speed = speed; }
 
 	void BringMonsterVec(vector<Monster*> monstervec);
+	void UnitMove();
 	void HeroUnit_VS_MonsterUnit();
 
 };

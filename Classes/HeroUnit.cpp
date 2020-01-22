@@ -224,18 +224,43 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 
 void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
 {
+	UnitMove(); // 유닛 이동
+
+
 	for (int i = 0; i < monstervec.size(); ++i)
 	{
 		if (_UnitSprite->getBoundingBox().intersectsRect(monstervec[i]->getMonster()->getBoundingBox()))
 		{
-			_unitAction = UnitCollision;
-			log("충돌!!");
+			if (_unitAction != UnitCollision)
+			{
+				_unitAction = UnitCollision;
+				log("충돌!!");
+			}
 		}
 
 		log("%f", monstervec[1]->getMonster()->getContentSize().width);
 		//log("%f", _UnitSprite->getPosition().y);
 	}
 }
+
+void HeroUnit::UnitMove()
+{
+	// 포지션 이동
+	if (_unitAction == UnitWalk)
+	{
+		_UnitSprite->setPosition(_UnitSprite->getPosition() + Vec2(_Speed, 0));
+	}
+
+	// Walk 액션(애니메이션)
+	if (_unitAction != UnitCollision && !_UnitSprite->getNumberOfRunningActions())
+	{
+		_unitAction = UnitWalk;
+		_UnitSprite->runAction(_walkAction);
+	}
+	
+}
+
+
 
 void HeroUnit::HeroUnit_VS_MonsterUnit()
 {

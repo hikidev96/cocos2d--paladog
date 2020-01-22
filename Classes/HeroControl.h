@@ -59,8 +59,8 @@ class HeroControl : Scene
 
 public:
 	HeroControl(Scene* scene, Hero* hero, Layer* layer);
+	//void UnitMove();
 	void HeroMove();
-	void UnitMove();
 	void HeroManaRegen();
 	void HeroMeatRegen();
 

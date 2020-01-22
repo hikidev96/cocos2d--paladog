@@ -84,7 +84,7 @@ bool MindForest_Stage1::init() {
 void MindForest_Stage1::tick(float delta)
 {
 	_heroControl->HeroMove();
-	_heroControl->UnitMove();
+	//_heroControl->UnitMove();
 
 	MonsterTick();
 
