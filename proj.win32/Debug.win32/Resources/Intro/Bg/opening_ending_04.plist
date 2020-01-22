@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>title_mountain_00.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1,1},{424,232}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>sourceSize</key>
+                <string>{424,232}</string>
+            </dict>
+            <key>title_mountain_01.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1,237},{196,108}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>sourceSize</key>
+                <string>{196,108}}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>1</integer>
+            <key>size</key>
+            <string>{512,512}</string>
+            <key>textureFileName</key>
+            <string>opening_ending_04.png</string>
+        </dict>
+    </dict>
+</plist>

@@ -274,7 +274,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0001.png</key>
+            <key>b01_down_0001.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{590,128},{74,124}}</string>
@@ -283,7 +283,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0002.png</key>
+            <key>b01_down_0002.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{600,509},{84,122}}</string>
@@ -292,7 +292,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0003.png</key>
+            <key>b01_down_0003.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{716,376},{86,118}}</string>
@@ -301,7 +301,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0004.png</key>
+            <key>b01_down_0004.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{744,751},{100,112}}</string>
@@ -310,7 +310,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0005.png</key>
+            <key>b01_down_0005.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{891,441},{112,96}}</string>
@@ -319,7 +319,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0006.png</key>
+            <key>b01_down_0006.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{891,297},{118,80}}</string>
@@ -328,7 +328,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0007.png</key>
+            <key>b01_down_0007.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{889,90},{120,86}}</string>
@@ -337,7 +337,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0008.png</key>
+            <key>b01_down_0008.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{632,908},{122,112}}</string>
@@ -346,7 +346,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0009.png</key>
+            <key>b01_down_0009.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{319,698},{118,126}}</string>
@@ -355,7 +355,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0010.png</key>
+            <key>b01_down_0010.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{347,569},{114,126}}</string>
@@ -364,7 +364,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0011.png</key>
+            <key>b01_down_0011.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{774,495},{116,108}}</string>
@@ -373,7 +373,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0012.png</key>
+            <key>b01_down_0012.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{889,1},{128,88}}</string>
@@ -382,7 +382,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0013.png</key>
+            <key>b01_down_0013.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{878,378},{142,62}}</string>
@@ -391,7 +391,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0014.png</key>
+            <key>b01_down_0014.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{855,238},{152,58}}</string>
@@ -400,7 +400,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0015.png</key>
+            <key>b01_down_0015.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{855,177},{152,60}}</string>
@@ -409,7 +409,7 @@
                 <key>sourceSize</key>
                 <string>{170,170}</string>
             </dict>
-            <key>b01_dead_0016.png</key>
+            <key>b01_down_0016.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{323,952},{150,62}}</string>
@@ -777,7 +777,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>textureFileName</key>
-            <string>b01_01.png</string>
+            <string>Zomking.png</string>
         </dict>
     </dict>
 </plist>
