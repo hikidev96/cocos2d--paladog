@@ -19,20 +19,8 @@
     <Filter Include="src\몬스터">
       <UniqueIdentifier>{c39f18fb-800a-4624-9bc6-5a71e5dcded0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\배경">
-      <UniqueIdentifier>{34bb7676-42d5-496c-8ec9-8890faa79b36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\UI">
-      <UniqueIdentifier>{61bc3649-eb65-4443-b0dc-cc960916d772}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Scene">
       <UniqueIdentifier>{fa434f4d-348f-4976-b13b-e0e2e705d3a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\GameDelegate">
-      <UniqueIdentifier>{f96cf258-eceb-416e-b645-73978dd78de3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Scene\MainGame">
-      <UniqueIdentifier>{84be032e-5fd4-40d9-ab3c-4a0863a2517d}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Scene\Shopping">
       <UniqueIdentifier>{79716ed1-2e2e-47a1-aef8-f0bd6dcd8b50}</UniqueIdentifier>
@@ -49,14 +37,14 @@
     <Filter Include="src\Scene\Map\스테이지">
       <UniqueIdentifier>{3d008ba3-9bd1-4e82-93f0-13a710a0d096}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\아이템">
-      <UniqueIdentifier>{a0453bd8-5786-4d9a-af5b-c88491097499}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\win32">
       <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Scene\Intro">
       <UniqueIdentifier>{bb5f61ca-9f26-411b-a20b-795a4bddbdd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\AppDelegate">
+      <UniqueIdentifier>{f96cf258-eceb-416e-b645-73978dd78de3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,26 +72,26 @@
     <ClCompile Include="..\Classes\MindForest_Stage3.cpp">
       <Filter>src\Scene\Map\스테이지</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameDelegate.cpp">
-      <Filter>src\GameDelegate</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MainGameScene.cpp">
-      <Filter>src\Scene\MainGame</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\HeroControl.cpp">
       <Filter>src\영웅</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HeroUnit.cpp">
       <Filter>src\영웅</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src\AppDelegate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Dungeon.cpp">
+      <Filter>src\몬스터</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IntroBg.cpp">
+      <Filter>src\Scene\Intro</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\IntroScene.cpp">
       <Filter>src\Scene\Intro</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UI.cpp">
-      <Filter>src\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Background.cpp">
-      <Filter>src\배경</Filter>
+    <ClCompile Include="..\Classes\IntroUI.cpp">
+      <Filter>src\Scene\Intro</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,26 +122,26 @@
     <ClInclude Include="..\Classes\MindForest_Stage3.h">
       <Filter>src\Scene\Map\스테이지</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameDelegate.h">
-      <Filter>src\GameDelegate</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MainGameScene.h">
-      <Filter>src\Scene\MainGame</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\HeroControl.h">
       <Filter>src\영웅</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HeroUnit.h">
       <Filter>src\영웅</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src\AppDelegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Dungeon.h">
+      <Filter>src\몬스터</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IntroBg.h">
+      <Filter>src\Scene\Intro</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\IntroScene.h">
       <Filter>src\Scene\Intro</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UI.h">
-      <Filter>src\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Background.h">
-      <Filter>src\배경</Filter>
+    <ClInclude Include="..\Classes\IntroUI.h">
+      <Filter>src\Scene\Intro</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

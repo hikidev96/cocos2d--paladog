@@ -354,7 +354,7 @@
             <key>size</key>
             <string>{256,512}</string>
             <key>textureFileName</key>
-            <string>e21_01.png</string>
+            <string>UZombie.png</string>
         </dict>
     </dict>
 </plist>

@@ -8,6 +8,8 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <time.h>
+#include <stdlib.h>
 #include "cocos2d.h"
 #include "ui/UIEditBox/UIEditBox.h"
 #include "ui/CocosGUI.h"
@@ -33,4 +35,4 @@ using namespace cocos2d::network;
 #pragma execution_character_set("utf-8")
 #endif
 
-// github Test
+//Git Test
