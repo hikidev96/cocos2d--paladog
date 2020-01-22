@@ -31,8 +31,12 @@ class HeroUnit
 	float _Hp; // 체력
 	float _Atk; // 공격력
 	float _Speed; // 스피드
+	float _Range; // 사거리
+	bool _Dead; // 생사여부
+	int _Zorder; // 제트오더
+
 	UnitKind _unitKind; // 유닛종류
-	UnitAction _unitAction;
+	UnitAction _unitAction; // 현재유닛액션
 	HeroUnit* _heroUnit; // 유닛객체
 
 	// Walk 액션
@@ -47,6 +51,12 @@ class HeroUnit
 	// Dead 액션
 	Animation* _animation3;
 	Animate* _animate3;
+
+	RepeatForever* AttackAct;
+	Sequence* DeadAct;
+
+	ProgressTimer* _HeroUnitHpBar;
+	Sprite* _HeroUnitHpBarBack;
 
 	vector<Monster*> _monsterVec;
 
@@ -68,9 +78,18 @@ public:
 	void setAtk(float atk) { _Atk = atk; }
 	float getSpeed() { return _Speed; }
 	void setSpeed(float speed) { _Speed = speed; }
+	int getZorder() { return _Zorder; }
+	void setZorder(int zorder) { _Zorder = zorder; }
+	bool getDead() { return _Dead; }
+	void setDead(bool dead) { _Dead = dead; }
+
+	ProgressTimer* getUnitHpBar() { return _HeroUnitHpBar; }
+	Sprite* getUnitHpBarBack() { return _HeroUnitHpBarBack; }
 
 	void BringMonsterVec(vector<Monster*> monstervec);
 	void UnitMove();
-	void HeroUnit_VS_MonsterUnit();
+	void UnitCollisionCheck();
+	void UnitAttack();
+	void UnitDeadCheck();
 
 };

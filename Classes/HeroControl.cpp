@@ -326,27 +326,6 @@ void HeroControl::HeroMove()
 	
 }
 
-//void HeroControl::UnitMove()
-//{
-//	// 유닛 이동
-//	for (int i = 0; i < _heroUnitVec.size(); ++i)
-//	{
-//		// 포지션 이동
-//		if (_heroUnitVec[i]->getUnitAction() == UnitWalk)
-//		{
-//			_heroUnitVec[i]->getSprite()->setPosition(_heroUnitVec[i]->getSprite()->getPosition() +
-//				Vec2(_heroUnitVec[i]->getSpeed(), 0));
-//		}
-//
-//		// Walk 액션(애니메이션)
-//		if (_heroUnitVec[i]->getUnitAction() != UnitCollision && !_heroUnitVec[i]->getSprite()->getNumberOfRunningActions())
-//		{
-//			_heroUnitVec[i]->setUnitAction(UnitWalk);
-//			_heroUnitVec[i]->getSprite()->runAction(_heroUnitVec[i]->getWalkAction());
-//		}
-//	}	
-//}
-
 void HeroControl::HeroManaRegen()
 {
 	// 마나 리젠
@@ -362,6 +341,40 @@ void HeroControl::HeroMeatRegen()
 	if (_hero->getMeat() < _hero->getMaxMeat())
 	{
 		_hero->setMeat(_hero->getMeat() + 1);
+	}
+}
+
+void HeroControl::UnitVecErase()
+{
+	for (int i = 0; i < _heroUnitVec.size(); i++)
+	{
+		if (_heroUnitVec[i]->getDead() == true /*&& !_heroUnitVec[i]->getSprite()->getNumberOfRunningActions()*/)
+		{
+			_heroUnitVec[i]->getSprite()->removeChild(_heroUnitVec[i]->getUnitHpBar(), false);
+			_heroUnitVec[i]->getSprite()->removeChild(_heroUnitVec[i]->getUnitHpBarBack(), false);
+			//_layer->removeChild(_heroUnitVec[i]->getSprite(), false);
+			_heroUnitVec.erase(_heroUnitVec.begin() + i);
+			log("d");
+		}
+	}
+}
+
+// Hero 기준으로 높낮이를 계산하여 Unit들의 제트오더를 설정해준다.
+void HeroControl::UnitZorder()
+{
+	
+	for (int i = 0; i < _heroUnitVec.size(); ++i)
+	{
+		if (_heroUnitVec[i]->getSprite()->getPositionY() - 
+			_heroUnitVec[i]->getSprite()->getContentSize().height / 2 >
+			_hero->getHero()->getPositionY() - _hero->getHero()->getContentSize().height / 2)
+		{
+			_heroUnitVec[i]->getSprite()->setZOrder(_hero->getHero()->getZOrder() - 1);
+		}
+		else
+		{
+			_heroUnitVec[i]->getSprite()->setZOrder(_hero->getHero()->getZOrder() + 1);
+		}
 	}
 }
 
