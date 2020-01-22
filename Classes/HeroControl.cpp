@@ -314,6 +314,9 @@ void HeroControl::HeroMove()
 
 	_hero->getManaGauge()->setPercentage((_hero->getMana() / _hero->getMaxMana()) * 100); // 마나게이지를 Bar 로 보여준다
 	_hero->getMeatGauge()->setPercentage((_hero->getMeat() / _hero->getMaxMeat()) * 100); // 고기게이지를 Bar 로 보여준다
+	_hero->getHeroHpInfo()->setPercentage((_hero->getHp() / _hero->getMaxHp()) * 100); // 플레이어의 체력을 보여줌
+	_hero->getMonsterBaseInfo()->setPercentage(100);
+
 
 	// 마나,고기 게이지를 숫자로 보여준다
 	_currentMeat->setString(String::createWithFormat("%d", (int)_hero->getMeat())->_string.c_str());
@@ -323,26 +326,26 @@ void HeroControl::HeroMove()
 	
 }
 
-void HeroControl::UnitMove()
-{
-	// 유닛 이동
-	for (int i = 0; i < _heroUnitVec.size(); ++i)
-	{
-		// 포지션 이동
-		if (_heroUnitVec[i]->getUnitAction() == UnitWalk)
-		{
-			_heroUnitVec[i]->getSprite()->setPosition(_heroUnitVec[i]->getSprite()->getPosition() +
-				Vec2(_heroUnitVec[i]->getSpeed(), 0));
-		}
-
-		// Walk 액션(애니메이션)
-		if (_heroUnitVec[i]->getUnitAction() != UnitCollision && !_heroUnitVec[i]->getSprite()->getNumberOfRunningActions())
-		{
-			_heroUnitVec[i]->setUnitAction(UnitWalk);
-			_heroUnitVec[i]->getSprite()->runAction(_heroUnitVec[i]->getWalkAction());
-		}
-	}	
-}
+//void HeroControl::UnitMove()
+//{
+//	// 유닛 이동
+//	for (int i = 0; i < _heroUnitVec.size(); ++i)
+//	{
+//		// 포지션 이동
+//		if (_heroUnitVec[i]->getUnitAction() == UnitWalk)
+//		{
+//			_heroUnitVec[i]->getSprite()->setPosition(_heroUnitVec[i]->getSprite()->getPosition() +
+//				Vec2(_heroUnitVec[i]->getSpeed(), 0));
+//		}
+//
+//		// Walk 액션(애니메이션)
+//		if (_heroUnitVec[i]->getUnitAction() != UnitCollision && !_heroUnitVec[i]->getSprite()->getNumberOfRunningActions())
+//		{
+//			_heroUnitVec[i]->setUnitAction(UnitWalk);
+//			_heroUnitVec[i]->getSprite()->runAction(_heroUnitVec[i]->getWalkAction());
+//		}
+//	}	
+//}
 
 void HeroControl::HeroManaRegen()
 {
@@ -350,7 +353,6 @@ void HeroControl::HeroManaRegen()
 	if (_hero->getMana() < _hero->getMaxMana())
 	{
 		_hero->setMana(_hero->getMana() + 1);
-		log("Mana : %f", _hero->getMana());
 	}
 }
 
@@ -360,7 +362,6 @@ void HeroControl::HeroMeatRegen()
 	if (_hero->getMeat() < _hero->getMaxMeat())
 	{
 		_hero->setMeat(_hero->getMeat() + 1);
-		log("Meat : %f", _hero->getMeat());
 	}
 }
 
@@ -470,9 +471,6 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 		}
 
 	}
-
-	/*log("터치좌표 : %f , %f", touch->getLocation().x, touch->getLocation().y);
-	log("유닛백터사이즈 : %d", _heroUnitVec.size());*/
 
 	return true;
 }

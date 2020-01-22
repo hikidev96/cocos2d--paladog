@@ -1,4 +1,5 @@
 #include "HeroUnit.h"
+#include "Monster.h"
 
 HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 {
@@ -7,17 +8,21 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	cache->addSpriteFramesWithFile("Player/Unit/u_02.plist");
 	cache->addSpriteFramesWithFile("Player/Unit/u_03.plist");
 
+	srand((unsigned)time(NULL));
+
 	switch (herokind)
 	{
 	case ª˝¡„:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
-		_UnitSprite->setPosition(100, 420);
+		_UnitSprite->setPosition(0, 416);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
 		_Atk = 0.6f;
 		_unitKind = ª˝¡„;
 		layer->addChild(_UnitSprite, 100);
+
+		log("%f", _UnitSprite->getPosition().y);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);
@@ -78,7 +83,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case ∞ı:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u03_walk_0001.png");
-		_UnitSprite->setPosition(100, 420);
+		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
@@ -146,7 +151,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case ƒª∞≈∑Á:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u04_walk_0001.png");
-		_UnitSprite->setPosition(100, 420);
+		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_Hp = 1.0f;
@@ -215,4 +220,49 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	default:
 		break;
 	}
+}
+
+void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
+{
+	UnitMove(); // ¿Ø¥÷ ¿Ãµø
+
+
+	for (int i = 0; i < monstervec.size(); ++i)
+	{
+		if (_UnitSprite->getBoundingBox().intersectsRect(monstervec[i]->getMonster()->getBoundingBox()))
+		{
+			if (_unitAction != UnitCollision)
+			{
+				_unitAction = UnitCollision;
+				log("√Êµπ!!");
+			}
+		}
+
+		log("%f", monstervec[1]->getMonster()->getContentSize().width);
+		//log("%f", _UnitSprite->getPosition().y);
+	}
+}
+
+void HeroUnit::UnitMove()
+{
+	// ∆˜¡ˆº« ¿Ãµø
+	if (_unitAction == UnitWalk)
+	{
+		_UnitSprite->setPosition(_UnitSprite->getPosition() + Vec2(_Speed, 0));
+	}
+
+	// Walk æ◊º«(æ÷¥œ∏ﬁ¿Ãº«)
+	if (_unitAction != UnitCollision && !_UnitSprite->getNumberOfRunningActions())
+	{
+		_unitAction = UnitWalk;
+		_UnitSprite->runAction(_walkAction);
+	}
+	
+}
+
+
+
+void HeroUnit::HeroUnit_VS_MonsterUnit()
+{
+
 }

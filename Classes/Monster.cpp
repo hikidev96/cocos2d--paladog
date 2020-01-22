@@ -1,10 +1,12 @@
 #include "cocos_framework.h"
 #include "Monster.h"
 
-Monster::Monster(Scene* scene, Hero* hero, Mob mob)
+Monster::Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit, Mob mob)
 {
 	_scene = scene;
+	_layer = layer;
 	_hero = hero;
+	_unit = unit;
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Player/effect/eff_blend_02.plist");
@@ -53,23 +55,36 @@ Monster::Monster(Scene* scene, Hero* hero, Mob mob)
 	_isRemove = false;
 	_isSummonX = 0;
 
-	int zorder = rand() % 20;
+	int zorder = rand() % 30;
 	_monster = Sprite::createWithSpriteFrameName(StringUtils::format("%s_walk_0001.png", _monsterCode));
-	_monster->setPosition(500, zorder + 190);
-	_scene->addChild(_monster, 60 - zorder);
+	_monster->setPosition(500, zorder + 405);
+	_layer->addChild(_monster, 65 - zorder);
 }
 
 void Monster::MonsterMove()
 {
 	_isSummonX = 0;
+	bool _isAttack = false;
+	for (int i = 0; i < _unit.size(); i++) {
+		if (_unit[i]->getSprite()->getPositionX() < _monster->getPositionX() &&
+			_unit[i]->getSprite()->getPositionX() > _monster->getPositionX() - _range) {
+			if (_state != ATTACK && _state != DEAD) {
+				_moveChange = true;
+				_state = ATTACK;
+				break;
+			}
+			_isAttack = true;
+		}
+	}
 	if (_hero->getHero()->getPositionX() < _monster->getPositionX() &&
 		_hero->getHero()->getPositionX() > _monster->getPositionX() - _range) {
 		if (_state != ATTACK && _state != DEAD) {
 			_moveChange = true;
 			_state = ATTACK;
 		}
+		_isAttack = true;
 	}
-	else if (_state == ATTACK) {
+	if (_state == ATTACK && !_moveChange && !_isAttack) {
 		_moveChange = true;
 		_state = WALK;
 	}
@@ -160,7 +175,12 @@ void Monster::Walk()
 {
 	_monster->setPosition(_monster->getPosition() + Vec2(-_speed, 0));
 	if (getMonster()->getPosition().x < 0) {
-		_isRemove = true;
+		if (_monsterCode == "b01") {
+			_monster->setPositionX(400);
+		}
+		else {
+			_isRemove = true;
+		}
 	}
 }
 
@@ -168,14 +188,21 @@ void Monster::Attack()
 {
 	float distance = _monster->getPositionX() - _hero->getHero()->getPositionX() < 0 ? 0 :
 		_monster->getPositionX() - _hero->getHero()->getPositionX();
-	//가장 가까운 유닛 검사
 	int target = -1;
+	float temp;
+	for (int i = 0; i < _unit.size(); i++) {
+		temp = _monster->getPositionX() - _unit[i]->getSprite()->getPositionX() < 0 ? 0 :
+			_monster->getPositionX() - _unit[i]->getSprite()->getPositionX();
+		distance = min(distance, temp);
+		if (temp == distance) target = i;
+	}
 	switch (target) {
 	case -1:
 		//_hero->setHp(_hero->getHp() - _atk); 
 		Hit(_atk);
 		break;
 	default:
+		Hit(_atk);
 		//유닛 공격
 		break;
 	}
@@ -187,14 +214,13 @@ void Monster::ZomkingSummon()
 
 	_summon = Sprite::createWithSpriteFrameName("b01_summon_0001.png");
 	_summon->setPosition(_monster->getPosition());
-	_scene->addChild(_summon, 60 - _monster->getZOrder());
+	_layer->addChild(_summon, 65);
 
 	Vector<SpriteFrame*> frame;
 
 	for (int i = 1; i <= 15; i++) {
 		frame.pushBack(SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(StringUtils::format("b01_summon_%04d.png", i)));
 	}
-
 	auto animation = Animation::createWithSpriteFrames(frame, 0.03f);
 	auto animate = Animate::create(animation);
 	_summon->runAction(Sequence::create(animate, CallFunc::create(CC_CALLBACK_0(Monster::ZomkingSummonRemove, this)), nullptr));
@@ -202,7 +228,7 @@ void Monster::ZomkingSummon()
 
 void Monster::ZomkingSummonRemove()
 {
-	_scene->removeChild(_summon);
+	_layer->removeChild(_summon);
 }
 
 void Monster::Dead()

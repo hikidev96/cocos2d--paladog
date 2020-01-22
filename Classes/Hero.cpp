@@ -8,7 +8,7 @@ Hero::Hero(Scene * scene, Layer* layer)
 
 	// 영웅 만들기
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
-	_hero->setPosition(100, 420);
+	_hero->setPosition(100, 400);
 	layer->addChild(_hero);
 
 	//마나 게이지 만들기
@@ -27,10 +27,27 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_meatGauge->setBarChangeRate({ 1,0 });
 	scene->addChild(_meatGauge, -1);
 
+	_hpInfoGauge = ProgressTimer::create(Sprite::create("UI/HeroHpBar.png"));
+	_hpInfoGauge->setType(ProgressTimer::Type::BAR);
+	_hpInfoGauge->setPosition(201, 310);
+	_hpInfoGauge->setMidpoint({ 1,0 });
+	_hpInfoGauge->setBarChangeRate({ 1,0 });
+	scene->addChild(_hpInfoGauge, -1);
+
+	_MonsterBaseHpGauge = ProgressTimer::create(Sprite::create("UI/MonsterBaseHpBar.png"));
+	_MonsterBaseHpGauge->setType(ProgressTimer::Type::BAR);
+	_MonsterBaseHpGauge->setPosition(280, 310);
+	_MonsterBaseHpGauge->setMidpoint({ 0,0 });
+	_MonsterBaseHpGauge->setBarChangeRate({ 1,0 });
+	scene->addChild(_MonsterBaseHpGauge, -1);
+
 	_movement = RightWay; // 기본 방향설정
 
 	_lv = 1; // 레벨
 	_speed = 1.0f; // 이동스피드
+
+	_maxhp = 200; // 최대체력
+	_hp = 200; // 현재체력
 
 	_maxmana = 100; // 최대마나량
 	_mana = 0; // 현재마나량
@@ -100,6 +117,5 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_animate3 = Animate::create(_animation3);
 	_animate3->retain();
 	_animate3->setTag(Attack);
-
 
 }

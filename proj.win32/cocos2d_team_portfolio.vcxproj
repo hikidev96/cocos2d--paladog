@@ -14,6 +14,7 @@
     <ProjectGuid>{76A39BB2-9B84-4C65-98A5-654D86B86F2A}</ProjectGuid>
     <RootNamespace>test_win32</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -151,13 +152,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\Background.cpp" />
     <ClCompile Include="..\Classes\Dungeon.cpp" />
     <ClCompile Include="..\Classes\Hero.cpp" />
     <ClCompile Include="..\Classes\HeroControl.cpp" />
     <ClCompile Include="..\Classes\HeroUnit.cpp" />
+    <ClCompile Include="..\Classes\IntroBg.cpp" />
     <ClCompile Include="..\Classes\IntroScene.cpp" />
-    <ClCompile Include="..\Classes\MainGameScene.cpp" />
+    <ClCompile Include="..\Classes\IntroUI.cpp" />
     <ClCompile Include="..\Classes\MapMindForest.cpp" />
     <ClCompile Include="..\Classes\MindForest_Stage1.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -166,7 +167,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MindForest_Stage2.cpp" />
     <ClCompile Include="..\Classes\MindForest_Stage3.cpp" />
     <ClCompile Include="..\Classes\Monster.cpp" />
-    <ClCompile Include="..\Classes\UI.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
     <ClCompile Include="main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -174,20 +174,19 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\Background.h" />
     <ClInclude Include="..\Classes\cocos_framework.h" />
     <ClInclude Include="..\Classes\Dungeon.h" />
     <ClInclude Include="..\Classes\Hero.h" />
     <ClInclude Include="..\Classes\HeroControl.h" />
     <ClInclude Include="..\Classes\HeroUnit.h" />
+    <ClInclude Include="..\Classes\IntroBg.h" />
     <ClInclude Include="..\Classes\IntroScene.h" />
-    <ClInclude Include="..\Classes\MainGameScene.h" />
+    <ClInclude Include="..\Classes\IntroUI.h" />
     <ClInclude Include="..\Classes\MapMindForest.h" />
     <ClInclude Include="..\Classes\MindForest_Stage1.h" />
     <ClInclude Include="..\Classes\MindForest_Stage2.h" />
     <ClInclude Include="..\Classes\MindForest_Stage3.h" />
     <ClInclude Include="..\Classes\Monster.h" />
-    <ClInclude Include="..\Classes\UI.h" />
     <ClInclude Include="..\Classes\Unit.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
