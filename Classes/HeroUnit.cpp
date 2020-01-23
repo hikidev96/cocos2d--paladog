@@ -20,10 +20,10 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_Hp = 100.0f;
 		_maxHP = 100.0f;
 		_Atk = 500.f;
-		_Range = 50;
+		_Range = 50 + rand() % 5;
 		_unitKind = 생쥐;
 		_Dead = false;
-		layer->addChild(_UnitSprite, 100);
+		layer->addChild(_UnitSprite, (_UnitSprite->getPositionY() - _UnitSprite->getContentSize().height / 2) * -1);
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
@@ -101,10 +101,10 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_Hp = 200.0f;
 		_maxHP = 200.0f;
 		_Atk = 500.f;
-		_Range = 50;
+		_Range = 50 + rand() % 5;
 		_unitKind = 곰;
 		_Dead = false;
-		layer->addChild(_UnitSprite);
+		layer->addChild(_UnitSprite, (_UnitSprite->getPositionY() - _UnitSprite->getContentSize().height / 2) * -1);
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
@@ -184,10 +184,10 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_Hp = 300.0f;
 		_maxHP = 300.0f;
 		_Atk = 500.f;
-		_Range = 50;
+		_Range = 50 + rand() % 5;
 		_unitKind = 캥거루;
 		_Dead = false;
-		layer->addChild(_UnitSprite);
+		layer->addChild(_UnitSprite, (_UnitSprite->getPositionY() - _UnitSprite->getContentSize().height / 2) * -1);
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
@@ -267,10 +267,10 @@ void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
 {
 	_monsterVec = monstervec;
 
-	UnitDeadCheck();
+	UnitDeadCheck(); // 유닛 생사여부 체크
 	UnitMove(); // 유닛 이동
-	UnitCollisionCheck();
-	ShowUnitHpBar();
+	UnitCollisionCheck(); // 유닛충돌체크
+	ShowUnitHpBar(); // 히어로 유닛의 체력바를 보여줌
 
 }
 
@@ -330,16 +330,16 @@ void HeroUnit::UnitCollisionCheck()
 }
 void HeroUnit::UnitAttack()
 {
-	/*for (int i = 0; i < _monsterVec.size(); ++i)
+	for (int i = 0; i < _monsterVec.size(); ++i)
 	{
 		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
 		{
 			_monsterVec[i]->Hit(_Atk);
 			return;
 		}
-	}*/
+	}
 
-	_Hp -= 60; // 죽는모션테스트용
+	//_Hp -= 60; // 죽는모션테스트용
 }
 
 void HeroUnit::UnitDeadCheck()
@@ -356,6 +356,16 @@ void HeroUnit::UnitDeadCheck()
 
 void HeroUnit::ShowUnitHpBar()
 {
+	if (_Hp == _maxHP)
+	{
+		_HeroUnitHpBar->setVisible(false);
+		_HeroUnitHpBarBack->setVisible(false);
+	}
+	else
+	{
+		_HeroUnitHpBar->setVisible(true);
+		_HeroUnitHpBarBack->setVisible(true);
+	}
 	_HeroUnitHpBar->setPercentage((_Hp / _maxHP) * 100);
 }
 

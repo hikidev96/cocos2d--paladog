@@ -26,6 +26,7 @@ public:
 	Dungeon(Scene* scene, Layer* layer, float hp);
 
 	void Hit(float atk);
+	float getHpm() { return _hpm; }
 	float getHp() { return _hp; }
 
 	void test();

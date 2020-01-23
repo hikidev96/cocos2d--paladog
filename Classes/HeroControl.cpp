@@ -247,8 +247,10 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_kangarooSummonsMaxCollTime = 2.0f;
 }
 
-void HeroControl::HeroMove()
+void HeroControl::HeroMove(Dungeon* dungeon)
 {
+	_dungeon = dungeon;
+	
 	// 히어로 조작부
 	if (_left)
 	{
@@ -367,7 +369,7 @@ void HeroControl::HeroMove()
 	_hero->getManaGauge()->setPercentage((_hero->getMana() / _hero->getMaxMana()) * 100); // 마나게이지를 Bar 로 보여준다
 	_hero->getMeatGauge()->setPercentage((_hero->getMeat() / _hero->getMaxMeat()) * 100); // 고기게이지를 Bar 로 보여준다
 	_hero->getHeroHpInfo()->setPercentage((_hero->getHp() / _hero->getMaxHp()) * 100); // 플레이어의 체력을 보여줌
-	_hero->getMonsterBaseInfo()->setPercentage(100);
+	_hero->getMonsterBaseInfo()->setPercentage((_dungeon->getHp() / _dungeon->getHpm()) * 100); // 몬스터베이스의 체력을 보여준다
 
 
 	// 마나,고기 게이지를 숫자로 보여준다
@@ -380,6 +382,7 @@ void HeroControl::HeroMove()
 	_mouseSummonsTimer->setPercentage((_mouseSummonsCollTime / _mouseSummonsMaxCollTime) * 100);
 	_bearSummonsTimer->setPercentage((_bearSummonsCollTime / _bearSummonsMaxCollTime) * 100);
 	_kangarooSummonsTimer->setPercentage((_kangarooSummonsCollTime / _kangarooSummonsMaxCollTime) * 100);
+
 }
 
 void HeroControl::HeroManaRegen()
@@ -414,27 +417,6 @@ void HeroControl::UnitVecErase()
 			//_layer->removeChild(_heroUnitVec[i]->getSprite(), false);
 			_heroUnitVec.erase(_heroUnitVec.begin() + i);
 			log("d");
-		}
-	}
-}
-
-// Hero 기준으로 높낮이를 계산하여 Unit들의 제트오더를 설정해준다.
-void HeroControl::UnitZorder()
-{
-	// 코드 설명 : 히어로스프라이트 밑변을 기준으로 유닛이 위에있으면
-	//		       히어로스프라이트 의 제트오더 -1 아래에 있으면
-	//			   히어로스프라이트 의 제트오더 +1
-	for (int i = 0; i < _heroUnitVec.size(); ++i)
-	{
-		if (_heroUnitVec[i]->getSprite()->getPositionY() - 
-			_heroUnitVec[i]->getSprite()->getContentSize().height / 2 >
-			_hero->getHero()->getPositionY() - _hero->getHero()->getContentSize().height / 2)
-		{
-			_heroUnitVec[i]->getSprite()->setZOrder(_hero->getHero()->getZOrder() - 1);
-		}
-		else
-		{
-			_heroUnitVec[i]->getSprite()->setZOrder(_hero->getHero()->getZOrder() + 1);
 		}
 	}
 }

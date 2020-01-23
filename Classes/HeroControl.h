@@ -4,12 +4,14 @@
 #include "Hero.h"
 #include "HeroUnit.h"
 #include "Monster.h"
+#include "Dungeon.h"
 
 class HeroControl : Scene
 {
 	SpriteFrameCache* cache; // 캐시
 	Hero* _hero; // 히어로 객체
 	HeroUnit* _heroUnit; // 히어로 유닛객체
+	Dungeon* _dungeon; // 몬스터 기지체력 가지고오기위해서
 	vector<HeroUnit*> _heroUnitVec; // 백터
 
 	EventListenerTouchOneByOne* listener;
@@ -77,12 +79,10 @@ class HeroControl : Scene
 
 public:
 	HeroControl(Scene* scene, Hero* hero, Layer* layer);
-	//void UnitMove();
-	void HeroMove();
+	void HeroMove(Dungeon* dungeon);
 	void HeroManaRegen();
 	void HeroMeatRegen();
 	void UnitVecErase();
-	void UnitZorder();
 	void CoolTime();
 
 	bool onTouchBegan(Touch* touch, Event* event);

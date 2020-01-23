@@ -51,6 +51,7 @@ private:
 	float _meatRegenSpeed; // 고기 리젠 스피드
 	float _gold; // 골드
 	float _exp; // 경험치
+	float _maxExp; // 최대경험치
 
 	float _skillOneManaUse; // 스킬 1 마나 소비량
 	float _skillTwoManaUse; // 스킬 2 마나 소비량
@@ -76,6 +77,8 @@ public:
 	void setGold(float gold) { _gold = gold; }
 	float getExp() { return _exp; }
 	void setExp(float exp) { _exp = exp; }
+	float getMaxExp() { return _maxExp; }
+	void setMaxExp(float maxexp) { _maxExp = maxexp; }
 	float getManaRegenSpeed() { return _manaRegenSpeed; }
 	void setManaRegenSpeed(float manaregenspeed) { _manaRegenSpeed = manaregenspeed; }
 	float getMeat() { return _meat; }
