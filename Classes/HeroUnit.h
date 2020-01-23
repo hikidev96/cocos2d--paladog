@@ -29,6 +29,7 @@ class HeroUnit
 	Sprite* _UnitSprite; // 유닛스프라이트
 
 	float _Hp; // 체력
+	float _maxHP;
 	float _Atk; // 공격력
 	float _Speed; // 스피드
 	float _Range; // 사거리
@@ -91,5 +92,6 @@ public:
 	void UnitCollisionCheck();
 	void UnitAttack();
 	void UnitDeadCheck();
+	void ShowUnitHpBar();
 
 };

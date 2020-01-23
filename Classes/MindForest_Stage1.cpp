@@ -87,6 +87,7 @@ void MindForest_Stage1::tick(float delta)
 	_heroControl->HeroMove(); // 히어로 각종 조작
 	_heroControl->UnitZorder(); // 제트오더 설정
 	_heroControl->UnitVecErase();
+	_heroControl->CoolTime();
 
 }
 

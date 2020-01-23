@@ -17,7 +17,8 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
-		_Hp = 1.0f;
+		_Hp = 100.0f;
+		_maxHP = 100.0f;
 		_Atk = 500.f;
 		_Range = 50;
 		_unitKind = ª˝¡„;
@@ -29,7 +30,6 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
 		_HeroUnitHpBar->setMidpoint({ 0, 0 });
 		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
-		_HeroUnitHpBar->setPercentage(100);
 		_UnitSprite->addChild(_HeroUnitHpBar);
 
 		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
@@ -98,7 +98,8 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
-		_Hp = 1.0f;
+		_Hp = 200.0f;
+		_maxHP = 200.0f;
 		_Atk = 500.f;
 		_Range = 50;
 		_unitKind = ∞ı;
@@ -107,14 +108,13 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
-		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2 - 7, _UnitSprite->getContentSize().height + 3 });
 		_HeroUnitHpBar->setMidpoint({ 0, 0 });
 		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
-		_HeroUnitHpBar->setPercentage(100);
 		_UnitSprite->addChild(_HeroUnitHpBar);
 
 		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
-		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2 - 7, _UnitSprite->getContentSize().height + 3 });
 		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
 
 		_animation1 = Animation::create();
@@ -181,7 +181,8 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
-		_Hp = 1.0f;
+		_Hp = 300.0f;
+		_maxHP = 300.0f;
 		_Atk = 500.f;
 		_Range = 50;
 		_unitKind = ƒª∞≈∑Á;
@@ -190,14 +191,13 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
-		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2 + 7, _UnitSprite->getContentSize().height + 3 });
 		_HeroUnitHpBar->setMidpoint({ 0, 0 });
 		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
-		_HeroUnitHpBar->setPercentage(100);
 		_UnitSprite->addChild(_HeroUnitHpBar);
 
 		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
-		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2 + 7, _UnitSprite->getContentSize().height + 3 });
 		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
 
 		_animation1 = Animation::create();
@@ -270,6 +270,7 @@ void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
 	UnitDeadCheck();
 	UnitMove(); // ¿Ø¥÷ ¿Ãµø
 	UnitCollisionCheck();
+	ShowUnitHpBar();
 
 }
 
@@ -329,16 +330,16 @@ void HeroUnit::UnitCollisionCheck()
 }
 void HeroUnit::UnitAttack()
 {
-	//for (int i = 0; i < _monsterVec.size(); ++i)
-	//{
-	//	if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
-	//	{
-	//		_monsterVec[i]->Hit(_Atk);
-	//		return;
-	//	}
-	//}
+	/*for (int i = 0; i < _monsterVec.size(); ++i)
+	{
+		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
+		{
+			_monsterVec[i]->Hit(_Atk);
+			return;
+		}
+	}*/
 
-	_Hp = 0;
+	_Hp -= 60; // ¡◊¥¬∏º«≈◊Ω∫∆ÆøÎ
 }
 
 void HeroUnit::UnitDeadCheck()
@@ -347,9 +348,14 @@ void HeroUnit::UnitDeadCheck()
 	{
 		_unitAction = UnitDead;
 		_UnitSprite->stopAllActions();
-		DeadAct = Sequence::create(_animate3, RemoveSelf::create(true), nullptr);
+		DeadAct = Sequence::create(_animate3,FadeOut::create(1.f), RemoveSelf::create(true), nullptr);
 		_UnitSprite->runAction(DeadAct);
 		_Dead = true;
 	}
+}
+
+void HeroUnit::ShowUnitHpBar()
+{
+	_HeroUnitHpBar->setPercentage((_Hp / _maxHP) * 100);
 }
 

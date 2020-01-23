@@ -53,7 +53,7 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_mana = 0; // 현재마나량
 	_manaRegenSpeed = 0.2f; // 마나리젠속도
 
-	_maxmeat = 150; // 최대고기량
+	_maxmeat = 40; // 최대고기량
 	_meat = 0; // 현재고기량
 	_meatRegenSpeed = 0.2f; // 고기리젠속도
 

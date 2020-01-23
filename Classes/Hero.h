@@ -19,41 +19,42 @@ class Hero
 private:
 	SpriteFrameCache* cache;
 
-	Animation* _animation1;
-	Animate* _animate1;
+	Animation* _animation1; // 대기 Action
+	Animate* _animate1; // 대기 Action
 
-	Animation* _animation2;
-	Animate* _animate2;
+	Animation* _animation2; // Walk Action
+	Animate* _animate2;	// Walk Action
+	RepeatForever* _heroWaitingAction; // Walk Action
+	RepeatForever* _heroWalkingAction; // Walk Action
 
-	Animation* _animation3;
-	Animate* _animate3;
+	Animation* _animation3; // 공격 Action
+	Animate* _animate3; // 공격 Action
 
-	RepeatForever* _heroWaitingAction;
-	RepeatForever* _heroWalkingAction;
+	Sprite* _hero; // 히어로 스프라이트
+	ProgressTimer* _manaGauge; // 마나 게이지
+	ProgressTimer* _meatGauge; // 고기 게이지
 
-	Sprite* _hero;
-	ProgressTimer* _manaGauge;
-	ProgressTimer* _meatGauge;
+	ProgressTimer* _hpInfoGauge; // 히어로 체력바(중앙상단)
+	ProgressTimer* _MonsterBaseHpGauge; // 몬스터 베이스 체력바(중앙상단)
 
-	ProgressTimer* _hpInfoGauge;
-	ProgressTimer* _MonsterBaseHpGauge;
+	Movement _movement; // 현재 플레이어가 보고있는 방향
 
-	Movement _movement;
+	float _speed; // 스피드
+	float _lv; // 레벨
+	float _hp; // 체력
+	float _maxhp; // 최대체력
+	float _mana; // 현재 마나량
+	float _maxmana; // 최대마나
+	float _manaRegenSpeed; // 마나 리젠 스피드
+	float _meat; // 현재 고기량
+	float _maxmeat; // 최대 고기량
+	float _meatRegenSpeed; // 고기 리젠 스피드
+	float _gold; // 골드
+	float _exp; // 경험치
 
-	float _speed;
-	float _lv;
-	float _hp;
-	float _maxhp;
-	float _mana;
-	float _maxmana;
-	float _manaRegenSpeed;
-	float _meat;
-	float _maxmeat;
-	float _meatRegenSpeed;
-
-	float _skillOneManaUse;
-	float _skillTwoManaUse;
-	float _skillThreeManaUse;
+	float _skillOneManaUse; // 스킬 1 마나 소비량
+	float _skillTwoManaUse; // 스킬 2 마나 소비량
+	float _skillThreeManaUse; // 스킬 3 마나 소비량
 
 public:
 
@@ -71,6 +72,10 @@ public:
 	void setMana(float mana) { _mana = mana; }
 	float getMaxMana() { return _maxmana; }
 	void setMaxMana(float maxmana) { _maxmana = maxmana; }
+	float getGold() { return _gold; }
+	void setGold(float gold) { _gold = gold; }
+	float getExp() { return _exp; }
+	void setExp(float exp) { _exp = exp; }
 	float getManaRegenSpeed() { return _manaRegenSpeed; }
 	void setManaRegenSpeed(float manaregenspeed) { _manaRegenSpeed = manaregenspeed; }
 	float getMeat() { return _meat; }
