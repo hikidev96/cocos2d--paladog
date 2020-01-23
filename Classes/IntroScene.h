@@ -20,9 +20,13 @@ class IntroScene : public Scene
   void changeBg15AgeToVolcano(float time);
   EventListenerTouchOneByOne* _listener;
   IntroUI* _introUI;
+  void titleSkyFlow(float time);
+  void flippedX();
+  void moveBy();
   bool _isPlay;
   bool _isPaladog;
   bool _isCampaign;
+  bool _isSurvival;
   bool _isExit;
   bool _isDataSlot;
   bool _isStart;

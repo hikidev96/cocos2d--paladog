@@ -43,12 +43,14 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
     getBoundingBox().containsPoint(touchPoint);
   bool touchCampaign = _introUI->GetBtnCampaignUp()->
     getBoundingBox().containsPoint(touchPoint);
+  bool touchSurvival = _introUI->GetBtnSurvivalUp()->
+    getBoundingBox().containsPoint(touchPoint);
   bool touchExit = _introUI->GetBtnExitUp()->
     getBoundingBox().containsPoint(touchPoint);
   bool touchDataSlot = _introUI->GetDataSlot()->
     getBoundingBox().containsPoint(touchPoint);
   bool touchStart = _introUI->GetBtnSlotStartUp()->
-    getBoundingBox().containsPoint(touchPoint);
+    getBoundingBox().containsPoint(touchPoint);  
 
   // Play 버튼 클릭
   if (touchPlay && !_isPlay) {
@@ -64,18 +66,25 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
   else if (_isPlay && touchPaladog && !_isPaladog) {
     _introUI->GetHeroDarkdogUp()->setVisible(false);
     _introUI->GetBtnCampaignUp()->setVisible(true);
-    _introUI->GetBtnCampaignUp()->
-      runAction(RotateBy::create(1, Vec3(0, 180, 0)));
+    _introUI->GetBtnCampaignUp()->runAction(
+      Sequence::create(
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        CallFunc::create(CC_CALLBACK_0(IntroScene::flippedX, this)),
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        nullptr));
     _introUI->GetBtnSurvivalUp()->setVisible(true);
-    _introUI->GetBtnSurvivalUp()->
-      runAction(RotateBy::create(1, Vec3(0, 180, 0)));
+    _introUI->GetBtnSurvivalUp()->runAction(
+      Sequence::create(
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        nullptr));
 
     _isPaladog = true;
   }
 
   // Play 버튼 클릭 후 배경 클릭
-  if (_isPlay && !_isPaladog && !touchCampaign && !touchPaladog &&
-      !_isCampaign) {
+  if (_isPlay && !touchPaladog && !_isPaladog && !touchCampaign &&
+      !_isCampaign && !touchSurvival && !_isSurvival) {
     _introUI->GetModeSelectBox()->setVisible(false);
     _introUI->GetTxtHeroSelect()->setVisible(false);
     _introUI->GetHeroPaladogUp()->setVisible(false);
@@ -83,15 +92,30 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
     _introUI->GetBtnCampaignUp()->setVisible(false);
     _introUI->GetBtnSurvivalUp()->setVisible(false);
     _introUI->GetTitleBtnNewgameUp()->setVisible(true);
-    _introUI->GetTitleBtnInfoUp()->setVisible(true);
+    _introUI->GetTitleBtnInfoUp()->setVisible(true);    
 
     _isPlay = false;
     _isPaladog = false;
 
-  } else if (_isPaladog && (!touchCampaign && !touchPaladog && !_isCampaign)) {
+  } else if ((_isPaladog && !touchPaladog) && 
+    ((!touchCampaign && !_isCampaign) && (!touchSurvival && !_isSurvival))) {
     _introUI->GetHeroDarkdogUp()->setVisible(true);
     _introUI->GetBtnCampaignUp()->setVisible(false);
     _introUI->GetBtnSurvivalUp()->setVisible(false);
+    _introUI->GetBtnCampaignUp()->runAction(
+      Sequence::create(
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        nullptr));
+    _introUI->GetBtnCampaignUp()->retain();
+    _introUI->GetBtnCampaignUp()->setFlippedX(false);
+    _introUI->GetBtnSurvivalUp()->runAction(
+      Sequence::create(
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        nullptr));
+    _introUI->GetBtnSurvivalUp()->retain();
+    _introUI->GetBtnSurvivalUp()->setFlippedX(false);
 
     _isPlay = true;
     _isPaladog = false;
@@ -107,8 +131,9 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
     _introUI->GetTitleBtnNewgameUp()->setVisible(false);
     _introUI->GetTitleBtnInfoUp()->setVisible(false);
     _introUI->GetBtnCampaignUp()->setVisible(false);
-    _introUI->GetBtnSurvivalUp()->setVisible(false);    
+    _introUI->GetBtnSurvivalUp()->setVisible(false);
     // 슬롯
+    _introUI->GetMsgBox()->setVisible(true);
     _introUI->GetMsgSelectSlot()->setVisible(true);
     _introUI->GetDataSlot()->setVisible(true);
     _introUI->GetSlotInfoEmpty()->setVisible(true);
@@ -121,8 +146,26 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
   if (_isCampaign && touchExit && !_isExit) {
     _introUI->GetMsgSelectSlot()->setVisible(false);
     _introUI->GetDataSlot()->setVisible(false);
+    _introUI->GetDataSlot()->runAction(MoveBy::create(0.15f, Vec2(52, 0)));
     _introUI->GetSlotInfoEmpty()->setVisible(false);
     _introUI->GetBtnExitUp()->setVisible(false);
+    _introUI->GetBtnSlotStartUp()->setVisible(false);
+    _introUI->GetBtnSlotDeleteUp()->setVisible(false);
+    _introUI->GetMsgBox()->setVisible(false);
+    _introUI->GetBtnCampaignUp()->runAction(
+      Sequence::create(
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        nullptr));
+    _introUI->GetBtnCampaignUp()->retain();
+    _introUI->GetBtnCampaignUp()->setFlippedX(false);
+    _introUI->GetBtnSurvivalUp()->runAction(
+      Sequence::create(
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        RotateBy::create(0.15f, Vec3(0, 90, 0)),
+        nullptr));
+    _introUI->GetBtnSurvivalUp()->retain();
+    _introUI->GetBtnSurvivalUp()->setFlippedX(false);
     // 초기화면
     _introUI->GetTitleLogo()->setVisible(true);
     _introUI->GetTitleBtnNewgameUp()->setVisible(true);
@@ -132,19 +175,21 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
     _isExit = false;
     _isPaladog = false;
     _isPlay = false;
+    _isDataSlot = false;
   }
 
   // 슬롯 선택
   if (_isCampaign && touchDataSlot && !_isDataSlot) {
-    _introUI->GetDataSlot()->runAction(MoveBy::create(1, Vec2(-20, 0)));
-    _introUI->GetBtnSlotStartUp()->setVisible(true);
-    _introUI->GetBtnSlotDeleteUp()->setVisible(true);
+    _introUI->GetDataSlot()->runAction(Sequence::create(
+      MoveBy::create(0.15f, Vec2(-52, 0)),
+      CallFunc::create(CC_CALLBACK_0(IntroScene::moveBy, this)),
+      nullptr));
 
     _isDataSlot = true;
   }
 
   // Start 클릭
-  if (_isDataSlot && touchStart && _isStart) {    
+  if (_isDataSlot && touchStart && !_isStart) {    
     _isStart = true;
 
     // 씬 전환
@@ -164,7 +209,8 @@ void IntroScene::changeBg15AgeToVolcano(float time) {
   // 배경
   _introBg->SetTitleVolcano(this); // 화산
   _introBg->SetTitleSky(this); // 제일 위에 구름
-  _introBg->SetTitleVolcanoCloud(this); // 밑에 구름 
+  this->schedule(schedule_selector(IntroScene::titleSkyFlow));
+  _introBg->SetTitleVolcanoCloud(this); // 밑에 구름
   _introBg->SetTitleDarkCloud(this);
   _introBg->GetTitleDarkCloud()->
     runAction(_introBg->GetTitleDarkCloudAction());
@@ -180,6 +226,7 @@ void IntroScene::changeBg15AgeToVolcano(float time) {
   _introUI->SetTitleLogo(this); // 팔라독 로고
   _introUI->SetTitleBtnNewgameUp(this); // PLAY 버튼
   _introUI->SetTitleBtnInfoUp(this); // 설정 버튼
+  _introUI->SetTitleLogoCrown(this); // 크라운
 
   // 영웅 선택
   _introUI->SetModeSelectBox(this);
@@ -188,7 +235,7 @@ void IntroScene::changeBg15AgeToVolcano(float time) {
   _introUI->GetHeroPaladogUp()->setVisible(false);
   _introUI->SetHeroDarkdogUp(this);
   _introUI->GetHeroDarkdogUp()->setVisible(false);
-  _introUI->SetBtnCampaignUp(this); // 캠페인 버튼
+  _introUI->SetBtnCampaignUp(this);
   _introUI->GetBtnCampaignUp()->setVisible(false);
   _introUI->SetBtnSurvivalUp(this);
   _introUI->GetBtnSurvivalUp()->setVisible(false);
@@ -196,23 +243,39 @@ void IntroScene::changeBg15AgeToVolcano(float time) {
   _introUI->GetTxtHeroSelect()->setVisible(false);
 
   // 슬롯 선택
+  _introUI->SetMsgBox(this);
+  _introUI->GetMsgBox()->setVisible(false);
   _introUI->SetMsgSelectSlot(this);
   _introUI->GetMsgSelectSlot()->setVisible(false);
+  _introUI->SetBtnSlotStartUp(this);
+  _introUI->GetBtnSlotStartUp()->setVisible(false);
+  _introUI->SetBtnSlotDeleteUp(this);
+  _introUI->GetBtnSlotDeleteUp()->setVisible(false);
   _introUI->SetDataSlot(this);
   _introUI->GetDataSlot()->setVisible(false);
   _introUI->SetSlotInfoEmpty(this);
   _introUI->GetSlotInfoEmpty()->setVisible(false);
   _introUI->SetBtnExitUp(this);
   _introUI->GetBtnExitUp()->setVisible(false);
-  _introUI->SetBtnSlotStartUp(this);
-  _introUI->GetBtnSlotStartUp()->setVisible(false);
-  _introUI->SetBtnSlotDeleteUp(this);
-  _introUI->GetBtnSlotDeleteUp()->setVisible(false);
 
   _isPlay = false;
   _isPaladog = false;
   _isCampaign = false;
+  _isSurvival = false;
   _isExit = false;
   _isDataSlot = false;
   _isStart = false;
+}
+
+void IntroScene::titleSkyFlow(float time) {
+}
+
+void IntroScene::flippedX() {
+  _introUI->GetBtnCampaignUp()->setFlippedX(true);
+  _introUI->GetBtnSurvivalUp()->setFlippedX(true);
+}
+
+void IntroScene::moveBy() {
+  _introUI->GetBtnSlotStartUp()->setVisible(true);
+  _introUI->GetBtnSlotDeleteUp()->setVisible(true);
 }

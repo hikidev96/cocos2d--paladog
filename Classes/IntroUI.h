@@ -19,6 +19,10 @@ class IntroUI
   Sprite* GetTitleBtnInfoUp() {
     return _titleBtnInfoUp;
   }
+  void SetTitleLogoCrown(Scene* pScene);
+  Sprite* GetTitleLogoCrown() {
+    return _titleLogoCrown;
+  }
   void SetModeSelectBox(Scene* pScene);
   Sprite* GetModeSelectBox() {
     return _modeSelectBox;
@@ -67,12 +71,16 @@ class IntroUI
   Sprite* GetBtnSlotDeleteUp() {
     return _btnSlotDeleteUp;
   }
-
+  void SetMsgBox(Scene* pScene);
+  Sprite* GetMsgBox() {
+    return _msgBox;
+  }
  private:
   SpriteFrameCache* _cache;
   Sprite* _titleLogo;
   Sprite* _titleBtnNewgameUp;
   Sprite* _titleBtnInfoUp;
+  Sprite* _titleLogoCrown;
   Sprite* _modeSelectBox;
   Sprite* _txtHeroSelect;
   Sprite* _heroPaladogUp;
@@ -85,6 +93,7 @@ class IntroUI
   Sprite* _btnExitUp;
   Sprite* _btnSlotStartUp;
   Sprite* _btnSlotDeleteUp;
+  Sprite* _msgBox;
 };
 
 #endif // __INTROUI_H__
