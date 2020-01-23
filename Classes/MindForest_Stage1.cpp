@@ -26,7 +26,7 @@ bool MindForest_Stage1::init() {
 	_cache = SpriteFrameCache::getInstance();
 	_cache->addSpriteFramesWithFile("UI/Background/background_00.plist");
 
-	// 배경이미지 만들기
+	// 배경이미지 만들기.
 	_backGround1 = Sprite::createWithSpriteFrameName("background_00_a.png");
 	_backGround1->setPosition({ 0,525 });
 	_backGround1->setAnchorPoint({ 0,1 });
@@ -83,7 +83,6 @@ void MindForest_Stage1::tick(float delta)
 	}
 
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
-	_heroControl->UnitZorder(); // 제트오더 설정
 	_heroControl->UnitVecErase();
 	_heroControl->CoolTime();
 
