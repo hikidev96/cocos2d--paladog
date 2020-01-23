@@ -4,7 +4,7 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 {
 	_hero = hero; // 히어로 메모리주소 받아오기
 	_scene = scene; // Scene 메모리주소 받아오기
-	_layer = layer;
+	_layer = layer; // layer 메모리주소 받아오기
 
 	cache = SpriteFrameCache::getInstance(); // 캐쉬생성
 	cache->addSpriteFramesWithFile("UI/ui_gameplay.plist"); // plist 추가
@@ -53,6 +53,9 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_mouseSummonsButton->setScaleY(0.48f);
 	_scene->addChild(_mouseSummonsButton, 1);
 
+	_mouseSummonsButtonDisable = Sprite::createWithSpriteFrameName("btn_unit_00_disable.png");
+	_mouseSummonsButtonDisable->setColor(Color3B::BLACK);
+
 	// 곰 소환 버튼
 	_bearSummonsButton = Sprite::createWithSpriteFrameName("btn_unit_02_disable.png");
 	_bearSummonsButton->setAnchorPoint({ 0,0 });
@@ -61,6 +64,9 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_bearSummonsButton->setScaleY(0.48f);
 	_scene->addChild(_bearSummonsButton, 1);
 
+	_bearSummonsButtonDisable = Sprite::createWithSpriteFrameName("btn_unit_02_disable.png");
+	_bearSummonsButtonDisable->setColor(Color3B::BLACK);
+
 	// 캥거루 소환 버튼
 	_kangarooSummonsButton = Sprite::createWithSpriteFrameName("btn_unit_03_disable.png");
 	_kangarooSummonsButton->setAnchorPoint({ 0,0 });
@@ -68,6 +74,9 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_kangarooSummonsButton->setScale(0.5f);
 	_kangarooSummonsButton->setScaleY(0.48f);
 	_scene->addChild(_kangarooSummonsButton, 1);
+
+	_kangarooSummonsButtonDisable = Sprite::createWithSpriteFrameName("btn_unit_03_disable.png");
+	_kangarooSummonsButtonDisable->setColor(Color3B::BLACK);
 
 	// 소환 버튼 잠김
 	_unitLock1 = Sprite::createWithSpriteFrameName("btn_unit_lock.png");
@@ -174,7 +183,34 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_expBarBack->setAnchorPoint({ 0,1 });
 	_expBarBack->setPosition(4, 308);
 	_scene->addChild(_expBarBack, -10);
-	
+
+	// 생쥐소환쿨타임(타이머)
+	_mouseSummonsTimer = ProgressTimer::create(_mouseSummonsButtonDisable);
+	_mouseSummonsTimer->setType(ProgressTimer::Type::RADIAL);
+	_mouseSummonsTimer->setAnchorPoint({ 0,0 });
+	_mouseSummonsTimer->setPosition(10, 55);
+	_mouseSummonsTimer->setScale(0.5f);
+	_mouseSummonsTimer->setScaleY(0.48f);
+	_scene->addChild(_mouseSummonsTimer);
+
+	// 곰소환쿨타임(타이머)
+	_bearSummonsTimer = ProgressTimer::create(_bearSummonsButtonDisable);
+	_bearSummonsTimer->setType(ProgressTimer::Type::RADIAL);
+	_bearSummonsTimer->setAnchorPoint({ 0,0 });
+	_bearSummonsTimer->setPosition(61, 55);
+	_bearSummonsTimer->setScale(0.5f);
+	_bearSummonsTimer->setScaleY(0.48f);
+	_scene->addChild(_bearSummonsTimer);
+
+	// 캥거루소환쿨타임(타이머)
+	_kangarooSummonsTimer = ProgressTimer::create(_kangarooSummonsButtonDisable);
+	_kangarooSummonsTimer->setType(ProgressTimer::Type::RADIAL);
+	_kangarooSummonsTimer->setAnchorPoint({ 0,0 });
+	_kangarooSummonsTimer->setPosition(112, 55);
+	_kangarooSummonsTimer->setScale(0.5f);
+	_kangarooSummonsTimer->setScaleY(0.48f);
+	_scene->addChild(_kangarooSummonsTimer);
+
 	// addchild
 	_scene->addChild(_leftButton, 1);
 	_scene->addChild(_rightButton, 1);
@@ -193,10 +229,28 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_mouseSummonsClick = false; // 생쥐 소환 버튼
 	_bearSummonsClick = false; // 곰 소환 버튼
 	_kangarooSummonsClick = false; // 캥거루 소환 버튼
+
+	_mouseSummonsButtonActivation = false; // 생쥐 소환 버튼 활성화(쿨타임)
+	_bearSummonsButtonActivation = false; // 곰 소환 버튼 활성화(쿨타임)
+	_kangarooSummonsButtonActivation = false; // 캥거루 소환 버튼 활성화(쿨타임)
+
+	// 생쥐 쿨타임 설정
+	_mouseSummonsCollTime = 0.0f;
+	_mouseSummonsMaxCollTime = 2.0f;
+
+	// 곰 쿨타임 설정
+	_bearSummonsCollTime = 0.0f;
+	_bearSummonsMaxCollTime = 2.0f;
+
+	// 캥거루 쿨타임 설정
+	_kangarooSummonsCollTime = 0.0f;
+	_kangarooSummonsMaxCollTime = 2.0f;
 }
 
-void HeroControl::HeroMove()
+void HeroControl::HeroMove(Dungeon* dungeon)
 {
+	_dungeon = dungeon;
+	
 	// 히어로 조작부
 	if (_left)
 	{
@@ -271,11 +325,11 @@ void HeroControl::HeroMove()
 	}
 
 	// 생쥐 소환 버튼
-	if (_hero->getMeat() < 10)
+	if (_hero->getMeat() < 10 || _mouseSummonsButtonActivation == false)
 	{
 		_mouseSummonsButton->setSpriteFrame("btn_unit_00_disable.png");
 	}
-	else if (_hero->getMeat() >= 10 && !_mouseSummonsClick)
+	else if (_hero->getMeat() >= 10 && !_mouseSummonsClick && _mouseSummonsButtonActivation == true)
 	{
 		_mouseSummonsButton->setSpriteFrame("btn_unit_00_up.png");
 	}
@@ -315,7 +369,7 @@ void HeroControl::HeroMove()
 	_hero->getManaGauge()->setPercentage((_hero->getMana() / _hero->getMaxMana()) * 100); // 마나게이지를 Bar 로 보여준다
 	_hero->getMeatGauge()->setPercentage((_hero->getMeat() / _hero->getMaxMeat()) * 100); // 고기게이지를 Bar 로 보여준다
 	_hero->getHeroHpInfo()->setPercentage((_hero->getHp() / _hero->getMaxHp()) * 100); // 플레이어의 체력을 보여줌
-	_hero->getMonsterBaseInfo()->setPercentage(100);
+	_hero->getMonsterBaseInfo()->setPercentage((_dungeon->getHp() / _dungeon->getHpm()) * 100); // 몬스터베이스의 체력을 보여준다
 
 
 	// 마나,고기 게이지를 숫자로 보여준다
@@ -323,7 +377,12 @@ void HeroControl::HeroMove()
 	_MaxMeat->setString(String::createWithFormat("%d", (int)_hero->getMaxMeat())->_string.c_str());
 	_currentMana->setString(String::createWithFormat("%d", (int)_hero->getMana())->_string.c_str());
 	_MaxMana->setString(String::createWithFormat("%d", (int)_hero->getMaxMana())->_string.c_str());
-	
+
+	// 유닛 소환 쿨타임을 보여준다
+	_mouseSummonsTimer->setPercentage((_mouseSummonsCollTime / _mouseSummonsMaxCollTime) * 100);
+	_bearSummonsTimer->setPercentage((_bearSummonsCollTime / _bearSummonsMaxCollTime) * 100);
+	_kangarooSummonsTimer->setPercentage((_kangarooSummonsCollTime / _kangarooSummonsMaxCollTime) * 100);
+
 }
 
 void HeroControl::HeroManaRegen()
@@ -346,6 +405,9 @@ void HeroControl::HeroMeatRegen()
 
 void HeroControl::UnitVecErase()
 {
+	// 코드 설명 : bool값으로 생사여부 를 결정하여 죽음상태이면
+	//	           안전하게 스프라이트의 자식(체력바)들 부터 제거한뒤
+	//			   removeself 액션을 이용(HeroUnit.cpp - 350line) 해 죽는 모션이 끝나면 객체(유닛)를 삭제해준다
 	for (int i = 0; i < _heroUnitVec.size(); i++)
 	{
 		if (_heroUnitVec[i]->getDead() == true /*&& !_heroUnitVec[i]->getSprite()->getNumberOfRunningActions()*/)
@@ -359,22 +421,70 @@ void HeroControl::UnitVecErase()
 	}
 }
 
-// Hero 기준으로 높낮이를 계산하여 Unit들의 제트오더를 설정해준다.
-void HeroControl::UnitZorder()
+// 쿨타임 계산
+void HeroControl::CoolTime()
 {
-	
-	for (int i = 0; i < _heroUnitVec.size(); ++i)
+	// 생쥐 쿨타임
+	if (_mouseSummonsCollTime <= 0.0f )
 	{
-		if (_heroUnitVec[i]->getSprite()->getPositionY() - 
-			_heroUnitVec[i]->getSprite()->getContentSize().height / 2 >
-			_hero->getHero()->getPositionY() - _hero->getHero()->getContentSize().height / 2)
-		{
-			_heroUnitVec[i]->getSprite()->setZOrder(_hero->getHero()->getZOrder() - 1);
-		}
-		else
-		{
-			_heroUnitVec[i]->getSprite()->setZOrder(_hero->getHero()->getZOrder() + 1);
-		}
+		_mouseSummonsCollTime = 2.0f;
+		_mouseSummonsButtonActivation = true;
+	}
+	if (_mouseSummonsButtonActivation == false)
+	{
+		_mouseSummonsCollTime -= 0.01f;
+	}
+
+	// 곰 쿨타임
+	if (_bearSummonsCollTime <= 0.0f)
+	{
+		_bearSummonsCollTime = 2.0f;
+		_bearSummonsButtonActivation = true;
+	}	 
+	if (_bearSummonsButtonActivation == false)
+	{	 
+		_bearSummonsCollTime -= 0.01f;
+	}
+
+	// 캥거루 쿨타임
+	if (_kangarooSummonsCollTime <= 0.0f)
+	{
+		_kangarooSummonsCollTime = 2.0f;
+		_kangarooSummonsButtonActivation = true;
+	}
+	if (_kangarooSummonsButtonActivation == false)
+	{
+		_kangarooSummonsCollTime -= 0.01f;
+	}
+	
+	//생쥐 버튼 활성화
+	if (_mouseSummonsButtonActivation == true)
+	{
+		_mouseSummonsTimer->setZOrder(-5);
+	}
+	else
+	{
+		_mouseSummonsTimer->setZOrder(5);
+	}
+
+	// 곰 버튼 활성화
+	if (_bearSummonsButtonActivation == true)
+	{
+		_bearSummonsTimer->setZOrder(-5);
+	}
+	else
+	{
+		_bearSummonsTimer->setZOrder(5);
+	}
+
+	// 캥거루 버튼 활성화
+	if (_kangarooSummonsButtonActivation == true)
+	{
+		_kangarooSummonsTimer->setZOrder(-5);
+	}
+	else
+	{
+		_kangarooSummonsTimer->setZOrder(5);
 	}
 }
 
@@ -445,9 +555,10 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	// 생쥐 소환 버튼
 	if (_mouseSummonsButton->getBoundingBox().containsPoint(touch->getLocation()))
 	{
-		if (_hero->getMeat() >= 10)
+		if (_hero->getMeat() >= 10 && _mouseSummonsButtonActivation == true)
 		{
 			_mouseSummonsClick = true;
+			_mouseSummonsButtonActivation = false;
 
 			_heroUnit = new HeroUnit(_scene, 생쥐, _layer);
 			_heroUnitVec.push_back(_heroUnit);
@@ -462,6 +573,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 		if (_hero->getMeat() >= 30)
 		{
 			_bearSummonsClick = true;
+			_bearSummonsButtonActivation = false;
 
 			_heroUnit = new HeroUnit(_scene, 곰, _layer);
 			_heroUnitVec.push_back(_heroUnit);
@@ -476,6 +588,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 		if (_hero->getMeat() >= 40)
 		{
 			_kangarooSummonsClick = true;
+			_kangarooSummonsButtonActivation = false;
 
 			_heroUnit = new HeroUnit(_scene, 캥거루, _layer);
 			_heroUnitVec.push_back(_heroUnit);

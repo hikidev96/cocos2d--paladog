@@ -4,12 +4,14 @@
 #include "Hero.h"
 #include "HeroUnit.h"
 #include "Monster.h"
+#include "Dungeon.h"
 
 class HeroControl : Scene
 {
 	SpriteFrameCache* cache; // 캐시
 	Hero* _hero; // 히어로 객체
 	HeroUnit* _heroUnit; // 히어로 유닛객체
+	Dungeon* _dungeon; // 몬스터 기지체력 가지고오기위해서
 	vector<HeroUnit*> _heroUnitVec; // 백터
 
 	EventListenerTouchOneByOne* listener;
@@ -25,8 +27,11 @@ class HeroControl : Scene
 	Sprite* _skillTwoButton; // 스킬 2 버튼
 	Sprite* _skillThreeButton; // 스킬 3 버튼
 	Sprite* _mouseSummonsButton; // 생쥐 소환 버튼
+	Sprite* _mouseSummonsButtonDisable; // 생쥐 소환 버튼(타이머)
 	Sprite* _bearSummonsButton; // 곰 소환 버튼
+	Sprite* _bearSummonsButtonDisable; // 곰 소환 버튼(타이머)
 	Sprite* _kangarooSummonsButton; // 캥거루 소환 버튼
+	Sprite* _kangarooSummonsButtonDisable; // 캥거루 소환 버튼(타이머)
 	Sprite* _unitLock1; // 잠긴 유닛 버튼
 	Sprite* _unitLock2; // 잠긴 유닛 버튼
 	Sprite* _unitLock3; // 잠긴 유닛 버튼
@@ -46,6 +51,17 @@ class HeroControl : Scene
 	Label* _currentMana;
 	Label* _MaxMana;
 
+	ProgressTimer* _mouseSummonsTimer;
+	ProgressTimer* _bearSummonsTimer;
+	ProgressTimer* _kangarooSummonsTimer;
+
+	float _mouseSummonsCollTime;
+	float _mouseSummonsMaxCollTime;
+	float _bearSummonsCollTime;
+	float _bearSummonsMaxCollTime;
+	float _kangarooSummonsCollTime;
+	float _kangarooSummonsMaxCollTime;
+
 	bool _right;
 	bool _left;
 
@@ -57,14 +73,17 @@ class HeroControl : Scene
 	bool _bearSummonsClick;
 	bool _kangarooSummonsClick;
 
+	bool _mouseSummonsButtonActivation;
+	bool _bearSummonsButtonActivation;
+	bool _kangarooSummonsButtonActivation;
+
 public:
 	HeroControl(Scene* scene, Hero* hero, Layer* layer);
-	//void UnitMove();
-	void HeroMove();
+	void HeroMove(Dungeon* dungeon);
 	void HeroManaRegen();
 	void HeroMeatRegen();
 	void UnitVecErase();
-	void UnitZorder();
+	void CoolTime();
 
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);

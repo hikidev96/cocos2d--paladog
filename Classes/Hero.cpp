@@ -9,7 +9,7 @@ Hero::Hero(Scene * scene, Layer* layer)
 	// 영웅 만들기
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
 	_hero->setPosition(100, 400);
-	layer->addChild(_hero);
+	layer->addChild(_hero, (_hero->getPositionY() - _hero->getContentSize().height / 2) * -1);
 
 	//마나 게이지 만들기
 	_manaGauge = ProgressTimer::create(Sprite::create("UI/Mana.png"));
@@ -53,9 +53,13 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_mana = 0; // 현재마나량
 	_manaRegenSpeed = 0.2f; // 마나리젠속도
 
-	_maxmeat = 150; // 최대고기량
+	_maxmeat = 40; // 최대고기량
 	_meat = 0; // 현재고기량
 	_meatRegenSpeed = 0.2f; // 고기리젠속도
+
+	_gold = 0; //현재 골드
+	_exp = 0; // 현재 경험치
+	_maxExp = 100; // 최대 경험치
 
 	_skillOneManaUse = 10; // 스킬 1 마나 사용량
 	_skillTwoManaUse = 20; // 스킬 2 마나 사용량

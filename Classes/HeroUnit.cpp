@@ -17,19 +17,19 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
-		_Hp = 1.0f;
+		_Hp = 100.0f;
+		_maxHP = 100.0f;
 		_Atk = 500.f;
-		_Range = 50;
+		_Range = 50 + rand() % 5;
 		_unitKind = 생쥐;
 		_Dead = false;
-		layer->addChild(_UnitSprite, 100);
+		layer->addChild(_UnitSprite, (_UnitSprite->getPositionY() - _UnitSprite->getContentSize().height / 2) * -1);
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
 		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
 		_HeroUnitHpBar->setMidpoint({ 0, 0 });
 		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
-		_HeroUnitHpBar->setPercentage(100);
 		_UnitSprite->addChild(_HeroUnitHpBar);
 
 		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
@@ -98,23 +98,23 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
-		_Hp = 1.0f;
+		_Hp = 200.0f;
+		_maxHP = 200.0f;
 		_Atk = 500.f;
-		_Range = 50;
+		_Range = 50 + rand() % 5;
 		_unitKind = 곰;
 		_Dead = false;
-		layer->addChild(_UnitSprite);
+		layer->addChild(_UnitSprite, (_UnitSprite->getPositionY() - _UnitSprite->getContentSize().height / 2) * -1);
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
-		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2 - 7, _UnitSprite->getContentSize().height + 3 });
 		_HeroUnitHpBar->setMidpoint({ 0, 0 });
 		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
-		_HeroUnitHpBar->setPercentage(100);
 		_UnitSprite->addChild(_HeroUnitHpBar);
 
 		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
-		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2 - 7, _UnitSprite->getContentSize().height + 3 });
 		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
 
 		_animation1 = Animation::create();
@@ -181,23 +181,23 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_UnitSprite->setPosition(0, 360 + rand() % 30);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
-		_Hp = 1.0f;
+		_Hp = 300.0f;
+		_maxHP = 300.0f;
 		_Atk = 500.f;
-		_Range = 50;
+		_Range = 50 + rand() % 5;
 		_unitKind = 캥거루;
 		_Dead = false;
-		layer->addChild(_UnitSprite);
+		layer->addChild(_UnitSprite, (_UnitSprite->getPositionY() - _UnitSprite->getContentSize().height / 2) * -1);
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
-		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2 + 7, _UnitSprite->getContentSize().height + 3 });
 		_HeroUnitHpBar->setMidpoint({ 0, 0 });
 		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
-		_HeroUnitHpBar->setPercentage(100);
 		_UnitSprite->addChild(_HeroUnitHpBar);
 
 		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
-		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2 + 7, _UnitSprite->getContentSize().height + 3 });
 		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
 
 		_animation1 = Animation::create();
@@ -267,9 +267,10 @@ void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
 {
 	_monsterVec = monstervec;
 
-	UnitDeadCheck();
+	UnitDeadCheck(); // 유닛 생사여부 체크
 	UnitMove(); // 유닛 이동
-	UnitCollisionCheck();
+	UnitCollisionCheck(); // 유닛충돌체크
+	ShowUnitHpBar(); // 히어로 유닛의 체력바를 보여줌
 
 }
 
@@ -329,16 +330,16 @@ void HeroUnit::UnitCollisionCheck()
 }
 void HeroUnit::UnitAttack()
 {
-	//for (int i = 0; i < _monsterVec.size(); ++i)
-	//{
-	//	if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
-	//	{
-	//		_monsterVec[i]->Hit(_Atk);
-	//		return;
-	//	}
-	//}
+	for (int i = 0; i < _monsterVec.size(); ++i)
+	{
+		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
+		{
+			_monsterVec[i]->Hit(_Atk);
+			return;
+		}
+	}
 
-	_Hp = 0;
+	//_Hp -= 60; // 죽는모션테스트용
 }
 
 void HeroUnit::UnitDeadCheck()
@@ -347,9 +348,24 @@ void HeroUnit::UnitDeadCheck()
 	{
 		_unitAction = UnitDead;
 		_UnitSprite->stopAllActions();
-		DeadAct = Sequence::create(_animate3, RemoveSelf::create(true), nullptr);
+		DeadAct = Sequence::create(_animate3,FadeOut::create(1.f), RemoveSelf::create(true), nullptr);
 		_UnitSprite->runAction(DeadAct);
 		_Dead = true;
 	}
+}
+
+void HeroUnit::ShowUnitHpBar()
+{
+	if (_Hp == _maxHP)
+	{
+		_HeroUnitHpBar->setVisible(false);
+		_HeroUnitHpBarBack->setVisible(false);
+	}
+	else
+	{
+		_HeroUnitHpBar->setVisible(true);
+		_HeroUnitHpBarBack->setVisible(true);
+	}
+	_HeroUnitHpBar->setPercentage((_Hp / _maxHP) * 100);
 }
 

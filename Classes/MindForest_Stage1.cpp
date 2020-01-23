@@ -14,21 +14,19 @@ bool MindForest_Stage1::init() {
 
 	_hero = new Hero(this, _bgLayer);
 	_heroControl = new HeroControl(this, _hero, _bgLayer);
-	_dungeon = new Dungeon(this, _bgLayer, 1000); //2번째 인자에 체력 넣음
+	_dungeon = new Dungeon(this, _bgLayer, 1000.0f); //2번째 인자에 체력 넣음
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
 	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), _hero->getManaRegenSpeed());
 	this->schedule(schedule_selector(MindForest_Stage1::HeroMeatRegen), _hero->getMeatRegenSpeed());
 
 	_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::좀비킹)); //몬스터 생성
-
-	_hero->getHero()->setZOrder(50); //위치조절을 위한 임시 설정입니당
 	
 	// 배경이미지 plist
 	_cache = SpriteFrameCache::getInstance();
 	_cache->addSpriteFramesWithFile("UI/Background/background_00.plist");
 
-	// 배경이미지 만들기
+	// 배경이미지 만들기.
 	_backGround1 = Sprite::createWithSpriteFrameName("background_00_a.png");
 	_backGround1->setPosition({ 0,525 });
 	_backGround1->setAnchorPoint({ 0,1 });
@@ -62,12 +60,12 @@ bool MindForest_Stage1::init() {
 	_backGround3_2->getTexture()->setAliasTexParameters();
 
 	// 배경레이어에 추가
-	_bgLayer->addChild(_backGround1, -100);
-	_bgLayer->addChild(_backGround2, -101);
-	_bgLayer->addChild(_backGround2_1, -101);
-	_bgLayer->addChild(_backGround3, -102);
-	_bgLayer->addChild(_backGround3_1, -102);
-	_bgLayer->addChild(_backGround3_2, -102);
+	_bgLayer->addChild(_backGround1, -1000);
+	_bgLayer->addChild(_backGround2, -1010);
+	_bgLayer->addChild(_backGround2_1, -1010);
+	_bgLayer->addChild(_backGround3, -1020);
+	_bgLayer->addChild(_backGround3_1, -1020);
+	_bgLayer->addChild(_backGround3_2, -1020);
 	
 	// Follow 액션으로 화면이동구현
 	_bgLayer->runAction(Follow::create(_hero->getHero(), Rect(0, 0, 1024, 512)));
@@ -84,9 +82,9 @@ void MindForest_Stage1::tick(float delta)
 		_heroControl->getHeroUnitVec()[i]->BringMonsterVec(_monster);
 	}
 
-	_heroControl->HeroMove(); // 히어로 각종 조작
-	_heroControl->UnitZorder(); // 제트오더 설정
+	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
 	_heroControl->UnitVecErase();
+	_heroControl->CoolTime();
 
 }
 
