@@ -14,15 +14,18 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	{
 	case »ýÁã:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
-		_UnitSprite->setPosition(0, 360 + rand() % 30);
+		_UnitSprite->setPosition(0, 360 + rand() % 50);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
+		_AtkSpeed = 1.0f;
+		_MaxAtkSpeed = 1.0f;
 		_Hp = 100.0f;
 		_maxHP = 100.0f;
 		_Atk = 500.f;
 		_Range = 50 + rand() % 5;
 		_unitKind = »ýÁã;
 		_Dead = false;
+		_FirstAtk = false;
 		layer->addChild(_UnitSprite, (_UnitSprite->getPositionY() - _UnitSprite->getContentSize().height / 2) * -1);
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
@@ -95,15 +98,18 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case °õ:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u03_walk_0001.png");
-		_UnitSprite->setPosition(0, 360 + rand() % 30);
+		_UnitSprite->setPosition(0, 360 + rand() % 50);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
+		_AtkSpeed = 1.0f;
+		_MaxAtkSpeed = 1.0f;
 		_Hp = 200.0f;
 		_maxHP = 200.0f;
 		_Atk = 500.f;
 		_Range = 50 + rand() % 5;
 		_unitKind = °õ;
 		_Dead = false;
+		_FirstAtk = false;
 		layer->addChild(_UnitSprite, (_UnitSprite->getPositionY() - _UnitSprite->getContentSize().height / 2) * -1);
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
@@ -178,15 +184,18 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case Ä»°Å·ç:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u04_walk_0001.png");
-		_UnitSprite->setPosition(0, 360 + rand() % 30);
+		_UnitSprite->setPosition(0, 360 + rand() % 50);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
+		_AtkSpeed = 1.0f;
+		_MaxAtkSpeed = 1.0f;
 		_Hp = 300.0f;
 		_maxHP = 300.0f;
 		_Atk = 500.f;
 		_Range = 50 + rand() % 5;
 		_unitKind = Ä»°Å·ç;
 		_Dead = false;
+		_FirstAtk = false;
 		layer->addChild(_UnitSprite, (_UnitSprite->getPositionY() - _UnitSprite->getContentSize().height / 2) * -1);
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
@@ -278,7 +287,7 @@ void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
 void HeroUnit::UnitMove()
 {
 	// Æ÷Áö¼Ç ÀÌµ¿
-	if (_unitAction == UnitWalk)
+	if (_unitAction == UnitWalk && !_UnitSprite->getNumberOfRunningActionsByTag(UnitAttack1))
 	{
 		_UnitSprite->setPosition(_UnitSprite->getPosition() + Vec2(_Speed, 0));
 	}
@@ -292,6 +301,17 @@ void HeroUnit::UnitMove()
 }
 void HeroUnit::UnitCollisionCheck()
 {
+	// À¯´Ö °ø°Ý¼Óµµ Ã¼Å©
+	if (_FirstAtk == true)
+	{
+		_AtkSpeed -= 0.01f;
+
+		if (_AtkSpeed <= 0)
+		{
+			_AtkSpeed = _MaxAtkSpeed;
+		}
+	}
+
 	// À¯´Ö Ãæµ¹ Ã¼Å©
 	for (int i = 0; i < _monsterVec.size(); ++i)
 	{
@@ -305,19 +325,51 @@ void HeroUnit::UnitCollisionCheck()
 				_unitAction = UnitCollision;
 			}
 
-			if (_unitAction == UnitCollision)
+			if (!_UnitSprite->getNumberOfRunningActionsByTag(UnitAttack1))
 			{
-				AttackAct = RepeatForever::create(Sequence::create
+				if (_unitKind == »ýÁã)
+					_UnitSprite->setSpriteFrame("u01_walk_0001.png");
+
+				if (_unitKind == °õ)
+					_UnitSprite->setSpriteFrame("u03_walk_0001.png");
+
+				if (_unitKind == Ä»°Å·ç)
+					_UnitSprite->setSpriteFrame("u04_walk_0001.png");
+			}
+
+			// ÃÖÃÊ Ãæµ¹½Ã °ø°Ý
+			if (_unitAction == UnitCollision && _FirstAtk == false)
+			{
+				AttackAct = Sequence::create
 				(_animate2,
-				CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
-				DelayTime::create(1.f),
-				nullptr));
+					CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
+					/*DelayTime::create(_AtkSpeed),*/
+					nullptr);
 				AttackAct->setTag(UnitAttack1);
 
 				if (!_UnitSprite->getNumberOfRunningActionsByTag(UnitAttack1))
 				{
 					_UnitSprite->runAction(AttackAct);
 				}
+
+				_FirstAtk = true;
+			}
+
+			// ÃÖÃÊ Ãæµ¹ °ø°Ý ÀÌÈÄ °ø°Ý
+			if (_unitAction == UnitCollision && _AtkSpeed == 1.0f && _FirstAtk == true)
+			{
+				AttackAct = Sequence::create
+				(_animate2,
+				CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
+				/*DelayTime::create(_AtkSpeed),*/
+				nullptr);
+				AttackAct->setTag(UnitAttack1);
+
+				if (!_UnitSprite->getNumberOfRunningActionsByTag(UnitAttack1))
+				{
+					_UnitSprite->runAction(AttackAct);
+				}
+				
 			}
 
 			return;
@@ -335,6 +387,7 @@ void HeroUnit::UnitAttack()
 		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
 		{
 			_monsterVec[i]->Hit(_Atk);
+			
 			return;
 		}
 	}
