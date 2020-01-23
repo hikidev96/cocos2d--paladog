@@ -31,7 +31,7 @@ Uzombie.plist->
 --------------------------------------------------------------------------------------------
 Zomking.plist->
 		좀비 대장 공격 b01_att_0001.png         ~ b01_att_0030.png
-		좀비 대장 죽음 b01_dead_0001.png      ~ b01_dead_0016.png
+		좀비 대장 죽음 b01_down_0001.png      ~ b01_down_0016.png
 		좀비 대장 대기 b01_wait_0001.png       ~ b01_wait_0012.png
 		좀비 대장 무브 b01_walk_0001.png       ~ b01_walk_0012.png
 		대장 잡몹 소환 b01_summon_0001.png  ~ b01_summon_0015.png
