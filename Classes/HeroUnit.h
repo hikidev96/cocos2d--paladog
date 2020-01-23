@@ -32,8 +32,11 @@ class HeroUnit
 	float _maxHP;
 	float _Atk; // 공격력
 	float _Speed; // 스피드
+	float _AtkSpeed; // 현재 공격 스피드
+	float _MaxAtkSpeed; // 최대 공격 스피드
 	float _Range; // 사거리
 	bool _Dead; // 생사여부
+	bool _FirstAtk;
 	int _Zorder; // 제트오더
 
 	UnitKind _unitKind; // 유닛종류
@@ -53,7 +56,8 @@ class HeroUnit
 	Animation* _animation3;
 	Animate* _animate3;
 
-	RepeatForever* AttackAct;
+	//RepeatForever* AttackAct;
+	Sequence* AttackAct;
 	Sequence* DeadAct;
 
 	ProgressTimer* _HeroUnitHpBar;
