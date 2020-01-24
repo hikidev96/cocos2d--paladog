@@ -4,8 +4,11 @@
 #include "HeroUnit.h"
 
 enum Mob {
-	걷는좀비,
-	분홍미라,
+	일반미라,
+	광부좀비,
+	일반좀비,
+	핑크미라,
+	강화좀비,
 	좀비킹
 };
 
@@ -27,6 +30,9 @@ class Monster : Scene
 	Sprite* _monster;
 	Sprite* _summon;
 
+	ProgressTimer* _monsterHpBar;
+	Sprite* _monsterHpBarBack;
+
 	char* _monsterCode; //몬스터 키값
 	STATE _state; //몬스터 상태값
 
@@ -42,8 +48,11 @@ class Monster : Scene
 	int _exp; //몬스터 처치 시 획득 경험치
 	int _money; //몬스터 처치 시 획득 머니
 
+	bool _isAttack;//범위체크
+	int _attackDelay;//공격딜레이
 	bool _isRemove; //몬스터 삭제
 	float _isSummonX; //몬스터 소환좌표
+	int _unitAttack; //공격할 유닛 번호
 
 public:
 	Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit, Mob mob);
@@ -52,10 +61,13 @@ public:
 	void Hit(float atk); //매개 변수에 공격력 삽입
 	void setSummunPositionX(float x);
 	void setUnit(vector<HeroUnit*> unit) { _unit = unit; }
+	void setUnitAttack() { _unitAttack = -1; }
+	int getUnitAttack() { return _unitAttack; }
 
 	Sprite* getMonster() { return _monster; }
 	int getUnitSize() { return _unit.size(); }
 	float getHp() { return _hp; }
+	float getAtk() { return _atk; }
 	float getRange() { return _range; }
 	int getExp() { return _exp; }
 	int getMoney() { return _money; }
@@ -69,4 +81,5 @@ private:
 	void ZomkingSummon(); //좀비킹 소환술
 	void ZomkingSummonRemove(); //좀비킹 소환술 해제
 	void Dead(); //몬스터 죽음
+	void setWalk();
 };

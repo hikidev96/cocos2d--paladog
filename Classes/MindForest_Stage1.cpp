@@ -14,13 +14,13 @@ bool MindForest_Stage1::init() {
 
 	_hero = new Hero(this, _bgLayer);
 	_heroControl = new HeroControl(this, _hero, _bgLayer);
-	_dungeon = new Dungeon(this, _bgLayer, 1000.0f); //2번째 인자에 체력 넣음
+	_dungeon = new Dungeon(this, _bgLayer, 1000.0f); //3번째 인자에 체력 넣음
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
 	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), _hero->getManaRegenSpeed());
 	this->schedule(schedule_selector(MindForest_Stage1::HeroMeatRegen), _hero->getMeatRegenSpeed());
 
-	_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::좀비킹)); //몬스터 생성
+	//_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::좀비킹)); //몬스터 생성
 	
 	// 배경이미지 plist
 	_cache = SpriteFrameCache::getInstance();
@@ -100,17 +100,24 @@ void MindForest_Stage1::HeroMeatRegen(float delta)
 
 void MindForest_Stage1::MonsterTick()
 {
-	if (rand() % 150 == 0) {
-		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::분홍미라));
+	if (rand() % 100 == 0) {
+		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
 	}
 	for (int i = 0; i < _monster.size(); i++) {
+		if (_monster[i]->getUnitAttack() != -1) {
+			_heroControl->getHeroUnitVec()[0]->setHp(_heroControl->getHeroUnitVec()[0]->getHp() - _monster[i]->getAtk());
+			_monster[i]->setUnitAttack();
+		}
+		if (_dungeon->getIsCrash()) {
+			_monster[i]->Hit(999999);
+		}
 		if (_heroControl->getHeroUnitVec().size() != _monster[i]->getUnitSize()) {
 			_monster[i]->setUnit(_heroControl->getHeroUnitVec());
 		}
 		if (_monster[i]->getIsSummon()) { //좀비킹 소환술
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::걷는좀비));
+			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
 			_monster.back()->setSummunPositionX(_monster[i]->getIsSummon());
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::걷는좀비));
+			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
 			_monster.back()->setSummunPositionX(_monster[i]->getIsSummon());
 		}
 		_monster[i]->MonsterMove();
