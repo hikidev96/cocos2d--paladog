@@ -98,14 +98,15 @@ void MindForest_Stage1::HeroMeatRegen(float delta)
 
 void MindForest_Stage1::MonsterTick()
 {
-	if (rand() % 400 == 0) {
+	if (rand() % 300 == 0) {
 		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
 	}
-	if (rand() % 2000 == 0) {
+	if (rand() % 1500 == 0) {
 		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::강화좀비));
 	}
 	for (int i = 0; i < _monster.size(); i++) {
-		if (_monster[i]->getUnitAttack() != -1) {
+		if (_monster[i]->getUnitAttack() != -1 && 
+			_monster[i]->getUnitAttack() < _heroControl->getHeroUnitVec().size()) {
 			_heroControl->getHeroUnitVec()[_monster[i]->getUnitAttack()]->setHp(_heroControl->getHeroUnitVec()[_monster[i]->getUnitAttack()]->getHp() - _monster[i]->getAtk());
 			_monster[i]->setUnitAttack();
 		}
@@ -114,12 +115,6 @@ void MindForest_Stage1::MonsterTick()
 		}
 		if (_heroControl->getHeroUnitVec().size() != _monster[i]->getUnitSize()) {
 			_monster[i]->setUnit(_heroControl->getHeroUnitVec());
-		}
-		if (_monster[i]->getIsSummon()) { //좀비킹 소환술
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
-			_monster.back()->setSummunPositionX(_monster[i]->getIsSummon());
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
-			_monster.back()->setSummunPositionX(_monster[i]->getIsSummon());
 		}
 		_monster[i]->MonsterMove();
 		if (_monster[i]->getIsRemove()) {

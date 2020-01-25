@@ -1,5 +1,7 @@
 #include "AppDelegate.h"
 #include "MindForest_Stage1.h"
+#include "MindForest_Stage2.h"
+#include "MindForest_Stage3.h"
 #include "IntroScene.h"
 
 // #define USE_AUDIO_ENGINE 1
@@ -73,7 +75,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
   glview->setDesignResolutionSize(480, 320, ResolutionPolicy::EXACT_FIT);
 
   // create a scene. it's an autorelease object
-  auto scene = MindForest_Stage1::createScene();
+  auto scene = MindForest_Stage3::createScene();
 
   // run
   director->runWithScene(scene);
