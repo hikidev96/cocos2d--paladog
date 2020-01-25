@@ -11,6 +11,7 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	cache->addSpriteFramesWithFile("Player/UNIT_B~1/btn_unit-hd.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/btn_pause.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
 
 	// 리스너 등록
 	listener = EventListenerTouchOneByOne::create();
@@ -19,6 +20,7 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	listener->onTouchEnded = CC_CALLBACK_2(HeroControl::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, _scene);
 
+
 	// 히어로 조작 스프라이트
 	_leftButton = Sprite::createWithSpriteFrameName("btn_left_up.png");
 	_leftButton->setAnchorPoint({ 0,0 });
@@ -26,7 +28,7 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_rightButton = Sprite::createWithSpriteFrameName("btn_right_up.png");
 	_rightButton->setAnchorPoint({ 0,0 });
 	_rightButton->setPosition({ 125,5 });
-
+		
 	// 대쉬보드 스프라이트
 	_mainDashbord = Sprite::createWithSpriteFrameName("ui_game_dashboard.png");
 	_mainDashbord->setAnchorPoint({ 0,0 });
@@ -230,7 +232,39 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_expBarBack = Sprite::createWithSpriteFrameName("ui_exp_back.png");
 	_expBarBack->setAnchorPoint({ 0,1 });
 	_expBarBack->setPosition(4, 308);
-	_scene->addChild(_expBarBack, -10);
+	_scene->addChild(_expBarBack, -15);
+
+	// 미니맵 포인터 스프라이트
+	_miniMapPointer = Sprite::createWithSpriteFrameName("pointer_0000.png");
+	_hpInfoLayout->addChild(_miniMapPointer);
+
+	// 미니맵 포인터 애니메이션
+	_miniMapPointerAnimation = Animation::create();
+	_miniMapPointerAnimation->setDelayPerUnit(0.03f);
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0000.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0001.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0002.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0003.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0004.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0005.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0006.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0007.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0008.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0009.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0010.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0011.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0012.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0013.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0014.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0015.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0016.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0017.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0018.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0019.png"));
+	_miniMapPointerAnimation->addSpriteFrame(cache->getSpriteFrameByName("pointer_0020.png"));
+	_miniMapPointerAnimate = Animate::create(_miniMapPointerAnimation);
+	_miniMapPointerRepeat = RepeatForever::create(_miniMapPointerAnimate);
+	_miniMapPointer->runAction(_miniMapPointerRepeat);
 
 	// 생쥐소환쿨타임(타이머)
 	_mouseSummonsTimer = ProgressTimer::create(_mouseSummonsButtonDisable);
@@ -306,9 +340,12 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	{
 		_hero->setMoveWay(LeftWay); // 왼쪽을 보는상태
 
-		_hero->getHero()->setPosition(_hero->getHero()->getPosition() + Vec2(_hero->getSpeed() * -1, 0));
-		_hero->getWeapon1()->setPosition(_hero->getWeapon1()->getPosition() + Vec2(_hero->getSpeed() * -1, 0));
-
+		if (_hero->getHero()->getPositionX() -_hero->getHero()->getContentSize().width / 2 + 30 > 0)
+		{
+			_hero->getHero()->setPosition(_hero->getHero()->getPosition() + Vec2(_hero->getSpeed() * -1, 0));
+			_hero->getWeapon1()->setPosition(_hero->getWeapon1()->getPosition() + Vec2(_hero->getSpeed() * -1, 0));
+		}
+		
 		if (!_hero->getHero()->getNumberOfRunningActionsByTag(Walking))
 		{
 			_hero->getHero()->runAction(_hero->getWalkingAction());
@@ -319,8 +356,11 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	{
 		_hero->setMoveWay(RightWay); // 오른쪽을 보는상태 
 
-		_hero->getHero()->setPosition(_hero->getHero()->getPosition() + Vec2(_hero->getSpeed(), 0));
-		_hero->getWeapon1()->setPosition(_hero->getWeapon1()->getPosition() + Vec2(_hero->getSpeed(), 0));
+		if (_hero->getHero()->getPositionX() < 1024)
+		{
+			_hero->getHero()->setPosition(_hero->getHero()->getPosition() + Vec2(_hero->getSpeed(), 0));
+			_hero->getWeapon1()->setPosition(_hero->getWeapon1()->getPosition() + Vec2(_hero->getSpeed(), 0));
+		}
 
 		if (!_hero->getHero()->getNumberOfRunningActionsByTag(Walking))
 		{
@@ -443,6 +483,9 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	_Level->setString(String::createWithFormat("%d", (int)_hero->getLv())->_string.c_str()); // 레벨
 	_Gold->setString(String::createWithFormat("%d", (int)_hero->getGold())->_string.c_str()); // 골드
 
+	// 경험치 게이지를 보여준다
+	_hero->getExpGauge()->setPercentage((_hero->getExp() / _hero->getMaxExp()) * 100);
+
 	// 스킬 마나 소비량을 보여준다
 	_SkillOneManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillOneManaUse())->_string.c_str()); // 스킬 1 마나소비량
 	_SkillTwoManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillTwoManaUse())->_string.c_str()); // 스킬 2 마나소비량
@@ -455,6 +498,9 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 
 	// 스킬 이펙트 액션이 비활성화일떈 스킬이펙트를 가려준다.
 	SkillEffectVisible();
+
+	// 미니맵 포인트의 위치를 갱신
+	MiniMap();
 }
 
 void HeroControl::HeroManaRegen()
@@ -572,13 +618,22 @@ void HeroControl::SkillEffectVisible()
 		_hero->getSkillEffectBox3()->setVisible(false);
 }
 
-bool HeroControl::onTouchBegan(Touch * touch, Event * event)
+void HeroControl::MiniMap()
+{
+	// 공식 : (미니맵 가로길이 / (맵전체길이 / 히어로 x좌표)) + 길이보정
+	_miniMapPointer->setPosition(160 / (1024 / _hero->getHero()->getPositionX()) + 10, 17);
+}
+
+void HeroControl::LevelUp()
 {
 
+}
+
+bool HeroControl::onTouchBegan(Touch * touch, Event * event)
+{
 	// 좌우 이동
 	if (_leftButton->getBoundingBox().containsPoint(touch->getLocation()))
 	{
-
 		_hero->getHero()->setFlippedX(true);
 		_hero->getWeapon1()->setFlippedX(true);
 		_hero->getSkillEffectBox1()->setFlippedX(true);
@@ -594,7 +649,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 		_right = true;
 		_rightButton->setSpriteFrame("btn_right_down.png");
 	}
-
+	// 히어로 대기
 	if (_hero->getHero()->getNumberOfRunningActionsByTag(Waiting))
 	{
 		_hero->getHero()->stopActionByTag(Waiting);
@@ -621,7 +676,6 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	{
 		_skillTwoClick = true;
 
-
 		if (_hero->getMana() >= _hero->getSkillTwoManaUse())
 		{
 			_hero->setHammerKind(회복망치);
@@ -632,14 +686,12 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			_hero->getSkillEffectBox2()->runAction(_hero->HammerAttackEffectB(_hero->getHammerKind())->clone()); // 스킬B 이펙트 애니메이션 실행
 			_hero->getSkillEffectBox3()->runAction(_hero->HammerAttackEffectC(_hero->getHammerKind())->clone()); // 스킬C 이펙트 애니메이션 실행
 		}
-
 	}
 
 	// 스킬 3 클릭시 행동
 	if (_skillThreeButton->getBoundingBox().containsPoint(touch->getLocation()))
 	{
 		_skillThreeClick = true;
-
 
 		if (_hero->getMana() >= _hero->getSkillThreeManaUse())
 		{
@@ -649,7 +701,6 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			_hero->getWeapon1()->runAction(_hero->HammerAttackAction(_hero->getHammerKind())->clone()); // 공격 모션 실행
 			_hero->getSkillEffectBox1()->runAction(_hero->HammerAttackEffectA(_hero->getHammerKind())->clone()); // 스킬A 이펙트 애니메이션 실행
 		}
-
 	}
 
 	// 생쥐 소환 버튼

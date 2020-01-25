@@ -105,6 +105,7 @@ private:
 	ProgressTimer* _meatGauge; // 고기 게이지
 	ProgressTimer* _hpInfoGauge; // 히어로 체력바(중앙상단)
 	ProgressTimer* _MonsterBaseHpGauge; // 몬스터 베이스 체력바(중앙상단)
+	ProgressTimer* _expGauge; // 몬스터 베이스 체력바(중앙상단)
 
 	Movement _movement; // 현재 플레이어가 보고있는 방향
 	HAMMERKIND _HammerKind;
@@ -173,6 +174,7 @@ public:
 	ProgressTimer* getMeatGauge() { return _meatGauge; }
 	ProgressTimer* getHeroHpInfo() { return _hpInfoGauge; }
 	ProgressTimer* getMonsterBaseInfo() { return _MonsterBaseHpGauge; }
+	ProgressTimer* getExpGauge() { return _expGauge; }
 	RepeatForever* getWaitingAction() { return _heroWaitingAction; }
 	RepeatForever* getWalkingAction() { return _heroWalkingAction; }
 	Animate* getAttackAction() { return _animate3; }
