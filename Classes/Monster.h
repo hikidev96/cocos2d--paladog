@@ -45,11 +45,11 @@ class Monster : Scene
 	float _speed; //몬스터 이동속도
 	float _delay; //몬스터 공격속도
 	float _range; //몬스터 공격범위
+	int _time;
 	int _exp; //몬스터 처치 시 획득 경험치
 	int _money; //몬스터 처치 시 획득 머니
 
-	bool _isAttack;//범위체크
-	int _attackDelay;//공격딜레이
+	int _isAttackDelay;//공격딜레이 체크
 	bool _isRemove; //몬스터 삭제
 	float _isSummonX; //몬스터 소환좌표
 	int _unitAttack; //공격할 유닛 번호
@@ -81,5 +81,4 @@ private:
 	void ZomkingSummon(); //좀비킹 소환술
 	void ZomkingSummonRemove(); //좀비킹 소환술 해제
 	void Dead(); //몬스터 죽음
-	void setWalk();
 };
