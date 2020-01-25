@@ -28,6 +28,7 @@ public:
 	void Hit(float atk);
 	float getHpm() { return _hpm; }
 	float getHp() { return _hp; }
+	bool getIsCrash() { return _state == ¹«³ÊÁü ? 1 : 0; }
 
 	void test();
 };
