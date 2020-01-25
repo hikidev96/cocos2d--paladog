@@ -3,11 +3,15 @@
 
 HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 {
+	_layer = layer;
+
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Player/Unit/u_01_1.plist");
 	cache->addSpriteFramesWithFile("Player/Unit/u_02_1.plist");
 	cache->addSpriteFramesWithFile("Player/Unit/u_03_1.plist");
-	cache->addSpriteFramesWithFile("eff_blend_02.plist");
+	cache->addSpriteFramesWithFile("Player/effect/eff_blend_02.plist");
+	cache->addSpriteFramesWithFile("Player/effect/eff_blend_03.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("Player/effect/eff_blend_03.plist");
 
 	srand((unsigned)time(NULL));
 
@@ -15,6 +19,10 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	_UnitDeadAnimateBox = Sprite::createWithSpriteFrameName("eff_die_0001.png");
 	_UnitDeadAnimateBox->setVisible(false);
 	layer->addChild(_UnitDeadAnimateBox);
+
+	// 히트 애니메이션 기준 스프라이트
+	//_hitAnimationBox = Sprite::createWithSpriteFrameName("eff_hit_01_0001.png");
+	//layer->addChild(_hitAnimationBox);
 
 	switch (herokind) 
 	{
@@ -317,6 +325,26 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	_animate4 = Animate::create(_animation4);
 	_animate4->retain();
 	_animate4->setTag(UnitSoul);
+
+	// 히트 애니메이션
+	_UnitHitAnimation1 = Animation::create();
+	_UnitHitAnimation1->setDelayPerUnit(0.02f);
+	_UnitHitAnimation1->addSpriteFrame(cache->getSpriteFrameByName("eff_hit_01_0001.png"));
+	_UnitHitAnimation1->addSpriteFrame(cache->getSpriteFrameByName("eff_hit_01_0002.png"));
+	_UnitHitAnimation1->addSpriteFrame(cache->getSpriteFrameByName("eff_hit_01_0003.png"));
+	_UnitHitAnimation1->addSpriteFrame(cache->getSpriteFrameByName("eff_hit_01_0004.png"));
+	_UnitHitAnimate1 = Animate::create(_UnitHitAnimation1);
+	_UnitHitAnimate1->retain();
+
+	_UnitHitAnimation2 = Animation::create();
+	_UnitHitAnimation2->setDelayPerUnit(0.02f);
+	_UnitHitAnimation2->addSpriteFrame(cache->getSpriteFrameByName("eff_hit_02_0001.png"));
+	_UnitHitAnimation2->addSpriteFrame(cache->getSpriteFrameByName("eff_hit_02_0002.png"));
+	_UnitHitAnimation2->addSpriteFrame(cache->getSpriteFrameByName("eff_hit_02_0003.png"));
+	_UnitHitAnimation2->addSpriteFrame(cache->getSpriteFrameByName("eff_hit_02_0004.png"));
+	_UnitHitAnimate2 = Animate::create(_UnitHitAnimation2);
+	_UnitHitAnimate2->retain();
+
 }
 
 void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
@@ -429,17 +457,30 @@ void HeroUnit::UnitCollisionCheck()
 }
 void HeroUnit::UnitAttack()
 {
-	/*for (int i = 0; i < _monsterVec.size(); ++i)
+	for (int i = 0; i < _monsterVec.size(); ++i)
 	{
 		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
 		{
+			_hitAnimationBox = Sprite::createWithSpriteFrameName("eff_hit_01_0001.png");
+			_hitAnimationBox->setOpacity(255);
+			_layer->addChild(_hitAnimationBox, _monsterVec[i]->getMonster()->getZOrder());
+			_hitAnimationBox->setPosition(_monsterVec[i]->getMonster()->getPosition());
+
+			// 랜덤으로 두가지 히트 이펙트중 하나를 보여준다
+			int RanNum = rand() % 2;
+
+			if (RanNum == 1)
+				_hitAnimationBox->runAction(Sequence::create(_UnitHitAnimate1, RemoveSelf::create(true), nullptr));
+			else
+				_hitAnimationBox->runAction(Sequence::create(_UnitHitAnimate2, RemoveSelf::create(true), nullptr));
+
 			_monsterVec[i]->Hit(_Atk);
 			
 			return;
 		}
-	}*/
+	}
 
-	_Hp -= 60; // 죽는모션테스트용
+	//_Hp -= 60; // 죽는모션테스트용
 }
 
 void HeroUnit::UnitDeadCheck()
