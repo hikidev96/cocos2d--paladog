@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>btn_pause_down.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{38,1},{36,36}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>sourceSize</key>
+                <string>{36,36}</string>
+            </dict>
+            <key>btn_pause_up.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1,1},{36,36}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>sourceSize</key>
+                <string>{36,36}</string>
+            </dict>
+            <key>gold_icon.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{1,38},{18,20}}</string>
+                <key>offset</key>
+                <string>{-231,150}</string>
+                <key>sourceSize</key>
+                <string>{480,320}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>1</integer>
+            <key>size</key>
+            <string>{128,64}</string>
+            <key>textureFileName</key>
+            <string>btn_pause.png</string>
+        </dict>
+    </dict>
+</plist>

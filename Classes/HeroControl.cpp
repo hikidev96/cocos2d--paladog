@@ -10,6 +10,7 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	cache->addSpriteFramesWithFile("UI/ui_gameplay.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("Player/UNIT_B~1/btn_unit-hd.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("UI/game_info/btn_pause.plist"); // plist 추가
 
 	// 리스너 등록
 	listener = EventListenerTouchOneByOne::create();
@@ -136,33 +137,60 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_meatBackGround->setPosition(33, 105);
 	_scene->addChild(_meatBackGround, -10);
 
+	// 골드 아이콘
+	_goldIcon = Sprite::createWithSpriteFrameName("gold_icon.png");
+	_goldIcon->setPosition(335, 320);
+	_goldIcon->setAnchorPoint({ 0,1 });
+	_scene->addChild(_goldIcon, 1);
+
+	// 정지 버튼
+	_pauseButton = Sprite::createWithSpriteFrameName("btn_pause_up.png");
+	_pauseButton->setAnchorPoint({ 1,1 });
+	_pauseButton->setPosition(480, 320);
+	_scene->addChild(_pauseButton, 1);
+
 	// 현재 고기량 폰트
-	_currentMeat = Label::createWithTTF("", "fonts/arial.ttf", 14);
-	_currentMeat->setPosition(73, 113);
+	_currentMeat = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26,28,48);
+	_currentMeat->setPosition(71, 113);
 	_currentMeat->setAnchorPoint({ 1, 0 });
-	_currentMeat->enableBold();
+	_currentMeat->setScale(0.5f);
 	_scene->addChild(_currentMeat,100);
 
 	// 최대 고기량 폰트
-	_MaxMeat = Label::createWithTTF("", "fonts/arial.ttf", 14);
+	_MaxMeat = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
 	_MaxMeat->setPosition(80, 113);
 	_MaxMeat->setAnchorPoint({ 0, 0 });
-	_MaxMeat->enableBold();
+	_MaxMeat->setScale(0.5f);
 	_scene->addChild(_MaxMeat, 100);
 
 	// 현재 마나량 폰트
-	_currentMana = Label::createWithTTF("", "fonts/arial.ttf", 14);
-	_currentMana->setPosition(400, 113);
+	_currentMana = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
+	_currentMana->setPosition(397, 113);
 	_currentMana->setAnchorPoint({ 1,0 });
-	_currentMana->enableBold();
+	_currentMana->setScale(0.5f);
 	_scene->addChild(_currentMana, 100);
 
 	// 최대 마냐량 폰트
-	_MaxMana = Label::createWithTTF("", "fonts/arial.ttf", 14);
-	_MaxMana->setPosition(407, 113);
+	_MaxMana = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
+	_MaxMana->setPosition(404, 113);
 	_MaxMana->setAnchorPoint({ 0,0 });
-	_MaxMana->enableBold();
+	_MaxMana->setScale(0.5f);
 	_scene->addChild(_MaxMana, 100);
+
+	// 레벨 폰트
+	_Level = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
+	_Level->setPosition(13, 322);
+	_Level->setAnchorPoint({ 0,1 });
+	_Level->setScale(0.5f);
+	_scene->addChild(_Level, 100);
+
+	// 골드 폰트
+	_Gold = Label::createWithCharMap("UI/Number/num_yel_12x15.png", 24, 30, 48);
+	_Gold->setPosition(355, 318);
+	_Gold->setAnchorPoint({ 0,1 });
+	_Gold->setScale(0.5f);
+	_scene->addChild(_Gold, 100);
+	
 
 	// 체력 정보(상단중앙)
 	_hpInfoLayout = Sprite::createWithSpriteFrameName("ui_hp_info_layout.png");
@@ -233,6 +261,8 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_mouseSummonsButtonActivation = false; // 생쥐 소환 버튼 활성화(쿨타임)
 	_bearSummonsButtonActivation = false; // 곰 소환 버튼 활성화(쿨타임)
 	_kangarooSummonsButtonActivation = false; // 캥거루 소환 버튼 활성화(쿨타임)
+
+	_PauseClick = false; // 게임 정지 버튼 클릭
 
 	// 생쥐 쿨타임 설정
 	_mouseSummonsCollTime = 0.0f;
@@ -366,6 +396,15 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		_kangarooSummonsButton->setSpriteFrame("btn_unit_03_down.png");
 	}
 
+	if (_PauseClick)
+	{
+		_pauseButton->setSpriteFrame("btn_pause_down.png");
+	}
+	else if (!_PauseClick)
+	{
+		_pauseButton->setSpriteFrame("btn_pause_up.png");
+	}
+
 	_hero->getManaGauge()->setPercentage((_hero->getMana() / _hero->getMaxMana()) * 100); // 마나게이지를 Bar 로 보여준다
 	_hero->getMeatGauge()->setPercentage((_hero->getMeat() / _hero->getMaxMeat()) * 100); // 고기게이지를 Bar 로 보여준다
 	_hero->getHeroHpInfo()->setPercentage((_hero->getHp() / _hero->getMaxHp()) * 100); // 플레이어의 체력을 보여줌
@@ -377,6 +416,8 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	_MaxMeat->setString(String::createWithFormat("%d", (int)_hero->getMaxMeat())->_string.c_str());
 	_currentMana->setString(String::createWithFormat("%d", (int)_hero->getMana())->_string.c_str());
 	_MaxMana->setString(String::createWithFormat("%d", (int)_hero->getMaxMana())->_string.c_str());
+	_Level->setString(String::createWithFormat("%d", (int)_hero->getLv())->_string.c_str()); // 레벨
+	_Gold->setString(String::createWithFormat("%d", (int)_hero->getGold())->_string.c_str()); // 골드
 
 	// 유닛 소환 쿨타임을 보여준다
 	_mouseSummonsTimer->setPercentage((_mouseSummonsCollTime / _mouseSummonsMaxCollTime) * 100);
@@ -598,6 +639,19 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 
 	}
 
+	// 정지 버튼
+	if (_pauseButton->getBoundingBox().containsPoint(touch->getLocation()))
+	{
+		_PauseClick = true;
+
+		auto layerTest = LayerColor::create(Color4B::BLACK, 480,320);
+		layerTest->setPosition(0, 0);
+		layerTest->setOpacity(150);
+		_scene->addChild(layerTest, 5000);
+
+		Director::getInstance()->pause();
+	}
+
 	return true;
 }
 
@@ -615,6 +669,7 @@ void HeroControl::onTouchEnded(Touch * touch, Event * event)
 	_mouseSummonsClick = false;
 	_bearSummonsClick = false;
 	_kangarooSummonsClick = false;
+	_PauseClick = false;
 
 	_leftButton->setSpriteFrame("btn_left_up.png");
 	_rightButton->setSpriteFrame("btn_right_up.png");
