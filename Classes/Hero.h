@@ -14,30 +14,100 @@ enum Movement
 	LeftWay,
 };
 
+enum HAMMERINFO
+{
+	HammerWaiting = 20,
+	HammerWalking,
+	HammerAttack,
+	HammerSkillEffect1,
+	HammerSkillEffect2,
+	HammerSkillEffect3,
+};
+
+enum HAMMERKIND
+{
+	고무망치 = 1582,
+	회복망치,
+	식량망치,
+};
+
 class Hero
 {
 private:
 	SpriteFrameCache* cache;
 
-	Animation* _animation1; // 대기 Action
-	Animate* _animate1; // 대기 Action
+	Animation* _animation1; // 히어로 대기 액션
+	Animate* _animate1; // 히어로 대기 액션
+	RepeatForever* _heroWaitingAction; // 히어로 대기 액션
 
-	Animation* _animation2; // Walk Action
-	Animate* _animate2;	// Walk Action
-	RepeatForever* _heroWaitingAction; // Walk Action
-	RepeatForever* _heroWalkingAction; // Walk Action
+	Animation* _animation2; // 히어로 걷기 액션
+	Animate* _animate2;	// 히어로 걷기 액션
+	RepeatForever* _heroWalkingAction; // 히어로 걷기 액션
 
-	Animation* _animation3; // 공격 Action
-	Animate* _animate3; // 공격 Action
+	Animation* _animation3; // 히어로 공격 액션
+	Animate* _animate3; // 히어로 공격 액션
+
+	Animation* _animation4; // 고무망치 대기 액션
+	Animate* _animate4; // 고무망치 대기 액션
+	RepeatForever* _hammerWaitingAction1; // 고무망치 대기 액션
+
+	Animation* _animation5; // 고무망치 걷기 액션
+	Animate* _animate5; // 고무망치 걷기 액션
+	RepeatForever* _hammerWalkingAction1; // 고무망치 걷기 액션
+
+	Animation* _animation6; // 고무망치 공격 액션
+	Animate* _animate6; // 고무망치 공격 액션
+
+	Animation* _hammerSkillEffectAnimation_A1; // 고무망치 스킬 이펙트A
+	Animate* _hammerSkillEffectAnimate_A1; // 고무망치 스킬 이펙트A
+
+	Animation* _animation7; // 회복망치 대기 액션
+	Animate* _animate7; // 회복망치 대기 액션
+	RepeatForever* _hammerWaitingAction2; // 회복망치 대기 액션
+
+	Animation* _animation8; // 회복망치 걷기 액션
+	Animate* _animate8; // 회복망치 걷기 액션
+	RepeatForever* _hammerWalkingAction2; // 회복망치 걷기 액션
+
+	Animation* _animation9; // 회복망치 공격 액션
+	Animate* _animate9; // 회복망치 공격 액션
+
+	Animation* _hammerSkillEffectAnimation_A2; // 회복망치 스킬 이펙트A
+	Animate* _hammerSkillEffectAnimate_A2; // 회복망치 스킬 이펙트A
+
+	Animation* _hammerSkillEffectAnimation_B2; // 회복망치 스킬 이펙트B
+	Animate* _hammerSkillEffectAnimate_B2; // 회복망치 스킬 이펙트B
+
+	Animation* _hammerSkillEffectAnimation_C2; // 회복망치 스킬 이펙트C
+	Animate* _hammerSkillEffectAnimate_C2; // 회복망치 스킬 이펙트C
+
+	Animation* _animation10; // 식량망치 대기 액션
+	Animate* _animate10; // 식량망치 대기 액션
+	RepeatForever* _hammerWaitingAction3; // 식량망치 대기 액션
+
+	Animation* _animation11; // 식량망치 걷기 액션
+	Animate* _animate11; // 식량망치 걷기 액션
+	RepeatForever* _hammerWalkingAction3; // 식량망치 걷기 액션
+
+	Animation* _animation12; // 식량망치 공격 액션
+	Animate* _animate12; // 식량망치 공격 액션
+
+	Animation* _hammerSkillEffectAnimation_A3; // 식량망치 스킬 이펙트A
+	Animate* _hammerSkillEffectAnimate_A3; // 식량망치 스킬 이펙트A
 
 	Sprite* _hero; // 히어로 스프라이트
+	Sprite* _heroWeapon1; // 고무망치
+	Sprite* _skillEffectBox1; // 스킬A 이펙트를 보여줄 박스
+	Sprite* _skillEffectBox2; // 스킬B 이펙트를 보여줄 박스
+	Sprite* _skillEffectBox3; // 스킬C 이펙트를 보여줄 박스
+
 	ProgressTimer* _manaGauge; // 마나 게이지
 	ProgressTimer* _meatGauge; // 고기 게이지
-
 	ProgressTimer* _hpInfoGauge; // 히어로 체력바(중앙상단)
 	ProgressTimer* _MonsterBaseHpGauge; // 몬스터 베이스 체력바(중앙상단)
 
 	Movement _movement; // 현재 플레이어가 보고있는 방향
+	HAMMERKIND _HammerKind;
 
 	float _speed; // 스피드
 	float _lv; // 레벨
@@ -63,6 +133,10 @@ public:
 	Movement getMoveWay() { return _movement; }
 	void setMoveWay(Movement movement) { _movement = movement; }
 	Sprite* getHero() { return _hero; }
+	Sprite* getWeapon1() { return _heroWeapon1; }
+	Sprite* getSkillEffectBox1() { return _skillEffectBox1; }
+	Sprite* getSkillEffectBox2() { return _skillEffectBox2; }
+	Sprite* getSkillEffectBox3() { return _skillEffectBox3; }
 	float getSpeed() { return _speed; }
 	void setSpeed(float speed) { _speed = speed; }
 	float getHp() { return _hp; }
@@ -102,4 +176,14 @@ public:
 	RepeatForever* getWaitingAction() { return _heroWaitingAction; }
 	RepeatForever* getWalkingAction() { return _heroWalkingAction; }
 	Animate* getAttackAction() { return _animate3; }
+	
+	HAMMERKIND getHammerKind() { return _HammerKind; }
+	void setHammerKind(HAMMERKIND hammerkind) { _HammerKind = hammerkind; }
+
+	RepeatForever* HammerWaitingAction(HAMMERKIND hammerkind);
+	RepeatForever* HammerWalkingAction(HAMMERKIND hammerkind);
+	Animate* HammerAttackAction(HAMMERKIND hammerkind);
+	Animate* HammerAttackEffectA(HAMMERKIND hammerkind);
+	Animate* HammerAttackEffectB(HAMMERKIND hammerkind);
+	Animate* HammerAttackEffectC(HAMMERKIND hammerkind);
 };

@@ -10,6 +10,7 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	cache->addSpriteFramesWithFile("UI/ui_gameplay.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("Player/UNIT_B~1/btn_unit-hd.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("UI/game_info/btn_pause.plist"); // plist 추가
 
 	// 리스너 등록
 	listener = EventListenerTouchOneByOne::create();
@@ -136,33 +137,80 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_meatBackGround->setPosition(33, 105);
 	_scene->addChild(_meatBackGround, -10);
 
+	// 골드 아이콘
+	_goldIcon = Sprite::createWithSpriteFrameName("gold_icon.png");
+	_goldIcon->setPosition(335, 320);
+	_goldIcon->setAnchorPoint({ 0,1 });
+	_scene->addChild(_goldIcon, 1);
+
+	// 정지 버튼
+	_pauseButton = Sprite::createWithSpriteFrameName("btn_pause_up.png");
+	_pauseButton->setAnchorPoint({ 1,1 });
+	_pauseButton->setPosition(480, 320);
+	_scene->addChild(_pauseButton, 1);
+
 	// 현재 고기량 폰트
-	_currentMeat = Label::createWithTTF("", "fonts/arial.ttf", 14);
-	_currentMeat->setPosition(73, 113);
+	_currentMeat = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26,28,48);
+	_currentMeat->setPosition(71, 113);
 	_currentMeat->setAnchorPoint({ 1, 0 });
-	_currentMeat->enableBold();
+	_currentMeat->setScale(0.5f);
 	_scene->addChild(_currentMeat,100);
 
 	// 최대 고기량 폰트
-	_MaxMeat = Label::createWithTTF("", "fonts/arial.ttf", 14);
+	_MaxMeat = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
 	_MaxMeat->setPosition(80, 113);
 	_MaxMeat->setAnchorPoint({ 0, 0 });
-	_MaxMeat->enableBold();
+	_MaxMeat->setScale(0.5f);
 	_scene->addChild(_MaxMeat, 100);
 
 	// 현재 마나량 폰트
-	_currentMana = Label::createWithTTF("", "fonts/arial.ttf", 14);
-	_currentMana->setPosition(400, 113);
+	_currentMana = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
+	_currentMana->setPosition(397, 113);
 	_currentMana->setAnchorPoint({ 1,0 });
-	_currentMana->enableBold();
+	_currentMana->setScale(0.5f);
 	_scene->addChild(_currentMana, 100);
 
 	// 최대 마냐량 폰트
-	_MaxMana = Label::createWithTTF("", "fonts/arial.ttf", 14);
-	_MaxMana->setPosition(407, 113);
+	_MaxMana = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
+	_MaxMana->setPosition(404, 113);
 	_MaxMana->setAnchorPoint({ 0,0 });
-	_MaxMana->enableBold();
+	_MaxMana->setScale(0.5f);
 	_scene->addChild(_MaxMana, 100);
+
+	// 레벨 폰트
+	_Level = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
+	_Level->setPosition(13, 322);
+	_Level->setAnchorPoint({ 0,1 });
+	_Level->setScale(0.5f);
+	_scene->addChild(_Level, 100);
+
+	// 골드 폰트
+	_Gold = Label::createWithCharMap("UI/Number/num_yel_12x15.png", 24, 30, 48);
+	_Gold->setPosition(355, 318);
+	_Gold->setAnchorPoint({ 0,1 });
+	_Gold->setScale(0.5f);
+	_scene->addChild(_Gold, 100);
+
+	// 스킬 1 마나 사용량 폰트
+	_SkillOneManaUse = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
+	_SkillOneManaUse->setPosition(255, 25);
+	_SkillOneManaUse->setAnchorPoint({ 0,1 });
+	_SkillOneManaUse->setScale(0.5f);
+	_scene->addChild(_SkillOneManaUse, 100);
+
+	// 스킬 2 마나 사용량 폰트
+	_SkillTwoManaUse = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
+	_SkillTwoManaUse->setPosition(335, 25);
+	_SkillTwoManaUse->setAnchorPoint({ 0,1 });
+	_SkillTwoManaUse->setScale(0.5f);
+	_scene->addChild(_SkillTwoManaUse, 100);
+
+	// 스킬 3 마나 사용량 폰트
+	_SkillThreeManaUse = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26, 28, 48);
+	_SkillThreeManaUse->setPosition(405, 25);
+	_SkillThreeManaUse->setAnchorPoint({ 0,1 });
+	_SkillThreeManaUse->setScale(0.5f);
+	_scene->addChild(_SkillThreeManaUse, 100);
 
 	// 체력 정보(상단중앙)
 	_hpInfoLayout = Sprite::createWithSpriteFrameName("ui_hp_info_layout.png");
@@ -174,11 +222,11 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_hpInfoBack->setPosition(240, 315);
 	_scene->addChild(_hpInfoBack, -10);
 
+	// 경험치 바
 	_expBar = Sprite::createWithSpriteFrameName("ui_exp.png");
 	_expBar->setAnchorPoint({ 0,1 });
 	_expBar->setPosition(0, 320);
 	_scene->addChild(_expBar);
-
 	_expBarBack = Sprite::createWithSpriteFrameName("ui_exp_back.png");
 	_expBarBack->setAnchorPoint({ 0,1 });
 	_expBarBack->setPosition(4, 308);
@@ -234,6 +282,8 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	_bearSummonsButtonActivation = false; // 곰 소환 버튼 활성화(쿨타임)
 	_kangarooSummonsButtonActivation = false; // 캥거루 소환 버튼 활성화(쿨타임)
 
+	_PauseClick = false; // 게임 정지 버튼 클릭
+
 	// 생쥐 쿨타임 설정
 	_mouseSummonsCollTime = 0.0f;
 	_mouseSummonsMaxCollTime = 2.0f;
@@ -257,10 +307,12 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		_hero->setMoveWay(LeftWay); // 왼쪽을 보는상태
 
 		_hero->getHero()->setPosition(_hero->getHero()->getPosition() + Vec2(_hero->getSpeed() * -1, 0));
+		_hero->getWeapon1()->setPosition(_hero->getWeapon1()->getPosition() + Vec2(_hero->getSpeed() * -1, 0));
 
 		if (!_hero->getHero()->getNumberOfRunningActionsByTag(Walking))
 		{
 			_hero->getHero()->runAction(_hero->getWalkingAction());
+			_hero->getWeapon1()->runAction(_hero->HammerWalkingAction(_hero->getHammerKind()));
 		}
 	}
 	if (_right)
@@ -268,18 +320,20 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		_hero->setMoveWay(RightWay); // 오른쪽을 보는상태 
 
 		_hero->getHero()->setPosition(_hero->getHero()->getPosition() + Vec2(_hero->getSpeed(), 0));
+		_hero->getWeapon1()->setPosition(_hero->getWeapon1()->getPosition() + Vec2(_hero->getSpeed(), 0));
 
 		if (!_hero->getHero()->getNumberOfRunningActionsByTag(Walking))
 		{
 			_hero->getHero()->runAction(_hero->getWalkingAction());
+			_hero->getWeapon1()->runAction(_hero->HammerWalkingAction(_hero->getHammerKind()));
 		}
 	}
-	if (!_hero->getHero()->getNumberOfRunningActions())
+	if (!_hero->getHero()->getNumberOfRunningActions()) // 히어로 대기
 	{
 		if (!_hero->getHero()->getNumberOfRunningActionsByTag(Waiting))
 		{
 			_hero->getHero()->runAction(_hero->getWaitingAction());
-
+			_hero->getWeapon1()->runAction(_hero->HammerWaitingAction(_hero->getHammerKind()));
 		}
 	}
 
@@ -339,7 +393,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	}
 
 	// 곰 소환 버튼
-	if (_hero->getMeat() < 30)
+	if (_hero->getMeat() < 30 || _bearSummonsButtonActivation == false)
 	{
 		_bearSummonsButton->setSpriteFrame("btn_unit_02_disable.png");
 	}
@@ -353,7 +407,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	}
 
 	// 캥거루 소환버튼
-	if (_hero->getMeat() < 40)
+	if (_hero->getMeat() < 40 || _kangarooSummonsButtonActivation == false)
 	{
 		_kangarooSummonsButton->setSpriteFrame("btn_unit_03_disable.png");
 	}
@@ -364,6 +418,15 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	else if (_kangarooSummonsClick)
 	{
 		_kangarooSummonsButton->setSpriteFrame("btn_unit_03_down.png");
+	}
+
+	if (_PauseClick)
+	{
+		_pauseButton->setSpriteFrame("btn_pause_down.png");
+	}
+	else if (!_PauseClick)
+	{
+		_pauseButton->setSpriteFrame("btn_pause_up.png");
 	}
 
 	_hero->getManaGauge()->setPercentage((_hero->getMana() / _hero->getMaxMana()) * 100); // 마나게이지를 Bar 로 보여준다
@@ -377,12 +440,21 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	_MaxMeat->setString(String::createWithFormat("%d", (int)_hero->getMaxMeat())->_string.c_str());
 	_currentMana->setString(String::createWithFormat("%d", (int)_hero->getMana())->_string.c_str());
 	_MaxMana->setString(String::createWithFormat("%d", (int)_hero->getMaxMana())->_string.c_str());
+	_Level->setString(String::createWithFormat("%d", (int)_hero->getLv())->_string.c_str()); // 레벨
+	_Gold->setString(String::createWithFormat("%d", (int)_hero->getGold())->_string.c_str()); // 골드
+
+	// 스킬 마나 소비량을 보여준다
+	_SkillOneManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillOneManaUse())->_string.c_str()); // 스킬 1 마나소비량
+	_SkillTwoManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillTwoManaUse())->_string.c_str()); // 스킬 2 마나소비량
+	_SkillThreeManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillThreeManaUse())->_string.c_str()); // 스킬 3 마나소비량
 
 	// 유닛 소환 쿨타임을 보여준다
 	_mouseSummonsTimer->setPercentage((_mouseSummonsCollTime / _mouseSummonsMaxCollTime) * 100);
 	_bearSummonsTimer->setPercentage((_bearSummonsCollTime / _bearSummonsMaxCollTime) * 100);
 	_kangarooSummonsTimer->setPercentage((_kangarooSummonsCollTime / _kangarooSummonsMaxCollTime) * 100);
 
+	// 스킬 이펙트 액션이 비활성화일떈 스킬이펙트를 가려준다.
+	SkillEffectVisible();
 }
 
 void HeroControl::HeroManaRegen()
@@ -488,6 +560,18 @@ void HeroControl::CoolTime()
 	}
 }
 
+void HeroControl::SkillEffectVisible()
+{
+	if (!_hero->getSkillEffectBox1()->getNumberOfRunningActions())
+		_hero->getSkillEffectBox1()->setVisible(false);
+
+	if (!_hero->getSkillEffectBox2()->getNumberOfRunningActions())
+		_hero->getSkillEffectBox2()->setVisible(false);
+
+	if (!_hero->getSkillEffectBox3()->getNumberOfRunningActions())
+		_hero->getSkillEffectBox3()->setVisible(false);
+}
+
 bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 {
 
@@ -496,6 +580,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	{
 
 		_hero->getHero()->setFlippedX(true);
+		_hero->getWeapon1()->setFlippedX(true);
+		_hero->getSkillEffectBox1()->setFlippedX(true);
 		_left = true;
 		_leftButton->setSpriteFrame("btn_left_down.png");
 
@@ -503,6 +589,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	else if (_rightButton->getBoundingBox().containsPoint(touch->getLocation()))
 	{
 		_hero->getHero()->setFlippedX(false);
+		_hero->getWeapon1()->setFlippedX(false);
+		_hero->getSkillEffectBox1()->setFlippedX(false);
 		_right = true;
 		_rightButton->setSpriteFrame("btn_right_down.png");
 	}
@@ -510,6 +598,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	if (_hero->getHero()->getNumberOfRunningActionsByTag(Waiting))
 	{
 		_hero->getHero()->stopActionByTag(Waiting);
+		_hero->getWeapon1()->stopActionByTag(HammerWaiting);
 	}
 
 	// 스킬 1 클릭시 행동
@@ -519,8 +608,11 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 
 		if (_hero->getMana() >= _hero->getSkillOneManaUse())
 		{
+			_hero->setHammerKind(고무망치);
 			_hero->setMana(_hero->getMana() - _hero->getSkillOneManaUse());
 			_hero->getHero()->runAction(_hero->getAttackAction()->clone()); // 공격 모션 실행
+			_hero->getWeapon1()->runAction(_hero->HammerAttackAction(_hero->getHammerKind())->clone()); // 공격 모션 실행
+			_hero->getSkillEffectBox1()->runAction(_hero->HammerAttackEffectA(_hero->getHammerKind())->clone()); // 스킬A 이펙트 애니메이션 실행
 		}
 	}
 
@@ -532,8 +624,13 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 
 		if (_hero->getMana() >= _hero->getSkillTwoManaUse())
 		{
+			_hero->setHammerKind(회복망치);
 			_hero->setMana(_hero->getMana() - _hero->getSkillTwoManaUse());
 			_hero->getHero()->runAction(_hero->getAttackAction()->clone()); // 공격 모션 실행
+			_hero->getWeapon1()->runAction(_hero->HammerAttackAction(_hero->getHammerKind())->clone()); // 공격 모션 실행
+			_hero->getSkillEffectBox1()->runAction(_hero->HammerAttackEffectA(_hero->getHammerKind())->clone()); // 스킬A 이펙트 애니메이션 실행
+			_hero->getSkillEffectBox2()->runAction(_hero->HammerAttackEffectB(_hero->getHammerKind())->clone()); // 스킬B 이펙트 애니메이션 실행
+			_hero->getSkillEffectBox3()->runAction(_hero->HammerAttackEffectC(_hero->getHammerKind())->clone()); // 스킬C 이펙트 애니메이션 실행
 		}
 
 	}
@@ -546,8 +643,11 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 
 		if (_hero->getMana() >= _hero->getSkillThreeManaUse())
 		{
+			_hero->setHammerKind(식량망치);
 			_hero->setMana(_hero->getMana() - _hero->getSkillThreeManaUse());
 			_hero->getHero()->runAction(_hero->getAttackAction()->clone()); // 공격 모션 실행
+			_hero->getWeapon1()->runAction(_hero->HammerAttackAction(_hero->getHammerKind())->clone()); // 공격 모션 실행
+			_hero->getSkillEffectBox1()->runAction(_hero->HammerAttackEffectA(_hero->getHammerKind())->clone()); // 스킬A 이펙트 애니메이션 실행
 		}
 
 	}
@@ -595,7 +695,19 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 
 			_hero->setMeat(_hero->getMeat() - 40);
 		}
+	}
 
+	// 정지 버튼
+	if (_pauseButton->getBoundingBox().containsPoint(touch->getLocation()))
+	{
+		_PauseClick = true;
+
+		auto layerTest = LayerColor::create(Color4B::BLACK, 480,320);
+		layerTest->setPosition(0, 0);
+		layerTest->setOpacity(150);
+		_scene->addChild(layerTest, 5000);
+
+		Director::getInstance()->pause();
 	}
 
 	return true;
@@ -615,6 +727,7 @@ void HeroControl::onTouchEnded(Touch * touch, Event * event)
 	_mouseSummonsClick = false;
 	_bearSummonsClick = false;
 	_kangarooSummonsClick = false;
+	_PauseClick = false;
 
 	_leftButton->setSpriteFrame("btn_left_up.png");
 	_rightButton->setSpriteFrame("btn_right_up.png");
@@ -622,6 +735,7 @@ void HeroControl::onTouchEnded(Touch * touch, Event * event)
 	if (_hero->getHero()->getNumberOfRunningActionsByTag(Walking))
 	{
 		_hero->getHero()->stopActionByTag(Walking);
+		_hero->getWeapon1()->stopActionByTag(HammerWalking);
 	}
 
 }
