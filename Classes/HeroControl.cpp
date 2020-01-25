@@ -20,6 +20,7 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
 	listener->onTouchEnded = CC_CALLBACK_2(HeroControl::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, _scene);
 
+
 	// 히어로 조작 스프라이트
 	_leftButton = Sprite::createWithSpriteFrameName("btn_left_up.png");
 	_leftButton->setAnchorPoint({ 0,0 });

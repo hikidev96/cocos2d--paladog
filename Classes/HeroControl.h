@@ -47,7 +47,7 @@ class HeroControl : Scene
 	Sprite* _expBarBack; // 경험치바배경(검정)
 	Sprite* _goldIcon; // 골드 아이콘
 	Sprite* _pauseButton; // 정지버튼
-	Sprite* _miniMapPointer;
+	Sprite* _miniMapPointer; // 미니맵 포인터
 
 	Animation* _miniMapPointerAnimation;
 	Animate* _miniMapPointerAnimate;
