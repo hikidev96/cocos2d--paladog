@@ -19,10 +19,10 @@ Dungeon::Dungeon(Scene* scene, Layer* layer, float hp)
 	_sprite2->setPosition(800, 352);
 	_layer->addChild(_sprite2, 90);
 
-	//_layer->runAction(RepeatForever::create(Sequence::create( //test
-	//	CallFunc::create(CC_CALLBACK_0(Dungeon::test, this)),
-	//	DelayTime::create(2),
-	//	nullptr)));
+	_layer->runAction(RepeatForever::create(Sequence::create( //test
+		CallFunc::create(CC_CALLBACK_0(Dungeon::test, this)),
+		DelayTime::create(2),
+		nullptr)));
 }
 
 void Dungeon::Hit(float atk)
