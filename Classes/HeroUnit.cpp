@@ -7,14 +7,20 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	cache->addSpriteFramesWithFile("Player/Unit/u_01_1.plist");
 	cache->addSpriteFramesWithFile("Player/Unit/u_02_1.plist");
 	cache->addSpriteFramesWithFile("Player/Unit/u_03_1.plist");
+	cache->addSpriteFramesWithFile("eff_blend_02.plist");
 
 	srand((unsigned)time(NULL));
+
+	// 죽을때 영혼나오는 애니메이션 기준 스프라이트
+	_UnitDeadAnimateBox = Sprite::createWithSpriteFrameName("eff_die_0001.png");
+	_UnitDeadAnimateBox->setVisible(false);
+	layer->addChild(_UnitDeadAnimateBox);
 
 	switch (herokind) 
 	{
 	case 생쥐:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
-		_UnitSprite->setPosition(0, 400 + rand() % 50);
+		_UnitSprite->setPosition(0, 420 + rand() % 40);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_AtkSpeed = 1.0f;
@@ -30,14 +36,14 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
-		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height - 110 });
 		_HeroUnitHpBar->setMidpoint({ 0, 0 });
 		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
-		_UnitSprite->addChild(_HeroUnitHpBar);
+		_UnitSprite->addChild(_HeroUnitHpBar, _UnitSprite->getZOrder());
 
 		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
-		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height + 3 });
-		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2, _UnitSprite->getContentSize().height -110 });
+		_UnitSprite->addChild(_HeroUnitHpBarBack, _UnitSprite->getZOrder() - 1);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);
@@ -98,7 +104,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case 곰:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u03_walk_0001.png");
-		_UnitSprite->setPosition(0, 400 + rand() % 50);
+		_UnitSprite->setPosition(0, 420 + rand() % 40);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_AtkSpeed = 1.0f;
@@ -114,14 +120,14 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
-		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2 - 7, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2 - 7, _UnitSprite->getContentSize().height -90 });
 		_HeroUnitHpBar->setMidpoint({ 0, 0 });
 		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
-		_UnitSprite->addChild(_HeroUnitHpBar);
+		_UnitSprite->addChild(_HeroUnitHpBar, _UnitSprite->getZOrder());
 
 		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
-		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2 - 7, _UnitSprite->getContentSize().height + 3 });
-		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2 - 7, _UnitSprite->getContentSize().height -90 });
+		_UnitSprite->addChild(_HeroUnitHpBarBack, _UnitSprite->getZOrder() -1);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);
@@ -184,7 +190,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case 캥거루:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u04_walk_0001.png");
-		_UnitSprite->setPosition(0, 400 + rand() % 50);
+		_UnitSprite->setPosition(0, 420 + rand() % 40);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_AtkSpeed = 1.0f;
@@ -200,14 +206,14 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 
 		_HeroUnitHpBar = ProgressTimer::create(Sprite::create("UI/HeroUnitHpBar.png"));
 		_HeroUnitHpBar->setType(ProgressTimer::Type::BAR);
-		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2 + 7, _UnitSprite->getContentSize().height + 3 });
+		_HeroUnitHpBar->setPosition({ _UnitSprite->getContentSize().width / 2 + 7, _UnitSprite->getContentSize().height - 90 });
 		_HeroUnitHpBar->setMidpoint({ 0, 0 });
 		_HeroUnitHpBar->setBarChangeRate({ 1,0 });
-		_UnitSprite->addChild(_HeroUnitHpBar);
+		_UnitSprite->addChild(_HeroUnitHpBar, _UnitSprite->getZOrder());
 
 		_HeroUnitHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
-		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2 + 7, _UnitSprite->getContentSize().height + 3 });
-		_UnitSprite->addChild(_HeroUnitHpBarBack, -10);
+		_HeroUnitHpBarBack->setPosition({ _UnitSprite->getContentSize().width / 2 + 7, _UnitSprite->getContentSize().height - 90 });
+		_UnitSprite->addChild(_HeroUnitHpBarBack, _UnitSprite->getZOrder() -1);
 
 		_animation1 = Animation::create();
 		_animation1->setDelayPerUnit(0.03f);
@@ -270,6 +276,47 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	default:
 		break;
 	}
+
+	// 영혼 나오는 애니메이션
+	_animation4 = Animation::create();
+	_animation4->setDelayPerUnit(0.03f);
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0001.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0002.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0003.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0004.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0005.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0006.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0007.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0008.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0009.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0010.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0011.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0012.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0013.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0014.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0015.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0016.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0017.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0018.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0019.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0020.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0021.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0022.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0023.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0024.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0025.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0026.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0027.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0028.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0029.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0030.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0031.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0032.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0033.png"));
+	_animation4->addSpriteFrame(cache->getSpriteFrameByName("eff_die_0034.png"));
+	_animate4 = Animate::create(_animation4);
+	_animate4->retain();
+	_animate4->setTag(UnitSoul);
 }
 
 void HeroUnit::BringMonsterVec(vector<Monster*> monstervec)
@@ -382,7 +429,7 @@ void HeroUnit::UnitCollisionCheck()
 }
 void HeroUnit::UnitAttack()
 {
-	for (int i = 0; i < _monsterVec.size(); ++i)
+	/*for (int i = 0; i < _monsterVec.size(); ++i)
 	{
 		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
 		{
@@ -390,9 +437,9 @@ void HeroUnit::UnitAttack()
 			
 			return;
 		}
-	}
+	}*/
 
-	//_Hp -= 60; // 죽는모션테스트용
+	_Hp -= 60; // 죽는모션테스트용
 }
 
 void HeroUnit::UnitDeadCheck()
@@ -401,8 +448,10 @@ void HeroUnit::UnitDeadCheck()
 	{
 		_unitAction = UnitDead;
 		_UnitSprite->stopAllActions();
-		DeadAct = Sequence::create(_animate3,FadeOut::create(1.f), RemoveSelf::create(true), nullptr);
+		_UnitSprite->runAction(MoveBy::create(0.2, Vec2(-50,0)));
+		DeadAct = Sequence::create(_animate3, CallFunc::create(CC_CALLBACK_0(HeroUnit::ShowUnitDeadSoul, this)),DelayTime::create(1.f), FadeOut::create(1.f),RemoveSelf::create(true), nullptr);
 		_UnitSprite->runAction(DeadAct);
+	
 		_Dead = true;
 	}
 }
@@ -419,6 +468,14 @@ void HeroUnit::ShowUnitHpBar()
 		_HeroUnitHpBar->setVisible(true);
 		_HeroUnitHpBarBack->setVisible(true);
 	}
+
 	_HeroUnitHpBar->setPercentage((_Hp / _maxHP) * 100);
+}
+
+void HeroUnit::ShowUnitDeadSoul()
+{
+	_UnitDeadAnimateBox->setPosition(_UnitSprite->getPosition());
+	_UnitDeadAnimateBox->setVisible(true);
+	_UnitDeadAnimateBox->runAction(Sequence::create(_animate4, RemoveSelf::create(true), nullptr));
 }
 

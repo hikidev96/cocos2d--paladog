@@ -11,7 +11,7 @@ Hero::Hero(Scene * scene, Layer* layer)
 
 	// 영웅 만들기
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
-	_hero->setPosition(100, 440);
+	_hero->setPosition(100, 430);
 	layer->addChild(_hero, (_hero->getPositionY() - _hero->getContentSize().height / 2) * -1);
 
 	// 영웅 무기 만들기
@@ -43,6 +43,7 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_meatGauge->setBarChangeRate({ 1,0 });
 	scene->addChild(_meatGauge, -1);
 
+	// 체력 게이지(중앙상단)
 	_hpInfoGauge = ProgressTimer::create(Sprite::create("UI/HeroHpBar.png"));
 	_hpInfoGauge->setType(ProgressTimer::Type::BAR);
 	_hpInfoGauge->setPosition(201, 310);
@@ -50,12 +51,21 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_hpInfoGauge->setBarChangeRate({ 1,0 });
 	scene->addChild(_hpInfoGauge, -1);
 
+	// 몬스터 베이스 체력 게이지(중앙상단)
 	_MonsterBaseHpGauge = ProgressTimer::create(Sprite::create("UI/MonsterBaseHpBar.png"));
 	_MonsterBaseHpGauge->setType(ProgressTimer::Type::BAR);
 	_MonsterBaseHpGauge->setPosition(280, 310);
 	_MonsterBaseHpGauge->setMidpoint({ 0,0 });
 	_MonsterBaseHpGauge->setBarChangeRate({ 1,0 });
 	scene->addChild(_MonsterBaseHpGauge, -1);
+
+	// 경험치 게이지
+	_expGauge = ProgressTimer::create(Sprite::create("UI/expbar.png"));
+	_expGauge->setType(ProgressTimer::Type::BAR);
+	_expGauge->setPosition(13, 303);
+	_expGauge->setMidpoint({ 0,0 });
+	_expGauge->setBarChangeRate({ 0,1 });
+	scene->addChild(_expGauge, -11);
 
 	_movement = RightWay; // 기본 방향설정
 
