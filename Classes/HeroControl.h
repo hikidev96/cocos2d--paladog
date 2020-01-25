@@ -92,7 +92,7 @@ class HeroControl : Scene
 	bool _PauseClick;
 
 public:
-	HeroControl(Scene* scene, Hero* hero, Layer* layer);
+	HeroControl(Scene* scene, Hero* hero, Layer* layer, Dungeon* dungeon);
 	void HeroMove(Dungeon* dungeon);
 	void HeroManaRegen();
 	void HeroMeatRegen();

@@ -13,8 +13,8 @@ bool MindForest_Stage1::init() {
 	this->addChild(_bgLayer, -100);
 
 	_hero = new Hero(this, _bgLayer);
-	_heroControl = new HeroControl(this, _hero, _bgLayer);
 	_dungeon = new Dungeon(this, _bgLayer, 1000.0f); //3번째 인자에 체력 넣음
+	_heroControl = new HeroControl(this, _hero, _bgLayer, _dungeon);
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
 	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), _hero->getManaRegenSpeed());

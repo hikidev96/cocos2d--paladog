@@ -30,5 +30,7 @@ public:
 	float getHp() { return _hp; }
 	bool getIsCrash() { return _state == ¹«³ÊÁü ? 1 : 0; }
 
+	Sprite* getMonsterBase() { return _sprite1; }
+
 	void test();
 };
