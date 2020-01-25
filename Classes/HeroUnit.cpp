@@ -9,8 +9,8 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	cache->addSpriteFramesWithFile("Player/Unit/u_01_1.plist");
 	cache->addSpriteFramesWithFile("Player/Unit/u_02_1.plist");
 	cache->addSpriteFramesWithFile("Player/Unit/u_03_1.plist");
-	cache->addSpriteFramesWithFile("eff_blend_02.plist");
-	cache->addSpriteFramesWithFile("UI/Player/eff_blend_03.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("Player/effect/eff_blend_02.plist");
+	cache->addSpriteFramesWithFile("Player/effect/eff_blend_03.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("Player/effect/eff_blend_03.plist");
 
 	srand((unsigned)time(NULL));
