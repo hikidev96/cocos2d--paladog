@@ -47,6 +47,11 @@ class HeroControl : Scene
 	Sprite* _expBarBack; // 경험치바배경(검정)
 	Sprite* _goldIcon; // 골드 아이콘
 	Sprite* _pauseButton; // 정지버튼
+	Sprite* _miniMapPointer;
+
+	Animation* _miniMapPointerAnimation;
+	Animate* _miniMapPointerAnimate;
+	RepeatForever* _miniMapPointerRepeat;
 
 	Label* _currentMeat;
 	Label* _MaxMeat;
@@ -94,6 +99,8 @@ public:
 	void UnitVecErase();
 	void CoolTime();
 	void SkillEffectVisible();
+	void MiniMap();
+	void LevelUp();
 
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);

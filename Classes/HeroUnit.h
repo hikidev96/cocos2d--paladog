@@ -18,6 +18,7 @@ enum UnitAction
 	UnitAttack2,
 	UnitDead,
 	UnitCollision,
+	UnitSoul,
 };
 
 class HeroUnit
@@ -27,6 +28,7 @@ class HeroUnit
 	vector<HeroUnit*> _unitVec; // 백터
 
 	Sprite* _UnitSprite; // 유닛스프라이트
+	Sprite* _UnitDeadAnimateBox;
 
 	float _Hp; // 체력
 	float _maxHP;
@@ -55,6 +57,9 @@ class HeroUnit
 	// Dead 액션
 	Animation* _animation3;
 	Animate* _animate3;
+
+	Animation* _animation4;
+	Animate* _animate4;
 
 	//RepeatForever* AttackAct;
 	Sequence* AttackAct;
@@ -97,5 +102,6 @@ public:
 	void UnitAttack();
 	void UnitDeadCheck();
 	void ShowUnitHpBar();
+	void ShowUnitDeadSoul();
 
 };
