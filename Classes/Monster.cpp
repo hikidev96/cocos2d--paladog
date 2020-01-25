@@ -40,7 +40,7 @@ Monster::Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit,
 		_monsterCode = "e13";
 		_atkMaxFrame = 15;
 		_atk = 35;
-		_hpm = 2900;
+		_hpm = 2500;
 		_range = 60;
 		_delay = 2.5f;
 		_speed = 0.4f;
@@ -52,8 +52,8 @@ Monster::Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit,
 		cache->addSpriteFramesWithFile("Monster/monster/mummymove.plist");
 		_monsterCode = "e07";
 		_atkMaxFrame = 15;
-		_atk = 40;
-		_hpm = 3400;
+		_atk = 35;
+		_hpm = 2900;
 		_range = 100;
 		_delay = 2.0f;
 		_speed = 0.5f;
@@ -65,8 +65,8 @@ Monster::Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit,
 		cache->addSpriteFramesWithFile("Monster/monster/Pmummymove.plist");
 		_monsterCode = "e27";
 		_atkMaxFrame = 15;
-		_atk = 50;
-		_hpm = 4400;
+		_atk = 40;
+		_hpm = 3500;
 		_range = 100;
 		_delay = 1.7f;
 		_speed = 0.7f;
@@ -94,10 +94,11 @@ Monster::Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit,
 	_isSummonX = 0;
 	_time = 0;
 	_unitAttack = -1;
+	_isBossDead = false;
 
 	int zorder = rand() % 30;
 	_monster = Sprite::createWithSpriteFrameName(StringUtils::format("%s_walk_0001.png", _monsterCode));
-	_monster->setPosition(1000, zorder + _hero->getHero()->getPositionY() + 17);
+	_monster->setPosition(1000, zorder + _hero->getHero()->getPositionY() - 17);
 	_layer->addChild(_monster, _hero->getHero()->getZOrder() + 15 - zorder);
 }
 
@@ -210,6 +211,9 @@ void Monster::MonsterMove()
 				nullptr
 			);
 			_monster->runAction(action);
+			if (strcmp(_monsterCode, "b01") == 0) { //좀비킹주금
+				_isBossDead = true;
+			}
 		}
 	}
 }

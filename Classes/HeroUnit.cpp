@@ -1,9 +1,10 @@
 #include "HeroUnit.h"
 #include "Monster.h"
 
-HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
+HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer, Dungeon* dungeon)
 {
 	_layer = layer;
+	_dungeon = dungeon;
 
 	cache = SpriteFrameCache::getInstance();
 	cache->addSpriteFramesWithFile("Player/Unit/u_01_1.plist");
@@ -30,7 +31,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
 		_UnitSprite->setPosition(0, 420 + rand() % 40);
 		_unitAction = UnitWalk;
-		_Speed = 0.6f;
+		_Speed = 5.f;
 		_AtkSpeed = 1.0f;
 		_MaxAtkSpeed = 1.0f;
 		_Hp = 100.0f;
@@ -454,9 +455,69 @@ void HeroUnit::UnitCollisionCheck()
 			_unitAction = UnitWalk;
 		}
 	}
+
+	// 몬스터 기지 충돌 체크
+	if (_dungeon->getMonsterBase()->getPositionX() - _UnitSprite->getPositionX() - _Range + 70 <= 0)
+	{
+		_UnitSprite->stopActionByTag(UnitWalk);
+
+
+		if (_unitAction != UnitCollision && _Dead == false)
+		{
+			_unitAction = UnitCollision;
+		}
+
+		if (!_UnitSprite->getNumberOfRunningActionsByTag(UnitAttack1))
+		{
+			if (_unitKind == 생쥐)
+				_UnitSprite->setSpriteFrame("u01_walk_0001.png");
+
+			if (_unitKind == 곰)
+				_UnitSprite->setSpriteFrame("u03_walk_0001.png");
+
+			if (_unitKind == 캥거루)
+				_UnitSprite->setSpriteFrame("u04_walk_0001.png");
+		}
+
+		// 최초 충돌시 공격
+		if (_unitAction == UnitCollision && _FirstAtk == false)
+		{
+			AttackAct = Sequence::create
+			(_animate2,
+				CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
+				/*DelayTime::create(_AtkSpeed),*/
+				nullptr);
+			AttackAct->setTag(UnitAttack1);
+
+			if (!_UnitSprite->getNumberOfRunningActionsByTag(UnitAttack1))
+			{
+				_UnitSprite->runAction(AttackAct);
+			}
+
+			_FirstAtk = true;
+		}
+
+		// 최초 충돌 공격 이후 공격
+		if (_unitAction == UnitCollision && _AtkSpeed == 1.0f && _FirstAtk == true)
+		{
+			AttackAct = Sequence::create
+			(_animate2,
+				CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
+				/*DelayTime::create(_AtkSpeed),*/
+				nullptr);
+			AttackAct->setTag(UnitAttack1);
+
+			if (!_UnitSprite->getNumberOfRunningActionsByTag(UnitAttack1))
+			{
+				_UnitSprite->runAction(AttackAct);
+			}
+
+		}
+	}
 }
 void HeroUnit::UnitAttack()
 {
+	// 몬스터 유닛을 공격
 	for (int i = 0; i < _monsterVec.size(); ++i)
 	{
 		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
@@ -478,6 +539,25 @@ void HeroUnit::UnitAttack()
 			
 			return;
 		}
+	}
+
+	// 몬스터 기지를 공격
+	if (_dungeon->getMonsterBase()->getPositionX() - _UnitSprite->getPositionX() - _Range + 70 <= 0)
+	{
+		_hitAnimationBox = Sprite::createWithSpriteFrameName("eff_hit_01_0001.png");
+		_hitAnimationBox->setOpacity(255);
+		_layer->addChild(_hitAnimationBox, _dungeon->getMonsterBase()->getZOrder());
+		_hitAnimationBox->setPosition(_dungeon->getMonsterBase()->getPosition().x + 70, _dungeon->getMonsterBase()->getPosition().y + 60);
+
+		// 랜덤으로 두가지 히트 이펙트중 하나를 보여준다
+		int RanNum = rand() % 2;
+
+		if (RanNum == 1)
+			_hitAnimationBox->runAction(Sequence::create(_UnitHitAnimate1, RemoveSelf::create(true), nullptr));
+		else
+			_hitAnimationBox->runAction(Sequence::create(_UnitHitAnimate2, RemoveSelf::create(true), nullptr));
+
+		_dungeon->Hit(_Atk);
 	}
 
 	//_Hp -= 60; // 죽는모션테스트용

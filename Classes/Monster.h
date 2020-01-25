@@ -53,6 +53,7 @@ class Monster : Scene
 	bool _isRemove; //몬스터 삭제
 	float _isSummonX; //몬스터 소환좌표
 	int _unitAttack; //공격할 유닛 번호
+	bool _isBossDead; //보스 죽음 여부
 
 public:
 	Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit, Mob mob);
@@ -74,6 +75,7 @@ public:
 
 	bool getIsRemove() { return _isRemove; }
 	float getIsSummon() { return _isSummonX; }
+	bool getIsBossDead() { return _isBossDead; }
 
 private:
 	void Walk(); //몬스터 이동

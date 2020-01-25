@@ -1,10 +1,11 @@
 #include "HeroControl.h"
 
-HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer)
+HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer, Dungeon* dungeon)
 {
 	_hero = hero; // 히어로 메모리주소 받아오기
 	_scene = scene; // Scene 메모리주소 받아오기
 	_layer = layer; // layer 메모리주소 받아오기
+	_dungeon = dungeon; // dungeon 메모리 주소 받아오기
 
 	cache = SpriteFrameCache::getInstance(); // 캐쉬생성
 	cache->addSpriteFramesWithFile("UI/ui_gameplay.plist"); // plist 추가
@@ -711,7 +712,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			_mouseSummonsClick = true;
 			_mouseSummonsButtonActivation = false;
 
-			_heroUnit = new HeroUnit(_scene, 생쥐, _layer);
+			_heroUnit = new HeroUnit(_scene, 생쥐, _layer,_dungeon);
 			_heroUnitVec.push_back(_heroUnit);
 
 			_hero->setMeat(_hero->getMeat() - 10);
@@ -726,7 +727,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			_bearSummonsClick = true;
 			_bearSummonsButtonActivation = false;
 
-			_heroUnit = new HeroUnit(_scene, 곰, _layer);
+			_heroUnit = new HeroUnit(_scene, 곰, _layer, _dungeon);
 			_heroUnitVec.push_back(_heroUnit);
 
 			_hero->setMeat(_hero->getMeat() - 30);
@@ -741,7 +742,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			_kangarooSummonsClick = true;
 			_kangarooSummonsButtonActivation = false;
 
-			_heroUnit = new HeroUnit(_scene, 캥거루, _layer);
+			_heroUnit = new HeroUnit(_scene, 캥거루, _layer, _dungeon);
 			_heroUnitVec.push_back(_heroUnit);
 
 			_hero->setMeat(_hero->getMeat() - 40);

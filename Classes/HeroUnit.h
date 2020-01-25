@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cocos_framework.h"
+#include "Dungeon.h"
 class Monster;
 
 
@@ -26,6 +27,8 @@ class HeroUnit
 	SpriteFrameCache* cache;
 
 	Layer* _layer;
+
+	Dungeon* _dungeon;
 
 	vector<HeroUnit*> _unitVec; // น้ลอ
 
@@ -82,7 +85,7 @@ class HeroUnit
 	vector<Monster*> _monsterVec;
 
 public:
-	HeroUnit(Scene* scene, UnitKind herokind, Layer* layer);
+	HeroUnit(Scene* scene, UnitKind herokind, Layer* layer, Dungeon* dungeon);
 
 	vector<HeroUnit*> getUnitVec() { return _unitVec; }
 	UnitKind getHeroKind() { return _unitKind; }
