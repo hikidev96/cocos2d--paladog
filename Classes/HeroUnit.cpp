@@ -4,9 +4,9 @@
 HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 {
 	cache = SpriteFrameCache::getInstance();
-	cache->addSpriteFramesWithFile("Player/Unit/u_01.plist");
-	cache->addSpriteFramesWithFile("Player/Unit/u_02.plist");
-	cache->addSpriteFramesWithFile("Player/Unit/u_03.plist");
+	cache->addSpriteFramesWithFile("Player/Unit/u_01_1.plist");
+	cache->addSpriteFramesWithFile("Player/Unit/u_02_1.plist");
+	cache->addSpriteFramesWithFile("Player/Unit/u_03_1.plist");
 
 	srand((unsigned)time(NULL));
 
@@ -14,7 +14,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 	{
 	case »ýÁã:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
-		_UnitSprite->setPosition(0, 360 + rand() % 50);
+		_UnitSprite->setPosition(0, 400 + rand() % 50);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_AtkSpeed = 1.0f;
@@ -98,7 +98,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case °õ:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u03_walk_0001.png");
-		_UnitSprite->setPosition(0, 360 + rand() % 50);
+		_UnitSprite->setPosition(0, 400 + rand() % 50);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_AtkSpeed = 1.0f;
@@ -184,7 +184,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer)
 		break;
 	case Ä»°Å·ç:
 		_UnitSprite = Sprite::createWithSpriteFrameName("u04_walk_0001.png");
-		_UnitSprite->setPosition(0, 360 + rand() % 50);
+		_UnitSprite->setPosition(0, 400 + rand() % 50);
 		_unitAction = UnitWalk;
 		_Speed = 0.6f;
 		_AtkSpeed = 1.0f;
