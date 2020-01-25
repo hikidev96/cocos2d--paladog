@@ -54,6 +54,9 @@ class HeroControl : Scene
 	Label* _MaxMana;
 	Label* _Level;
 	Label* _Gold;
+	Label* _SkillOneManaUse;
+	Label* _SkillTwoManaUse;
+	Label* _SkillThreeManaUse;
 
 	ProgressTimer* _mouseSummonsTimer;
 	ProgressTimer* _bearSummonsTimer;
@@ -90,6 +93,7 @@ public:
 	void HeroMeatRegen();
 	void UnitVecErase();
 	void CoolTime();
+	void SkillEffectVisible();
 
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);
