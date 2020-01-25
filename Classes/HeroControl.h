@@ -47,6 +47,11 @@ class HeroControl : Scene
 	Sprite* _expBarBack; // 경험치바배경(검정)
 	Sprite* _goldIcon; // 골드 아이콘
 	Sprite* _pauseButton; // 정지버튼
+	Sprite* _miniMapPointer; // 미니맵 포인터
+
+	Animation* _miniMapPointerAnimation;
+	Animate* _miniMapPointerAnimate;
+	RepeatForever* _miniMapPointerRepeat;
 
 	Label* _currentMeat;
 	Label* _MaxMeat;
@@ -54,6 +59,9 @@ class HeroControl : Scene
 	Label* _MaxMana;
 	Label* _Level;
 	Label* _Gold;
+	Label* _SkillOneManaUse;
+	Label* _SkillTwoManaUse;
+	Label* _SkillThreeManaUse;
 
 	ProgressTimer* _mouseSummonsTimer;
 	ProgressTimer* _bearSummonsTimer;
@@ -84,12 +92,15 @@ class HeroControl : Scene
 	bool _PauseClick;
 
 public:
-	HeroControl(Scene* scene, Hero* hero, Layer* layer);
+	HeroControl(Scene* scene, Hero* hero, Layer* layer, Dungeon* dungeon);
 	void HeroMove(Dungeon* dungeon);
 	void HeroManaRegen();
 	void HeroMeatRegen();
 	void UnitVecErase();
 	void CoolTime();
+	void SkillEffectVisible();
+	void MiniMap();
+	void LevelUp();
 
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);

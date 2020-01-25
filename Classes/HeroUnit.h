@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cocos_framework.h"
+#include "Dungeon.h"
 class Monster;
 
 
@@ -18,15 +19,22 @@ enum UnitAction
 	UnitAttack2,
 	UnitDead,
 	UnitCollision,
+	UnitSoul,
 };
 
 class HeroUnit
 {
 	SpriteFrameCache* cache;
 
+	Layer* _layer;
+
+	Dungeon* _dungeon;
+
 	vector<HeroUnit*> _unitVec; // 백터
 
 	Sprite* _UnitSprite; // 유닛스프라이트
+	Sprite* _UnitDeadAnimateBox; // 영혼 애니메이션 기준 스프라이트
+	Sprite* _hitAnimationBox; // 히트 애니메이션 기준 스프라이트
 
 	float _Hp; // 체력
 	float _maxHP;
@@ -56,6 +64,17 @@ class HeroUnit
 	Animation* _animation3;
 	Animate* _animate3;
 
+	// 죽을시 영혼 애니메이션
+	Animation* _animation4; 
+	Animate* _animate4;
+
+	// 히트애니메이션
+	Animation* _UnitHitAnimation1;
+	Animate* _UnitHitAnimate1;
+
+	Animation* _UnitHitAnimation2;
+	Animate* _UnitHitAnimate2;
+
 	//RepeatForever* AttackAct;
 	Sequence* AttackAct;
 	Sequence* DeadAct;
@@ -66,7 +85,7 @@ class HeroUnit
 	vector<Monster*> _monsterVec;
 
 public:
-	HeroUnit(Scene* scene, UnitKind herokind, Layer* layer);
+	HeroUnit(Scene* scene, UnitKind herokind, Layer* layer, Dungeon* dungeon);
 
 	vector<HeroUnit*> getUnitVec() { return _unitVec; }
 	UnitKind getHeroKind() { return _unitKind; }
@@ -97,5 +116,6 @@ public:
 	void UnitAttack();
 	void UnitDeadCheck();
 	void ShowUnitHpBar();
+	void ShowUnitDeadSoul();
 
 };
