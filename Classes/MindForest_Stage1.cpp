@@ -87,14 +87,15 @@ void MindForest_Stage1::tick(float delta)
 	// 모든 객체의 힐이 끝나면 힐 스킬 비활성화 상태로 돌려줌
 	_hero->setIsHealing(false);
 
+	// 스킬 1 미사일 과 몬스터 유닛 충돌 처리
 	for (int i = 0; i < _heroControl->getMissileCollisionVec().size(); i++)
 	{
 		_heroControl->getMissileCollisionVec()[i]->BringMonsterVec(_monster, _dungeon);
 	}
 
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
-	_heroControl->UnitVecErase();
-	_heroControl->CoolTime();
+	_heroControl->UnitVecErase(); // 유닛백터 삭제
+	_heroControl->CoolTime(); // 쿨타임 계산
 
 }
 

@@ -25,6 +25,7 @@ private:
 	Sprite* _address2;
 
 	float _Atk;
+	float _speed;
 
 	Animation* _hammerSkillEffectAnimation_B1; // 고무망치 스킬 이펙트B
 	Animate* _hammerSkillEffectAnimate_B1; // 고무망치 스킬 이펙트B

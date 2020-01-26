@@ -104,6 +104,7 @@ public:
 	void SkillEffectVisible();
 	void MiniMap();
 	void LevelUp();
+	void UnitBuff();
 
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);

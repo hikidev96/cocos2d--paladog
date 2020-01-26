@@ -11,15 +11,17 @@ MissileCollision::MissileCollision(Layer* layer, Movement moveway, Vec2 pos, int
 	_MissileSprite = Sprite::createWithSpriteFrameName("m01_eff_b_0001.png");
 
 	if (moveway == LeftWay)
-		_MissileSprite->setPosition(pos.x - 70, pos.y - 25);
+		_MissileSprite->setPosition(pos.x - 50, pos.y - 25);
 	if (moveway == RightWay)
-		_MissileSprite->setPosition(pos.x + 70, pos.y - 25);
+		_MissileSprite->setPosition(pos.x + 50, pos.y - 25);
 	
 	_layer->addChild(_MissileSprite, zoder);
 
 	_firstAtk = false;
 	_secondAtk = false;
+
 	_Atk = 500.f;
+	_speed = 4.f;
 
 	_erase = false;
 
@@ -49,12 +51,12 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 	if (_movement == RightWay)
 	{
 		_MissileSprite->setFlippedX(false);
-		_MissileSprite->setPosition(_MissileSprite->getPositionX() + 1.5, _MissileSprite->getPositionY());
+		_MissileSprite->setPosition(_MissileSprite->getPositionX() + _speed, _MissileSprite->getPositionY());
 	}
 	if (_movement == LeftWay)
 	{
 		_MissileSprite->setFlippedX(true);
-		_MissileSprite->setPosition(_MissileSprite->getPositionX() - 1.5, _MissileSprite->getPositionY());
+		_MissileSprite->setPosition(_MissileSprite->getPositionX() - _speed, _MissileSprite->getPositionY());
 	}
 	
 	//몬스터 유닛과 충돌

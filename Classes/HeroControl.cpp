@@ -503,6 +503,9 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 
 	// 미니맵 포인트의 위치를 갱신
 	MiniMap();
+
+	//유닛 버프!
+	UnitBuff();
 }
 
 void HeroControl::HeroManaRegen()
@@ -637,6 +640,28 @@ void HeroControl::MiniMap()
 void HeroControl::LevelUp()
 {
 
+}
+
+void HeroControl::UnitBuff()
+{
+	_hero->getHeroBuffOra()->setPosition(_hero->getHero()->getPosition().x, _hero->getHero()->getPosition().y - 75);
+	 
+	// 히어로 버프 범위 안에있으면 버프활성화
+	for (int i = 0; i < _heroUnitVec.size(); i++)
+	{
+		if (_hero->getHeroBuffOra()->getPositionX() - 100 < _heroUnitVec[i]->getSprite()->getPositionX() &&
+			_hero->getHeroBuffOra()->getPositionX() + 100 > _heroUnitVec[i]->getSprite()->getPositionX())
+		{
+			_heroUnitVec[i]->getUnitBuffOra()->setVisible(true);
+			_heroUnitVec[i]->setBuff(true);
+		}
+		else
+		{
+			_heroUnitVec[i]->getUnitBuffOra()->setVisible(false);
+			_heroUnitVec[i]->setBuff(false);
+		}
+	}
+	
 }
 
 bool HeroControl::onTouchBegan(Touch * touch, Event * event)
