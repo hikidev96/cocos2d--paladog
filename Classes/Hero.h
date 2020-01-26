@@ -1,6 +1,8 @@
 #pragma once
 #include "cocos_framework.h"
 
+class Monster;
+
 enum INFO
 {
 	Waiting = 0,
@@ -22,6 +24,7 @@ enum HAMMERINFO
 	HammerSkillEffect1,
 	HammerSkillEffect2,
 	HammerSkillEffect3,
+	HammerMissile,
 };
 
 enum HAMMERKIND
@@ -128,8 +131,9 @@ private:
 	float _skillTwoManaUse; // 스킬 2 마나 소비량
 	float _skillThreeManaUse; // 스킬 3 마나 소비량
 
-public:
+	bool IsHealing;
 
+public:
 	Hero(Scene* scene, Layer* layer);
 	Movement getMoveWay() { return _movement; }
 	void setMoveWay(Movement movement) { _movement = movement; }
@@ -138,6 +142,8 @@ public:
 	Sprite* getSkillEffectBox1() { return _skillEffectBox1; }
 	Sprite* getSkillEffectBox2() { return _skillEffectBox2; }
 	Sprite* getSkillEffectBox3() { return _skillEffectBox3; }
+	//vector<Sprite*> getSkillOneMissileVec() { return _SkillOneMissileVec; }
+	//MISSILE* getMissileStruct() { return _MissileStruct; }
 	float getSpeed() { return _speed; }
 	void setSpeed(float speed) { _speed = speed; }
 	float getHp() { return _hp; }
@@ -170,6 +176,8 @@ public:
 	void setSkillThreeManaUse(float skillthreemanause) { _skillThreeManaUse = skillthreemanause; }
 	float getLv() { return _lv; }
 	void setLv(float lv) { _lv = lv; }
+	bool getIsHealing() { return IsHealing; }
+	void setIsHealing(bool ishealing) { IsHealing = ishealing; }
 	ProgressTimer* getManaGauge() { return _manaGauge; }
 	ProgressTimer* getMeatGauge() { return _meatGauge; }
 	ProgressTimer* getHeroHpInfo() { return _hpInfoGauge; }
@@ -178,6 +186,7 @@ public:
 	RepeatForever* getWaitingAction() { return _heroWaitingAction; }
 	RepeatForever* getWalkingAction() { return _heroWalkingAction; }
 	Animate* getAttackAction() { return _animate3; }
+	//void SkillOneMissileCollision(vector<Monster*> monstervec);
 	
 	HAMMERKIND getHammerKind() { return _HammerKind; }
 	void setHammerKind(HAMMERKIND hammerkind) { _HammerKind = hammerkind; }

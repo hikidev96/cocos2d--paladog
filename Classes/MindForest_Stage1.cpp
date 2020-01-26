@@ -78,6 +78,18 @@ void MindForest_Stage1::tick(float delta)
 	for (int i = 0; i < _heroControl->getHeroUnitVec().size(); i++)
 	{
 		_heroControl->getHeroUnitVec()[i]->BringMonsterVec(_monster);
+
+		// 힐 스킬 사용시 작동
+		if (_hero->getIsHealing())
+			_heroControl->getHeroUnitVec()[i]->Healing();
+	}
+
+	// 모든 객체의 힐이 끝나면 힐 스킬 비활성화 상태로 돌려줌
+	_hero->setIsHealing(false);
+
+	for (int i = 0; i < _heroControl->getMissileCollisionVec().size(); i++)
+	{
+		_heroControl->getMissileCollisionVec()[i]->BringMonsterVec(_monster, _dungeon);
 	}
 
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작

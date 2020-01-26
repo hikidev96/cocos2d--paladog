@@ -13,6 +13,7 @@ HeroControl::HeroControl(Scene* scene, Hero* hero, Layer* layer, Dungeon* dungeo
 	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/btn_pause.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("Player/weapons/m01_1.plist"); // plist 추가
 
 	// 리스너 등록
 	listener = EventListenerTouchOneByOne::create();
@@ -538,6 +539,14 @@ void HeroControl::UnitVecErase()
 			log("d");
 		}
 	}
+
+	for (int i = 0; i < _missileCollisionVec.size(); i++)
+	{
+		if (_missileCollisionVec[i]->getErase() == true)
+		{
+			_missileCollisionVec.erase(_missileCollisionVec.begin() + i);
+		}
+	}
 }
 
 // 쿨타임 계산
@@ -669,6 +678,10 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			_hero->getHero()->runAction(_hero->getAttackAction()->clone()); // 공격 모션 실행
 			_hero->getWeapon1()->runAction(_hero->HammerAttackAction(_hero->getHammerKind())->clone()); // 공격 모션 실행
 			_hero->getSkillEffectBox1()->runAction(_hero->HammerAttackEffectA(_hero->getHammerKind())->clone()); // 스킬A 이펙트 애니메이션 실행
+
+			// 스킬 투사체 객체를 만들어 백터에 추가
+			_missileCollision = new MissileCollision(_layer, _hero->getMoveWay(), _hero->getHero()->getPosition(), _hero->getHero()->getZOrder());
+			_missileCollisionVec.push_back(_missileCollision);
 		}
 	}
 

@@ -5,6 +5,7 @@
 #include "HeroUnit.h"
 #include "Monster.h"
 #include "Dungeon.h"
+#include "MissileCollision.h"
 
 class HeroControl : Scene
 {
@@ -12,7 +13,9 @@ class HeroControl : Scene
 	Hero* _hero; // 히어로 객체
 	HeroUnit* _heroUnit; // 히어로 유닛객체
 	Dungeon* _dungeon; // 몬스터 기지체력 가지고오기위해서
-	vector<HeroUnit*> _heroUnitVec; // 백터
+	MissileCollision* _missileCollision;
+	vector<HeroUnit*> _heroUnitVec; // 유닛 백터
+	vector<MissileCollision*> _missileCollisionVec; // 미사일 벡터
 
 	EventListenerTouchOneByOne* listener;
 
@@ -107,4 +110,5 @@ public:
 	void onTouchEnded(Touch* touch, Event* event);
 
 	vector<HeroUnit*> getHeroUnitVec() { return _heroUnitVec; }
+	vector<MissileCollision*> getMissileCollisionVec() { return _missileCollisionVec; }
 };

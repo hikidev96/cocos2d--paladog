@@ -93,6 +93,9 @@
     <ClCompile Include="..\Classes\IntroUI.cpp">
       <Filter>src\Scene\Intro</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MissileCollision.cpp">
+      <Filter>src\영웅</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\IntroUI.h">
       <Filter>src\Scene\Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MissileCollision.h">
+      <Filter>src\영웅</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

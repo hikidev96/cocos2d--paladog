@@ -600,3 +600,11 @@ void HeroUnit::ShowUnitDeadSoul()
 	_UnitDeadAnimateBox->runAction(Sequence::create(_animate4, RemoveSelf::create(true), nullptr));
 }
 
+void HeroUnit::Healing()
+{
+	_Hp += 50;
+
+	if (_Hp > _maxHP)
+		_Hp = _maxHP;
+}
+
