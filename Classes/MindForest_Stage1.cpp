@@ -13,14 +13,12 @@ bool MindForest_Stage1::init() {
 	this->addChild(_bgLayer, -100);
 
 	_hero = new Hero(this, _bgLayer);
-	_heroControl = new HeroControl(this, _hero, _bgLayer);
-	_dungeon = new Dungeon(this, _bgLayer, 1000.0f); //2번째 인자에 체력 넣음
+	_dungeon = new Dungeon(this, _bgLayer, 1000.0f); //3번째 인자에 체력 넣음
+	_heroControl = new HeroControl(this, _hero, _bgLayer, _dungeon);
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
 	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), _hero->getManaRegenSpeed());
 	this->schedule(schedule_selector(MindForest_Stage1::HeroMeatRegen), _hero->getMeatRegenSpeed());
-
-	_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::좀비킹)); //몬스터 생성
 	
 	// 배경이미지 plist
 	_cache = SpriteFrameCache::getInstance();
@@ -80,11 +78,24 @@ void MindForest_Stage1::tick(float delta)
 	for (int i = 0; i < _heroControl->getHeroUnitVec().size(); i++)
 	{
 		_heroControl->getHeroUnitVec()[i]->BringMonsterVec(_monster);
+
+		// 힐 스킬 사용시 작동
+		if (_hero->getIsHealing())
+			_heroControl->getHeroUnitVec()[i]->Healing();
+	}
+
+	// 모든 객체의 힐이 끝나면 힐 스킬 비활성화 상태로 돌려줌
+	_hero->setIsHealing(false);
+
+	// 스킬 1 미사일 과 몬스터 유닛 충돌 처리
+	for (int i = 0; i < _heroControl->getMissileCollisionVec().size(); i++)
+	{
+		_heroControl->getMissileCollisionVec()[i]->BringMonsterVec(_monster, _dungeon);
 	}
 
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
-	_heroControl->UnitVecErase();
-	_heroControl->CoolTime();
+	_heroControl->UnitVecErase(); // 유닛백터 삭제
+	_heroControl->CoolTime(); // 쿨타임 계산
 
 }
 
@@ -100,18 +111,23 @@ void MindForest_Stage1::HeroMeatRegen(float delta)
 
 void MindForest_Stage1::MonsterTick()
 {
-	if (rand() % 150 == 0) {
-		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::분홍미라));
+	if (rand() % 300 == 0) {
+		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
+	}
+	if (rand() % 1500 == 0) {
+		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::강화좀비));
 	}
 	for (int i = 0; i < _monster.size(); i++) {
+		if (_monster[i]->getUnitAttack() != -1 && 
+			_monster[i]->getUnitAttack() < _heroControl->getHeroUnitVec().size()) {
+			_heroControl->getHeroUnitVec()[_monster[i]->getUnitAttack()]->setHp(_heroControl->getHeroUnitVec()[_monster[i]->getUnitAttack()]->getHp() - _monster[i]->getAtk());
+			_monster[i]->setUnitAttack();
+		}
+		if (_dungeon->getIsCrash()) {
+			_monster[i]->Hit(999999);
+		}
 		if (_heroControl->getHeroUnitVec().size() != _monster[i]->getUnitSize()) {
 			_monster[i]->setUnit(_heroControl->getHeroUnitVec());
-		}
-		if (_monster[i]->getIsSummon()) { //좀비킹 소환술
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::걷는좀비));
-			_monster.back()->setSummunPositionX(_monster[i]->getIsSummon());
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::걷는좀비));
-			_monster.back()->setSummunPositionX(_monster[i]->getIsSummon());
 		}
 		_monster[i]->MonsterMove();
 		if (_monster[i]->getIsRemove()) {
