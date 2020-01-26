@@ -9,10 +9,11 @@ Hero::Hero(Scene * scene, Layer* layer)
 	cache->addSpriteFramesWithFile("Player/weapons/m01_1.plist");
 	cache->addSpriteFramesWithFile("Player/weapons/m02.plist");
 	cache->addSpriteFramesWithFile("Player/weapons/m09.plist");
+	cache->addSpriteFramesWithFile("Player/effect/eff_blend_01.plist");
 
 	// 영웅 만들기
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
-	_hero->setPosition(100, 430);
+	_hero->setPosition(100, 440);
 	layer->addChild(_hero, (_hero->getPositionY() - _hero->getContentSize().height / 2) * -1);
 
 	// 영웅 무기 만들기
@@ -27,6 +28,12 @@ Hero::Hero(Scene * scene, Layer* layer)
 	layer->addChild(_skillEffectBox2, _hero->getZOrder());
 	_skillEffectBox3 = Sprite::createWithSpriteFrameName("m01_eff_a_0001.png");
 	layer->addChild(_skillEffectBox3, _hero->getZOrder() - 1);
+
+	// 히어로 버프 오라
+	_heroBuffOra = Sprite::createWithSpriteFrameName("eff_aura_0001.png");
+	_heroBuffOra->setPosition(_hero->getPosition().x, _hero->getPosition().y);
+	//_hero->getContentSize().width / 2, 10
+	layer->addChild(_heroBuffOra, _hero->getZOrder() - 2);
 
 	//마나 게이지 만들기
 	_manaGauge = ProgressTimer::create(Sprite::create("UI/Mana.png"));
@@ -470,65 +477,21 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_hammerSkillEffectAnimate_A3 = Animate::create(_hammerSkillEffectAnimation_A3);
 	_hammerSkillEffectAnimate_A3->retain();
 	_hammerSkillEffectAnimate_A3->setTag(HammerSkillEffect1);
-}
 
-//void Hero::SkillOneMissileCollision(vector<Monster*> monstervec)
-//{
-//	// 미사일 움직임!
-//	for (int i = 0; i < _SkillOneMissileVec.size(); i++)
-//	{
-//		if (!_SkillOneMissileVec[i]._MissileSprite->getNumberOfRunningActions())
-//		{
-//			_SkillOneMissileVec[i]._MissileSprite->runAction(_hammerSkillEffectRepeat_B1->clone());
-//		}
-//
-//		if (_SkillOneMissileVec[i]._MoveWay == RightWay)
-//		{
-//			_SkillOneMissileVec[i]._MissileSprite->setFlippedX(false);
-//			_SkillOneMissileVec[i]._MissileSprite->setPosition(_SkillOneMissileVec[i]._MissileSprite->getPositionX() + 1.5, _SkillOneMissileVec[i]._MissileSprite->getPositionY());
-//		}
-//		if (_SkillOneMissileVec[i]._MoveWay == LeftWay)
-//		{
-//			_SkillOneMissileVec[i]._MissileSprite->setFlippedX(true);
-//			_SkillOneMissileVec[i]._MissileSprite->setPosition(_SkillOneMissileVec[i]._MissileSprite->getPositionX() - 1.5, _SkillOneMissileVec[i]._MissileSprite->getPositionY());
-//		}
-//	}
-//
-//	// 몬스터 유닛과 충돌
-//	for (int i = 0; i < _SkillOneMissileVec.size(); i++)
-//	{
-//		for (int j = 0; j < monstervec.size(); j++)
-//		{
-//			if (monstervec[j]->getMonster()->getBoundingBox().containsPoint(_SkillOneMissileVec[i]._MissileSprite->getPosition()))
-//			{
-//				if (monstervec[j]->getIsHeroSkillHit() == false || _SkillOneMissileVec[i]._IsHit == false)
-//				{
-//					log("충돌!!");
-//					monstervec[j]->Hit(_skill1Atk);
-//					monstervec[j]->setIsHeroSkillHit(true);
-//					_SkillOneMissileVec[i]._IsHit = true;
-//					_SkillOneMissileVec[i]._CollisionCount++;
-//					log("%d", _SkillOneMissileVec[i]._CollisionCount);
-//				}
-//			}
-//			else
-//			{
-//				monstervec[j]->setIsHeroSkillHit(false);
-//			}
-//
-//			if (_SkillOneMissileVec[i]._CollisionCount == 3)
-//			{
-//				_SkillOneMissileVec[i]._MissileSprite->stopAllActions();
-//				_SkillOneMissileVec[i]._MissileSprite->runAction(RemoveSelf::create(true));
-//				_SkillOneMissileVec.erase(_SkillOneMissileVec.begin() + i);
-//				break;
-//			}
-//		}
-//
-//		// 미사일 삭제!
-//	
-//	}
-//}
+	// 히어로 오라 애니메이션
+	_animation13 = Animation::create();
+	_animation13->setDelayPerUnit(0.1f);
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0001.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0002.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0003.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0004.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0005.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0006.png"));
+	_animate13 = Animate::create(_animation13);
+	_heroBuffOraRepeat = RepeatForever::create(_animate13);
+
+	_heroBuffOra->runAction(_heroBuffOraRepeat);
+}
 
 RepeatForever* Hero::HammerWaitingAction(HAMMERKIND hammerkind)
 {

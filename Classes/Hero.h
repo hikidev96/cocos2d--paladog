@@ -98,11 +98,16 @@ private:
 	Animation* _hammerSkillEffectAnimation_A3; // 식량망치 스킬 이펙트A
 	Animate* _hammerSkillEffectAnimate_A3; // 식량망치 스킬 이펙트A
 
+	Animation* _animation13; // 식량망치 대기 액션
+	Animate* _animate13; // 식량망치 대기 액션
+	RepeatForever* _heroBuffOraRepeat; // 식량망치 대기 액션
+
 	Sprite* _hero; // 히어로 스프라이트
 	Sprite* _heroWeapon1; // 고무망치
 	Sprite* _skillEffectBox1; // 스킬A 이펙트를 보여줄 박스
 	Sprite* _skillEffectBox2; // 스킬B 이펙트를 보여줄 박스
 	Sprite* _skillEffectBox3; // 스킬C 이펙트를 보여줄 박스
+	Sprite* _heroBuffOra;
 
 	ProgressTimer* _manaGauge; // 마나 게이지
 	ProgressTimer* _meatGauge; // 고기 게이지
@@ -142,8 +147,7 @@ public:
 	Sprite* getSkillEffectBox1() { return _skillEffectBox1; }
 	Sprite* getSkillEffectBox2() { return _skillEffectBox2; }
 	Sprite* getSkillEffectBox3() { return _skillEffectBox3; }
-	//vector<Sprite*> getSkillOneMissileVec() { return _SkillOneMissileVec; }
-	//MISSILE* getMissileStruct() { return _MissileStruct; }
+	Sprite* getHeroBuffOra() { return _heroBuffOra; }
 	float getSpeed() { return _speed; }
 	void setSpeed(float speed) { _speed = speed; }
 	float getHp() { return _hp; }
@@ -186,7 +190,6 @@ public:
 	RepeatForever* getWaitingAction() { return _heroWaitingAction; }
 	RepeatForever* getWalkingAction() { return _heroWalkingAction; }
 	Animate* getAttackAction() { return _animate3; }
-	//void SkillOneMissileCollision(vector<Monster*> monstervec);
 	
 	HAMMERKIND getHammerKind() { return _HammerKind; }
 	void setHammerKind(HAMMERKIND hammerkind) { _HammerKind = hammerkind; }
