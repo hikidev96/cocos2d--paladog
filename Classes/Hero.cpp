@@ -1,4 +1,5 @@
 #include "Hero.h"
+#include "Monster.h"
 
 Hero::Hero(Scene * scene, Layer* layer)
 {
@@ -92,6 +93,8 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_skillThreeManaUse = 30; // 스킬 3 마나 사용량
 
 	_HammerKind = 고무망치; // 최초 무기
+
+	IsHealing = false;
 
 	// 대기 애니메이션 만들기
 	_animation1 = Animation::create();
@@ -469,6 +472,64 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_hammerSkillEffectAnimate_A3->setTag(HammerSkillEffect1);
 }
 
+//void Hero::SkillOneMissileCollision(vector<Monster*> monstervec)
+//{
+//	// 미사일 움직임!
+//	for (int i = 0; i < _SkillOneMissileVec.size(); i++)
+//	{
+//		if (!_SkillOneMissileVec[i]._MissileSprite->getNumberOfRunningActions())
+//		{
+//			_SkillOneMissileVec[i]._MissileSprite->runAction(_hammerSkillEffectRepeat_B1->clone());
+//		}
+//
+//		if (_SkillOneMissileVec[i]._MoveWay == RightWay)
+//		{
+//			_SkillOneMissileVec[i]._MissileSprite->setFlippedX(false);
+//			_SkillOneMissileVec[i]._MissileSprite->setPosition(_SkillOneMissileVec[i]._MissileSprite->getPositionX() + 1.5, _SkillOneMissileVec[i]._MissileSprite->getPositionY());
+//		}
+//		if (_SkillOneMissileVec[i]._MoveWay == LeftWay)
+//		{
+//			_SkillOneMissileVec[i]._MissileSprite->setFlippedX(true);
+//			_SkillOneMissileVec[i]._MissileSprite->setPosition(_SkillOneMissileVec[i]._MissileSprite->getPositionX() - 1.5, _SkillOneMissileVec[i]._MissileSprite->getPositionY());
+//		}
+//	}
+//
+//	// 몬스터 유닛과 충돌
+//	for (int i = 0; i < _SkillOneMissileVec.size(); i++)
+//	{
+//		for (int j = 0; j < monstervec.size(); j++)
+//		{
+//			if (monstervec[j]->getMonster()->getBoundingBox().containsPoint(_SkillOneMissileVec[i]._MissileSprite->getPosition()))
+//			{
+//				if (monstervec[j]->getIsHeroSkillHit() == false || _SkillOneMissileVec[i]._IsHit == false)
+//				{
+//					log("충돌!!");
+//					monstervec[j]->Hit(_skill1Atk);
+//					monstervec[j]->setIsHeroSkillHit(true);
+//					_SkillOneMissileVec[i]._IsHit = true;
+//					_SkillOneMissileVec[i]._CollisionCount++;
+//					log("%d", _SkillOneMissileVec[i]._CollisionCount);
+//				}
+//			}
+//			else
+//			{
+//				monstervec[j]->setIsHeroSkillHit(false);
+//			}
+//
+//			if (_SkillOneMissileVec[i]._CollisionCount == 3)
+//			{
+//				_SkillOneMissileVec[i]._MissileSprite->stopAllActions();
+//				_SkillOneMissileVec[i]._MissileSprite->runAction(RemoveSelf::create(true));
+//				_SkillOneMissileVec.erase(_SkillOneMissileVec.begin() + i);
+//				break;
+//			}
+//		}
+//
+//		// 미사일 삭제!
+//	
+//	}
+//}
+
 RepeatForever* Hero::HammerWaitingAction(HAMMERKIND hammerkind)
 {
 	switch (hammerkind)
@@ -557,6 +618,9 @@ Animate* Hero::HammerAttackEffectA(HAMMERKIND hammerkind)
 	{
 		_skillEffectBox1->setPosition(_hero->getPosition());
 		_skillEffectBox1->setVisible(true);
+
+
+		IsHealing = true;
 
 		return _hammerSkillEffectAnimate_A2;
 	}

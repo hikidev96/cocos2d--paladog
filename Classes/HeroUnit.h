@@ -86,7 +86,6 @@ class HeroUnit
 
 public:
 	HeroUnit(Scene* scene, UnitKind herokind, Layer* layer, Dungeon* dungeon);
-
 	vector<HeroUnit*> getUnitVec() { return _unitVec; }
 	UnitKind getHeroKind() { return _unitKind; }
 	UnitAction getUnitAction() { return _unitAction; }
@@ -117,5 +116,6 @@ public:
 	void UnitDeadCheck();
 	void ShowUnitHpBar();
 	void ShowUnitDeadSoul();
+	void Healing();
 
 };
