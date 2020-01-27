@@ -137,6 +137,14 @@ private:
 	float _skillThreeManaUse; // 스킬 3 마나 소비량
 
 	bool IsHealing;
+	
+	bool _skillOneUnlock;
+	bool _skillTwoUnlock;
+	bool _skillThreeUnlock;
+
+	bool _unitOneUnlock;
+	bool _unitTwoUnlock;
+	bool _unitThreeUnlock;
 
 public:
 	Hero(Scene* scene, Layer* layer);
@@ -182,6 +190,18 @@ public:
 	void setLv(float lv) { _lv = lv; }
 	bool getIsHealing() { return IsHealing; }
 	void setIsHealing(bool ishealing) { IsHealing = ishealing; }
+	bool getSkillOneUnlock() { return _skillOneUnlock; }
+	void setSkillOneUnlock(bool skilloneunlock) { _skillOneUnlock = skilloneunlock; }
+	bool getSkillTwoUnlock() { return _skillTwoUnlock; }
+	void setSkillTwoUnlock(bool skilltwounlock) { _skillTwoUnlock = skilltwounlock; }
+	bool getSkillThreeUnlock() { return _skillThreeUnlock; }
+	void setSkillThreeUnlock(bool skillthreeunlock) { _skillThreeUnlock = skillthreeunlock; }
+	bool getUnitOneUnlock() { return _unitOneUnlock; }
+	void setUnitOneUnlock(bool unitoneunlock) { _unitOneUnlock = unitoneunlock; }
+	bool getUnitTwoUnlock() { return _unitTwoUnlock; }
+	void setUnitTwoUnlock(bool unittwounlock) { _unitTwoUnlock = unittwounlock; }
+	bool getUnitThreeUnlock() { return _unitThreeUnlock; }
+	void setUnitThreeUnlock(bool unitthreeunlock) { _unitThreeUnlock = unitthreeunlock; }
 	ProgressTimer* getManaGauge() { return _manaGauge; }
 	ProgressTimer* getMeatGauge() { return _meatGauge; }
 	ProgressTimer* getHeroHpInfo() { return _hpInfoGauge; }

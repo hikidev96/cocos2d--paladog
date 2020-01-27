@@ -410,6 +410,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer, Dungeon* dung
 
 	_unitBuffOra = Sprite::createWithSpriteFrameName("eff_aura2_0001.png");
 	_unitBuffOra->setPosition(_UnitSprite->getContentSize().width / 2, 10);
+	_unitBuffOra->setScale(0.8f);
 	_UnitSprite->addChild(_unitBuffOra, _UnitSprite->getZOrder() - 1);
 	_unitBuffOra->runAction(_unitBuffOraRepeat);
 	_unitBuffOra->setVisible(false);
@@ -506,6 +507,8 @@ void HeroUnit::UnitCollisionCheck()
 				// 버프상태가 아닐떄
 				if (_buff == false)
 				{
+
+
 					AttackAct = Sequence::create
 					(_animate2,
 						CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -529,6 +532,7 @@ void HeroUnit::UnitCollisionCheck()
 
 					if (RandNum == 0)
 					{
+						
 						AttackAct = Sequence::create
 						(_animate2,
 							CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -546,6 +550,8 @@ void HeroUnit::UnitCollisionCheck()
 
 					if (RandNum == 1)
 					{
+						
+
 						AttackAct = Sequence::create
 						(_animate2_1,
 							CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitHeavyAttack, this)),
@@ -570,6 +576,7 @@ void HeroUnit::UnitCollisionCheck()
 			{
 				if (_buff == false)
 				{
+					
 					AttackAct = Sequence::create
 					(_animate2,
 						CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -589,6 +596,7 @@ void HeroUnit::UnitCollisionCheck()
 
 					if (RandNum == 0)
 					{
+						
 						AttackAct = Sequence::create
 						(_animate2,
 							CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -604,6 +612,7 @@ void HeroUnit::UnitCollisionCheck()
 
 					if (RandNum == 1)
 					{
+						
 						AttackAct = Sequence::create
 						(_animate2_1,
 							CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitHeavyAttack, this)),
@@ -630,7 +639,7 @@ void HeroUnit::UnitCollisionCheck()
 	}
 
 	// 몬스터 기지 충돌 체크
-	if (_dungeon->getMonsterBase()->getPositionX() - _UnitSprite->getPositionX() - _Range + 70 <= 0)
+	if (_dungeon->getMonsterBase()->getPositionX() - _UnitSprite->getPositionX() - _Range + 70 <= 0 && _dungeon->getHp() > 0)
 	{
 		_UnitSprite->stopActionByTag(UnitWalk);
 
@@ -657,6 +666,8 @@ void HeroUnit::UnitCollisionCheck()
 		{
 			if (_buff == false)
 			{
+
+
 				AttackAct = Sequence::create
 				(_animate2,
 					CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -779,6 +790,9 @@ void HeroUnit::UnitAttack()
 	{
 		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
 		{
+			// 히트시 잠시 빨간색으로 바뀌는효과
+			_monsterVec[i]->getMonster()->runAction(Sequence::createWithTwoActions(TintTo::create(0, Color3B::RED), TintTo::create(0.1f, Color3B::WHITE)));
+
 			_hitAnimationBox = Sprite::createWithSpriteFrameName("eff_hit_01_0001.png");
 			_hitAnimationBox->setOpacity(255);
 			_layer->addChild(_hitAnimationBox, _monsterVec[i]->getMonster()->getZOrder());
@@ -792,6 +806,7 @@ void HeroUnit::UnitAttack()
 			else
 				_hitAnimationBox->runAction(Sequence::create(_UnitHitAnimate2, RemoveSelf::create(true), nullptr));
 
+
 			_monsterVec[i]->Hit(_Atk);
 			
 			return;
@@ -799,8 +814,11 @@ void HeroUnit::UnitAttack()
 	}
 
 	// 몬스터 기지를 공격
-	if (_dungeon->getMonsterBase()->getPositionX() - _UnitSprite->getPositionX() - _Range + 70 <= 0)
+	if (_dungeon->getMonsterBase()->getPositionX() - _UnitSprite->getPositionX() - _Range + 70 <= 0 && _dungeon->getHp() > 0)
 	{
+		// 히트시 잠시 빨간색으로 바뀌는효과
+		_dungeon->getMonsterBase()->runAction(Sequence::createWithTwoActions(TintTo::create(0, Color3B::RED), TintTo::create(0.1f, Color3B::WHITE)));
+
 		_hitAnimationBox = Sprite::createWithSpriteFrameName("eff_hit_01_0001.png");
 		_hitAnimationBox->setOpacity(255);
 		_layer->addChild(_hitAnimationBox, _dungeon->getMonsterBase()->getZOrder());
@@ -828,6 +846,9 @@ void HeroUnit::UnitHeavyAttack()
 	{
 		if (_monsterVec[i]->getMonster()->getPositionX() - _UnitSprite->getPositionX() - _Range <= 0)
 		{
+			// 히트시 잠시 빨간색으로 바뀌는효과
+			_monsterVec[i]->getMonster()->runAction(Sequence::createWithTwoActions(TintTo::create(0, Color3B::RED), TintTo::create(0.1f, Color3B::WHITE)));
+
 			_hitAnimationBox = Sprite::createWithSpriteFrameName("eff_hit_01_0001.png");
 			_hitAnimationBox->setOpacity(255);
 			_layer->addChild(_hitAnimationBox, _monsterVec[i]->getMonster()->getZOrder());
@@ -841,6 +862,7 @@ void HeroUnit::UnitHeavyAttack()
 			else
 				_hitAnimationBox->runAction(Sequence::create(_UnitHitAnimate2, RemoveSelf::create(true), nullptr));
 
+
 			_monsterVec[i]->Hit(_Atk2);
 
 			return;
@@ -848,8 +870,11 @@ void HeroUnit::UnitHeavyAttack()
 	}
 
 	// 몬스터 기지를 공격
-	if (_dungeon->getMonsterBase()->getPositionX() - _UnitSprite->getPositionX() - _Range + 70 <= 0)
+	if (_dungeon->getMonsterBase()->getPositionX() - _UnitSprite->getPositionX() - _Range + 70 <= 0 && _dungeon->getHp() > 0)
 	{
+		// 히트시 잠시 빨간색으로 바뀌는효과
+		_dungeon->getMonsterBase()->runAction(Sequence::createWithTwoActions(TintTo::create(0, Color3B::RED), TintTo::create(0.1f, Color3B::WHITE)));
+
 		_hitAnimationBox = Sprite::createWithSpriteFrameName("eff_hit_01_0001.png");
 		_hitAnimationBox->setOpacity(255);
 		_layer->addChild(_hitAnimationBox, _dungeon->getMonsterBase()->getZOrder());
@@ -913,9 +938,3 @@ void HeroUnit::Healing()
 	if (_Hp > _maxHP)
 		_Hp = _maxHP;
 }
-
-void HeroUnit::ShowUnitBuffOra()
-{
-
-}
-

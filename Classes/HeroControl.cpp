@@ -380,7 +380,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	}
 
 	// 스킬버튼 1
-	if (_hero->getMana() < _hero->getSkillOneManaUse())
+	if (_hero->getMana() < _hero->getSkillOneManaUse() || !_hero->getSkillOneUnlock())
 	{
 		_skillOneButton->setSpriteFrame("btn_fist_disable.png");
 	}
@@ -393,7 +393,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		_skillOneButton->setSpriteFrame("btn_fist_down.png");
 	}
 	// 스킬버튼 2
-	if (_hero->getMana() < _hero->getSkillTwoManaUse())
+	if (_hero->getMana() < _hero->getSkillTwoManaUse() || !_hero->getSkillTwoUnlock())
 	{
 		_skillTwoButton->setSpriteFrame("btn_fist_disable.png");
 	}
@@ -407,7 +407,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	}
 
 	// 스킬버튼 3
-	if (_hero->getMana() < _hero->getSkillThreeManaUse())
+	if (_hero->getMana() < _hero->getSkillThreeManaUse() || !_hero->getSkillThreeUnlock())
 	{
 		_skillThreeButton->setSpriteFrame("btn_fist_disable.png");
 	}
@@ -421,7 +421,11 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	}
 
 	// 생쥐 소환 버튼
-	if (_hero->getMeat() < 10 || _mouseSummonsButtonActivation == false)
+	if (!_hero->getUnitOneUnlock())
+	{
+		_mouseSummonsButton->setSpriteFrame("btn_unit_lock.png");
+	}
+	else if (_hero->getMeat() < 10 || _mouseSummonsButtonActivation == false)
 	{
 		_mouseSummonsButton->setSpriteFrame("btn_unit_00_disable.png");
 	}
@@ -435,7 +439,11 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	}
 
 	// 곰 소환 버튼
-	if (_hero->getMeat() < 30 || _bearSummonsButtonActivation == false)
+	if (!_hero->getUnitTwoUnlock())
+	{
+		_bearSummonsButton->setSpriteFrame("btn_unit_lock.png");
+	}
+	else if (_hero->getMeat() < 30 || _bearSummonsButtonActivation == false)
 	{
 		_bearSummonsButton->setSpriteFrame("btn_unit_02_disable.png");
 	}
@@ -449,7 +457,11 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	}
 
 	// 캥거루 소환버튼
-	if (_hero->getMeat() < 40 || _kangarooSummonsButtonActivation == false)
+	if (!_hero->getUnitThreeUnlock())
+	{
+		_kangarooSummonsButton->setSpriteFrame("btn_unit_lock.png");
+	}
+	else if (_hero->getMeat() < 40 || _kangarooSummonsButtonActivation == false)
 	{
 		_kangarooSummonsButton->setSpriteFrame("btn_unit_03_disable.png");
 	}
@@ -489,9 +501,12 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	_hero->getExpGauge()->setPercentage((_hero->getExp() / _hero->getMaxExp()) * 100);
 
 	// 스킬 마나 소비량을 보여준다
-	_SkillOneManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillOneManaUse())->_string.c_str()); // 스킬 1 마나소비량
-	_SkillTwoManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillTwoManaUse())->_string.c_str()); // 스킬 2 마나소비량
-	_SkillThreeManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillThreeManaUse())->_string.c_str()); // 스킬 3 마나소비량
+	if (_hero->getSkillOneUnlock())
+		_SkillOneManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillOneManaUse())->_string.c_str()); // 스킬 1 마나소비량
+	if (_hero->getSkillTwoUnlock())
+		_SkillTwoManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillTwoManaUse())->_string.c_str()); // 스킬 2 마나소비량
+	if (_hero->getSkillThreeUnlock())
+		_SkillThreeManaUse->setString(String::createWithFormat("%d", (int)_hero->getSkillThreeManaUse())->_string.c_str()); // 스킬 3 마나소비량
 
 	// 유닛 소환 쿨타임을 보여준다
 	_mouseSummonsTimer->setPercentage((_mouseSummonsCollTime / _mouseSummonsMaxCollTime) * 100);
@@ -692,7 +707,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 스킬 1 클릭시 행동
-	if (_skillOneButton->getBoundingBox().containsPoint(touch->getLocation()))
+	if (_skillOneButton->getBoundingBox().containsPoint(touch->getLocation()) && _hero->getSkillOneUnlock())
 	{
 		_skillOneClick = true;
 
@@ -711,7 +726,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 스킬 2 클릭시 행동
-	if (_skillTwoButton->getBoundingBox().containsPoint(touch->getLocation()))
+	if (_skillTwoButton->getBoundingBox().containsPoint(touch->getLocation()) && _hero->getSkillTwoUnlock())
 	{
 		_skillTwoClick = true;
 
@@ -728,7 +743,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 스킬 3 클릭시 행동
-	if (_skillThreeButton->getBoundingBox().containsPoint(touch->getLocation()))
+	if (_skillThreeButton->getBoundingBox().containsPoint(touch->getLocation()) && _hero->getSkillThreeUnlock())
 	{
 		_skillThreeClick = true;
 
@@ -743,7 +758,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 생쥐 소환 버튼
-	if (_mouseSummonsButton->getBoundingBox().containsPoint(touch->getLocation()))
+	if (_mouseSummonsButton->getBoundingBox().containsPoint(touch->getLocation()) && _hero->getUnitOneUnlock())
 	{
 		if (_hero->getMeat() >= 10 && _mouseSummonsButtonActivation == true)
 		{
@@ -758,7 +773,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 곰 소환 버튼
-	if (_bearSummonsButton->getBoundingBox().containsPoint(touch->getLocation()))
+	if (_bearSummonsButton->getBoundingBox().containsPoint(touch->getLocation()) && _hero->getUnitTwoUnlock())
 	{
 		if (_hero->getMeat() >= 30)
 		{
@@ -773,7 +788,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 캥거루 소환 버튼
-	if (_kangarooSummonsButton->getBoundingBox().containsPoint(touch->getLocation()))
+	if (_kangarooSummonsButton->getBoundingBox().containsPoint(touch->getLocation()) && _hero->getUnitThreeUnlock())
 	{
 		if (_hero->getMeat() >= 40)
 		{

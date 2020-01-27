@@ -134,6 +134,5 @@ public:
 	void ShowUnitHpBar();
 	void ShowUnitDeadSoul();
 	void Healing();
-	void ShowUnitBuffOra();
 
 };

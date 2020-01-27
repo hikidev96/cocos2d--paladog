@@ -103,6 +103,14 @@ Hero::Hero(Scene * scene, Layer* layer)
 
 	IsHealing = false;
 
+	_skillOneUnlock = true;
+	_skillTwoUnlock = false;
+	_skillThreeUnlock = false;
+
+	_unitOneUnlock = true;
+	_unitTwoUnlock = false;
+	_unitThreeUnlock = false;
+
 	// 대기 애니메이션 만들기
 	_animation1 = Animation::create();
 	_animation1->setDelayPerUnit(0.03f);
