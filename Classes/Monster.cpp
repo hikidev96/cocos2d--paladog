@@ -1,11 +1,10 @@
 #include "cocos_framework.h"
 #include "Monster.h"
 
-Monster::Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit, Mob mob)
+Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 {
 	_scene = scene;
 	_layer = layer;
-	_hero = hero;
 	_unit = unit;
 
 	cache = SpriteFrameCache::getInstance();
@@ -98,8 +97,8 @@ Monster::Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit,
 
 	int zorder = rand() % 30;
 	_monster = Sprite::createWithSpriteFrameName(StringUtils::format("%s_walk_0001.png", _monsterCode));
-	_monster->setPosition(1000, zorder + _hero->getHero()->getPositionY() - 17);
-	_layer->addChild(_monster, _hero->getHero()->getZOrder() + 15 - zorder);
+	_monster->setPosition(1000, zorder + Hero::getInstance()->getHero()->getPositionY() - 17);
+	_layer->addChild(_monster, Hero::getInstance()->getHero()->getZOrder() + 15 - zorder);
 }
 
 void Monster::MonsterMove()
@@ -124,8 +123,8 @@ void Monster::MonsterMove()
 			_isAttackRange = true;
 		}
 	}
-	if (_hero->getHero()->getPositionX() < _monster->getPositionX() &&
-		_hero->getHero()->getPositionX() > _monster->getPositionX() - _range) {
+	if (Hero::getInstance()->getHero()->getPositionX() < _monster->getPositionX() &&
+		Hero::getInstance()->getHero()->getPositionX() > _monster->getPositionX() - _range) {
 		if (_state != DEAD && _isAttackDelay == 0) {
 			_moveChange = true;
 			_state = ATTACK;
@@ -255,8 +254,8 @@ void Monster::Walk()
 
 void Monster::Attack()
 {
-	float distance = _monster->getPositionX() - _hero->getHero()->getPositionX() < 0 ? 9999 :
-		_monster->getPositionX() - _hero->getHero()->getPositionX();
+	float distance = _monster->getPositionX() - Hero::getInstance()->getHero()->getPositionX() < 0 ? 9999 :
+		_monster->getPositionX() - Hero::getInstance()->getHero()->getPositionX();
 	int target = -1;
 	float temp;
 	for (int i = 0; i < _unit.size(); i++) {
@@ -267,7 +266,7 @@ void Monster::Attack()
 	}
 	switch (target) {
 	case -1:
-		_hero->setHp(_hero->getHp() - _atk); 
+		Hero::getInstance()->setHp(Hero::getInstance()->getHp() - _atk);
 		break;
 	default:
 		_unitAttack = target;
@@ -282,7 +281,7 @@ void Monster::ZomkingSummon()
 
 	_summon = Sprite::createWithSpriteFrameName("b01_summon_0001.png");
 	_summon->setPosition(_monster->getPosition());
-	_layer->addChild(_summon, _hero->getHero()->getZOrder() + 15);
+	_layer->addChild(_summon, Hero::getInstance()->getHero()->getZOrder() + 15);
 
 	Vector<SpriteFrame*> frame;
 

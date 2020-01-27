@@ -10,7 +10,6 @@
 class HeroControl : Scene
 {
 	SpriteFrameCache* cache; // 캐시
-	Hero* _hero; // 히어로 객체
 	HeroUnit* _heroUnit; // 히어로 유닛객체
 	Dungeon* _dungeon; // 몬스터 기지체력 가지고오기위해서
 	MissileCollision* _missileCollision;
@@ -95,7 +94,7 @@ class HeroControl : Scene
 	bool _PauseClick;
 
 public:
-	HeroControl(Scene* scene, Hero* hero, Layer* layer, Dungeon* dungeon);
+	HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon);
 	void HeroMove(Dungeon* dungeon);
 	void HeroManaRegen();
 	void HeroMeatRegen();

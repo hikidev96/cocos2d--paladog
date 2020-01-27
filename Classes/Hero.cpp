@@ -1,7 +1,9 @@
 #include "Hero.h"
 #include "Monster.h"
 
-Hero::Hero(Scene * scene, Layer* layer)
+Hero* Hero::Instance = nullptr;
+
+Hero::Hero()
 {
 	// plist 파일 추가
 	cache = SpriteFrameCache::getInstance();
@@ -10,70 +12,6 @@ Hero::Hero(Scene * scene, Layer* layer)
 	cache->addSpriteFramesWithFile("Player/weapons/m02.plist");
 	cache->addSpriteFramesWithFile("Player/weapons/m09.plist");
 	cache->addSpriteFramesWithFile("Player/effect/eff_blend_01.plist");
-
-	// 영웅 만들기
-	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
-	_hero->setPosition(100, 440);
-	layer->addChild(_hero, (_hero->getPositionY() - _hero->getContentSize().height / 2) * -1);
-
-	// 영웅 무기 만들기
-	_heroWeapon1 = Sprite::createWithSpriteFrameName("m01_wait_0001.png");
-	_heroWeapon1->setPosition(100, 440);
-	layer->addChild(_heroWeapon1, _hero->getZOrder() - 1);
-
-	// 스킬 이펙트를 보여줄 기준 스프라이트
-	_skillEffectBox1 = Sprite::createWithSpriteFrameName("m01_eff_a_0001.png");
-	layer->addChild(_skillEffectBox1, _hero->getZOrder());
-	_skillEffectBox2 = Sprite::createWithSpriteFrameName("m01_eff_a_0001.png");
-	layer->addChild(_skillEffectBox2, _hero->getZOrder());
-	_skillEffectBox3 = Sprite::createWithSpriteFrameName("m01_eff_a_0001.png");
-	layer->addChild(_skillEffectBox3, _hero->getZOrder() - 1);
-
-	// 히어로 버프 오라
-	_heroBuffOra = Sprite::createWithSpriteFrameName("eff_aura_0001.png");
-	_heroBuffOra->setPosition(_hero->getPosition().x, _hero->getPosition().y);
-	//_hero->getContentSize().width / 2, 10
-	layer->addChild(_heroBuffOra, _hero->getZOrder() - 2);
-
-	//마나 게이지 만들기
-	_manaGauge = ProgressTimer::create(Sprite::create("UI/Mana.png"));
-	_manaGauge->setType(ProgressTimer::Type::BAR);
-	_manaGauge->setPosition({ 378,113 });
-	_manaGauge->setMidpoint({ 1, 0 });
-	_manaGauge->setBarChangeRate({ 1,0 });
-	scene->addChild(_manaGauge, -1);
-
-	//고기 게이지 만들기
-	_meatGauge = ProgressTimer::create(Sprite::create("UI/Meat.png"));
-	_meatGauge->setType(ProgressTimer::Type::BAR);
-	_meatGauge->setPosition({ 103,113 });
-	_meatGauge->setMidpoint({ 0, 0 });
-	_meatGauge->setBarChangeRate({ 1,0 });
-	scene->addChild(_meatGauge, -1);
-
-	// 체력 게이지(중앙상단)
-	_hpInfoGauge = ProgressTimer::create(Sprite::create("UI/HeroHpBar.png"));
-	_hpInfoGauge->setType(ProgressTimer::Type::BAR);
-	_hpInfoGauge->setPosition(201, 310);
-	_hpInfoGauge->setMidpoint({ 1,0 });
-	_hpInfoGauge->setBarChangeRate({ 1,0 });
-	scene->addChild(_hpInfoGauge, -1);
-
-	// 몬스터 베이스 체력 게이지(중앙상단)
-	_MonsterBaseHpGauge = ProgressTimer::create(Sprite::create("UI/MonsterBaseHpBar.png"));
-	_MonsterBaseHpGauge->setType(ProgressTimer::Type::BAR);
-	_MonsterBaseHpGauge->setPosition(280, 310);
-	_MonsterBaseHpGauge->setMidpoint({ 0,0 });
-	_MonsterBaseHpGauge->setBarChangeRate({ 1,0 });
-	scene->addChild(_MonsterBaseHpGauge, -1);
-
-	// 경험치 게이지
-	_expGauge = ProgressTimer::create(Sprite::create("UI/expbar.png"));
-	_expGauge->setType(ProgressTimer::Type::BAR);
-	_expGauge->setPosition(13, 303);
-	_expGauge->setMidpoint({ 0,0 });
-	_expGauge->setBarChangeRate({ 0,1 });
-	scene->addChild(_expGauge, -11);
 
 	_movement = RightWay; // 기본 방향설정
 
@@ -497,6 +435,91 @@ Hero::Hero(Scene * scene, Layer* layer)
 	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0006.png"));
 	_animate13 = Animate::create(_animation13);
 	_heroBuffOraRepeat = RepeatForever::create(_animate13);
+
+	
+}
+
+Hero * Hero::getInstance()
+{
+	if (Instance == nullptr)
+	{
+		Instance = new Hero();
+	}
+
+	return Instance;
+}
+
+void Hero::releaseInstance()
+{
+	if (Instance) delete Instance;
+}
+
+void Hero::createHeroInfo(Scene* scene, Layer* layer)
+{
+
+	// 영웅 만들기
+	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
+	_hero->setPosition(100, 440);
+	layer->addChild(_hero, (_hero->getPositionY() - _hero->getContentSize().height / 2) * -1);
+
+	// 영웅 무기 만들기
+	_heroWeapon1 = Sprite::createWithSpriteFrameName("m01_wait_0001.png");
+	_heroWeapon1->setPosition(100, 440);
+	layer->addChild(_heroWeapon1, _hero->getZOrder() - 1);
+
+	// 스킬 이펙트를 보여줄 기준 스프라이트
+	_skillEffectBox1 = Sprite::createWithSpriteFrameName("m01_eff_a_0001.png");
+	layer->addChild(_skillEffectBox1, _hero->getZOrder());
+	_skillEffectBox2 = Sprite::createWithSpriteFrameName("m01_eff_a_0001.png");
+	layer->addChild(_skillEffectBox2, _hero->getZOrder());
+	_skillEffectBox3 = Sprite::createWithSpriteFrameName("m01_eff_a_0001.png");
+	layer->addChild(_skillEffectBox3, _hero->getZOrder() - 1);
+
+	// 히어로 버프 오라
+	_heroBuffOra = Sprite::createWithSpriteFrameName("eff_aura_0001.png");
+	_heroBuffOra->setPosition(_hero->getPosition().x, _hero->getPosition().y);
+	//_hero->getContentSize().width / 2, 10
+	layer->addChild(_heroBuffOra, _hero->getZOrder() - 2);
+
+	//마나 게이지 만들기
+	_manaGauge = ProgressTimer::create(Sprite::create("UI/Mana.png"));
+	_manaGauge->setType(ProgressTimer::Type::BAR);
+	_manaGauge->setPosition({ 378,113 });
+	_manaGauge->setMidpoint({ 1, 0 });
+	_manaGauge->setBarChangeRate({ 1,0 });
+	scene->addChild(_manaGauge, -1);
+
+	//고기 게이지 만들기
+	_meatGauge = ProgressTimer::create(Sprite::create("UI/Meat.png"));
+	_meatGauge->setType(ProgressTimer::Type::BAR);
+	_meatGauge->setPosition({ 103,113 });
+	_meatGauge->setMidpoint({ 0, 0 });
+	_meatGauge->setBarChangeRate({ 1,0 });
+	scene->addChild(_meatGauge, -1);
+
+	// 체력 게이지(중앙상단)
+	_hpInfoGauge = ProgressTimer::create(Sprite::create("UI/HeroHpBar.png"));
+	_hpInfoGauge->setType(ProgressTimer::Type::BAR);
+	_hpInfoGauge->setPosition(201, 310);
+	_hpInfoGauge->setMidpoint({ 1,0 });
+	_hpInfoGauge->setBarChangeRate({ 1,0 });
+	scene->addChild(_hpInfoGauge, -1);
+
+	// 몬스터 베이스 체력 게이지(중앙상단)
+	_MonsterBaseHpGauge = ProgressTimer::create(Sprite::create("UI/MonsterBaseHpBar.png"));
+	_MonsterBaseHpGauge->setType(ProgressTimer::Type::BAR);
+	_MonsterBaseHpGauge->setPosition(280, 310);
+	_MonsterBaseHpGauge->setMidpoint({ 0,0 });
+	_MonsterBaseHpGauge->setBarChangeRate({ 1,0 });
+	scene->addChild(_MonsterBaseHpGauge, -1);
+
+	// 경험치 게이지
+	_expGauge = ProgressTimer::create(Sprite::create("UI/expbar.png"));
+	_expGauge->setType(ProgressTimer::Type::BAR);
+	_expGauge->setPosition(13, 303);
+	_expGauge->setMidpoint({ 0,0 });
+	_expGauge->setBarChangeRate({ 0,1 });
+	scene->addChild(_expGauge, -11);
 
 	_heroBuffOra->runAction(_heroBuffOraRepeat);
 }

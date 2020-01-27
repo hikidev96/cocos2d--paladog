@@ -1,7 +1,6 @@
 #pragma once
 
 #include "cocos_framework.h"
-#include "Hero.h"
 #include "Monster.h"
 #include "Dungeon.h"
 

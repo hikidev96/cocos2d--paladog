@@ -12,15 +12,15 @@ bool MindForest_Stage1::init() {
 	_bgLayer = Layer::create();
 	this->addChild(_bgLayer, -100);
 
-	_hero = new Hero(this, _bgLayer);
+	Hero::getInstance()->createHeroInfo(this, _bgLayer); // 플레이어의 싱글톤 객체 생성
 	_dungeon = new Dungeon(this, _bgLayer, 1000.0f); //3번째 인자에 체력 넣음
-	_heroControl = new HeroControl(this, _hero, _bgLayer, _dungeon);
+	_heroControl = new HeroControl(this, _bgLayer, _dungeon);
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
-	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), _hero->getManaRegenSpeed());
-	this->schedule(schedule_selector(MindForest_Stage1::HeroMeatRegen), _hero->getMeatRegenSpeed());
+	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), Hero::getInstance()->getManaRegenSpeed());
+	this->schedule(schedule_selector(MindForest_Stage1::HeroMeatRegen), Hero::getInstance()->getMeatRegenSpeed());
 	
-	// 배경이미지 plist
+	 //배경이미지 plist
 	_cache = SpriteFrameCache::getInstance();
 	_cache->addSpriteFramesWithFile("UI/Background/background_00.plist");
 
@@ -49,7 +49,7 @@ bool MindForest_Stage1::init() {
 	_backGround3_2->setPosition({ 960,525 });
 	_backGround3_2->setAnchorPoint({ 0,1 });
 
-	// 이미지가 만나는 가장자리에 검은선이 생기는 현상을 방지
+	 //이미지가 만나는 가장자리에 검은선이 생기는 현상을 방지
 	_backGround1->getTexture()->setAliasTexParameters();
 	_backGround2->getTexture()->setAliasTexParameters();
 	_backGround2_1->getTexture()->setAliasTexParameters();
@@ -66,7 +66,7 @@ bool MindForest_Stage1::init() {
 	_bgLayer->addChild(_backGround3_2, -1020);
 	
 	// Follow 액션으로 화면이동구현
-	_bgLayer->runAction(Follow::create(_hero->getHero(), Rect(0, 0, 1024, 512)));
+	_bgLayer->runAction(Follow::create(Hero::getInstance()->getHero(), Rect(0, 0, 1024, 512)));
 
 	return true;
 }
@@ -80,12 +80,12 @@ void MindForest_Stage1::tick(float delta)
 		_heroControl->getHeroUnitVec()[i]->BringMonsterVec(_monster);
 
 		// 힐 스킬 사용시 작동
-		if (_hero->getIsHealing())
+		if (Hero::getInstance()->getIsHealing())
 			_heroControl->getHeroUnitVec()[i]->Healing();
 	}
 
 	// 모든 객체의 힐이 끝나면 힐 스킬 비활성화 상태로 돌려줌
-	_hero->setIsHealing(false);
+	Hero::getInstance()->setIsHealing(false);
 
 	// 스킬 1 미사일 과 몬스터 유닛 충돌 처리
 	for (int i = 0; i < _heroControl->getMissileCollisionVec().size(); i++)
@@ -96,7 +96,7 @@ void MindForest_Stage1::tick(float delta)
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
 	_heroControl->UnitVecErase(); // 유닛백터 삭제
 	_heroControl->CoolTime(); // 쿨타임 계산
-
+	ClearTest();// 클리어 테스트
 }
 
 void MindForest_Stage1::HeroManaRegen(float delta)
@@ -112,10 +112,10 @@ void MindForest_Stage1::HeroMeatRegen(float delta)
 void MindForest_Stage1::MonsterTick()
 {
 	if (rand() % 300 == 0) {
-		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
+		_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::일반좀비));
 	}
 	if (rand() % 1500 == 0) {
-		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::강화좀비));
+		_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::강화좀비));
 	}
 	for (int i = 0; i < _monster.size(); i++) {
 		if (_monster[i]->getUnitAttack() != -1 && 
@@ -134,5 +134,17 @@ void MindForest_Stage1::MonsterTick()
 			_bgLayer->removeChild(_monster[i]->getMonster());
 			_monster.erase(_monster.begin() + i);
 		}
+	}
+}
+
+void MindForest_Stage1::ClearTest()
+{
+	if (_dungeon->getHp() <= 0)
+	{
+		Hero::getInstance()->setSkillTwoUnlock(true);
+		Hero::getInstance()->setUnitTwoUnlock(true);
+
+		auto scene = MindForest_Stage2::create();
+		Director::getInstance()->replaceScene(scene);
 	}
 }
