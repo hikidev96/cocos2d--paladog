@@ -6,10 +6,10 @@
 #include "HeroUnit.h"
 #include "Monster.h"
 #include "Dungeon.h"
+#include "MindForest_Stage2.h"
 
 class MindForest_Stage1 : public Scene
 {
-	Hero* _hero;
 	HeroControl* _heroControl;
 	HeroUnit* _heroUnit;
 	vector<Monster*> _monster;
@@ -36,4 +36,6 @@ public:
 	void HeroMeatRegen(float delta);
 
 	void MonsterTick();
+
+	void ClearTest();
 };

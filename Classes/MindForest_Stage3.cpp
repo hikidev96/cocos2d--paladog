@@ -12,13 +12,12 @@ bool MindForest_Stage3::init() {
 	_bgLayer = Layer::create();
 	this->addChild(_bgLayer, -100);
 
-	_hero = new Hero(this, _bgLayer);
-	_heroControl = new HeroControl(this, _hero, _bgLayer, _dungeon);
+	_heroControl = new HeroControl(this, _bgLayer, _dungeon);
 	_dungeon = new Dungeon(this, _bgLayer, 3000.0f); //3번째 인자에 체력 넣음
 
 	this->schedule(schedule_selector(MindForest_Stage3::tick));
-	this->schedule(schedule_selector(MindForest_Stage3::HeroManaRegen), _hero->getManaRegenSpeed());
-	this->schedule(schedule_selector(MindForest_Stage3::HeroMeatRegen), _hero->getMeatRegenSpeed());
+	this->schedule(schedule_selector(MindForest_Stage3::HeroManaRegen), Hero::getInstance()->getManaRegenSpeed());
+	this->schedule(schedule_selector(MindForest_Stage3::HeroMeatRegen), Hero::getInstance()->getMeatRegenSpeed());
 
 	// 배경이미지 plist
 	_cache = SpriteFrameCache::getInstance();
@@ -66,7 +65,7 @@ bool MindForest_Stage3::init() {
 	_bgLayer->addChild(_backGround3_2, -1020);
 
 	// Follow 액션으로 화면이동구현
-	_bgLayer->runAction(Follow::create(_hero->getHero(), Rect(0, 0, 1024, 512)));
+	_bgLayer->runAction(Follow::create(Hero::getInstance()->getHero(), Rect(0, 0, 1024, 512)));
 
 	//좀비킹 상태값
 	_zomking = 0;
@@ -104,25 +103,25 @@ void MindForest_Stage3::MonsterTick()
 	if (_dungeon->getIsCrash()) {
 		switch (_zomking) {
 		case 0:
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::좀비킹));
+			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::좀비킹));
 			_zomking = 1;
 			break;
 		case 1:
 			if (rand() % 1500 == 0) {
-				_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::핑크미라));
+				_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::핑크미라));
 			}
 			break;
 		}
 	}
 	else {
 		if (rand() % 400 == 0) {
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::광부좀비));
+			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::광부좀비));
 		}
 		if (rand() % 1000 == 0) {
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반미라));
+			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::일반미라));
 		}
 		if (rand() % 2000 == 0) {
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::핑크미라));
+			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::핑크미라));
 		}
 	}
 	for (int i = 0; i < _monster.size(); i++) {
@@ -141,9 +140,9 @@ void MindForest_Stage3::MonsterTick()
 			_monster[i]->setUnit(_heroControl->getHeroUnitVec());
 		}
 		if (_monster[i]->getIsSummon()) { //좀비킹 소환술
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
+			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::일반좀비));
 			_monster.back()->setSummunPositionX(_monster[i]->getIsSummon());
-			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
+			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::일반좀비));
 			_monster.back()->setSummunPositionX(_monster[i]->getIsSummon());
 		}
 		_monster[i]->MonsterMove();

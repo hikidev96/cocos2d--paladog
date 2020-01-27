@@ -37,6 +37,10 @@ enum HAMMERKIND
 class Hero
 {
 private:
+	static Hero* Instance;
+	Hero();
+	~Hero() {}
+
 	SpriteFrameCache* cache;
 
 	Animation* _animation1; // 히어로 대기 액션
@@ -137,7 +141,7 @@ private:
 	float _skillThreeManaUse; // 스킬 3 마나 소비량
 
 	bool IsHealing;
-	
+
 	bool _skillOneUnlock;
 	bool _skillTwoUnlock;
 	bool _skillThreeUnlock;
@@ -147,7 +151,10 @@ private:
 	bool _unitThreeUnlock;
 
 public:
-	Hero(Scene* scene, Layer* layer);
+	static Hero* getInstance();
+	static void releaseInstance();
+	void createHeroInfo(Scene* scene, Layer* layer);
+
 	Movement getMoveWay() { return _movement; }
 	void setMoveWay(Movement movement) { _movement = movement; }
 	Sprite* getHero() { return _hero; }
@@ -210,7 +217,7 @@ public:
 	RepeatForever* getWaitingAction() { return _heroWaitingAction; }
 	RepeatForever* getWalkingAction() { return _heroWalkingAction; }
 	Animate* getAttackAction() { return _animate3; }
-	
+
 	HAMMERKIND getHammerKind() { return _HammerKind; }
 	void setHammerKind(HAMMERKIND hammerkind) { _HammerKind = hammerkind; }
 

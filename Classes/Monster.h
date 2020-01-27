@@ -22,7 +22,6 @@ class Monster : Scene
 
 	Scene* _scene;
 	Layer* _layer;
-	Hero* _hero;
 	vector<HeroUnit*> _unit;
 
 	SpriteFrameCache* cache;
@@ -56,7 +55,7 @@ class Monster : Scene
 	bool _isBossDead; //보스 죽음 여부
 
 public:
-	Monster(Scene* scene, Layer* layer, Hero* hero, vector<HeroUnit*> unit, Mob mob);
+	Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob);
 
 	void MonsterMove();
 	void Hit(float atk); //매개 변수에 공격력 삽입
