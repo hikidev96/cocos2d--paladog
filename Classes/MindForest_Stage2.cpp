@@ -14,7 +14,7 @@ bool MindForest_Stage2::init() {
 
 	_hero = new Hero(this, _bgLayer);
 	_heroControl = new HeroControl(this, _hero, _bgLayer, _dungeon);
-	_dungeon = new Dungeon(this, _bgLayer, 2000.0f); //3번째 인자에 체력 넣음
+	_dungeon = new Dungeon(this, _bgLayer, 20000.0f); //3번째 인자에 체력 넣음
 
 	this->schedule(schedule_selector(MindForest_Stage2::tick));
 	this->schedule(schedule_selector(MindForest_Stage2::HeroManaRegen), _hero->getManaRegenSpeed());
@@ -98,14 +98,16 @@ void MindForest_Stage2::HeroMeatRegen(float delta)
 
 void MindForest_Stage2::MonsterTick()
 {
-	if (rand() % 400 == 0) {
-		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::강화좀비));
-	}
-	if (rand() % 1000 == 0) {
-		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::광부좀비));
-	}
-	if (rand() % 2000 == 0) {
-		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반미라));
+	if (!_dungeon->getIsCrash()) {
+		if (rand() % 400 == 0) {
+			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::강화좀비));
+		}
+		if (rand() % 1000 == 0) {
+			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::광부좀비));
+		}
+		if (rand() % 2000 == 0) {
+			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반미라));
+		}
 	}
 	for (int i = 0; i < _monster.size(); i++) {
 		if (_monster[i]->getUnitAttack() != -1 &&

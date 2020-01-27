@@ -14,7 +14,7 @@ bool MindForest_Stage3::init() {
 
 	_hero = new Hero(this, _bgLayer);
 	_heroControl = new HeroControl(this, _hero, _bgLayer, _dungeon);
-	_dungeon = new Dungeon(this, _bgLayer, 3000.0f); //3번째 인자에 체력 넣음
+	_dungeon = new Dungeon(this, _bgLayer, 30000.0f); //3번째 인자에 체력 넣음
 
 	this->schedule(schedule_selector(MindForest_Stage3::tick));
 	this->schedule(schedule_selector(MindForest_Stage3::HeroManaRegen), _hero->getManaRegenSpeed());
@@ -86,7 +86,6 @@ void MindForest_Stage3::tick(float delta)
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
 	_heroControl->UnitVecErase();
 	_heroControl->CoolTime();
-
 }
 
 void MindForest_Stage3::HeroManaRegen(float delta)

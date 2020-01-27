@@ -13,7 +13,7 @@ bool MindForest_Stage1::init() {
 	this->addChild(_bgLayer, -100);
 
 	_hero = new Hero(this, _bgLayer);
-	_dungeon = new Dungeon(this, _bgLayer, 1000.0f); //3번째 인자에 체력 넣음
+	_dungeon = new Dungeon(this, _bgLayer, 10000.0f); //3번째 인자에 체력 넣음
 	_heroControl = new HeroControl(this, _hero, _bgLayer, _dungeon);
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
@@ -111,11 +111,13 @@ void MindForest_Stage1::HeroMeatRegen(float delta)
 
 void MindForest_Stage1::MonsterTick()
 {
-	if (rand() % 300 == 0) {
-		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
-	}
-	if (rand() % 1500 == 0) {
-		_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::강화좀비));
+	if (!_dungeon->getIsCrash()) {
+		if (rand() % 300 == 0) {
+			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::일반좀비));
+		}
+		if (rand() % 1500 == 0) {
+			_monster.push_back(new Monster(this, _bgLayer, _hero, _heroControl->getHeroUnitVec(), Mob::강화좀비));
+		}
 	}
 	for (int i = 0; i < _monster.size(); i++) {
 		if (_monster[i]->getUnitAttack() != -1 && 

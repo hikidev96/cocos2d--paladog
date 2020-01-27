@@ -204,6 +204,9 @@ void Monster::MonsterMove()
 			auto animation2 = Animation::createWithSpriteFrames(frame2, 0.03f);
 			auto animate2 = Animate::create(animation2);
 
+			_hero->setExp(_hero->getExp() + _exp);
+			_hero->setGold(_hero->getGold() + _money);
+
 			auto action = Sequence::create(
 				Spawn::create(animate, MoveBy::create(0.48, Vec2(70, 0)), nullptr),
 				animate2,
