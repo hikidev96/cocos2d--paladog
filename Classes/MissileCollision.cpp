@@ -42,7 +42,7 @@ MissileCollision::MissileCollision(Layer* layer, Movement moveway, Vec2 pos, int
 	_hammerSkillEffectRepeat_B1->setTag(777);
 
 	_hammerHitEffectAnimation = Animation::create();
-	_hammerHitEffectAnimation->setDelayPerUnit(0.03f);
+	_hammerHitEffectAnimation->setDelayPerUnit(0.05f);
 	_hammerHitEffectAnimation->addSpriteFrame(cache->getSpriteFrameByName("eff_explosion_a_0001.png"));
 	_hammerHitEffectAnimation->addSpriteFrame(cache->getSpriteFrameByName("eff_explosion_a_0002.png"));
 	_hammerHitEffectAnimation->addSpriteFrame(cache->getSpriteFrameByName("eff_explosion_a_0003.png"));
@@ -96,7 +96,7 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 			_firstAtk = true;
 
 			_hitEffect1 = Sprite::createWithSpriteFrameName("eff_explosion_a_0001.png");
-			_hitEffect1->setOpacity(255);
+			_hitEffect1->setScale(1.5f);
 			_layer->addChild(_hitEffect1, monster[i]->getMonster()->getZOrder());
 			_hitEffect1->setPosition(monster[i]->getMonster()->getPosition().x, monster[i]->getMonster()->getPosition().y - 30);
 			_hitEffect1->runAction(Sequence::create(_hammerHitEffectAnimate, RemoveSelf::create(true), nullptr)->clone());
@@ -121,7 +121,7 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 			_secondAtk = true;
 
 			_hitEffect2 = Sprite::createWithSpriteFrameName("eff_explosion_a_0001.png");
-			_hitEffect2->setOpacity(255);
+			_hitEffect2->setScale(1.5f);
 			_layer->addChild(_hitEffect2, monster[i]->getMonster()->getZOrder());
 			_hitEffect2->setPosition(monster[i]->getMonster()->getPosition().x, monster[i]->getMonster()->getPosition().y - 30);
 			_hitEffect2->runAction(Sequence::create(_hammerHitEffectAnimate, RemoveSelf::create(true), nullptr)->clone());
@@ -145,7 +145,7 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 			monster[i]->Hit(_Atk);
 
 			_hitEffect3 = Sprite::createWithSpriteFrameName("eff_explosion_a_0001.png");
-			_hitEffect3->setOpacity(255);
+			_hitEffect3->setScale(1.5f);
 			_layer->addChild(_hitEffect3, monster[i]->getMonster()->getZOrder());
 			_hitEffect3->setPosition(monster[i]->getMonster()->getPosition().x, monster[i]->getMonster()->getPosition().y - 30);
 			_hitEffect3->runAction(Sequence::create(_hammerHitEffectAnimate, RemoveSelf::create(true), nullptr)->clone());
@@ -165,7 +165,7 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 		dungeon->Hit(_Atk);
 
 		_hitEffect4 = Sprite::createWithSpriteFrameName("eff_explosion_a_0001.png");
-		_hitEffect4->setScale(2.f);
+		_hitEffect4->setScale(1.5f);
 		_layer->addChild(_hitEffect4, dungeon->getMonsterBase()->getZOrder() + 1);
 		_hitEffect4->setPosition(dungeon->getMonsterBase()->getPosition().x + 100, dungeon->getMonsterBase()->getPosition().y + 100);
 		_hitEffect4->runAction(Sequence::create(_hammerHitEffectAnimate, RemoveSelf::create(true), nullptr)->clone());

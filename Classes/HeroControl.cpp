@@ -662,7 +662,12 @@ void HeroControl::UnitBuff()
 	// 히어로 버프 범위 안에있으면 버프활성화
 	for (int i = 0; i < _heroUnitVec.size(); i++)
 	{
-		if (Hero::getInstance()->getHeroBuffOra()->getPositionX() - 100 < _heroUnitVec[i]->getSprite()->getPositionX() &&
+		if (_heroUnitVec[i]->getDead())
+		{
+			_heroUnitVec[i]->getUnitBuffOra()->setVisible(false);
+			_heroUnitVec[i]->setBuff(false);
+		}
+		else if (Hero::getInstance()->getHeroBuffOra()->getPositionX() - 100 < _heroUnitVec[i]->getSprite()->getPositionX() &&
 			Hero::getInstance()->getHeroBuffOra()->getPositionX() + 100 > _heroUnitVec[i]->getSprite()->getPositionX())
 		{
 			_heroUnitVec[i]->getUnitBuffOra()->setVisible(true);

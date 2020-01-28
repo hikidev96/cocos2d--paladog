@@ -96,7 +96,6 @@ void MindForest_Stage1::tick(float delta)
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
 	_heroControl->UnitVecErase(); // 유닛백터 삭제
 	_heroControl->CoolTime(); // 쿨타임 계산
-	ClearTest();// 클리어 테스트
 }
 
 void MindForest_Stage1::HeroManaRegen(float delta)
@@ -134,17 +133,5 @@ void MindForest_Stage1::MonsterTick()
 			_bgLayer->removeChild(_monster[i]->getMonster());
 			_monster.erase(_monster.begin() + i);
 		}
-	}
-}
-
-void MindForest_Stage1::ClearTest()
-{
-	if (_dungeon->getHp() <= 0)
-	{
-		Hero::getInstance()->setSkillTwoUnlock(true);
-		Hero::getInstance()->setUnitTwoUnlock(true);
-
-		auto scene = MindForest_Stage2::create();
-		Director::getInstance()->replaceScene(scene);
 	}
 }

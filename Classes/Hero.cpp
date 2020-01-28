@@ -436,6 +436,25 @@ Hero::Hero()
 	_animate13 = Animate::create(_animation13);
 	_heroBuffOraRepeat = RepeatForever::create(_animate13);
 
+	// 유닛 정보
+
+	_mouseHp = 100.0f; // 체력
+	_mouseMaxHP = 100.0f; // 최대체력
+	_mouseAtk = 500.0f; // 일반공격력
+	_mouseAtk2 = 1000.0f; // 강공격력
+	_mouseSpeed = 0.6f; // 스피드
+
+	_bearHp = 200.0f; // 체력
+	_bearMaxHP = 200.0f; // 최대체력
+	_bearAtk = 500.0f; // 일반공격력
+	_bearAtk2 = 1000.0f; // 강공격력
+	_bearSpeed = 0.6f; // 스피드
+
+	_kangarooHp = 300.0f; // 체력
+	_kangarooMaxHP = 300.0f; // 최대체력
+	_kangarooAtk = 500.0f; // 일반공격력
+	_kangarooAtk2 = 1000.0f; // 강공격력
+	_kangarooSpeed = 0.6f; // 스피드
 	
 }
 

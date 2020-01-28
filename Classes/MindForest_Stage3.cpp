@@ -12,6 +12,7 @@ bool MindForest_Stage3::init() {
 	_bgLayer = Layer::create();
 	this->addChild(_bgLayer, -100);
 
+	Hero::getInstance()->createHeroInfo(this, _bgLayer);
 	_heroControl = new HeroControl(this, _bgLayer, _dungeon);
 	_dungeon = new Dungeon(this, _bgLayer, 3000.0f); //3번째 인자에 체력 넣음
 
@@ -21,30 +22,30 @@ bool MindForest_Stage3::init() {
 
 	// 배경이미지 plist
 	_cache = SpriteFrameCache::getInstance();
-	_cache->addSpriteFramesWithFile("UI/Background/background_00.plist");
+	_cache->addSpriteFramesWithFile("UI/Background/background_07.plist");
 
 	// 배경이미지 만들기.
-	_backGround1 = Sprite::createWithSpriteFrameName("background_00_a.png");
+	_backGround1 = Sprite::createWithSpriteFrameName("background_07_a.png");
 	_backGround1->setPosition({ 0,525 });
 	_backGround1->setAnchorPoint({ 0,1 });
 
 	// 이미지가 짧아서 여러장 붙힘
-	_backGround2 = Sprite::createWithSpriteFrameName("background_00_b.png");
+	_backGround2 = Sprite::createWithSpriteFrameName("background_07_b.png");
 	_backGround2->setPosition({ 0,525 });
 	_backGround2->setAnchorPoint({ 0,1 });
-	_backGround2_1 = Sprite::createWithSpriteFrameName("background_00_b.png");
+	_backGround2_1 = Sprite::createWithSpriteFrameName("background_07_b.png");
 	_backGround2_1->setPosition({ 752,525 });
 	_backGround2_1->setAnchorPoint({ 0,1 });
 
-	_backGround3 = Sprite::createWithSpriteFrameName("background_00_c.png");
+	_backGround3 = Sprite::createWithSpriteFrameName("background_07_c.png");
 	_backGround3->setPosition({ 0,525 });
 	_backGround3->setAnchorPoint({ 0,1 });
 
 	// 이미지가 짧아서 여러장 붙힘
-	_backGround3_1 = Sprite::createWithSpriteFrameName("background_00_c.png");
+	_backGround3_1 = Sprite::createWithSpriteFrameName("background_07_c.png");
 	_backGround3_1->setPosition({ 480,525 });
 	_backGround3_1->setAnchorPoint({ 0,1 });
-	_backGround3_2 = Sprite::createWithSpriteFrameName("background_00_c.png");
+	_backGround3_2 = Sprite::createWithSpriteFrameName("background_07_c.png");
 	_backGround3_2->setPosition({ 960,525 });
 	_backGround3_2->setAnchorPoint({ 0,1 });
 
