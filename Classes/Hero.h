@@ -122,6 +122,7 @@ private:
 	Movement _movement; // 현재 플레이어가 보고있는 방향
 	HAMMERKIND _HammerKind;
 
+	// 히어로 정보
 	float _speed; // 스피드
 	float _lv; // 레벨
 	float _hp; // 체력
@@ -149,6 +150,27 @@ private:
 	bool _unitOneUnlock;
 	bool _unitTwoUnlock;
 	bool _unitThreeUnlock;
+
+
+	// 유닛정보
+	float _mouseHp; // 체력
+	float _mouseMaxHP; // 최대체력
+	float _mouseAtk; // 일반공격력
+	float _mouseAtk2; // 강공격력
+	float _mouseSpeed; // 스피드
+
+	float _bearHp; // 체력
+	float _bearMaxHP; // 최대체력
+	float _bearAtk; // 일반공격력
+	float _bearAtk2; // 강공격력
+	float _bearSpeed; // 스피드
+
+	float _kangarooHp; // 체력
+	float _kangarooMaxHP; // 최대체력
+	float _kangarooAtk; // 일반공격력
+	float _kangarooAtk2; // 강공격력
+	float _kangarooSpeed; // 스피드
+
 
 public:
 	static Hero* getInstance();
@@ -227,4 +249,40 @@ public:
 	Animate* HammerAttackEffectA(HAMMERKIND hammerkind);
 	Animate* HammerAttackEffectB(HAMMERKIND hammerkind);
 	Animate* HammerAttackEffectC(HAMMERKIND hammerkind);
+
+	//유닛 정보 getset 함수
+	float getMouseHp() { return _mouseHp; }
+	void setMouseHp(float hp) { _mouseHp = hp; }
+	float getMouseMaxHp() { return _mouseMaxHP; }
+	void setMouseMaxHp(float maxhp) { _mouseMaxHP = maxhp; }
+	float getMouseAtk() { return _mouseAtk; }
+	void setMouseAtk(float atk) { _mouseAtk = atk; }
+	float getMouseAtk2() { return _mouseAtk2; }
+	void setMouseAtk2(float atk2) { _mouseAtk2 = atk2; }
+	float getMouseSpeed() { return _mouseSpeed; }
+	void setMouseSpeed(float speed) { _mouseSpeed = speed; }
+
+
+	float getBearHp() { return _bearHp; }
+	void setBearHp(float hp) { _bearHp = hp; }
+	float getBearMaxHp() { return _bearMaxHP; }
+	void setBearMaxHp(float maxhp) { _bearMaxHP = maxhp; }
+	float getBearAtk() { return _bearAtk; }
+	void setBearAtk(float atk) { _bearAtk = atk; }
+	float getBearAtk2() { return _bearAtk2; }
+	void setBearAtk2(float atk2) { _bearAtk2 = atk2; }
+	float getBearSpeed() { return _bearSpeed; }
+	void setBearSpeed(float speed) { _bearSpeed = speed; }
+
+
+	float getKangarooHp() { return _kangarooHp; }
+	void setKangarooHp(float hp) { _kangarooHp = hp; }
+	float getKangarooMaxHp() { return _kangarooMaxHP; }
+	void setKangarooMaxHp(float maxhp) { _kangarooMaxHP = maxhp; }
+	float getKangarooAtk() { return _kangarooAtk; }
+	void setKangarooAtk(float atk) { _kangarooAtk = atk; }
+	float getKangarooAtk2() { return _kangarooAtk2; }
+	void setKangarooAtk2(float atk2) { _kangarooAtk2 = atk2; }
+	float getKangarooSpeed() { return _kangarooSpeed; }
+	void setKangarooSpeed(float speed) { _kangarooSpeed = speed; }
 };

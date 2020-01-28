@@ -2,6 +2,7 @@
 
 #include "cocos_framework.h"
 #include "Dungeon.h"
+#include "Hero.h"
 class Monster;
 
 enum UnitKind
@@ -38,8 +39,8 @@ class HeroUnit
 
 	float _Hp; // 체력
 	float _maxHP;
-	float _Atk; // 공격력
-	float _Atk2;
+	float _Atk; // 일반공격력
+	float _Atk2; // 강공격력
 	float _Speed; // 스피드
 	float _AtkSpeed; // 현재 공격 스피드
 	float _MaxAtkSpeed; // 최대 공격 스피드
@@ -109,6 +110,8 @@ public:
 	void setSprite(Sprite* pSprite) { _UnitSprite = pSprite; }
 	float getHp() { return _Hp; }
 	void setHp(float hp) { _Hp = hp; }
+	float getMaxHp() { return _maxHP; }
+	void setMaxHp(float maxhp) { _maxHP = maxhp; }
 	float getAtk() { return _Atk; }
 	void setAtk(float atk) { _Atk = atk; }
 	float getAtk2() { return _Atk2; }

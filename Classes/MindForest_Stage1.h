@@ -36,6 +36,4 @@ public:
 	void HeroMeatRegen(float delta);
 
 	void MonsterTick();
-
-	void ClearTest();
 };
