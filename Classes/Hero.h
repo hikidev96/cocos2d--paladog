@@ -43,6 +43,8 @@ private:
 
 	SpriteFrameCache* cache;
 
+	vector<Sprite*> HeroInventoryVec; // 히어로 인벤토리
+
 	Animation* _animation1; // 히어로 대기 액션
 	Animate* _animate1; // 히어로 대기 액션
 	RepeatForever* _heroWaitingAction; // 히어로 대기 액션
@@ -176,6 +178,8 @@ public:
 	static Hero* getInstance();
 	static void releaseInstance();
 	void createHeroInfo(Scene* scene, Layer* layer);
+
+	vector<Sprite*> getHeroInventoryVec() { return HeroInventoryVec; } // 히어로 인벤토리 겟함수
 
 	Movement getMoveWay() { return _movement; }
 	void setMoveWay(Movement movement) { _movement = movement; }
