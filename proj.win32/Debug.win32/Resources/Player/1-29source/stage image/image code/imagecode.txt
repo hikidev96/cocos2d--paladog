@@ -1,0 +1,20 @@
+stage image.plist ->	
+
+			getready_back.png   -> 알파값 어두운 칸
+			msg_getready.png   ->  텍스트 이미지
+
+stage_clear.plist  ->	
+
+			stage_clear_blackback.png -> 알파값 어두운 칸
+			
+			stage_clear_circle_01.png  -> 금색 왕관 코인
+			stage_clear_circle_02.png  -> 은색 왕관 코인
+			stage_clear_circle_03.png  -> 동색 왕관 코인
+
+			stage_clear_light_01.png -> 금색 후광
+			stage_clear_light_02.png -> 은색 후광
+			stage_clear_light_03.png -> 동색 후광
+
+			stage_clear_star.png      -> 별 
+
+			stage_clear_text_1.png    ->  1~ -> stage clear 단어순서대로
