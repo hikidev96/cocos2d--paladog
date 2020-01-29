@@ -15,6 +15,7 @@ bool MindForest_Stage1::init() {
 	Hero::getInstance()->createHeroInfo(this, _bgLayer); // 플레이어의 싱글톤 객체 생성
 	_dungeon = new Dungeon(this, _bgLayer, 10000.0f); //3번째 인자에 체력 넣음
 	_heroControl = new HeroControl(this, _bgLayer, _dungeon);
+	_servecScene = new ServiceScene(this);
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
 	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), Hero::getInstance()->getManaRegenSpeed());
@@ -23,6 +24,7 @@ bool MindForest_Stage1::init() {
 	 //배경이미지 plist
 	_cache = SpriteFrameCache::getInstance();
 	_cache->addSpriteFramesWithFile("UI/Background/background_00.plist");
+
 
 	// 배경이미지 만들기.
 	_backGround1 = Sprite::createWithSpriteFrameName("background_00_a.png");
@@ -67,13 +69,17 @@ bool MindForest_Stage1::init() {
 	
 	// Follow 액션으로 화면이동구현
 	_bgLayer->runAction(Follow::create(Hero::getInstance()->getHero(), Rect(0, 0, 1024, 512)));
+	
+	// 겟 레디 액션
+	_servecScene->GetReady();
 
 	return true;
 }
 
 void MindForest_Stage1::tick(float delta)
 {
-	MonsterTick();
+	if (Hero::getInstance()->getStageStart())
+		MonsterTick();
 
 	for (int i = 0; i < _heroControl->getHeroUnitVec().size(); i++)
 	{
@@ -92,20 +98,23 @@ void MindForest_Stage1::tick(float delta)
 	{
 		_heroControl->getMissileCollisionVec()[i]->BringMonsterVec(_monster, _dungeon);
 	}
-
+	
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
 	_heroControl->UnitVecErase(); // 유닛백터 삭제
 	_heroControl->CoolTime(); // 쿨타임 계산
+
 }
 
 void MindForest_Stage1::HeroManaRegen(float delta)
 {
-	_heroControl->HeroManaRegen(); // 마나리젠
+	if (Hero::getInstance()->getStageStart())
+		_heroControl->HeroManaRegen(); // 마나리젠
 }
 
 void MindForest_Stage1::HeroMeatRegen(float delta)
 {
-	_heroControl->HeroMeatRegen(); // 고기리젠
+	if (Hero::getInstance()->getStageStart())
+		_heroControl->HeroMeatRegen(); // 고기리젠
 }
 
 void MindForest_Stage1::MonsterTick()

@@ -6,6 +6,7 @@
 #include "HeroUnit.h"
 #include "Monster.h"
 #include "Dungeon.h"
+#include "ServiceScene.h"
 #include "MindForest_Stage2.h"
 
 class MindForest_Stage1 : public Scene
@@ -14,10 +15,12 @@ class MindForest_Stage1 : public Scene
 	HeroUnit* _heroUnit;
 	vector<Monster*> _monster;
 	Dungeon* _dungeon;
+	ServiceScene* _servecScene;
 
 	Layer* _bgLayer;
 
 	SpriteFrameCache* _cache;
+
 
 	Sprite* _backGround1;
 	Sprite* _backGround2;

@@ -475,6 +475,7 @@ void Hero::releaseInstance()
 
 void Hero::createHeroInfo(Scene* scene, Layer* layer)
 {
+	_stageStart = false;
 
 	// ¿µ¿õ ¸¸µé±â
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");

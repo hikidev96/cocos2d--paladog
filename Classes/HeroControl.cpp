@@ -336,7 +336,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	_dungeon = dungeon;
 	
 	// 히어로 조작부
-	if (_left)
+	if (_left && Hero::getInstance()->getStageStart())
 	{
 		Hero::getInstance()->setMoveWay(LeftWay); // 왼쪽을 보는상태
 
@@ -352,7 +352,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 			Hero::getInstance()->getWeapon1()->runAction(Hero::getInstance()->HammerWalkingAction(Hero::getInstance()->getHammerKind()));
 		}
 	}
-	if (_right)
+	if (_right && Hero::getInstance()->getStageStart())
 	{
 		Hero::getInstance()->setMoveWay(RightWay); // 오른쪽을 보는상태 
 
@@ -654,8 +654,6 @@ void HeroControl::MiniMap()
 
 void HeroControl::LevelUp()
 {
-	Hero::getInstance()->setExp(Hero::getInstance()->getExp() + 1);
-
 	if (Hero::getInstance()->getExp() >= Hero::getInstance()->getMaxExp())
 	{
 		Hero::getInstance()->setExp(0);
@@ -693,7 +691,7 @@ void HeroControl::UnitBuff()
 bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 {
 	// 좌우 이동
-	if (_leftButton->getBoundingBox().containsPoint(touch->getLocation()))
+	if (_leftButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getStageStart())
 	{
 		Hero::getInstance()->getHero()->setFlippedX(true);
 		Hero::getInstance()->getWeapon1()->setFlippedX(true);
@@ -702,7 +700,7 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 		_leftButton->setSpriteFrame("btn_left_down.png");
 
 	}
-	else if (_rightButton->getBoundingBox().containsPoint(touch->getLocation()))
+	else if (_rightButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getStageStart())
 	{
 		Hero::getInstance()->getHero()->setFlippedX(false);
 		Hero::getInstance()->getWeapon1()->setFlippedX(false);

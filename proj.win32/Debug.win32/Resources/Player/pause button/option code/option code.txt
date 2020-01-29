@@ -1,0 +1,12 @@
+game_option.plist->
+
+		back_alpha.png		-> 퍼즈 뒷배경 어두워지는거
+		gameplay_option_board.png -> 퍼즈 보드
+		msg_pause.png 		-> PAUSE 텍스트이미지
+
+		gp_option_btn_quit_up.png	-> give up 버튼
+		gp_option_btn_quit_down.png -> give up 버튼 누름
+
+		
+		gp_option_btn_resume_up.png -> resume 버튼 
+		gp_option_btn_resume_down.png -> resume 버튼 누름

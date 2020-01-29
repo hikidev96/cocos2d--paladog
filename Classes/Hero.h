@@ -153,6 +153,8 @@ private:
 	bool _unitTwoUnlock;
 	bool _unitThreeUnlock;
 
+	bool _stageStart;
+
 
 	// 유닛정보
 	float _mouseHp; // 체력
@@ -235,6 +237,8 @@ public:
 	void setUnitTwoUnlock(bool unittwounlock) { _unitTwoUnlock = unittwounlock; }
 	bool getUnitThreeUnlock() { return _unitThreeUnlock; }
 	void setUnitThreeUnlock(bool unitthreeunlock) { _unitThreeUnlock = unitthreeunlock; }
+	bool getStageStart() { return _stageStart; }
+	void setStageStart(bool stagestart) { _stageStart = stagestart; }
 	ProgressTimer* getManaGauge() { return _manaGauge; }
 	ProgressTimer* getMeatGauge() { return _meatGauge; }
 	ProgressTimer* getHeroHpInfo() { return _hpInfoGauge; }
