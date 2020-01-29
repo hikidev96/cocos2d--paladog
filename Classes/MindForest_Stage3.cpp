@@ -14,7 +14,7 @@ bool MindForest_Stage3::init() {
 
 	Hero::getInstance()->createHeroInfo(this, _bgLayer);
 	_heroControl = new HeroControl(this, _bgLayer, _dungeon);
-	_dungeon = new Dungeon(this, _bgLayer, 3000.0f); //3번째 인자에 체력 넣음
+	_dungeon = new Dungeon(this, _bgLayer, 30000.0f); //3번째 인자에 체력 넣음
 
 	this->schedule(schedule_selector(MindForest_Stage3::tick));
 	this->schedule(schedule_selector(MindForest_Stage3::HeroManaRegen), Hero::getInstance()->getManaRegenSpeed());
@@ -81,11 +81,24 @@ void MindForest_Stage3::tick(float delta)
 	for (int i = 0; i < _heroControl->getHeroUnitVec().size(); i++)
 	{
 		_heroControl->getHeroUnitVec()[i]->BringMonsterVec(_monster);
+
+		// 힐 스킬 사용시 작동
+		if (Hero::getInstance()->getIsHealing())
+			_heroControl->getHeroUnitVec()[i]->Healing();
+	}
+
+	// 모든 객체의 힐이 끝나면 힐 스킬 비활성화 상태로 돌려줌
+	Hero::getInstance()->setIsHealing(false);
+
+	// 스킬 1 미사일 과 몬스터 유닛 충돌 처리
+	for (int i = 0; i < _heroControl->getMissileCollisionVec().size(); i++)
+	{
+		_heroControl->getMissileCollisionVec()[i]->BringMonsterVec(_monster, _dungeon);
 	}
 
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
-	_heroControl->UnitVecErase();
-	_heroControl->CoolTime();
+	_heroControl->UnitVecErase(); // 유닛백터 삭제
+	_heroControl->CoolTime(); // 쿨타임 계산
 
 }
 
