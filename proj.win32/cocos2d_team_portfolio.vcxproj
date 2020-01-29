@@ -166,6 +166,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     </ClCompile>
     <ClCompile Include="..\Classes\MindForest_Stage2.cpp" />
     <ClCompile Include="..\Classes\MindForest_Stage3.cpp" />
+    <ClCompile Include="..\Classes\MissileCollision.cpp" />
     <ClCompile Include="..\Classes\Monster.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
     <ClCompile Include="main.cpp">
@@ -186,6 +187,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MindForest_Stage1.h" />
     <ClInclude Include="..\Classes\MindForest_Stage2.h" />
     <ClInclude Include="..\Classes\MindForest_Stage3.h" />
+    <ClInclude Include="..\Classes\MissileCollision.h" />
     <ClInclude Include="..\Classes\Monster.h" />
     <ClInclude Include="..\Classes\Unit.h" />
     <ClInclude Include="main.h" />
