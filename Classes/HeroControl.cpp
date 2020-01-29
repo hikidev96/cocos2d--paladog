@@ -519,6 +519,8 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 
 	//À¯´Ö ¹öÇÁ!
 	UnitBuff();
+
+	LevelUp();
 }
 
 void HeroControl::HeroManaRegen()
@@ -576,7 +578,7 @@ void HeroControl::CoolTime()
 	}
 	if (_mouseSummonsButtonActivation == false)
 	{
-		_mouseSummonsCollTime -= 0.01f;
+		_mouseSummonsCollTime -= 0.04f;
 	}
 
 	// °õ ÄðÅ¸ÀÓ
@@ -587,7 +589,7 @@ void HeroControl::CoolTime()
 	}	 
 	if (_bearSummonsButtonActivation == false)
 	{	 
-		_bearSummonsCollTime -= 0.01f;
+		_bearSummonsCollTime -= 0.02f;
 	}
 
 	// Ä»°Å·ç ÄðÅ¸ÀÓ
@@ -652,7 +654,13 @@ void HeroControl::MiniMap()
 
 void HeroControl::LevelUp()
 {
+	Hero::getInstance()->setExp(Hero::getInstance()->getExp() + 1);
 
+	if (Hero::getInstance()->getExp() >= Hero::getInstance()->getMaxExp())
+	{
+		Hero::getInstance()->setExp(0);
+		Hero::getInstance()->setLv(Hero::getInstance()->getLv() + 1);
+	}
 }
 
 void HeroControl::UnitBuff()

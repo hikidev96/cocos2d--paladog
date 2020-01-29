@@ -18,16 +18,16 @@ Hero::Hero()
 	_lv = 1; // 레벨
 	_speed = 1.0f; // 이동스피드
 
-	_maxhp = 200; // 최대체력
-	_hp = 200; // 현재체력
+	_maxhp = 3000; // 최대체력
+	_hp = 3000; // 현재체력
 
 	_maxmana = 100; // 최대마나량
 	_mana = 0; // 현재마나량
-	_manaRegenSpeed = 0.2f; // 마나리젠속도
+	_manaRegenSpeed = 0.4f; // 마나리젠속도
 
 	_maxmeat = 40; // 최대고기량
 	_meat = 0; // 현재고기량
-	_meatRegenSpeed = 0.2f; // 고기리젠속도
+	_meatRegenSpeed = 0.4f; // 고기리젠속도
 
 	_gold = 0; //현재 골드
 	_exp = 0; // 현재 경험치
@@ -438,22 +438,22 @@ Hero::Hero()
 
 	// 유닛 정보
 
-	_mouseHp = 100.0f; // 체력
-	_mouseMaxHP = 100.0f; // 최대체력
-	_mouseAtk = 500.0f; // 일반공격력
-	_mouseAtk2 = 1000.0f; // 강공격력
+	_mouseHp = 300.0f; // 체력
+	_mouseMaxHP = 300.0f; // 최대체력
+	_mouseAtk = 200.0f; // 일반공격력
+	_mouseAtk2 = 400.0f; // 강공격력
 	_mouseSpeed = 0.6f; // 스피드
 
-	_bearHp = 200.0f; // 체력
-	_bearMaxHP = 200.0f; // 최대체력
-	_bearAtk = 500.0f; // 일반공격력
-	_bearAtk2 = 1000.0f; // 강공격력
+	_bearHp = 1200.0f; // 체력
+	_bearMaxHP = 1200.0f; // 최대체력
+	_bearAtk = 400.0f; // 일반공격력
+	_bearAtk2 = 800.0f; // 강공격력
 	_bearSpeed = 0.6f; // 스피드
 
-	_kangarooHp = 300.0f; // 체력
-	_kangarooMaxHP = 300.0f; // 최대체력
-	_kangarooAtk = 500.0f; // 일반공격력
-	_kangarooAtk2 = 1000.0f; // 강공격력
+	_kangarooHp = 1600.0f; // 체력
+	_kangarooMaxHP = 1600.0f; // 최대체력
+	_kangarooAtk = 200.0f; // 일반공격력
+	_kangarooAtk2 = 400.0f; // 강공격력
 	_kangarooSpeed = 0.6f; // 스피드
 	
 }
