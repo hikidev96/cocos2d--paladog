@@ -21,7 +21,7 @@ MissileCollision::MissileCollision(Layer* layer, Movement moveway, Vec2 pos, int
 	_firstAtk = false;
 	_secondAtk = false;
 
-	_Atk = 500.f;
+	_Atk = 50000.f; // 테스트용 원래 500
 	_speed = 4.f;
 
 	_erase = false;

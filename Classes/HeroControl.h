@@ -51,6 +51,8 @@ class HeroControl : Scene
 	Sprite* _pauseButton; // 정지버튼
 	Sprite* _miniMapPointer; // 미니맵 포인터
 
+	Sprite* NextButton; // 클리어시 보여지는 넥스트 버튼
+
 	Animation* _miniMapPointerAnimation;
 	Animate* _miniMapPointerAnimate;
 	RepeatForever* _miniMapPointerRepeat;
