@@ -164,7 +164,7 @@ void ServiceScene::StageClear()
 		_stageClearText9->runAction(Sequence::create(DelayTime::create(0.8), Spawn::create(MoveBy::create(0.4, Vec2(0, 320)), ScaleBy::create(0.4, 0.5f), nullptr), nullptr));
 		_stageClearText10->runAction(Sequence::create(DelayTime::create(0.9), Spawn::create(MoveBy::create(0.4, Vec2(0, 320)), ScaleBy::create(0.4, 0.5f), nullptr), nullptr));
 
-		_stageClearCoin->runAction(Sequence::create(DelayTime::create(1),CallFunc::create(CC_CALLBACK_0(ServiceScene::CoinVisible,this)),
+		_stageClearCoin->runAction(Sequence::create(DelayTime::create(1.5),CallFunc::create(CC_CALLBACK_0(ServiceScene::CoinVisible,this)),
 			ScaleBy::create(0.1, 0.3f), CallFunc::create(CC_CALLBACK_0(ServiceScene::LightVisible, this)), nullptr));
 
 		_stageClearLight1->runAction(RepeatForever::create(RotateBy::create(0.8, Vec3(0, 0,50))));

@@ -14,6 +14,7 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("Player/weapons/m01_1.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/startMapUI/result.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("Player/pause button/game_option.plist"); // plist 추가
 
 	// 리스너 등록
 	listener = EventListenerTouchOneByOne::create();
@@ -154,7 +155,8 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 
 	// 넥스트버튼 (클리어시)
 	NextButton = Sprite::createWithSpriteFrameName("lv_clear_next_btn_up.png");
-	NextButton->setPosition(120, 130);
+	NextButton->setPosition(240, 50);
+	NextButton->setVisible(false);
 	_scene->addChild(NextButton, 2000);
 
 	// 현재 고기량 폰트
@@ -342,7 +344,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	_dungeon = dungeon;
 	
 	// 히어로 조작부
-	if (_left && Hero::getInstance()->getStageStart())
+	if (_left && Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
 	{
 		Hero::getInstance()->setMoveWay(LeftWay); // 왼쪽을 보는상태
 
@@ -358,7 +360,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 			Hero::getInstance()->getWeapon1()->runAction(Hero::getInstance()->HammerWalkingAction(Hero::getInstance()->getHammerKind()));
 		}
 	}
-	if (_right && Hero::getInstance()->getStageStart())
+	if (_right && Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
 	{
 		Hero::getInstance()->setMoveWay(RightWay); // 오른쪽을 보는상태 
 
@@ -526,7 +528,11 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	//유닛 버프!
 	UnitBuff();
 
+	// 레벨업
 	LevelUp();
+
+	// 넥스트 버튼 활성화
+	NextButtonVisible();
 }
 
 void HeroControl::HeroManaRegen()
@@ -694,10 +700,19 @@ void HeroControl::UnitBuff()
 	
 }
 
+void HeroControl::NextButtonVisible()
+{
+	if (Hero::getInstance()->getStageClear())
+	{
+		NextButton->setVisible(true);
+	}
+}
+
 bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 {
 	// 좌우 이동
-	if (_leftButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getStageStart())
+	if (_leftButton->getBoundingBox().containsPoint(touch->getLocation())
+		&& Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
 	{
 		Hero::getInstance()->getHero()->setFlippedX(true);
 		Hero::getInstance()->getWeapon1()->setFlippedX(true);
@@ -706,7 +721,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 		_leftButton->setSpriteFrame("btn_left_down.png");
 
 	}
-	else if (_rightButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getStageStart())
+	else if (_rightButton->getBoundingBox().containsPoint(touch->getLocation())
+		&& Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
 	{
 		Hero::getInstance()->getHero()->setFlippedX(false);
 		Hero::getInstance()->getWeapon1()->setFlippedX(false);
@@ -722,7 +738,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 스킬 1 클릭시 행동
-	if (_skillOneButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getSkillOneUnlock())
+	if (_skillOneButton->getBoundingBox().containsPoint(touch->getLocation())
+		&& Hero::getInstance()->getSkillOneUnlock() && !Hero::getInstance()->getStageClear())
 	{
 		_skillOneClick = true;
 
@@ -741,7 +758,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 스킬 2 클릭시 행동
-	if (_skillTwoButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getSkillTwoUnlock())
+	if (_skillTwoButton->getBoundingBox().containsPoint(touch->getLocation()) 
+		&& Hero::getInstance()->getSkillTwoUnlock() && !Hero::getInstance()->getStageClear())
 	{
 		_skillTwoClick = true;
 
@@ -758,7 +776,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 스킬 3 클릭시 행동
-	if (_skillThreeButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getSkillThreeUnlock())
+	if (_skillThreeButton->getBoundingBox().containsPoint(touch->getLocation())
+		&& Hero::getInstance()->getSkillThreeUnlock() && !Hero::getInstance()->getStageClear())
 	{
 		_skillThreeClick = true;
 
@@ -773,7 +792,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 생쥐 소환 버튼
-	if (_mouseSummonsButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getUnitOneUnlock())
+	if (_mouseSummonsButton->getBoundingBox().containsPoint(touch->getLocation())
+		&& Hero::getInstance()->getUnitOneUnlock() && !Hero::getInstance()->getStageClear())
 	{
 		if (Hero::getInstance()->getMeat() >= 10 && _mouseSummonsButtonActivation == true)
 		{
@@ -788,7 +808,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 곰 소환 버튼
-	if (_bearSummonsButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getUnitTwoUnlock())
+	if (_bearSummonsButton->getBoundingBox().containsPoint(touch->getLocation()) 
+		&& Hero::getInstance()->getUnitTwoUnlock() && !Hero::getInstance()->getStageClear())
 	{
 		if (Hero::getInstance()->getMeat() >= 30)
 		{
@@ -803,7 +824,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 캥거루 소환 버튼
-	if (_kangarooSummonsButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getUnitThreeUnlock())
+	if (_kangarooSummonsButton->getBoundingBox().containsPoint(touch->getLocation()) 
+		&& Hero::getInstance()->getUnitThreeUnlock() && !Hero::getInstance()->getStageClear())
 	{
 		if (Hero::getInstance()->getMeat() >= 40)
 		{
@@ -818,19 +840,59 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	}
 
 	// 정지 버튼
-	if (_pauseButton->getBoundingBox().containsPoint(touch->getLocation()))
+	if (_pauseButton->getBoundingBox().containsPoint(touch->getLocation())
+		&& !Hero::getInstance()->getStageClear() && !_PauseClick)
 	{
+		_pauseBack = Sprite::createWithSpriteFrameName("back_alpha.png");
+		_pauseBack->setOpacity(200);
+		_pauseBack->setPosition(-50, -50);
+		_pauseBack->setAnchorPoint({ 0,0 });
+		_pauseBack->setScale(20.0f);
+		_scene->addChild(_pauseBack, 1500);
+
+		_pauseBord = Sprite::createWithSpriteFrameName("gameplay_option_board.png");
+		_pauseBord->setPosition(240, 160);
+		_scene->addChild(_pauseBord, 1700);
+
+		_pauseText = Sprite::createWithSpriteFrameName("msg_pause.png");
+		_pauseText->setPosition(240, 240);
+		_scene->addChild(_pauseText, 1700);
 		_PauseClick = true;
 
-		auto layerTest = LayerColor::create(Color4B::BLACK, 480,320);
-		layerTest->setPosition(0, 0);
-		layerTest->setOpacity(150);
-		_scene->addChild(layerTest, 5000);
+		_pauseQuitButton = Sprite::createWithSpriteFrameName("gp_option_btn_quit_up.png");
+		_pauseQuitButton->setPosition(240, 180);
+		_scene->addChild(_pauseQuitButton, 1700);
+
+		_pauseResumeButton = Sprite::createWithSpriteFrameName("gp_option_btn_resume_up.png");
+		_pauseResumeButton->setPosition(240, 140);
+		_scene->addChild(_pauseResumeButton, 1700);
 
 		Director::getInstance()->pause();
 	}
 
+	// Pause 시 Resume 버튼 클릭시
+	if (_PauseClick)
+	{
+		if (_pauseResumeButton->getBoundingBox().containsPoint(touch->getLocation()))
+		{
+			_PauseClick = false;
+			_scene->removeChild(_pauseBack);
+			_scene->removeChild(_pauseBord);
+			_scene->removeChild(_pauseText);
+			_scene->removeChild(_pauseQuitButton);
+			_scene->removeChild(_pauseResumeButton);
 
+			Director::getInstance()->resume();
+		}
+	}
+
+	// 넥스트 버튼
+	if (NextButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getStageClear())
+	{
+		//auto secene = ShopScene::create();
+		//Director::getInstance()->replaceScene(secene);
+		log("Next Scene");
+	}
 
 	return true;
 }
@@ -849,7 +911,6 @@ void HeroControl::onTouchEnded(Touch * touch, Event * event)
 	_mouseSummonsClick = false;
 	_bearSummonsClick = false;
 	_kangarooSummonsClick = false;
-	_PauseClick = false;
 
 	_leftButton->setSpriteFrame("btn_left_up.png");
 	_rightButton->setSpriteFrame("btn_right_up.png");
