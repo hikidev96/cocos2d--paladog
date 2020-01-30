@@ -96,6 +96,15 @@
     <ClCompile Include="..\Classes\MissileCollision.cpp">
       <Filter>src\영웅</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ServiceScene.cpp">
+      <Filter>src\Scene\Map\스테이지</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Shop.cpp">
+      <Filter>src\Scene\Shopping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopScene.cpp">
+      <Filter>src\Scene\Shopping</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -148,6 +157,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MissileCollision.h">
       <Filter>src\영웅</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ServiceScene.h">
+      <Filter>src\Scene\Map\스테이지</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shop.h">
+      <Filter>src\Scene\Shopping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopScene.h">
+      <Filter>src\Scene\Shopping</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

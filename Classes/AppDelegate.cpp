@@ -2,6 +2,7 @@
 #include "MindForest_Stage1.h"
 #include "MindForest_Stage2.h"
 #include "MindForest_Stage3.h"
+#include "ShopScene.h"
 #include "IntroScene.h"
 
 // #define USE_AUDIO_ENGINE 1

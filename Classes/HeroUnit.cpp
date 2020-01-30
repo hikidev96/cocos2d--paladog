@@ -141,8 +141,8 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer, Dungeon* dung
 		_UnitSprite->setPosition(0, 420 + rand() % 40);
 		_unitAction = UnitWalk;
 		_Speed = Hero::getInstance()->getBearSpeed();
-		_AtkSpeed = 1.0f;
-		_MaxAtkSpeed = 1.0f;
+		_AtkSpeed = 1.5f;
+		_MaxAtkSpeed = 1.5f;
 		_Hp = Hero::getInstance()->getBearHp();
 		_maxHP = Hero::getInstance()->getBearMaxHp();
 		_Atk = Hero::getInstance()->getBearAtk();
@@ -249,8 +249,8 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer, Dungeon* dung
 		_UnitSprite->setPosition(0, 420 + rand() % 40);
 		_unitAction = UnitWalk;
 		_Speed = Hero::getInstance()->getKangarooSpeed();
-		_AtkSpeed = 1.0f;
-		_MaxAtkSpeed = 1.0f;
+		_AtkSpeed = 0.4f;
+		_MaxAtkSpeed = 0.4f;
 		_Hp = Hero::getInstance()->getKangarooHp();
 		_maxHP = Hero::getInstance()->getKangarooMaxHp();
 		_Atk = Hero::getInstance()->getKangarooAtk();
@@ -572,7 +572,7 @@ void HeroUnit::UnitCollisionCheck()
 			}
 
 			// 최초 충돌 공격 이후 공격
-			if (_unitAction == UnitCollision && _AtkSpeed == 1.0f && _FirstAtk == true)
+			if (_unitAction == UnitCollision && _AtkSpeed == _MaxAtkSpeed && _FirstAtk == true)
 			{
 				if (_buff == false)
 				{
@@ -725,7 +725,7 @@ void HeroUnit::UnitCollisionCheck()
 		}
 
 		// 최초 충돌 공격 이후 공격
-		if (_unitAction == UnitCollision && _AtkSpeed == 1.0f && _FirstAtk == true)
+		if (_unitAction == UnitCollision && _AtkSpeed == _MaxAtkSpeed && _FirstAtk == true)
 		{
 			if (_buff == false)
 			{

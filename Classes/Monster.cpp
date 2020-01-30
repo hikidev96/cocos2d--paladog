@@ -14,50 +14,50 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 		cache->addSpriteFramesWithFile("Monster/monster/Nzombie.plist");
 		_monsterCode = "e01";
 		_atkMaxFrame = 10;
-		_atk = 20;
+		_atk = 60;
 		_hpm = 1300;
-		_range = 50;
+		_range = 70;
 		_delay = 2.0f;
 		_speed = 0.5f;
 		_exp = 5;
-		_money = 1;
+		_money = 10;
 		break;
 	case 강화좀비:
 		cache->addSpriteFramesWithFile("Monster/monster/Uzombie.plist");
 		_monsterCode = "e21";
 		_atkMaxFrame = 10;
-		_atk = 25;
+		_atk =75;
 		_hpm = 1900;
-		_range = 50;
+		_range = 70;
 		_delay = 1.8f;
 		_speed = 0.6f;
 		_exp = 10;
-		_money = 2;
+		_money = 20;
 		break;
 	case 광부좀비:
 		cache->addSpriteFramesWithFile("Monster/monster/Mzombie.plist");
 		_monsterCode = "e13";
 		_atkMaxFrame = 15;
-		_atk = 35;
+		_atk = 100;
 		_hpm = 2500;
-		_range = 60;
+		_range = 80;
 		_delay = 2.5f;
 		_speed = 0.4f;
 		_exp = 15;
-		_money = 3;
+		_money = 30;
 		break;
 	case 일반미라:
 		cache->addSpriteFramesWithFile("Monster/monster/mummy.plist");
 		cache->addSpriteFramesWithFile("Monster/monster/mummymove.plist");
 		_monsterCode = "e07";
 		_atkMaxFrame = 15;
-		_atk = 35;
+		_atk = 100;
 		_hpm = 2900;
-		_range = 100;
+		_range = 120;
 		_delay = 2.0f;
 		_speed = 0.5f;
 		_exp = 20;
-		_money = 4;
+		_money = 40;
 		break;
 	case 핑크미라:
 		cache->addSpriteFramesWithFile("Monster/monster/Pmummy.plist");
@@ -66,11 +66,11 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 		_atkMaxFrame = 15;
 		_atk = 40;
 		_hpm = 3500;
-		_range = 100;
+		_range = 120;
 		_delay = 1.7f;
 		_speed = 0.7f;
 		_exp = 30;
-		_money = 5;
+		_money = 50;
 		break;
 	case 좀비킹:
 		cache->addSpriteFramesWithFile("Monster/monster/Zomking.plist");
@@ -82,7 +82,7 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 		_delay = 3.0f;
 		_speed = 0.6f;
 		_exp = 50;
-		_money = 10;
+		_money = 100;
 		break;
 	}
 	_hp = _hpm;
@@ -164,14 +164,14 @@ void Monster::MonsterMove()
 			for (int i = 1; i <= _atkMaxFrame; i++) {
 				frame.pushBack(SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(StringUtils::format("%s_att_%04d.png", _monsterCode, i)));
 			}
-			auto animation = Animation::createWithSpriteFrames(frame, 0.03f);
+			auto animation = Animation::createWithSpriteFrames(frame, 0.04f);
 			auto animate = Animate::create(animation);
 			if (strcmp(_monsterCode, "b01") == 0) { //좀비킹 공격모션
 				for (int i = 1; i <= 12; i++) {
 					frame2.pushBack(SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(StringUtils::format("b01_wait_%04d.png", i)));
 				}
 
-				auto animation2 = Animation::createWithSpriteFrames(frame2, 0.03f);
+				auto animation2 = Animation::createWithSpriteFrames(frame2, 0.04f);
 				auto animate2 = Animate::create(animation2);
 
 				auto action = Sequence::create(
@@ -193,15 +193,18 @@ void Monster::MonsterMove()
 			for (int i = 1; i <= 16; i++) {
 				frame.pushBack(SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(StringUtils::format("%s_down_%04d.png", _monsterCode, i)));
 			}
-			auto animation = Animation::createWithSpriteFrames(frame, 0.03f);
+			auto animation = Animation::createWithSpriteFrames(frame, 0.04f);
 			auto animate = Animate::create(animation);
 
 			for (int i = 1; i <= 34; i++) {
 				frame2.pushBack(SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(StringUtils::format("eff_die_%04d.png", i))); //eff_enemydie_%04d.png <- 몬스터
 			}
 
-			auto animation2 = Animation::createWithSpriteFrames(frame2, 0.03f);
+			auto animation2 = Animation::createWithSpriteFrames(frame2, 0.04f);
 			auto animate2 = Animate::create(animation2);
+
+			Hero::getInstance()->setExp(Hero::getInstance()->getExp() + _exp);
+			Hero::getInstance()->setGold(Hero::getInstance()->getGold() + _money);
 
 			auto action = Sequence::create(
 				Spawn::create(animate, MoveBy::create(0.48, Vec2(70, 0)), nullptr),
