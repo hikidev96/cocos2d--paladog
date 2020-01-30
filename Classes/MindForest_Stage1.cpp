@@ -70,9 +70,8 @@ bool MindForest_Stage1::init() {
 	// Follow 액션으로 화면이동구현
 	_bgLayer->runAction(Follow::create(Hero::getInstance()->getHero(), Rect(0, 0, 1024, 512)));
 	
-	// 겟 레디 액션
+	// 겟 레디 화면
 	_servecScene->GetReady();
-
 	return true;
 }
 
@@ -102,6 +101,15 @@ void MindForest_Stage1::tick(float delta)
 	_heroControl->HeroMove(_dungeon); // 히어로 각종 조작
 	_heroControl->UnitVecErase(); // 유닛백터 삭제
 	_heroControl->CoolTime(); // 쿨타임 계산
+
+	// 스테이지 클리어 화면
+	_servecScene->StageClear();
+
+	if (_dungeon->getHp() <= 0)
+	{
+		if (!Hero::getInstance()->getStageClear())
+			Hero::getInstance()->setStageClear(true);
+	}
 
 }
 

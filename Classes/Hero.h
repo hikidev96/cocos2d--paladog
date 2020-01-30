@@ -154,6 +154,7 @@ private:
 	bool _unitThreeUnlock;
 
 	bool _stageStart;
+	bool _stageClear;
 
 
 	// ¿Ø¥÷¡§∫∏
@@ -239,6 +240,8 @@ public:
 	void setUnitThreeUnlock(bool unitthreeunlock) { _unitThreeUnlock = unitthreeunlock; }
 	bool getStageStart() { return _stageStart; }
 	void setStageStart(bool stagestart) { _stageStart = stagestart; }
+	bool getStageClear() { return _stageClear; }
+	void setStageClear(bool stageclear) { _stageClear = stageclear; }
 	ProgressTimer* getManaGauge() { return _manaGauge; }
 	ProgressTimer* getMeatGauge() { return _meatGauge; }
 	ProgressTimer* getHeroHpInfo() { return _hpInfoGauge; }

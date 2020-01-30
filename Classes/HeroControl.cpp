@@ -13,6 +13,7 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 	cache->addSpriteFramesWithFile("UI/game_info/btn_pause.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("Player/weapons/m01_1.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("UI/startMapUI/result.plist"); // plist 추가
 
 	// 리스너 등록
 	listener = EventListenerTouchOneByOne::create();
@@ -150,6 +151,11 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 	_pauseButton->setAnchorPoint({ 1,1 });
 	_pauseButton->setPosition(480, 320);
 	_scene->addChild(_pauseButton, 1);
+
+	// 넥스트버튼 (클리어시)
+	NextButton = Sprite::createWithSpriteFrameName("lv_clear_next_btn_up.png");
+	NextButton->setPosition(120, 130);
+	_scene->addChild(NextButton, 2000);
 
 	// 현재 고기량 폰트
 	_currentMeat = Label::createWithCharMap("UI/Number/num_wht_13x14.png", 26,28,48);
@@ -823,6 +829,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 
 		Director::getInstance()->pause();
 	}
+
+
 
 	return true;
 }
