@@ -45,9 +45,9 @@
                 <key>frame</key>
                 <string>{{363,1},{120,50}}</string>
                 <key>offset</key>
-                <string>{124,-90}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{120,50}</string>
             </dict>
             <key>lv_clear_small_star.png</key>
             <dict>

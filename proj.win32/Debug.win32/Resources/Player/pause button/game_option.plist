@@ -11,16 +11,16 @@
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{48,32}</string>
             </dict>
             <key>gameplay_option_board.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{0,0},{176,116}}</string>
                 <key>offset</key>
-                <string>{0,-2}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{176,116}</string>
             </dict>
             <key>gp_option_btn_quit_down.png</key>
             <dict>
@@ -36,9 +36,9 @@
                 <key>frame</key>
                 <string>{{177,86},{154,42}}</string>
                 <key>offset</key>
-                <string>{0,-28}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{154,42}</string>
             </dict>
             <key>gp_option_btn_resume_down.png</key>
             <dict>
@@ -54,18 +54,18 @@
                 <key>frame</key>
                 <string>{{338,0},{154,42}}</string>
                 <key>offset</key>
-                <string>{0,20}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{154,42}</string>
             </dict>
             <key>msg_pause.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{177,0},{160,46}}</string>
                 <key>offset</key>
-                <string>{-1,81}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{160,46}</string>
             </dict>
         </dict>
         <key>metadata</key>

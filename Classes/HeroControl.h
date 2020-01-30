@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "Dungeon.h"
 #include "MissileCollision.h"
+#include "ShopScene.h"
 
 class HeroControl : Scene
 {
@@ -52,6 +53,12 @@ class HeroControl : Scene
 	Sprite* _miniMapPointer; // 미니맵 포인터
 
 	Sprite* NextButton; // 클리어시 보여지는 넥스트 버튼
+
+	Sprite* _pauseBack;
+	Sprite* _pauseBord;
+	Sprite* _pauseText;
+	Sprite* _pauseQuitButton;
+	Sprite* _pauseResumeButton;
 
 	Animation* _miniMapPointerAnimation;
 	Animate* _miniMapPointerAnimate;
@@ -106,6 +113,7 @@ public:
 	void MiniMap();
 	void LevelUp();
 	void UnitBuff();
+	void NextButtonVisible();
 
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);

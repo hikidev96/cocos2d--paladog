@@ -115,13 +115,13 @@ void MindForest_Stage1::tick(float delta)
 
 void MindForest_Stage1::HeroManaRegen(float delta)
 {
-	if (Hero::getInstance()->getStageStart())
+	if (Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
 		_heroControl->HeroManaRegen(); // ¸¶³ª¸®Á¨
 }
 
 void MindForest_Stage1::HeroMeatRegen(float delta)
 {
-	if (Hero::getInstance()->getStageStart())
+	if (Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
 		_heroControl->HeroMeatRegen(); // °í±â¸®Á¨
 }
 
