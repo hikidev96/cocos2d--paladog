@@ -6,25 +6,21 @@
 #include "HeroUnit.h"
 #include "Monster.h"
 #include "Dungeon.h"
-
-enum ZORDER { //이거 어디두는게 좋을까여?
-	던전뒤 = 10,
-	영웅 = 50,
-	유닛 = 55,
-	던전앞 = 90
-};
+#include "ServiceScene.h"
+#include "MindForest_Stage2.h"
 
 class MindForest_Stage1 : public Scene
 {
-	Hero* _hero;
 	HeroControl* _heroControl;
 	HeroUnit* _heroUnit;
 	vector<Monster*> _monster;
 	Dungeon* _dungeon;
+	ServiceScene* _servecScene;
 
 	Layer* _bgLayer;
 
 	SpriteFrameCache* _cache;
+
 
 	Sprite* _backGround1;
 	Sprite* _backGround2;
