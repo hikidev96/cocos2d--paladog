@@ -105,6 +105,12 @@
     <ClCompile Include="..\Classes\ShopScene.cpp">
       <Filter>src\Scene\Shopping</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Upgrade.cpp">
+      <Filter>src\Scene\Upgrade</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UpgradeScene.cpp">
+      <Filter>src\Scene\Upgrade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -166,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\ShopScene.h">
       <Filter>src\Scene\Shopping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Upgrade.h">
+      <Filter>src\Scene\Upgrade</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UpgradeScene.h">
+      <Filter>src\Scene\Upgrade</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

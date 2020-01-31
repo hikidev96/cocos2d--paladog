@@ -172,6 +172,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Shop.cpp" />
     <ClCompile Include="..\Classes\ShopScene.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
+    <ClCompile Include="..\Classes\Upgrade.cpp" />
+    <ClCompile Include="..\Classes\UpgradeScene.cpp" />
     <ClCompile Include="main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -196,6 +198,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Shop.h" />
     <ClInclude Include="..\Classes\ShopScene.h" />
     <ClInclude Include="..\Classes\Unit.h" />
+    <ClInclude Include="..\Classes\Upgrade.h" />
+    <ClInclude Include="..\Classes\UpgradeScene.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
