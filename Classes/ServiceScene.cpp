@@ -171,9 +171,9 @@ void ServiceScene::StageClear()
 		_stageClearLight2->runAction(RepeatForever::create(RotateBy::create(0.8, Vec3(0, 0, -50))));
 		_stageClearLight3->runAction(RepeatForever::create(RotateBy::create(2, Vec3(0, 0, 120))));
 
-		_stageClearStar1->runAction(Sequence::create(DelayTime::create(1.8), MoveBy::create(0.2, Vec2(0, 160)), nullptr));
-		_stageClearStar2->runAction(Sequence::create(DelayTime::create(2.0), MoveBy::create(0.2, Vec2(0, 160)), nullptr));
-		_stageClearStar3->runAction(Sequence::create(DelayTime::create(2.2), MoveBy::create(0.2, Vec2(0, 160)), nullptr));
+		_stageClearStar1->runAction(Sequence::create(DelayTime::create(1.8), MoveBy::create(0.2, Vec2(0, 160)), CallFunc::create(CC_CALLBACK_0(ServiceScene::CoinSound, this)), nullptr));
+		_stageClearStar2->runAction(Sequence::create(DelayTime::create(2.0), MoveBy::create(0.2, Vec2(0, 160)), CallFunc::create(CC_CALLBACK_0(ServiceScene::CoinSound, this)), nullptr));
+		_stageClearStar3->runAction(Sequence::create(DelayTime::create(2.2), MoveBy::create(0.2, Vec2(0, 160)), CallFunc::create(CC_CALLBACK_0(ServiceScene::CoinSound, this)), nullptr));
 
 		Hero::getInstance()->setStageClear(false);
 	}
@@ -189,6 +189,17 @@ void ServiceScene::LightVisible()
 	_stageClearLight1->setVisible(true);
 	_stageClearLight2->setVisible(true);
 	_stageClearLight3->setVisible(true);
+}
+
+void ServiceScene::CoinSound()
+{
+	AudioEngine::play2d("Sound/t_score.mp3", false, true);
+}
+
+void ServiceScene::LodingScene(Scene* scene)
+{
+	auto _layercolor = LayerColor::create(Color4B(0, 0, 0, 0));
+	scene->addChild(_layercolor, 10000);
 }
 
 

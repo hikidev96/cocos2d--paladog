@@ -71,6 +71,7 @@ public:
 	float getRange() { return _range; }
 	int getExp() { return _exp; }
 	int getMoney() { return _money; }
+	char* getMonsterCode() { return _monsterCode; }
 
 	bool getIsRemove() { return _isRemove; }
 	float getIsSummon() { return _isSummonX; }

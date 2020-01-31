@@ -34,6 +34,12 @@ enum HAMMERKIND
 	식량망치,
 };
 
+enum StageKind
+{
+	Stage1And2,
+	Stage3,
+};
+
 class Hero
 {
 private:
@@ -123,6 +129,7 @@ private:
 
 	Movement _movement; // 현재 플레이어가 보고있는 방향
 	HAMMERKIND _HammerKind;
+	StageKind _stageKind;
 
 	// 히어로 정보
 	float _speed; // 스피드
@@ -155,6 +162,8 @@ private:
 
 	bool _stageStart;
 	bool _stageClear;
+
+	bool _sceneChange;
 
 
 	// 유닛정보
@@ -242,6 +251,9 @@ public:
 	void setStageStart(bool stagestart) { _stageStart = stagestart; }
 	bool getStageClear() { return _stageClear; }
 	void setStageClear(bool stageclear) { _stageClear = stageclear; }
+	bool getSceneChange() { return _sceneChange; }
+	void setSceneChange(bool scenehange) { _sceneChange = scenehange; }
+
 	ProgressTimer* getManaGauge() { return _manaGauge; }
 	ProgressTimer* getMeatGauge() { return _meatGauge; }
 	ProgressTimer* getHeroHpInfo() { return _hpInfoGauge; }
@@ -253,6 +265,8 @@ public:
 
 	HAMMERKIND getHammerKind() { return _HammerKind; }
 	void setHammerKind(HAMMERKIND hammerkind) { _HammerKind = hammerkind; }
+	StageKind getStageKind() { return _stageKind; }
+	void setStageKind(StageKind stagekind) { _stageKind = stagekind; }
 
 	RepeatForever* HammerWaitingAction(HAMMERKIND hammerkind);
 	RepeatForever* HammerWalkingAction(HAMMERKIND hammerkind);

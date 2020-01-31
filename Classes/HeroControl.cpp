@@ -364,9 +364,12 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 	Hero::getInstance()->getHero()->addChild(_levelUpWingR);
 
 	// 사운드 
-	AudioEngine::preload("Sound/hero2_walk.mp3");
+	AudioEngine::preload("Sound/horse_run.mp3");
 	AudioEngine::preload("Sound/unit_active.mp3");
 	AudioEngine::preload("Sound/unit_create.mp3");
+	AudioEngine::preload("Sound/fistofgod.mp3");
+	AudioEngine::preload("Sound/food.mp3");
+	AudioEngine::preload("Sound/heal.mp3");
 }
 
 void HeroControl::HeroMove(Dungeon* dungeon)
@@ -394,7 +397,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 
 		if (AudioEngine::getState(_audioId1) != AudioEngine::AudioState::PLAYING)
 		{
-			_audioId1 = AudioEngine::play2d("Sound/hero2_walk.mp3", true, 1.0f);
+			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", true, 1.0f);
 		}
 	}
 	if (_right && Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
@@ -415,7 +418,7 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 
 		if (AudioEngine::getState(_audioId1) != AudioEngine::AudioState::PLAYING)
 		{
-			_audioId1 = AudioEngine::play2d("Sound/hero2_walk.mp3", true, 1.0f);
+			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", true, 1.0f);
 		}
 	}
 	if (!Hero::getInstance()->getHero()->getNumberOfRunningActions()) // 히어로 대기
@@ -867,6 +870,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			// 스킬 투사체 객체를 만들어 백터에 추가
 			_missileCollision = new MissileCollision(_layer, Hero::getInstance()->getMoveWay(), Hero::getInstance()->getHero()->getPosition(), Hero::getInstance()->getHero()->getZOrder());
 			_missileCollisionVec.push_back(_missileCollision);
+
+			AudioEngine::play2d("Sound/fistofgod.mp3", false, 1.0f);
 		}
 	}
 
@@ -885,6 +890,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			Hero::getInstance()->getSkillEffectBox1()->runAction(Hero::getInstance()->HammerAttackEffectA(Hero::getInstance()->getHammerKind())->clone()); // 스킬A 이펙트 애니메이션 실행
 			Hero::getInstance()->getSkillEffectBox2()->runAction(Hero::getInstance()->HammerAttackEffectB(Hero::getInstance()->getHammerKind())->clone()); // 스킬B 이펙트 애니메이션 실행
 			Hero::getInstance()->getSkillEffectBox3()->runAction(Hero::getInstance()->HammerAttackEffectC(Hero::getInstance()->getHammerKind())->clone()); // 스킬C 이펙트 애니메이션 실행
+
+			AudioEngine::play2d("Sound/heal.mp3", false, 1.0f);
 		}
 	}
 
@@ -901,6 +908,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			Hero::getInstance()->getHero()->runAction(Hero::getInstance()->getAttackAction()->clone()); // 공격 모션 실행
 			Hero::getInstance()->getWeapon1()->runAction(Hero::getInstance()->HammerAttackAction(Hero::getInstance()->getHammerKind())->clone()); // 공격 모션 실행
 			Hero::getInstance()->getSkillEffectBox1()->runAction(Hero::getInstance()->HammerAttackEffectA(Hero::getInstance()->getHammerKind())->clone()); // 스킬A 이펙트 애니메이션 실행
+
+			AudioEngine::play2d("Sound/food.mp3", false, 1.0f);
 		}
 	}
 
@@ -1008,9 +1017,9 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 	// 넥스트 버튼
 	if (NextButton->getBoundingBox().containsPoint(touch->getLocation()) && Hero::getInstance()->getStageClear())
 	{
-		//auto secene = ShopScene::create();
-		//Director::getInstance()->replaceScene(secene);
+		Hero::getInstance()->setSceneChange(true);
 		log("Next Scene");
+		AudioEngine::play2d("Sound/start.mp3", false, 1.0f);
 	}
 
 	return true;

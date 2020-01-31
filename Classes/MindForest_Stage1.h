@@ -32,7 +32,7 @@ class MindForest_Stage1 : public Scene
 	int _soundBs;
 	int _soundBg1;
 	
-	
+	bool BgSoundClear;
 
 public:
 	static cocos2d::Scene* createScene();
