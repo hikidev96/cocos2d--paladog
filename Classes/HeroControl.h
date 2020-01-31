@@ -54,6 +54,11 @@ class HeroControl : Scene
 
 	Sprite* NextButton; // 클리어시 보여지는 넥스트 버튼
 
+	Sprite* _levelUpBlackDot; // 레벨업 효과
+	Sprite* _levelUpText; // 레벨업 텍스트
+	Sprite* _levelUpWingL;
+	Sprite* _levelUpWingR;
+
 	Sprite* _pauseBack;
 	Sprite* _pauseBord;
 	Sprite* _pauseText;
@@ -112,6 +117,7 @@ public:
 	void SkillEffectVisible();
 	void MiniMap();
 	void LevelUp();
+	void SetLevelUpImage();
 	void UnitBuff();
 	void NextButtonVisible();
 
