@@ -758,6 +758,9 @@ void HeroControl::LevelUp()
 
 	if (Hero::getInstance()->getExp() >= Hero::getInstance()->getMaxExp())
 	{
+		_levelUpWingL->setRotation(0);
+		_levelUpWingR->setRotation(0);
+
 		_levelUpText->setVisible(true);
 		_levelUpWingL->setVisible(true);
 		_levelUpWingR->setVisible(true);
