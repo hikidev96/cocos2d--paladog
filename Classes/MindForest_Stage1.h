@@ -29,6 +29,11 @@ class MindForest_Stage1 : public Scene
 	Sprite* _backGround3_1;
 	Sprite* _backGround3_2;
 
+	int _soundBs;
+	int _soundBg1;
+	
+	
+
 public:
 	static cocos2d::Scene* createScene();
 	virtual bool init();

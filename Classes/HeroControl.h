@@ -107,6 +107,15 @@ class HeroControl : Scene
 
 	bool _PauseClick;
 
+	bool _UnitActiveSoundBool;
+	bool _UnitActiveSoundBool2;
+	bool _UnitActiveSoundBool3;
+
+	// 사운드
+	int _audioId1; // 히어로 걷기
+	int _audioUnitActive; // 유닛 소환버튼 활성화
+	int _audioUnitSommons; // 유닛 소환버튼 누름
+
 public:
 	HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon);
 	void HeroMove(Dungeon* dungeon);

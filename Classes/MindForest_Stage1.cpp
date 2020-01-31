@@ -72,11 +72,21 @@ bool MindForest_Stage1::init() {
 	
 	// 겟 레디 화면
 	_servecScene->GetReady();
+
+	// 사운드
+	_soundBs = AudioEngine::play2d("Sound/start_battle.mp3", false, 1.f);
+	
+
 	return true;
 }
 
 void MindForest_Stage1::tick(float delta)
 {
+	if (AudioEngine::getState(_soundBs) != AudioEngine::AudioState::PLAYING && AudioEngine::getState(_soundBg1) != AudioEngine::AudioState::PLAYING)
+	{
+		_soundBg1 = AudioEngine::play2d("Sound/bg_stage.mp3", true, 1.f);
+	}
+
 	if (Hero::getInstance()->getStageStart())
 		MonsterTick();
 
