@@ -411,7 +411,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer, Dungeon* dung
 	_unitBuffOra = Sprite::createWithSpriteFrameName("eff_aura2_0001.png");
 	_unitBuffOra->setPosition(_UnitSprite->getContentSize().width / 2, 10);
 	_unitBuffOra->setScale(0.8f);
-	_UnitSprite->addChild(_unitBuffOra, _UnitSprite->getZOrder() - 1);
+	_UnitSprite->addChild(_unitBuffOra,Hero::getInstance()->getHeroBuffOra()->getZOrder() + 1);
 	_unitBuffOra->runAction(_unitBuffOraRepeat);
 	_unitBuffOra->setVisible(false);
 

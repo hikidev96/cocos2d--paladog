@@ -31,7 +31,7 @@ Hero::Hero()
 
 	_gold = 0; //현재 골드
 	_exp = 0; // 현재 경험치
-	_maxExp = 100; // 최대 경험치
+	_maxExp = 60; // 최대 경험치
 
 	_skillOneManaUse = 10; // 스킬 1 마나 사용량
 	_skillTwoManaUse = 20; // 스킬 2 마나 사용량
@@ -500,7 +500,7 @@ void Hero::createHeroInfo(Scene* scene, Layer* layer)
 	_heroBuffOra = Sprite::createWithSpriteFrameName("eff_aura_0001.png");
 	_heroBuffOra->setPosition(_hero->getPosition().x, _hero->getPosition().y);
 	//_hero->getContentSize().width / 2, 10
-	layer->addChild(_heroBuffOra, _hero->getZOrder() - 2);
+	layer->addChild(_heroBuffOra, _hero->getZOrder() - 200);
 
 	//마나 게이지 만들기
 	_manaGauge = ProgressTimer::create(Sprite::create("UI/Mana.png"));

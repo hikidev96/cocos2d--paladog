@@ -9,6 +9,7 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 	cache = SpriteFrameCache::getInstance(); // 캐쉬생성
 	cache->addSpriteFramesWithFile("UI/ui_gameplay.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("Player/UNIT_B~1/btn_unit-hd.plist"); // plist 추가
+	cache->addSpriteFramesWithFile("Player/Level up/eff_levelup.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/btn_pause.plist"); // plist 추가
 	cache->addSpriteFramesWithFile("UI/game_info/ui_game_info.plist"); // plist 추가
@@ -40,7 +41,7 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 	_mainDashbordCase->setPosition({ 237,2 });
 
 	// 스킬 1,2,3 버튼 스프라이트
-	_skillOneButton = Sprite::createWithSpriteFrameName("btn_fist_up.png");
+	_skillOneButton = Sprite::create("MACEBU~1/mace1/mace1_button_black.png");
 	_skillOneButton->setAnchorPoint({ 0,0 });
 	_skillOneButton->setPosition({ 256,5 });
 	_skillTwoButton = Sprite::createWithSpriteFrameName("btn_heal_up.png");
@@ -305,7 +306,7 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 	_scene->addChild(_leftButton, 1);
 	_scene->addChild(_rightButton, 1);
 	_scene->addChild(_mainDashbord, 0);
-	_scene->addChild(_mainDashbordCase, 2);
+	_scene->addChild(_mainDashbordCase, 4);
 	_scene->addChild(_skillOneButton, 0);
 	_scene->addChild(_skillTwoButton, 0);
 	_scene->addChild(_skillThreeButton, 0);
@@ -337,6 +338,30 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 	// 캥거루 쿨타임 설정
 	_kangarooSummonsCollTime = 0.0f;
 	_kangarooSummonsMaxCollTime = 2.0f;
+
+	// 레벨업 텍스트
+	_levelUpText = Sprite::createWithSpriteFrameName("levelup_source_txt.png");
+	_levelUpText->setScale(0.5f);
+	_levelUpText->setScaleX(0.01f);
+	_levelUpText->setPosition(90,120);
+	_levelUpText->setVisible(false);
+	Hero::getInstance()->getHero()->addChild(_levelUpText);
+
+	// 레벨업 날개 왼쪽
+	_levelUpWingL = Sprite::createWithSpriteFrameName("levelup_source_wing_l.png");
+	_levelUpWingL->setScale(0.5f);
+	_levelUpWingL->setAnchorPoint({ 0.7,0.5 });
+	_levelUpWingL->setPosition(90,120);
+	_levelUpWingL->setVisible(false);
+	Hero::getInstance()->getHero()->addChild(_levelUpWingL);
+
+	// 레벨업 날개 오른쪽
+	_levelUpWingR = Sprite::createWithSpriteFrameName("levelup_source_wing_r.png");
+	_levelUpWingR->setScale(0.5f);
+	_levelUpWingR->setAnchorPoint({ 0.3,0.5 });
+	_levelUpWingR->setPosition(90,120);
+	_levelUpWingR->setVisible(false);
+	Hero::getInstance()->getHero()->addChild(_levelUpWingR);
 }
 
 void HeroControl::HeroMove(Dungeon* dungeon)
@@ -386,44 +411,56 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	}
 
 	// 스킬버튼 1
-	if (Hero::getInstance()->getMana() < Hero::getInstance()->getSkillOneManaUse() || !Hero::getInstance()->getSkillOneUnlock())
+	if (!Hero::getInstance()->getSkillOneUnlock())
 	{
-		_skillOneButton->setSpriteFrame("btn_fist_disable.png");
+		_skillOneButton->setTexture("MACEBU~1/mace1/mace1_button_black.png");
+	}
+	else if (Hero::getInstance()->getMana() < Hero::getInstance()->getSkillOneManaUse())
+	{
+		_skillOneButton->setTexture("MACEBU~1/mace1/mace1_button_black.png");
 	}
 	else if (Hero::getInstance()->getMana() >= Hero::getInstance()->getSkillOneManaUse() && !_skillOneClick)
 	{
-		_skillOneButton->setSpriteFrame("btn_fist_up.png");
+		_skillOneButton->setTexture("MACEBU~1/mace1/mace1_button_up.png");
 	}
 	else if (_skillOneClick)
 	{
-		_skillOneButton->setSpriteFrame("btn_fist_down.png");
+		_skillOneButton->setTexture("MACEBU~1/mace1/mace1_button_down");
 	}
 	// 스킬버튼 2
-	if (Hero::getInstance()->getMana() < Hero::getInstance()->getSkillTwoManaUse() || !Hero::getInstance()->getSkillTwoUnlock())
+	if (!Hero::getInstance()->getSkillTwoUnlock())
 	{
 		_skillTwoButton->setSpriteFrame("btn_fist_disable.png");
 	}
+	else if (Hero::getInstance()->getMana() < Hero::getInstance()->getSkillTwoManaUse())
+	{
+		_skillTwoButton->setTexture("MACEBU~1/mace2/mace2_button_black.png");
+	}
 	else if (Hero::getInstance()->getMana() >= Hero::getInstance()->getSkillTwoManaUse() && !_skillTwoClick)
 	{
-		_skillTwoButton->setSpriteFrame("btn_heal_up.png");
+		_skillTwoButton->setTexture("MACEBU~1/mace2/mace2_button_up.png");
 	}
 	else if (_skillTwoClick)
 	{
-		_skillTwoButton->setSpriteFrame("btn_heal_down.png");
+		_skillTwoButton->setTexture("MACEBU~1/mace2/mace2_button_down.png");
 	}
 
 	// 스킬버튼 3
-	if (Hero::getInstance()->getMana() < Hero::getInstance()->getSkillThreeManaUse() || !Hero::getInstance()->getSkillThreeUnlock())
+	if (!Hero::getInstance()->getSkillThreeUnlock())
 	{
 		_skillThreeButton->setSpriteFrame("btn_fist_disable.png");
 	}
+	else if (Hero::getInstance()->getMana() < Hero::getInstance()->getSkillThreeManaUse())
+	{
+		_skillThreeButton->setTexture("MACEBU~1/mace3/mace3_button_black.png");
+	}
 	else if (Hero::getInstance()->getMana() >= Hero::getInstance()->getSkillThreeManaUse() && !_skillThreeClick)
 	{
-		_skillThreeButton->setSpriteFrame("btn_turnundead_up.png");
+		_skillThreeButton->setTexture("MACEBU~1/mace3/mace3_button_up.png");
 	}
 	else if (_skillThreeClick)
 	{
-		_skillThreeButton->setSpriteFrame("btn_turnundead_down.png");
+		_skillThreeButton->setTexture("MACEBU~1/mace3/mace3_button_down.png");
 	}
 
 	// 생쥐 소환 버튼
@@ -666,11 +703,43 @@ void HeroControl::MiniMap()
 
 void HeroControl::LevelUp()
 {
+
+	auto WingActL = RotateBy::create(0.1f, Vec3(0, 0, -90));
+	auto WingActR = RotateBy::create(0.1f, Vec3(0, 0, +90));
+	auto WingActL_1 = Spawn::create(Sequence::createWithTwoActions(WingActL, WingActL->reverse()), MoveBy::create(0.2, Vec2(0, 200)), nullptr);
+	auto WingActR_1 = Spawn::create(Sequence::createWithTwoActions(WingActR, WingActR->reverse()), MoveBy::create(0.2, Vec2(0, 200)), nullptr);
+
 	if (Hero::getInstance()->getExp() >= Hero::getInstance()->getMaxExp())
 	{
+		_levelUpText->setVisible(true);
+		_levelUpWingL->setVisible(true);
+		_levelUpWingR->setVisible(true);
+
 		Hero::getInstance()->setExp(0);
 		Hero::getInstance()->setLv(Hero::getInstance()->getLv() + 1);
+
+		// 레벨업 텍스트, 날개 액션
+		_levelUpText->runAction(Sequence::create(ScaleTo::create(0.1f, 0.5, 0.5),DelayTime::create(2.4), MoveBy::create(0.2,Vec2(0,200)), nullptr));
+
+		_levelUpWingL->runAction(Sequence::create(MoveBy::create(0.1f, Vec2(-55, 0)), WingActL, WingActL->reverse(), WingActL, WingActL->reverse(), WingActL, WingActL->reverse(),
+			WingActL, WingActL->reverse(), WingActL, WingActL->reverse(), WingActL, WingActL->reverse(), WingActL, WingActL->reverse(), WingActL, WingActL->reverse(), WingActL, WingActL->reverse(),
+			WingActL, WingActL->reverse(), WingActL, WingActL->reverse(), WingActL, WingActL->reverse(), WingActL_1, nullptr));
+
+		_levelUpWingR->runAction(Sequence::create(MoveBy::create(0.1f, Vec2(+55, 0)), WingActR, WingActR->reverse(), WingActR, WingActR->reverse(), WingActR, WingActR->reverse(),
+			WingActR, WingActR->reverse(), WingActR, WingActR->reverse(), WingActR, WingActR->reverse(), WingActR, WingActR->reverse(), WingActR, WingActR->reverse(), WingActR, WingActR->reverse(),
+			WingActR, WingActR->reverse(), WingActR, WingActR->reverse(), WingActR, WingActR->reverse(), WingActR_1, CallFunc::create(CC_CALLBACK_0(HeroControl::SetLevelUpImage, this)), nullptr));
 	}
+}
+
+void HeroControl::SetLevelUpImage()
+{
+	_levelUpText->setVisible(false);
+	_levelUpWingL->setVisible(false);
+	_levelUpWingR->setVisible(false);
+
+	_levelUpText->setPosition(90, 120);
+	_levelUpWingL->setPosition(90, 120);
+	_levelUpWingR->setPosition(90, 120);
 }
 
 void HeroControl::UnitBuff()
