@@ -5,14 +5,17 @@
 #include "HeroUnit.h"
 #include "Monster.h"
 #include "Dungeon.h"
+#include "MissileCollision.h"
+#include "ShopScene.h"
 
 class HeroControl : Scene
 {
 	SpriteFrameCache* cache; // 캐시
-	Hero* _hero; // 히어로 객체
 	HeroUnit* _heroUnit; // 히어로 유닛객체
 	Dungeon* _dungeon; // 몬스터 기지체력 가지고오기위해서
-	vector<HeroUnit*> _heroUnitVec; // 백터
+	MissileCollision* _missileCollision;
+	vector<HeroUnit*> _heroUnitVec; // 유닛 백터
+	vector<MissileCollision*> _missileCollisionVec; // 미사일 벡터
 
 	EventListenerTouchOneByOne* listener;
 
@@ -47,6 +50,19 @@ class HeroControl : Scene
 	Sprite* _expBarBack; // 경험치바배경(검정)
 	Sprite* _goldIcon; // 골드 아이콘
 	Sprite* _pauseButton; // 정지버튼
+	Sprite* _miniMapPointer; // 미니맵 포인터
+
+	Sprite* NextButton; // 클리어시 보여지는 넥스트 버튼
+
+	Sprite* _pauseBack;
+	Sprite* _pauseBord;
+	Sprite* _pauseText;
+	Sprite* _pauseQuitButton;
+	Sprite* _pauseResumeButton;
+
+	Animation* _miniMapPointerAnimation;
+	Animate* _miniMapPointerAnimate;
+	RepeatForever* _miniMapPointerRepeat;
 
 	Label* _currentMeat;
 	Label* _MaxMeat;
@@ -54,6 +70,9 @@ class HeroControl : Scene
 	Label* _MaxMana;
 	Label* _Level;
 	Label* _Gold;
+	Label* _SkillOneManaUse;
+	Label* _SkillTwoManaUse;
+	Label* _SkillThreeManaUse;
 
 	ProgressTimer* _mouseSummonsTimer;
 	ProgressTimer* _bearSummonsTimer;
@@ -84,16 +103,22 @@ class HeroControl : Scene
 	bool _PauseClick;
 
 public:
-	HeroControl(Scene* scene, Hero* hero, Layer* layer);
+	HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon);
 	void HeroMove(Dungeon* dungeon);
 	void HeroManaRegen();
 	void HeroMeatRegen();
 	void UnitVecErase();
 	void CoolTime();
+	void SkillEffectVisible();
+	void MiniMap();
+	void LevelUp();
+	void UnitBuff();
+	void NextButtonVisible();
 
 	bool onTouchBegan(Touch* touch, Event* event);
 	void onTouchMoved(Touch* touch, Event* event);
 	void onTouchEnded(Touch* touch, Event* event);
 
 	vector<HeroUnit*> getHeroUnitVec() { return _heroUnitVec; }
+	vector<MissileCollision*> getMissileCollisionVec() { return _missileCollisionVec; }
 };
