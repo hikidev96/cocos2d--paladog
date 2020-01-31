@@ -42,12 +42,12 @@ Hero::Hero()
 	IsHealing = false;
 
 	_skillOneUnlock = true;
-	_skillTwoUnlock = false;
-	_skillThreeUnlock = false;
+	_skillTwoUnlock = true;
+	_skillThreeUnlock = true;
 
 	_unitOneUnlock = true;
-	_unitTwoUnlock = false;
-	_unitThreeUnlock = false;
+	_unitTwoUnlock = true;
+	_unitThreeUnlock = true;
 
 	// 대기 애니메이션 만들기
 	_animation1 = Animation::create();
@@ -456,6 +456,8 @@ Hero::Hero()
 	_kangarooAtk2 = 400.0f; // 강공격력
 	_kangarooSpeed = 0.6f; // 스피드
 	
+	
+
 }
 
 Hero * Hero::getInstance()

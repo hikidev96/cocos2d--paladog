@@ -362,6 +362,11 @@ HeroControl::HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon)
 	_levelUpWingR->setPosition(90,120);
 	_levelUpWingR->setVisible(false);
 	Hero::getInstance()->getHero()->addChild(_levelUpWingR);
+
+	// 사운드 
+	AudioEngine::preload("Sound/hero2_walk.mp3");
+	AudioEngine::preload("Sound/unit_active.mp3");
+	AudioEngine::preload("Sound/unit_create.mp3");
 }
 
 void HeroControl::HeroMove(Dungeon* dungeon)
@@ -377,12 +382,19 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		{
 			Hero::getInstance()->getHero()->setPosition(Hero::getInstance()->getHero()->getPosition() + Vec2(Hero::getInstance()->getSpeed() * -1, 0));
 			Hero::getInstance()->getWeapon1()->setPosition(Hero::getInstance()->getWeapon1()->getPosition() + Vec2(Hero::getInstance()->getSpeed() * -1, 0));
+
 		}
 		
 		if (!Hero::getInstance()->getHero()->getNumberOfRunningActionsByTag(Walking))
 		{
 			Hero::getInstance()->getHero()->runAction(Hero::getInstance()->getWalkingAction());
 			Hero::getInstance()->getWeapon1()->runAction(Hero::getInstance()->HammerWalkingAction(Hero::getInstance()->getHammerKind()));
+
+		}
+
+		if (AudioEngine::getState(_audioId1) != AudioEngine::AudioState::PLAYING)
+		{
+			_audioId1 = AudioEngine::play2d("Sound/hero2_walk.mp3", true, 1.0f);
 		}
 	}
 	if (_right && Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
@@ -399,6 +411,11 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		{
 			Hero::getInstance()->getHero()->runAction(Hero::getInstance()->getWalkingAction());
 			Hero::getInstance()->getWeapon1()->runAction(Hero::getInstance()->HammerWalkingAction(Hero::getInstance()->getHammerKind()));
+		}
+
+		if (AudioEngine::getState(_audioId1) != AudioEngine::AudioState::PLAYING)
+		{
+			_audioId1 = AudioEngine::play2d("Sound/hero2_walk.mp3", true, 1.0f);
 		}
 	}
 	if (!Hero::getInstance()->getHero()->getNumberOfRunningActions()) // 히어로 대기
@@ -471,10 +488,19 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	else if (Hero::getInstance()->getMeat() < 10 || _mouseSummonsButtonActivation == false)
 	{
 		_mouseSummonsButton->setSpriteFrame("btn_unit_00_disable.png");
+
+		_UnitActiveSoundBool = false;
 	}
 	else if (Hero::getInstance()->getMeat() >= 10 && !_mouseSummonsClick && _mouseSummonsButtonActivation == true)
 	{
 		_mouseSummonsButton->setSpriteFrame("btn_unit_00_up.png");
+
+		if (AudioEngine::getState(_audioUnitActive) != AudioEngine::AudioState::PLAYING && !_UnitActiveSoundBool)
+		{
+			_audioUnitActive = AudioEngine::play2d("Sound/unit_active.mp3", false, 1.f);
+
+			_UnitActiveSoundBool = true;
+		}
 	}
 	else if (_mouseSummonsClick)
 	{
@@ -489,10 +515,19 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	else if (Hero::getInstance()->getMeat() < 30 || _bearSummonsButtonActivation == false)
 	{
 		_bearSummonsButton->setSpriteFrame("btn_unit_02_disable.png");
+
+		_UnitActiveSoundBool2 = false;
 	}
 	else if (Hero::getInstance()->getMeat() >= 30 && !_bearSummonsClick)
 	{
 		_bearSummonsButton->setSpriteFrame("btn_unit_02_up.png");
+
+		if (AudioEngine::getState(_audioUnitActive) != AudioEngine::AudioState::PLAYING && !_UnitActiveSoundBool2)
+		{
+			_audioUnitActive = AudioEngine::play2d("Sound/unit_active.mp3", false, 1.f);
+
+			_UnitActiveSoundBool2 = true;
+		}
 	}
 	else if (_bearSummonsClick)
 	{
@@ -507,10 +542,19 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 	else if (Hero::getInstance()->getMeat() < 40 || _kangarooSummonsButtonActivation == false)
 	{
 		_kangarooSummonsButton->setSpriteFrame("btn_unit_03_disable.png");
+
+		_UnitActiveSoundBool3 = false;
 	}
 	else if (Hero::getInstance()->getMeat() >= 40 && !_kangarooSummonsClick)
 	{
 		_kangarooSummonsButton->setSpriteFrame("btn_unit_03_up.png");
+
+		if (AudioEngine::getState(_audioUnitActive) != AudioEngine::AudioState::PLAYING && !_UnitActiveSoundBool3)
+		{
+			_audioUnitActive = AudioEngine::play2d("Sound/unit_active.mp3", false, 1.f);
+
+			_UnitActiveSoundBool3 = true;
+		}
 	}
 	else if (_kangarooSummonsClick)
 	{
@@ -873,6 +917,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			_heroUnitVec.push_back(_heroUnit);
 
 			Hero::getInstance()->setMeat(Hero::getInstance()->getMeat() - 10);
+
+			_audioUnitSommons = AudioEngine::play2d("Sound/unit_create.mp3", false, 1.f); // 소환버튼 클릭 사운드
 		}
 	}
 
@@ -889,6 +935,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			_heroUnitVec.push_back(_heroUnit);
 
 			Hero::getInstance()->setMeat(Hero::getInstance()->getMeat() - 30);
+
+			_audioUnitSommons = AudioEngine::play2d("Sound/unit_create.mp3", false, 1.f); // 소환버튼 클릭 사운드
 		}
 	}
 
@@ -905,6 +953,8 @@ bool HeroControl::onTouchBegan(Touch * touch, Event * event)
 			_heroUnitVec.push_back(_heroUnit);
 
 			Hero::getInstance()->setMeat(Hero::getInstance()->getMeat() - 40);
+
+			_audioUnitSommons = AudioEngine::play2d("Sound/unit_create.mp3", false, 1.f); // 소환버튼 클릭 사운드
 		}
 	}
 
@@ -989,5 +1039,9 @@ void HeroControl::onTouchEnded(Touch * touch, Event * event)
 		Hero::getInstance()->getHero()->stopActionByTag(Walking);
 		Hero::getInstance()->getWeapon1()->stopActionByTag(HammerWalking);
 	}
+
+	AudioEngine::stop(_audioId1);
+
+	//AudioEngine::uncache("Sound/hero2_walk.mp3");
 
 }
