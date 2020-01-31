@@ -49,6 +49,7 @@ Hero::Hero()
 	_unitTwoUnlock = true;
 	_unitThreeUnlock = true;
 
+
 	// 대기 애니메이션 만들기
 	_animation1 = Animation::create();
 	_animation1->setDelayPerUnit(0.03f);
@@ -479,6 +480,10 @@ void Hero::createHeroInfo(Scene* scene, Layer* layer)
 {
 	_stageStart = false;
 	_stageClear = false;
+	_sceneChange = false;
+
+	_mana = 0;
+	_meat = 0;
 
 	// 영웅 만들기
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");

@@ -35,6 +35,8 @@ class ServiceScene
 	Sprite* _stageClearStar2;
 	Sprite* _stageClearStar3;
 
+	Sprite* _loding;
+
 	Scene* _scene;
 
 public:
@@ -47,5 +49,7 @@ public:
 	void StageClear();
 	void CoinVisible();
 	void LightVisible();
+	void CoinSound();
+	void LodingScene(Scene* scene);
 	
 };

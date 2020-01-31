@@ -75,6 +75,10 @@ bool MindForest_Stage1::init() {
 
 	// 사운드
 	_soundBs = AudioEngine::play2d("Sound/start_battle.mp3", false, 1.f);
+
+	BgSoundClear = false;
+
+	Hero::getInstance()->setStageKind(Stage1And2);
 	
 
 	return true;
@@ -82,9 +86,11 @@ bool MindForest_Stage1::init() {
 
 void MindForest_Stage1::tick(float delta)
 {
-	if (AudioEngine::getState(_soundBs) != AudioEngine::AudioState::PLAYING && AudioEngine::getState(_soundBg1) != AudioEngine::AudioState::PLAYING)
+
+	if (AudioEngine::getState(_soundBs) != AudioEngine::AudioState::PLAYING && AudioEngine::getState(_soundBg1) != AudioEngine::AudioState::PLAYING && !BgSoundClear)
 	{
-		_soundBg1 = AudioEngine::play2d("Sound/bg_stage.mp3", true, 1.f);
+		_soundBg1 = AudioEngine::play2d("Sound/bg_stage.mp3", true, 0.6);
+		BgSoundClear = true;
 	}
 
 	if (Hero::getInstance()->getStageStart())
@@ -118,7 +124,22 @@ void MindForest_Stage1::tick(float delta)
 	if (_dungeon->getHp() <= 0)
 	{
 		if (!Hero::getInstance()->getStageClear())
+		{
+			AudioEngine::stop(_soundBg1);
+			AudioEngine::play2d("Sound/stage_clear.mp3",false,1.0f);
 			Hero::getInstance()->setStageClear(true);
+		}
+			
+	}
+
+	// 씬 전환
+	if (Hero::getInstance()->getSceneChange())
+	{
+		AudioEngine::stopAll();
+		AudioEngine::uncacheAll();
+		Hero::getInstance()->setSceneChange(false);
+		auto scene = MindForest_Stage2::create();
+		Director::getInstance()->replaceScene(scene);
 	}
 
 }
