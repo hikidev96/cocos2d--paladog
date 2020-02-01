@@ -31,7 +31,7 @@ Hero::Hero()
 
 	_gold = 0; //현재 골드
 	_exp = 0; // 현재 경험치
-	_maxExp = 100; // 최대 경험치
+	_maxExp = 60; // 최대 경험치
 
 	_skillOneManaUse = 10; // 스킬 1 마나 사용량
 	_skillTwoManaUse = 20; // 스킬 2 마나 사용량
@@ -42,12 +42,13 @@ Hero::Hero()
 	IsHealing = false;
 
 	_skillOneUnlock = true;
-	_skillTwoUnlock = false;
-	_skillThreeUnlock = false;
+	_skillTwoUnlock = true;
+	_skillThreeUnlock = true;
 
 	_unitOneUnlock = true;
-	_unitTwoUnlock = false;
-	_unitThreeUnlock = false;
+	_unitTwoUnlock = true;
+	_unitThreeUnlock = true;
+
 
 	// 대기 애니메이션 만들기
 	_animation1 = Animation::create();
@@ -456,6 +457,8 @@ Hero::Hero()
 	_kangarooAtk2 = 400.0f; // 강공격력
 	_kangarooSpeed = 0.6f; // 스피드
 	
+	
+
 }
 
 Hero * Hero::getInstance()
@@ -477,6 +480,10 @@ void Hero::createHeroInfo(Scene* scene, Layer* layer)
 {
 	_stageStart = false;
 	_stageClear = false;
+	_sceneChange = false;
+
+	_mana = 0;
+	_meat = 0;
 
 	// 영웅 만들기
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
@@ -500,7 +507,7 @@ void Hero::createHeroInfo(Scene* scene, Layer* layer)
 	_heroBuffOra = Sprite::createWithSpriteFrameName("eff_aura_0001.png");
 	_heroBuffOra->setPosition(_hero->getPosition().x, _hero->getPosition().y);
 	//_hero->getContentSize().width / 2, 10
-	layer->addChild(_heroBuffOra, _hero->getZOrder() - 2);
+	layer->addChild(_heroBuffOra, _hero->getZOrder() - 200);
 
 	//마나 게이지 만들기
 	_manaGauge = ProgressTimer::create(Sprite::create("UI/Mana.png"));

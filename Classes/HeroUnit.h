@@ -96,6 +96,11 @@ class HeroUnit
 
 	vector<Monster*> _monsterVec;
 
+	// »ç¿îµå
+	int _audioMouseDead; // »ıÁãÁ×À½
+	int _audioBearDead; // °õÁ×À½
+	int _audioKangarooDead; // Ä»°Å·çÁ×À½
+
 public:
 	HeroUnit(Scene* scene, UnitKind herokind, Layer* layer, Dungeon* dungeon);
 	vector<HeroUnit*> getUnitVec() { return _unitVec; }

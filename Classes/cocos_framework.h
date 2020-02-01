@@ -20,6 +20,7 @@
 #include "json/stringbuffer.h"
 #include "json/prettywriter.h"
 #include "network/HttpClient.h"
+#include "AudioEngine.h"
 
 // using namespace
 USING_NS_CC; // for cocos2d
@@ -28,6 +29,7 @@ using namespace std; // for std
 using namespace ui; // for ui
 using namespace tinyxml2; // for xml import
 using namespace cocos2d::network;
+using namespace experimental;
 // using namespace extension; // for tableView
 
 // is make you can print korean language on cocos2d
