@@ -1,4 +1,5 @@
 #include "MindForest_Stage1.h"
+#include "MapMindForestScene.h"
 
 Scene* MindForest_Stage1::createScene() {
 	return MindForest_Stage1::create();
@@ -9,6 +10,8 @@ bool MindForest_Stage1::init() {
 		return false;
 	}
 
+	_soundBs = AudioEngine::play2d("Sound/start_battle.mp3", false, 1.f);
+
 	_bgLayer = Layer::create();
 	this->addChild(_bgLayer, -100);
 
@@ -16,6 +19,8 @@ bool MindForest_Stage1::init() {
 	_dungeon = new Dungeon(this, _bgLayer, 10000.0f); //3번째 인자에 체력 넣음
 	_heroControl = new HeroControl(this, _bgLayer, _dungeon);
 	_servecScene = new ServiceScene(this);
+
+	Hero::getInstance()->getHeroBuffOra()->runAction(Hero::getInstance()->getOraAct());
 
 	this->schedule(schedule_selector(MindForest_Stage1::tick));
 	this->schedule(schedule_selector(MindForest_Stage1::HeroManaRegen), Hero::getInstance()->getManaRegenSpeed());
@@ -72,8 +77,6 @@ bool MindForest_Stage1::init() {
 	// 겟 레디 화면
 	_servecScene->GetReady();
 
-	// 사운드
-	_soundBs = AudioEngine::play2d("Sound/start_battle.mp3", false, 1.f);
 
 	BgSoundClear = false;
 
@@ -85,7 +88,9 @@ bool MindForest_Stage1::init() {
 
 MindForest_Stage1::~MindForest_Stage1()
 {
-
+	delete _dungeon;
+	delete _heroControl;
+	delete _servecScene;
 }
 
 void MindForest_Stage1::tick(float delta)
@@ -141,8 +146,8 @@ void MindForest_Stage1::tick(float delta)
 		AudioEngine::stopAll();
 		AudioEngine::uncacheAll();
 		Hero::getInstance()->setSceneChange(false);
-		//auto scene = MindForest_Stage2::create();
-		//Director::getInstance()->replaceScene(scene);
+		auto scene = MapMindForestScene::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(2,scene));
 	}
 
 }

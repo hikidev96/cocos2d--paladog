@@ -19,6 +19,8 @@ bool MindForest_Stage3::init() {
 	_dungeon = new Dungeon(this, _bgLayer, 30000.0f); //3번째 인자에 체력 넣음
 	_servecScene = new ServiceScene(this);
 
+	Hero::getInstance()->getHeroBuffOra()->runAction(Hero::getInstance()->getOraAct());
+
 	this->schedule(schedule_selector(MindForest_Stage3::tick));
 	this->schedule(schedule_selector(MindForest_Stage3::HeroManaRegen), Hero::getInstance()->getManaRegenSpeed());
 	this->schedule(schedule_selector(MindForest_Stage3::HeroMeatRegen), Hero::getInstance()->getMeatRegenSpeed());

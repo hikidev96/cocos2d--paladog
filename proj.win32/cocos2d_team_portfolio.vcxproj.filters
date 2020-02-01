@@ -60,9 +60,6 @@
     <ClCompile Include="..\Classes\Hero.cpp">
       <Filter>src\영웅</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MapMindForest.cpp">
-      <Filter>src\Scene\Map</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MindForest_Stage1.cpp">
       <Filter>src\Scene\Map\스테이지</Filter>
     </ClCompile>
@@ -105,6 +102,15 @@
     <ClCompile Include="..\Classes\ShopScene.cpp">
       <Filter>src\Scene\Shopping</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MapMindForestBg.cpp">
+      <Filter>src\Scene\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapMindForestScene.cpp">
+      <Filter>src\Scene\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapMindForestUI.cpp">
+      <Filter>src\Scene\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -121,9 +127,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Hero.h">
       <Filter>src\영웅</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MapMindForest.h">
-      <Filter>src\Scene\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MindForest_Stage1.h">
       <Filter>src\Scene\Map\스테이지</Filter>
@@ -166,6 +169,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\ShopScene.h">
       <Filter>src\Scene\Shopping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapMindForestBg.h">
+      <Filter>src\Scene\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapMindForestScene.h">
+      <Filter>src\Scene\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapMindForestUI.h">
+      <Filter>src\Scene\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -207,9 +207,9 @@
                 <key>frame</key>
                 <string>{{210,552},{100,46}}</string>
                 <key>offset</key>
-                <string>{183,44}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{100,46}</string>
             </dict>
             <key>btn_slot_start_down.png</key>
             <dict>
@@ -225,9 +225,9 @@
                 <key>frame</key>
                 <string>{{300,376},{108,54}}</string>
                 <key>offset</key>
-                <string>{186,92}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{108,54}</string>
             </dict>
             <key>btn_sub_option.png</key>
             <dict>
@@ -252,9 +252,9 @@
                 <key>frame</key>
                 <string>{{684,493},{82,53}}</string>
                 <key>offset</key>
-                <string>{0,1}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{84,55}</string>
+                <string>{82,53}</string>
             </dict>
             <key>btn_vibration_off.png</key>
             <dict>

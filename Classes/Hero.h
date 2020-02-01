@@ -110,9 +110,9 @@ private:
 	Animation* _hammerSkillEffectAnimation_A3; // 식량망치 스킬 이펙트A
 	Animate* _hammerSkillEffectAnimate_A3; // 식량망치 스킬 이펙트A
 
-	Animation* _animation13; // 식량망치 대기 액션
-	Animate* _animate13; // 식량망치 대기 액션
-	RepeatForever* _heroBuffOraRepeat; // 식량망치 대기 액션
+	Animation* _animation13; //오라 액션
+	Animate* _animate13; // 오라 액션
+	RepeatForever* _heroBuffOraRepeat; // 오라 액션
 
 	Sprite* _hero; // 히어로 스프라이트
 	Sprite* _heroWeapon1; // 고무망치
@@ -274,6 +274,8 @@ public:
 	Animate* HammerAttackEffectA(HAMMERKIND hammerkind);
 	Animate* HammerAttackEffectB(HAMMERKIND hammerkind);
 	Animate* HammerAttackEffectC(HAMMERKIND hammerkind);
+
+	RepeatForever* getOraAct() { return _heroBuffOraRepeat; }
 
 	//유닛 정보 getset 함수
 	float getMouseHp() { return _mouseHp; }

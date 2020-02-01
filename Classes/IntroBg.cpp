@@ -6,6 +6,7 @@ IntroBg::IntroBg() {
   _cache->addSpriteFramesWithFile("Intro/Bg/startMapUI/opening_ending_03.plist");
   _cache->addSpriteFramesWithFile("Intro/Bg/opening_ending_04.plist");
   _cache->addSpriteFramesWithFile("Intro/Bg/title_wood.plist");
+  _cache->addSpriteFramesWithFile("Player/Unit/u_01_1.plist");
 
   // 구름 애니메이션
   Animation* titleDarkCloudAnimation1 = Animation::create();
@@ -44,6 +45,24 @@ IntroBg::IntroBg() {
   Animate* titleDarkCloudAnimate2 = Animate::create(titleDarkCloudAnimation2);
   _titleDarkCloudAction2 = RepeatForever::create(titleDarkCloudAnimate2);
   _titleDarkCloudAction2->retain();
+
+  Animation* heroAnimation = Animation::create();
+  heroAnimation->setDelayPerUnit(0.03f);
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0001.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0002.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0003.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0004.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0005.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0006.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0007.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0008.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0009.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0010.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0011.png"));
+  heroAnimation->addSpriteFrame(_cache->getSpriteFrameByName("hero_wait_0012.png"));
+  Animate* heroAnimate = Animate::create(heroAnimation);
+  _heroAction = RepeatForever::create(heroAnimate);
+  _heroAction->retain();
 }
 
 void IntroBg::Set15Age(Scene * pScene) {
@@ -69,12 +88,28 @@ void IntroBg::SetTitleSky(Scene * pScene) {
   pScene->addChild(_titleSky);
 }
 
+void IntroBg::SetTitleSkyClone(Scene * pScene) {
+  _titleSkyClone =
+    Sprite::createWithSpriteFrameName("title_sky_02.png");
+  _titleSkyClone->setAnchorPoint(Vec2(0, 0));
+  _titleSkyClone->setPosition(Vec2(480, 0));
+  pScene->addChild(_titleSkyClone);
+}
+
 void IntroBg::SetTitleVolcanoCloud(Scene * pScene) {
   _titleVolcanoCloud =
     Sprite::createWithSpriteFrameName("title_volcano_cloud.png");
   _titleVolcanoCloud->setAnchorPoint(Vec2(0, 0));
   _titleVolcanoCloud->setPosition(Vec2(0, 0));
   pScene->addChild(_titleVolcanoCloud);
+}
+
+void IntroBg::SetTitleVolcanoCloudClone(Scene * pScene) {
+  _titleVolcanoCloudClone =
+    Sprite::createWithSpriteFrameName("title_volcano_cloud.png");
+  _titleVolcanoCloudClone->setAnchorPoint(Vec2(0, 0));
+  _titleVolcanoCloudClone->setPosition(Vec2(-480, 0));
+  pScene->addChild(_titleVolcanoCloudClone);
 }
 
 void IntroBg::SetTitleDarkCloud(Scene* pScene) {
@@ -128,4 +163,10 @@ void IntroBg::SetTitleWood(Scene * pScene) {
   _treeB->setAnchorPoint(Vec2(0, 0));
   _treeB->setPosition(Vec2(0, 0));
   pScene->addChild(_treeB);
+}
+
+void IntroBg::SetHero(Scene * pScene) {
+  _hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
+  _hero->setPosition(70, 300);
+  pScene->addChild(_hero);
 }
