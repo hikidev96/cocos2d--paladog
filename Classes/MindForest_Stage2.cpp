@@ -159,13 +159,13 @@ void MindForest_Stage2::HeroMeatRegen(float delta)
 void MindForest_Stage2::MonsterTick()
 {
 	if (!_dungeon->getIsCrash()) {
-		if (rand() % 400 == 0) {
+		if (rand() % 500 == 0) {
 			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::강화좀비));
 		}
-		if (rand() % 1000 == 0) {
+		if (rand() % 1500 == 0) {
 			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::광부좀비));
 		}
-		if (rand() % 2000 == 0) {
+		if (rand() % 2200 == 0) {
 			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::일반미라));
 		}
 	}

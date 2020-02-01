@@ -46,8 +46,8 @@ Hero::Hero()
 	_skillThreeUnlock = true;
 
 	_unitOneUnlock = true;
-	_unitTwoUnlock = true;
-	_unitThreeUnlock = true;
+	_unitTwoUnlock = false ;
+	_unitThreeUnlock = false;
 
 
 	// 대기 애니메이션 만들기
