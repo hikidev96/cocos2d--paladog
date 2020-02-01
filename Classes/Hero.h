@@ -34,6 +34,12 @@ enum HAMMERKIND
 	식량망치,
 };
 
+enum StageKind
+{
+	Stage1And2,
+	Stage3,
+};
+
 class Hero
 {
 private:
@@ -104,9 +110,9 @@ private:
 	Animation* _hammerSkillEffectAnimation_A3; // 식량망치 스킬 이펙트A
 	Animate* _hammerSkillEffectAnimate_A3; // 식량망치 스킬 이펙트A
 
-	Animation* _animation13; // 식량망치 대기 액션
-	Animate* _animate13; // 식량망치 대기 액션
-	RepeatForever* _heroBuffOraRepeat; // 식량망치 대기 액션
+	Animation* _animation13; //오라 액션
+	Animate* _animate13; // 오라 액션
+	RepeatForever* _heroBuffOraRepeat; // 오라 액션
 
 	Sprite* _hero; // 히어로 스프라이트
 	Sprite* _heroWeapon1; // 고무망치
@@ -123,6 +129,7 @@ private:
 
 	Movement _movement; // 현재 플레이어가 보고있는 방향
 	HAMMERKIND _HammerKind;
+	StageKind _stageKind;
 
 	// 히어로 정보
 	float _speed; // 스피드
@@ -155,6 +162,8 @@ private:
 
 	bool _stageStart;
 	bool _stageClear;
+
+	bool _sceneChange;
 
 
 	// 유닛정보
@@ -242,6 +251,9 @@ public:
 	void setStageStart(bool stagestart) { _stageStart = stagestart; }
 	bool getStageClear() { return _stageClear; }
 	void setStageClear(bool stageclear) { _stageClear = stageclear; }
+	bool getSceneChange() { return _sceneChange; }
+	void setSceneChange(bool scenehange) { _sceneChange = scenehange; }
+
 	ProgressTimer* getManaGauge() { return _manaGauge; }
 	ProgressTimer* getMeatGauge() { return _meatGauge; }
 	ProgressTimer* getHeroHpInfo() { return _hpInfoGauge; }
@@ -253,6 +265,8 @@ public:
 
 	HAMMERKIND getHammerKind() { return _HammerKind; }
 	void setHammerKind(HAMMERKIND hammerkind) { _HammerKind = hammerkind; }
+	StageKind getStageKind() { return _stageKind; }
+	void setStageKind(StageKind stagekind) { _stageKind = stagekind; }
 
 	RepeatForever* HammerWaitingAction(HAMMERKIND hammerkind);
 	RepeatForever* HammerWalkingAction(HAMMERKIND hammerkind);
@@ -260,6 +274,8 @@ public:
 	Animate* HammerAttackEffectA(HAMMERKIND hammerkind);
 	Animate* HammerAttackEffectB(HAMMERKIND hammerkind);
 	Animate* HammerAttackEffectC(HAMMERKIND hammerkind);
+
+	RepeatForever* getOraAct() { return _heroBuffOraRepeat; }
 
 	//유닛 정보 getset 함수
 	float getMouseHp() { return _mouseHp; }

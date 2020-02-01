@@ -42,12 +42,13 @@ Hero::Hero()
 	IsHealing = false;
 
 	_skillOneUnlock = true;
-	_skillTwoUnlock = false;
-	_skillThreeUnlock = false;
+	_skillTwoUnlock = true;
+	_skillThreeUnlock = true;
 
 	_unitOneUnlock = true;
-	_unitTwoUnlock = false;
-	_unitThreeUnlock = false;
+	_unitTwoUnlock = true;
+	_unitThreeUnlock = true;
+
 
 	// 대기 애니메이션 만들기
 	_animation1 = Animation::create();
@@ -425,16 +426,16 @@ Hero::Hero()
 	_hammerSkillEffectAnimate_A3->setTag(HammerSkillEffect1);
 
 	// 히어로 오라 애니메이션
-	_animation13 = Animation::create();
-	_animation13->setDelayPerUnit(0.1f);
-	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0001.png"));
-	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0002.png"));
-	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0003.png"));
-	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0004.png"));
-	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0005.png"));
-	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0006.png"));
-	_animate13 = Animate::create(_animation13);
-	_heroBuffOraRepeat = RepeatForever::create(_animate13);
+	//_animation13 = Animation::create();
+	//_animation13->setDelayPerUnit(0.1f);
+	//_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0001.png"));
+	//_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0002.png"));
+	//_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0003.png"));
+	//_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0004.png"));
+	//_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0005.png"));
+	//_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0006.png"));
+	//_animate13 = Animate::create(_animation13);
+	//_heroBuffOraRepeat = RepeatForever::create(_animate13);
 
 	// 유닛 정보
 
@@ -456,6 +457,7 @@ Hero::Hero()
 	_kangarooAtk2 = 400.0f; // 강공격력
 	_kangarooSpeed = 0.6f; // 스피드
 	
+
 }
 
 Hero * Hero::getInstance()
@@ -477,6 +479,22 @@ void Hero::createHeroInfo(Scene* scene, Layer* layer)
 {
 	_stageStart = false;
 	_stageClear = false;
+	_sceneChange = false;
+
+	_mana = 0;
+	_meat = 0;
+
+	// 히어로 오라 애니메이션
+	_animation13 = Animation::create();
+	_animation13->setDelayPerUnit(0.1f);
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0001.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0002.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0003.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0004.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0005.png"));
+	_animation13->addSpriteFrame(cache->getSpriteFrameByName("eff_aura_0006.png"));
+	_animate13 = Animate::create(_animation13);
+	_heroBuffOraRepeat = RepeatForever::create(_animate13);
 
 	// 영웅 만들기
 	_hero = Sprite::createWithSpriteFrameName("hero_wait_0001.png");
@@ -542,7 +560,7 @@ void Hero::createHeroInfo(Scene* scene, Layer* layer)
 	_expGauge->setBarChangeRate({ 0,1 });
 	scene->addChild(_expGauge, -11);
 
-	_heroBuffOra->runAction(_heroBuffOraRepeat);
+		
 }
 
 RepeatForever* Hero::HammerWaitingAction(HAMMERKIND hammerkind)

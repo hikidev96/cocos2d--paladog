@@ -6,6 +6,7 @@
 #include "HeroUnit.h"
 #include "Monster.h"
 #include "Dungeon.h"
+#include "ServiceScene.h"
 
 class MindForest_Stage2 : public Scene
 {
@@ -13,10 +14,12 @@ class MindForest_Stage2 : public Scene
 	HeroUnit* _heroUnit;
 	vector<Monster*> _monster;
 	Dungeon* _dungeon;
+	ServiceScene* _servecScene;
 
 	Layer* _bgLayer;
 
 	SpriteFrameCache* _cache;
+
 
 	Sprite* _backGround1;
 	Sprite* _backGround2;
@@ -24,6 +27,11 @@ class MindForest_Stage2 : public Scene
 	Sprite* _backGround3;
 	Sprite* _backGround3_1;
 	Sprite* _backGround3_2;
+
+	int _soundBs;
+	int _soundBg1;
+
+	bool BgSoundClear;
 
 public:
 	static cocos2d::Scene* createScene();

@@ -19,9 +19,17 @@ class IntroBg
   Sprite* GetTitleSky() {
     return _titleSky;
   }
+  void SetTitleSkyClone(Scene* pScene);
+  Sprite* GetTitleSkyClone() {
+    return _titleSkyClone;
+  }
   void SetTitleVolcanoCloud(Scene* pScene);
   Sprite* GetTitleVolcanoCloud() {
     return _titleVolcanoCloud;
+  }
+  void SetTitleVolcanoCloudClone(Scene* pScene);
+  Sprite* GetTitleVolcanoCloudClone() {
+    return _titleVolcanoCloudClone;
   }
   void SetTitleDarkCloud(Scene* pScene);
   Sprite* GetTitleDarkCloud() {
@@ -58,12 +66,21 @@ class IntroBg
   Sprite* GetTreeB() {
     return _treeB;
   }
+  void SetHero(Scene* pScene);
+  Sprite* GetHero() {
+    return _hero;
+  }
+  RepeatForever* GetHeroAction() {
+    return _heroAction;
+  }
  private:
   SpriteFrameCache* _cache;
   Sprite* _15Age;
   Sprite* _titleVolcano;
   Sprite* _titleSky;
-  Sprite* _titleVolcanoCloud;  
+  Sprite* _titleSkyClone;
+  Sprite* _titleVolcanoCloud;
+  Sprite* _titleVolcanoCloudClone;
   Sprite* _titleDarkCloud;
   RepeatForever* _titleDarkCloudAction;
   Sprite* _titleDarkCloud2;
@@ -74,6 +91,8 @@ class IntroBg
   Sprite* _woodR;
   Sprite* _treeA;
   Sprite* _treeB;
+  Sprite* _hero;
+  RepeatForever* _heroAction;
 };
 
 #endif // __INTROBG_H__
