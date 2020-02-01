@@ -135,11 +135,25 @@ void MindForest_Stage3::tick(float delta)
 	// ¾À ÀüÈ¯
 	if (Hero::getInstance()->getSceneChange())
 	{
+
+		AudioEngine::end();
 		AudioEngine::stopAll();
 		AudioEngine::uncacheAll();
+
 		Hero::getInstance()->setSceneChange(false);
-		//auto scene = MindForest_Stage2::create();
-		//Director::getInstance()->replaceScene(scene);
+
+		auto EndingLayer = LayerColor::create(Color4B::WHITE);
+		EndingLayer->setOpacity(0);
+		this->addChild(EndingLayer, 10000);
+
+		auto EndingText = Sprite::create("UI/ending_msg_kor.png");
+		EndingText->setOpacity(0);
+		EndingText->setPosition(280, 160);
+		EndingText->setScale(0.5f);
+		this->addChild(EndingText, 10000);
+
+		EndingLayer->runAction(FadeIn::create(3));
+		EndingText->runAction(Sequence::create(DelayTime::create(3),FadeIn::create(3),nullptr));
 	}
 }
 
