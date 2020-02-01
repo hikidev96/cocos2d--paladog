@@ -1,4 +1,7 @@
 #include "MindForest_Stage1.h"
+#include "MapMindForestScene.h"
+
+bool MindForest_Stage1::_isComplete = false;
 
 Scene* MindForest_Stage1::createScene() {
 	return MindForest_Stage1::create();
@@ -78,7 +81,6 @@ bool MindForest_Stage1::init() {
 	BgSoundClear = false;
 
 	Hero::getInstance()->setStageKind(Stage1And2);
-	
 
 	return true;
 }
@@ -90,7 +92,6 @@ MindForest_Stage1::~MindForest_Stage1()
 
 void MindForest_Stage1::tick(float delta)
 {
-
 	if (AudioEngine::getState(_soundBs) != AudioEngine::AudioState::PLAYING && AudioEngine::getState(_soundBg1) != AudioEngine::AudioState::PLAYING && !BgSoundClear)
 	{
 		_soundBg1 = AudioEngine::play2d("Sound/bg_stage.mp3", true, 0.6);
@@ -141,10 +142,10 @@ void MindForest_Stage1::tick(float delta)
 		AudioEngine::stopAll();
 		AudioEngine::uncacheAll();
 		Hero::getInstance()->setSceneChange(false);
-		//auto scene = MindForest_Stage2::create();
-		//Director::getInstance()->replaceScene(scene);
+        _isComplete = true;
+		auto scene = MapMindForestScene::createScene();
+		Director::getInstance()->replaceScene(scene);
 	}
-
 }
 
 void MindForest_Stage1::HeroManaRegen(float delta)

@@ -1,5 +1,7 @@
 #include "MindForest_Stage3.h"
 
+bool MindForest_Stage3::_isComplete = false;
+
 Scene* MindForest_Stage3::createScene() {
 	return MindForest_Stage3::create();
 }
@@ -139,6 +141,7 @@ void MindForest_Stage3::tick(float delta)
 		AudioEngine::end();
 		AudioEngine::stopAll();
 		AudioEngine::uncacheAll();
+        _isComplete = true;
 
 		Hero::getInstance()->setSceneChange(false);
 

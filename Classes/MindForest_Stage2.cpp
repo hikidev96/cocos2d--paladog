@@ -1,4 +1,7 @@
 #include "MindForest_Stage2.h"
+#include "MapMindForestScene.h"
+
+bool MindForest_Stage2::_isComplete = false;
 
 Scene* MindForest_Stage2::createScene() {
 	return MindForest_Stage2::create();
@@ -134,9 +137,10 @@ void MindForest_Stage2::tick(float delta)
 	{
 		AudioEngine::stopAll();
 		AudioEngine::uncacheAll();
+        _isComplete = true;
 		Hero::getInstance()->setSceneChange(false);
-		//auto scene = MindForest_Stage3::create();
-		//Director::getInstance()->replaceScene(scene);
+		auto scene = MapMindForestScene::createScene();
+		Director::getInstance()->replaceScene(scene);
 	}
 
 }

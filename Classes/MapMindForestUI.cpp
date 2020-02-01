@@ -65,3 +65,10 @@ void MapMindForestUI::setStSelPointUp2(Scene * pScene) {
   _stSelPointUp[2]->setPosition(Vec2(175, 200));
   pScene->addChild(_stSelPointUp[2]);
 }
+
+void MapMindForestUI::setUpgrade(Scene * pScene) {
+  _upgrade = Sprite::create("MapMindForest/UI/upgrade.png");
+  _upgrade->setAnchorPoint(Vec2(0, 0));
+  _upgrade->setPosition(Vec2(0, 0));
+  pScene->addChild(_upgrade);
+}
