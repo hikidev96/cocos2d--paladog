@@ -94,6 +94,7 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 	_time = 0;
 	_unitAttack = -1;
 	_isBossDead = false;
+	//AudioEngine::play2d("Sound/sword_01.mp3", false, 1.0f);
 
 	int zorder = rand() % 30;
 	_monster = Sprite::createWithSpriteFrameName(StringUtils::format("%s_walk_0001.png", _monsterCode));
