@@ -19,6 +19,10 @@ class IntroUI
   Sprite* GetTitleBtnInfoUp() {
     return _titleBtnInfoUp;
   }
+  void SetTitleLogoCrown(Scene* pScene);
+  Sprite* GetTitleLogoCrown() {
+    return _titleLogoCrown;
+  }
   void SetModeSelectBox(Scene* pScene);
   Sprite* GetModeSelectBox() {
     return _modeSelectBox;
@@ -59,20 +63,29 @@ class IntroUI
   Sprite* GetBtnExitUp() {
     return _btnExitUp;
   }
-  void SetBtnSlotStartUp(Scene* pScene);
-  Sprite* GetBtnSlotStartUp() {
-    return _btnSlotStartUp;
+  void SetStart(Scene* pScene);
+  Sprite* GetStart() {
+    return _start;
   }
-  void SetBtnSlotDeleteUp(Scene* pScene);
-  Sprite* GetBtnSlotDeleteUp() {
-    return _btnSlotDeleteUp;
+  void SetDelete(Scene* pScene);
+  Sprite* GetDelete() {
+    return _delete;
   }
-
+  void SetMsgBox(Scene* pScene);
+  Sprite* GetMsgBox() {
+    return _msgBox;
+  }
+  void SetBtnCatUp(Scene* pScene);
+  Sprite* GetBtnCatUp() {
+    return _btnCatUp;
+  }
  private:
   SpriteFrameCache* _cache;
   Sprite* _titleLogo;
   Sprite* _titleBtnNewgameUp;
   Sprite* _titleBtnInfoUp;
+  Sprite* _titleLogoCrown;
+  Sprite* _btnCatUp;
   Sprite* _modeSelectBox;
   Sprite* _txtHeroSelect;
   Sprite* _heroPaladogUp;
@@ -83,8 +96,9 @@ class IntroUI
   Sprite* _slotInfoEmpty;
   Sprite* _msgSelectSlot;
   Sprite* _btnExitUp;
-  Sprite* _btnSlotStartUp;
-  Sprite* _btnSlotDeleteUp;
+  Sprite* _start;
+  Sprite* _delete;
+  Sprite* _msgBox;
 };
 
 #endif // __INTROUI_H__
