@@ -7,7 +7,6 @@
 #include "Monster.h"
 #include "Dungeon.h"
 #include "ServiceScene.h"
-#include "MindForest_Stage2.h"
 
 class MindForest_Stage1 : public Scene
 {
@@ -38,6 +37,8 @@ public:
 	static cocos2d::Scene* createScene();
 	virtual bool init();
 	CREATE_FUNC(MindForest_Stage1);
+
+	~MindForest_Stage1();
 
 	void tick(float delta);
 	void HeroManaRegen(float delta);

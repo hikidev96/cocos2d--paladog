@@ -195,11 +195,3 @@ void ServiceScene::CoinSound()
 {
 	AudioEngine::play2d("Sound/t_score.mp3", false, true);
 }
-
-void ServiceScene::LodingScene(Scene* scene)
-{
-	auto _layercolor = LayerColor::create(Color4B(0, 0, 0, 0));
-	scene->addChild(_layercolor, 10000);
-}
-
-

@@ -395,9 +395,15 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 
 		}
 
+		
 		if (AudioEngine::getState(_audioId1) != AudioEngine::AudioState::PLAYING)
 		{
-			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", true, 1.0f);
+			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", false, 1.0f);
+		}
+		if (AudioEngine::getCurrentTime(_audioId1) >= 0.5f)
+		{
+			log("사운드체크");
+			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", false, 1.0f);
 		}
 	}
 	if (_right && Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
@@ -418,7 +424,12 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 
 		if (AudioEngine::getState(_audioId1) != AudioEngine::AudioState::PLAYING)
 		{
-			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", true, 1.0f);
+			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", false, 1.0f);
+		}
+		if (AudioEngine::getCurrentTime(_audioId1) >= 0.5f)
+		{
+			log("사운드체크");
+			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", false, 1.0f);
 		}
 	}
 	if (!Hero::getInstance()->getHero()->getNumberOfRunningActions()) // 히어로 대기

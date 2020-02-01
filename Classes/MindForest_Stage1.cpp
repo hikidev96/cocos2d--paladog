@@ -25,7 +25,6 @@ bool MindForest_Stage1::init() {
 	_cache = SpriteFrameCache::getInstance();
 	_cache->addSpriteFramesWithFile("UI/Background/background_00.plist");
 
-
 	// 배경이미지 만들기.
 	_backGround1 = Sprite::createWithSpriteFrameName("background_00_a.png");
 	_backGround1->setPosition({ 0,525 });
@@ -84,6 +83,11 @@ bool MindForest_Stage1::init() {
 	return true;
 }
 
+MindForest_Stage1::~MindForest_Stage1()
+{
+
+}
+
 void MindForest_Stage1::tick(float delta)
 {
 
@@ -129,7 +133,6 @@ void MindForest_Stage1::tick(float delta)
 			AudioEngine::play2d("Sound/stage_clear.mp3",false,1.0f);
 			Hero::getInstance()->setStageClear(true);
 		}
-			
 	}
 
 	// 씬 전환
@@ -138,8 +141,8 @@ void MindForest_Stage1::tick(float delta)
 		AudioEngine::stopAll();
 		AudioEngine::uncacheAll();
 		Hero::getInstance()->setSceneChange(false);
-		auto scene = MindForest_Stage2::create();
-		Director::getInstance()->replaceScene(scene);
+		//auto scene = MindForest_Stage2::create();
+		//Director::getInstance()->replaceScene(scene);
 	}
 
 }

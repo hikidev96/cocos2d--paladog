@@ -127,7 +127,6 @@ void MindForest_Stage2::tick(float delta)
 			AudioEngine::play2d("Sound/stage_clear.mp3", false, 1.0f);
 			Hero::getInstance()->setStageClear(true);
 		}
-
 	}
 
 	// ¾À ÀüÈ¯
@@ -136,8 +135,8 @@ void MindForest_Stage2::tick(float delta)
 		AudioEngine::stopAll();
 		AudioEngine::uncacheAll();
 		Hero::getInstance()->setSceneChange(false);
-		auto scene = MindForest_Stage3::create();
-		Director::getInstance()->replaceScene(scene);
+		//auto scene = MindForest_Stage3::create();
+		//Director::getInstance()->replaceScene(scene);
 	}
 
 }

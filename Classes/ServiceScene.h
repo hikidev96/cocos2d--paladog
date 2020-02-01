@@ -50,6 +50,5 @@ public:
 	void CoinVisible();
 	void LightVisible();
 	void CoinSound();
-	void LodingScene(Scene* scene);
 	
 };

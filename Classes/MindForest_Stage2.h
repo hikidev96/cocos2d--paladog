@@ -7,7 +7,6 @@
 #include "Monster.h"
 #include "Dungeon.h"
 #include "ServiceScene.h"
-#include "MindForest_Stage3.h"
 
 class MindForest_Stage2 : public Scene
 {
