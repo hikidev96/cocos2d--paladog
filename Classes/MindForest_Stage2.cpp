@@ -14,10 +14,13 @@ bool MindForest_Stage2::init() {
 	_bgLayer = Layer::create();
 	this->addChild(_bgLayer, -100);
 
+
 	Hero::getInstance()->createHeroInfo(this, _bgLayer);
 	_heroControl = new HeroControl(this, _bgLayer, _dungeon);
 	_dungeon = new Dungeon(this, _bgLayer, 20000.0f); //3번째 인자에 체력 넣음
 	_servecScene = new ServiceScene(this);
+
+	Hero::getInstance()->getHeroBuffOra()->runAction(Hero::getInstance()->getOraAct());
 
 	this->schedule(schedule_selector(MindForest_Stage2::tick));
 	this->schedule(schedule_selector(MindForest_Stage2::HeroManaRegen), Hero::getInstance()->getManaRegenSpeed());

@@ -18,9 +18,9 @@
                 <key>frame</key>
                 <string>{{208,182},{84,74}}</string>
                 <key>offset</key>
-                <string>{192,-26}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{84,74}</string>
             </dict>
             <key>msg_notice.png</key>
             <dict>
@@ -110,7 +110,7 @@
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{127,68}</string>
+                <string>{125,68}</string>
             </dict>
             <key>title_logo_gloss_01.png</key>
             <dict>
