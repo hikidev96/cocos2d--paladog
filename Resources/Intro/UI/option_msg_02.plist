@@ -72,9 +72,9 @@
                 <key>frame</key>
                 <string>{{266,242},{116,136}}</string>
                 <key>offset</key>
-                <string>{0,-1}</string>
+                <string>{0,-0}</string>
                 <key>sourceSize</key>
-                <string>{128,148}</string>
+                <string>{116,136}</string>
             </dict>
             <key>hero_paladog_up.png</key>
             <dict>
