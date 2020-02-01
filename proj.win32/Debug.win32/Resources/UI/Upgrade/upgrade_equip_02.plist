@@ -135,16 +135,16 @@
                 <key>frame</key>
                 <string>{{668,440},{92,36}}</string>
                 <key>offset</key>
-                <string>{-194,140}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{92,36}</string>
             </dict>
             <key>btn_main_up.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{640,396},{92,36}}</string>
                 <key>offset</key>
-                <string>{-193,140}</string>
+                <string>{2 ,0}</string>
                 <key>sourceSize</key>
                 <string>{92,36}</string>
             </dict>
@@ -243,18 +243,18 @@
                 <key>frame</key>
                 <string>{{764,256},{96,36}}</string>
                 <key>offset</key>
-                <string>{191,140}</string>
+                <string>{2, 0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{96, 36}</string>
             </dict>
             <key>btn_shop01_up.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{662,212},{96,36}}</string>
                 <key>offset</key>
-                <string>{190,140}</string>
+                <string>{0, 0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{96, 36}</string>
             </dict>
             <key>btn_shop02_down.png</key>
             <dict>
@@ -486,27 +486,27 @@
                 <key>frame</key>
                 <string>{{634,352},{118,36}}</string>
                 <key>offset</key>
-                <string>{19,-12}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{118, 36}</string>
             </dict>
             <key>btn_upgrade_down.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{302,410},{118,36}}</string>
                 <key>offset</key>
-                <string>{19,-12}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{118, 36}</string>
             </dict>
             <key>btn_upgrade_up.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{176,410},{118,36}}</string>
                 <key>offset</key>
-                <string>{19,-12}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{118, 36}</string>
             </dict>
             <key>gem_shop_exit_down.png</key>
             <dict>
@@ -891,9 +891,9 @@
                 <key>frame</key>
                 <string>{{574,352},{2,6}}</string>
                 <key>offset</key>
-                <string>{103,94}</string>
+                <string>{0,0}</string>
                 <key>sourceSize</key>
-                <string>{480,320}</string>
+                <string>{2, 6}</string>
             </dict>
             <key>unit_status_gauge_preview.png</key>
             <dict>
