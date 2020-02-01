@@ -1,6 +1,9 @@
 #include "UpgradeScene.h"
 #include "ui/CocosGUI.h"
 #include "cocos_framework.h"
+#include "MapMindForestScene.h"
+#include "IntroScene.h"
+
 USING_NS_CC;
 using namespace ui;
 
@@ -13,6 +16,11 @@ bool UpgradeScene::init() {
 	if (!Scene::init()) {
 		return false;
 	}
+
+	/*if (AudioEngine::getState(_soundBs) != AudioEngine::AudioState::PLAYING && AudioEngine::getState(_soundBg1) != AudioEngine::AudioState::PLAYING && !BgSoundClear)
+	{
+		
+	}*/
 
 	_cache = SpriteFrameCache::getInstance();
 
@@ -47,7 +55,7 @@ bool UpgradeScene::init() {
 	this->addChild(_shopScene);
 
 
-	_upgrade = Sprite::createWithSpriteFrameName("btn_upgrade_up.png");
+	_upgrade = Sprite::createWithSpriteFrameName(Hero::getInstance()->getGold() >= 250 ? "btn_upgrade_up.png" : "btn_upgrade_disable.png");
 	_upgrade->setAnchorPoint(Vec2(0, 0));
 	_upgrade->setPosition(200, 130);
 	this->addChild(_upgrade);
@@ -130,6 +138,11 @@ bool UpgradeScene::init() {
 	_gold->setColor(Color3B::YELLOW);
 	this->addChild(_gold);
 
+	_myGold = Label::createWithTTF(ttfConfig, StringUtils::format("%d", (int)Hero::getInstance()->getGold()));
+	_myGold->setPosition(Vec2(115, 32));
+	_myGold->setColor(Color3B::YELLOW);
+	this->addChild(_myGold);
+
 	_unit = Sprite::createWithSpriteFrameName("u01_walk_0001.png");
 	_unit->setPosition(260, 255);
 	this->addChild(_unit, 10);
@@ -175,15 +188,48 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 	if (_mainScene->getBoundingBox().containsPoint(touch->getLocation()))
 	{
 		_mainScene->setSpriteFrame("btn_main_down.png");
-
+		AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
+		auto scene = IntroScene::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(2, scene));
 	}
 	if (_shopScene->getBoundingBox().containsPoint(touch->getLocation()))
 	{
 		_shopScene->setSpriteFrame("btn_shop01_down.png");
+		AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
+		auto scene = MapMindForestScene::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(2, scene));
 	}
 	if (_upgrade->getBoundingBox().containsPoint(touch->getLocation()) &&
 		1) {
-		_upgrade->setSpriteFrame("btn_upgrade_down.png");
+		switch (_select) {
+		case 0:
+			if (Hero::getInstance()->getGold() < 250) {
+				_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+			}
+			else {
+				_upgrade->setSpriteFrame("btn_upgrade_down.png");
+				AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
+			}
+			break;
+		case 2:
+			if (Hero::getInstance()->getGold() < 10000) {
+				_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+			}
+			else {
+				_upgrade->setSpriteFrame("btn_upgrade_down.png");
+				AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
+			}
+			break;
+		case 3:
+			if (Hero::getInstance()->getGold() < 20000) {
+				_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+			}
+			else {
+				_upgrade->setSpriteFrame("btn_upgrade_down.png");
+				AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
+			}
+			break;
+		}
 	}
 
 	if (_unit00->getBoundingBox().containsPoint(touch->getLocation()))
@@ -210,6 +256,7 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 		_attackBar->setScaleX(3);
 		_speedBar->setScaleX(58.5);
 		_delayBar->setScaleX(30);
+		AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
 	}
 	if (_unit02->getBoundingBox().containsPoint(touch->getLocation()))
 	{
@@ -235,6 +282,7 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 		_attackBar->setScaleX(6);
 		_speedBar->setScaleX(45);
 		_delayBar->setScaleX(20);
+		AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
 	}
 	if (_unit03->getBoundingBox().containsPoint(touch->getLocation()))
 	{
@@ -260,6 +308,7 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 		_attackBar->setScaleX(3);
 		_speedBar->setScaleX(53);
 		_delayBar->setScaleX(3);
+		AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
 	}
 	return true;
 }
@@ -272,7 +321,30 @@ void UpgradeScene::onTouchEnded(Touch * touch, Event * event)
 {
 	_mainScene->setSpriteFrame("btn_main_up.png");
 	_shopScene->setSpriteFrame("btn_shop01_up.png");
-	if (1) {
-		_upgrade->setSpriteFrame("btn_upgrade_up.png");
+	switch (_select) {
+	case 0:
+		if (Hero::getInstance()->getGold() < 250) {
+			_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+		}
+		else {
+			_upgrade->setSpriteFrame("btn_upgrade_up.png");
+		}
+		break;
+	case 2:
+		if (Hero::getInstance()->getGold() < 10000) {
+			_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+		}
+		else {
+			_upgrade->setSpriteFrame("btn_upgrade_up.png");
+		}
+		break;
+	case 3:
+		if (Hero::getInstance()->getGold() < 20000) {
+			_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+		}
+		else {
+			_upgrade->setSpriteFrame("btn_upgrade_up.png");
+		}
+		break;
 	}
 }

@@ -1,5 +1,6 @@
 #include "MindForest_Stage1.h"
 #include "MapMindForestScene.h"
+#include "UpgradeScene.h"
 
 Scene* MindForest_Stage1::createScene() {
 	return MindForest_Stage1::create();
@@ -146,7 +147,7 @@ void MindForest_Stage1::tick(float delta)
 		AudioEngine::stopAll();
 		AudioEngine::uncacheAll();
 		Hero::getInstance()->setSceneChange(false);
-		auto scene = MapMindForestScene::createScene();
+		auto scene = UpgradeScene::createScene();
 		Director::getInstance()->replaceScene(TransitionFade::create(2,scene));
 	}
 
