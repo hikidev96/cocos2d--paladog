@@ -4,6 +4,7 @@
 #include "cocos_framework.h"
 #include "MapMindForestBg.h"
 #include "MapMindForestUI.h"
+#include "UpgradeScene.h"
 
 class MapMindForestScene : public Scene
 {

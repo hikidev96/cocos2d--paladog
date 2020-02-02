@@ -23,6 +23,7 @@
     <ClCompile Include="..\Classes\Unit.cpp" />
     <ClCompile Include="..\Classes\UpgradeScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Classes\MapMindForest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -48,6 +49,7 @@
     <ClInclude Include="..\Classes\Unit.h" />
     <ClInclude Include="..\Classes\UpgradeScene.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="..\Classes\MapMindForest.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
