@@ -93,6 +93,7 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 			monster[i]->getMonster()->runAction(Sequence::createWithTwoActions(TintTo::create(0, Color3B::RED), TintTo::create(0.1f, Color3B::WHITE)));
 
 			monster[i]->Hit(_Atk);
+			AudioEngine::play2d("Sound/hit_01.mp3", false, 1.0f);
 			_firstAtk = true;
 
 			_hitEffect1 = Sprite::createWithSpriteFrameName("eff_explosion_a_0001.png");
@@ -105,6 +106,8 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 			{
 				_address1 = monster[i]->getMonster();
 			}
+
+
 		}
 
 		// 두번째 유닛과 충돌
@@ -118,6 +121,7 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 				continue;
 
 			monster[i]->Hit(_Atk);
+			AudioEngine::play2d("Sound/hit_01.mp3", false, 1.0f);
 			_secondAtk = true;
 
 			_hitEffect2 = Sprite::createWithSpriteFrameName("eff_explosion_a_0001.png");
@@ -143,6 +147,7 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 				continue;
 
 			monster[i]->Hit(_Atk);
+			AudioEngine::play2d("Sound/hit_01.mp3", false, 1.0f);
 
 			_hitEffect3 = Sprite::createWithSpriteFrameName("eff_explosion_a_0001.png");
 			_hitEffect3->setScale(1.5f);
@@ -163,6 +168,7 @@ void MissileCollision::BringMonsterVec(vector<Monster*> monster, Dungeon* dungeo
 		dungeon->getMonsterBase()->runAction(Sequence::createWithTwoActions(TintTo::create(0, Color3B::RED), TintTo::create(0.1f, Color3B::WHITE)));
 
 		dungeon->Hit(_Atk);
+		AudioEngine::play2d("Sound/hit_01.mp3", false, 1.0f);
 
 		_hitEffect4 = Sprite::createWithSpriteFrameName("eff_explosion_a_0001.png");
 		_hitEffect4->setScale(1.5f);

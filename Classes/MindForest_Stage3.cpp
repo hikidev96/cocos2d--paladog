@@ -9,12 +9,17 @@ bool MindForest_Stage3::init() {
 		return false;
 	}
 
+	_soundBs = AudioEngine::play2d("Sound/start_battle.mp3", false, 1.f);
+
 	_bgLayer = Layer::create();
 	this->addChild(_bgLayer, -100);
 
 	Hero::getInstance()->createHeroInfo(this, _bgLayer);
 	_heroControl = new HeroControl(this, _bgLayer, _dungeon);
 	_dungeon = new Dungeon(this, _bgLayer, 30000.0f); //3번째 인자에 체력 넣음
+	_servecScene = new ServiceScene(this);
+
+	Hero::getInstance()->getHeroBuffOra()->runAction(Hero::getInstance()->getOraAct());
 
 	this->schedule(schedule_selector(MindForest_Stage3::tick));
 	this->schedule(schedule_selector(MindForest_Stage3::HeroManaRegen), Hero::getInstance()->getManaRegenSpeed());
@@ -71,12 +76,28 @@ bool MindForest_Stage3::init() {
 	//좀비킹 상태값
 	_zomking = 0;
 
+	// 겟 레디 화면
+	_servecScene->GetReady();
+
+	// 사운드
+
+	BgSoundClear = false;
+
+	Hero::getInstance()->setStageKind(Stage3);
+
 	return true;
 }
 
 void MindForest_Stage3::tick(float delta)
 {
-	MonsterTick();
+	if (AudioEngine::getState(_soundBs) != AudioEngine::AudioState::PLAYING && AudioEngine::getState(_soundBg1) != AudioEngine::AudioState::PLAYING && !BgSoundClear)
+	{
+		_soundBg1 = AudioEngine::play2d("Sound/bg_stage.mp3", true, 0.6);
+		BgSoundClear = true;
+	}
+
+	if (Hero::getInstance()->getStageStart())
+		MonsterTick();
 
 	for (int i = 0; i < _heroControl->getHeroUnitVec().size(); i++)
 	{
@@ -100,16 +121,54 @@ void MindForest_Stage3::tick(float delta)
 	_heroControl->UnitVecErase(); // 유닛백터 삭제
 	_heroControl->CoolTime(); // 쿨타임 계산
 
+	// 스테이지 클리어 화면
+	_servecScene->StageClear();
+
+	for (int i = 0; i < _monster.size(); i++)
+	{
+		if (_monster[i]->getMonsterCode() == "b01" && _monster[i]->getHp() <= 0 && !Hero::getInstance()->getStageClear())
+		{
+			AudioEngine::stop(_soundBg1);
+			AudioEngine::play2d("Sound/stage_clear.mp3", false, 1.0f);
+			Hero::getInstance()->setStageClear(true);
+		}
+	}
+
+	// 씬 전환
+	if (Hero::getInstance()->getSceneChange())
+	{
+
+		AudioEngine::end();
+		AudioEngine::stopAll();
+		AudioEngine::uncacheAll();
+
+		Hero::getInstance()->setSceneChange(false);
+
+		auto EndingLayer = LayerColor::create(Color4B::WHITE);
+		EndingLayer->setOpacity(0);
+		this->addChild(EndingLayer, 10000);
+
+		auto EndingText = Sprite::create("UI/ending_msg_kor.png");
+		EndingText->setOpacity(0);
+		EndingText->setPosition(280, 160);
+		EndingText->setScale(0.5f);
+		this->addChild(EndingText, 10000);
+
+		EndingLayer->runAction(FadeIn::create(3));
+		EndingText->runAction(Sequence::create(DelayTime::create(3),FadeIn::create(3),nullptr));
+	}
 }
 
 void MindForest_Stage3::HeroManaRegen(float delta)
 {
-	_heroControl->HeroManaRegen(); // 마나리젠
+	if (Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
+		_heroControl->HeroManaRegen(); // 마나리젠
 }
 
 void MindForest_Stage3::HeroMeatRegen(float delta)
 {
-	_heroControl->HeroMeatRegen(); // 고기리젠
+	if (Hero::getInstance()->getStageStart() && !Hero::getInstance()->getStageClear())
+		_heroControl->HeroMeatRegen(); // 고기리젠
 }
 
 void MindForest_Stage3::MonsterTick()
@@ -118,20 +177,22 @@ void MindForest_Stage3::MonsterTick()
 		switch (_zomking) {
 		case 0:
 			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::좀비킹));
+			_monster.back()->getMonster()->setPositionX(_monster.back()->getMonster()->getPositionX() - 10);
+			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::핑크미라));
 			_zomking = 1;
 			break;
 		case 1:
-			if (rand() % 1500 == 0) {
+			if (rand() % 2500 == 0) {
 				_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::핑크미라));
 			}
 			break;
 		}
 	}
 	else {
-		if (rand() % 400 == 0) {
+		if (rand() % 500 == 0) {
 			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::광부좀비));
 		}
-		if (rand() % 1000 == 0) {
+		if (rand() % 1200 == 0) {
 			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::일반미라));
 		}
 		if (rand() % 2000 == 0) {

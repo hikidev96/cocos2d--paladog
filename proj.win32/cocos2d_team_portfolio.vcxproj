@@ -159,7 +159,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\IntroBg.cpp" />
     <ClCompile Include="..\Classes\IntroScene.cpp" />
     <ClCompile Include="..\Classes\IntroUI.cpp" />
-    <ClCompile Include="..\Classes\MapMindForest.cpp" />
+    <ClCompile Include="..\Classes\MapMindForestBg.cpp" />
+    <ClCompile Include="..\Classes\MapMindForestScene.cpp" />
+    <ClCompile Include="..\Classes\MapMindForestUI.cpp" />
     <ClCompile Include="..\Classes\MindForest_Stage1.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
@@ -172,6 +174,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Shop.cpp" />
     <ClCompile Include="..\Classes\ShopScene.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
+    <ClCompile Include="..\Classes\UpgradeScene.cpp" />
     <ClCompile Include="main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -186,7 +189,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\IntroBg.h" />
     <ClInclude Include="..\Classes\IntroScene.h" />
     <ClInclude Include="..\Classes\IntroUI.h" />
-    <ClInclude Include="..\Classes\MapMindForest.h" />
+    <ClInclude Include="..\Classes\MapMindForestBg.h" />
+    <ClInclude Include="..\Classes\MapMindForestScene.h" />
+    <ClInclude Include="..\Classes\MapMindForestUI.h" />
     <ClInclude Include="..\Classes\MindForest_Stage1.h" />
     <ClInclude Include="..\Classes\MindForest_Stage2.h" />
     <ClInclude Include="..\Classes\MindForest_Stage3.h" />
@@ -196,6 +201,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Shop.h" />
     <ClInclude Include="..\Classes\ShopScene.h" />
     <ClInclude Include="..\Classes\Unit.h" />
+    <ClInclude Include="..\Classes\UpgradeScene.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

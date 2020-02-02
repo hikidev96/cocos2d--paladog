@@ -54,6 +54,11 @@ class HeroControl : Scene
 
 	Sprite* NextButton; // 클리어시 보여지는 넥스트 버튼
 
+	Sprite* _levelUpBlackDot; // 레벨업 효과
+	Sprite* _levelUpText; // 레벨업 텍스트
+	Sprite* _levelUpWingL;
+	Sprite* _levelUpWingR;
+
 	Sprite* _pauseBack;
 	Sprite* _pauseBord;
 	Sprite* _pauseText;
@@ -102,6 +107,15 @@ class HeroControl : Scene
 
 	bool _PauseClick;
 
+	bool _UnitActiveSoundBool;
+	bool _UnitActiveSoundBool2;
+	bool _UnitActiveSoundBool3;
+
+	// 사운드
+	int _audioId1; // 히어로 걷기
+	int _audioUnitActive; // 유닛 소환버튼 활성화
+	int _audioUnitSommons; // 유닛 소환버튼 누름
+
 public:
 	HeroControl(Scene* scene, Layer* layer, Dungeon* dungeon);
 	void HeroMove(Dungeon* dungeon);
@@ -112,6 +126,7 @@ public:
 	void SkillEffectVisible();
 	void MiniMap();
 	void LevelUp();
+	void SetLevelUpImage();
 	void UnitBuff();
 	void NextButtonVisible();
 

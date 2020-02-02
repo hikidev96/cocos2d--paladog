@@ -411,7 +411,7 @@ HeroUnit::HeroUnit(Scene * scene, UnitKind herokind, Layer* layer, Dungeon* dung
 	_unitBuffOra = Sprite::createWithSpriteFrameName("eff_aura2_0001.png");
 	_unitBuffOra->setPosition(_UnitSprite->getContentSize().width / 2, 10);
 	_unitBuffOra->setScale(0.8f);
-	_UnitSprite->addChild(_unitBuffOra, _UnitSprite->getZOrder() - 1);
+	_UnitSprite->addChild(_unitBuffOra,Hero::getInstance()->getHeroBuffOra()->getZOrder() + 1);
 	_unitBuffOra->runAction(_unitBuffOraRepeat);
 	_unitBuffOra->setVisible(false);
 
@@ -507,7 +507,26 @@ void HeroUnit::UnitCollisionCheck()
 				// ¹öÇÁ»óÅÂ°¡ ¾Æ´Ò‹š
 				if (_buff == false)
 				{
-
+					switch (_unitKind)
+					{
+					case »ýÁã:
+					{
+						AudioEngine::play2d("Sound/sword_01.mp3", false, 1.0f);
+					}		
+						break;
+					case °õ:
+					{
+						AudioEngine::play2d("Sound/spear.mp3", false, 1.0f);
+					}
+						break;
+					case Ä»°Å·ç:
+					{
+						AudioEngine::play2d("Sound/punch.mp3", false, 1.0f);
+					}
+						break;
+					default:
+						break;
+					}
 
 					AttackAct = Sequence::create
 					(_animate2,
@@ -532,7 +551,27 @@ void HeroUnit::UnitCollisionCheck()
 
 					if (RandNum == 0)
 					{
-						
+						switch (_unitKind)
+						{
+						case »ýÁã:
+						{
+							AudioEngine::play2d("Sound/sword_01.mp3", false, 1.0f);
+						}
+						break;
+						case °õ:
+						{
+							AudioEngine::play2d("Sound/spear.mp3", false, 1.0f);
+						}
+						break;
+						case Ä»°Å·ç:
+						{
+							AudioEngine::play2d("Sound/punch.mp3", false, 1.0f);
+						}
+						break;
+						default:
+							break;
+						}
+
 						AttackAct = Sequence::create
 						(_animate2,
 							CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -550,7 +589,26 @@ void HeroUnit::UnitCollisionCheck()
 
 					if (RandNum == 1)
 					{
-						
+						switch (_unitKind)
+						{
+						case »ýÁã:
+						{
+							AudioEngine::play2d("Sound/u01_skill.mp3", false, 1.0f);
+						}
+						break;
+						case °õ:
+						{
+							AudioEngine::play2d("Sound/u03_skill.mp3", false, 1.0f);
+						}
+						break;
+						case Ä»°Å·ç:
+						{
+							AudioEngine::play2d("Sound/u04_skill.mp3", false, 1.0f);
+						}
+						break;
+						default:
+							break;
+						}
 
 						AttackAct = Sequence::create
 						(_animate2_1,
@@ -576,7 +634,27 @@ void HeroUnit::UnitCollisionCheck()
 			{
 				if (_buff == false)
 				{
-					
+					switch (_unitKind)
+					{
+					case »ýÁã:
+					{
+						AudioEngine::play2d("Sound/sword_01.mp3", false, 1.0f);
+					}
+					break;
+					case °õ:
+					{
+						AudioEngine::play2d("Sound/spear.mp3", false, 1.0f);
+					}
+					break;
+					case Ä»°Å·ç:
+					{
+						AudioEngine::play2d("Sound/punch.mp3", false, 1.0f);
+					}
+					break;
+					default:
+						break;
+					}
+
 					AttackAct = Sequence::create
 					(_animate2,
 						CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -596,7 +674,27 @@ void HeroUnit::UnitCollisionCheck()
 
 					if (RandNum == 0)
 					{
-						
+						switch (_unitKind)
+						{
+						case »ýÁã:
+						{
+							AudioEngine::play2d("Sound/sword_01.mp3", false, 1.0f);
+						}
+						break;
+						case °õ:
+						{
+							AudioEngine::play2d("Sound/spear.mp3", false, 1.0f);
+						}
+						break;
+						case Ä»°Å·ç:
+						{
+							AudioEngine::play2d("Sound/punch.mp3", false, 1.0f);
+						}
+						break;
+						default:
+							break;
+						}
+
 						AttackAct = Sequence::create
 						(_animate2,
 							CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -612,7 +710,27 @@ void HeroUnit::UnitCollisionCheck()
 
 					if (RandNum == 1)
 					{
-						
+						switch (_unitKind)
+						{
+						case »ýÁã:
+						{
+							AudioEngine::play2d("Sound/u01_skill.mp3", false, 1.0f);
+						}
+						break;
+						case °õ:
+						{
+							AudioEngine::play2d("Sound/u03_skill.mp3", false, 1.0f);
+						}
+						break;
+						case Ä»°Å·ç:
+						{
+							AudioEngine::play2d("Sound/u04_skill.mp3", false, 1.0f);
+						}
+						break;
+						default:
+							break;
+						}
+
 						AttackAct = Sequence::create
 						(_animate2_1,
 							CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitHeavyAttack, this)),
@@ -666,7 +784,26 @@ void HeroUnit::UnitCollisionCheck()
 		{
 			if (_buff == false)
 			{
-
+				switch (_unitKind)
+				{
+				case »ýÁã:
+				{
+					AudioEngine::play2d("Sound/sword_01.mp3", false, 1.0f);
+				}
+				break;
+				case °õ:
+				{
+					AudioEngine::play2d("Sound/spear.mp3", false, 1.0f);
+				}
+				break;
+				case Ä»°Å·ç:
+				{
+					AudioEngine::play2d("Sound/punch.mp3", false, 1.0f);
+				}
+				break;
+				default:
+					break;
+				}
 
 				AttackAct = Sequence::create
 				(_animate2,
@@ -689,6 +826,27 @@ void HeroUnit::UnitCollisionCheck()
 
 				if (RandNum == 0)
 				{
+					switch (_unitKind)
+					{
+					case »ýÁã:
+					{
+						AudioEngine::play2d("Sound/sword_01.mp3", false, 1.0f);
+					}
+					break;
+					case °õ:
+					{
+						AudioEngine::play2d("Sound/spear.mp3", false, 1.0f);
+					}
+					break;
+					case Ä»°Å·ç:
+					{
+						AudioEngine::play2d("Sound/punch.mp3", false, 1.0f);
+					}
+					break;
+					default:
+						break;
+					}
+
 					AttackAct = Sequence::create
 					(_animate2,
 						CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -706,6 +864,27 @@ void HeroUnit::UnitCollisionCheck()
 
 				if (RandNum == 1)
 				{
+					switch (_unitKind)
+					{
+					case »ýÁã:
+					{
+						AudioEngine::play2d("Sound/u01_skill.mp3", false, 1.0f);
+					}
+					break;
+					case °õ:
+					{
+						AudioEngine::play2d("Sound/u03_skill.mp3", false, 1.0f);
+					}
+					break;
+					case Ä»°Å·ç:
+					{
+						AudioEngine::play2d("Sound/u04_skill.mp3", false, 1.0f);
+					}
+					break;
+					default:
+						break;
+					}
+
 					AttackAct = Sequence::create
 					(_animate2_1,
 						CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitHeavyAttack, this)),
@@ -729,6 +908,27 @@ void HeroUnit::UnitCollisionCheck()
 		{
 			if (_buff == false)
 			{
+				switch (_unitKind)
+				{
+				case »ýÁã:
+				{
+					AudioEngine::play2d("Sound/sword_01.mp3", false, 1.0f);
+				}
+				break;
+				case °õ:
+				{
+					AudioEngine::play2d("Sound/spear.mp3", false, 1.0f);
+				}
+				break;
+				case Ä»°Å·ç:
+				{
+					AudioEngine::play2d("Sound/punch.mp3", false, 1.0f);
+				}
+				break;
+				default:
+					break;
+				}
+
 				AttackAct = Sequence::create
 				(_animate2,
 					CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -748,6 +948,27 @@ void HeroUnit::UnitCollisionCheck()
 
 				if (RandNum == 0)
 				{
+					switch (_unitKind)
+					{
+					case »ýÁã:
+					{
+						AudioEngine::play2d("Sound/sword_01.mp3", false, 1.0f);
+					}
+					break;
+					case °õ:
+					{
+						AudioEngine::play2d("Sound/spear.mp3", false, 1.0f);
+					}
+					break;
+					case Ä»°Å·ç:
+					{
+						AudioEngine::play2d("Sound/punch.mp3", false, 1.0f);
+					}
+					break;
+					default:
+						break;
+					}
+
 					AttackAct = Sequence::create
 					(_animate2,
 						CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitAttack, this)),
@@ -763,6 +984,27 @@ void HeroUnit::UnitCollisionCheck()
 
 				if (RandNum == 1)
 				{
+					switch (_unitKind)
+					{
+					case »ýÁã:
+					{
+						AudioEngine::play2d("Sound/u01_skill.mp3", false, 1.0f);
+					}
+					break;
+					case °õ:
+					{
+						AudioEngine::play2d("Sound/u03_skill.mp3", false, 1.0f);
+					}
+					break;
+					case Ä»°Å·ç:
+					{
+						AudioEngine::play2d("Sound/u04_skill.mp3", false, 1.0f);
+					}
+					break;
+					default:
+						break;
+
+					}
 					AttackAct = Sequence::create
 					(_animate2_1,
 						CallFunc::create(CC_CALLBACK_0(HeroUnit::UnitHeavyAttack, this)),
@@ -808,6 +1050,8 @@ void HeroUnit::UnitAttack()
 
 
 			_monsterVec[i]->Hit(_Atk);
+
+			AudioEngine::play2d("Sound/hit_01.mp3", false, 1.0f);
 			
 			return;
 		}
@@ -833,6 +1077,8 @@ void HeroUnit::UnitAttack()
 			_hitAnimationBox->runAction(Sequence::create(_UnitHitAnimate2, RemoveSelf::create(true), nullptr));
 
 		_dungeon->Hit(_Atk);
+
+		AudioEngine::play2d("Sound/hit_01.mp3", false, 1.0f);
 	}
 
 	//_Hp -= 60; // Á×´Â¸ð¼ÇÅ×½ºÆ®¿ë
@@ -865,6 +1111,8 @@ void HeroUnit::UnitHeavyAttack()
 
 			_monsterVec[i]->Hit(_Atk2);
 
+			AudioEngine::play2d("Sound/hit_01.mp3", false, 1.0f);
+
 			return;
 		}
 	}
@@ -889,6 +1137,8 @@ void HeroUnit::UnitHeavyAttack()
 			_hitAnimationBox->runAction(Sequence::create(_UnitHitAnimate2, RemoveSelf::create(true), nullptr));
 
 		_dungeon->Hit(_Atk2);
+
+		AudioEngine::play2d("Sound/hit_01.mp3", false, 1.0f);
 	}
 
 	//_Hp -= 60; // Á×´Â¸ð¼ÇÅ×½ºÆ®¿ë
@@ -903,6 +1153,27 @@ void HeroUnit::UnitDeadCheck()
 		_UnitSprite->runAction(MoveBy::create(0.2, Vec2(-50,0)));
 		DeadAct = Sequence::create(_animate3, CallFunc::create(CC_CALLBACK_0(HeroUnit::ShowUnitDeadSoul, this)),DelayTime::create(1.f), FadeOut::create(1.f),RemoveSelf::create(true), nullptr);
 		_UnitSprite->runAction(DeadAct);
+
+		switch (_unitKind)
+		{
+		case »ýÁã:
+		{
+			AudioEngine::play2d("Sound/die_u01.mp3", false,1.0f);
+		}
+			break;
+		case °õ:
+		{
+			AudioEngine::play2d("Sound/die_u03.mp3", false, 1.0f);
+		}
+			break;
+		case Ä»°Å·ç:
+		{
+			AudioEngine::play2d("Sound/die_u04.mp3", false, 1.0f);
+		}
+			break;
+		default:
+			break;
+		}
 	
 		_Dead = true;
 	}
@@ -933,7 +1204,7 @@ void HeroUnit::ShowUnitDeadSoul()
 
 void HeroUnit::Healing()
 {
-	_Hp += 50;
+	_Hp += 600;
 
 	if (_Hp > _maxHP)
 		_Hp = _maxHP;
