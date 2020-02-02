@@ -177,20 +177,22 @@ void MindForest_Stage3::MonsterTick()
 		switch (_zomking) {
 		case 0:
 			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::좀비킹));
+			_monster.back()->getMonster()->setPositionX(_monster.back()->getMonster()->getPositionX() - 10);
+			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::핑크미라));
 			_zomking = 1;
 			break;
 		case 1:
-			if (rand() % 1500 == 0) {
+			if (rand() % 2500 == 0) {
 				_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::핑크미라));
 			}
 			break;
 		}
 	}
 	else {
-		if (rand() % 400 == 0) {
+		if (rand() % 500 == 0) {
 			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::광부좀비));
 		}
-		if (rand() % 1000 == 0) {
+		if (rand() % 1200 == 0) {
 			_monster.push_back(new Monster(this, _bgLayer, _heroControl->getHeroUnitVec(), Mob::일반미라));
 		}
 		if (rand() % 2000 == 0) {
