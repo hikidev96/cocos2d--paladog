@@ -85,6 +85,8 @@ bool MindForest_Stage3::init() {
 
 	Hero::getInstance()->setStageKind(Stage3);
 
+	Hero::getInstance()->getHeroBuffOra()->runAction(Hero::getInstance()->getOraAct());
+
 	return true;
 }
 

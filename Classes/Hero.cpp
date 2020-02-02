@@ -42,8 +42,8 @@ Hero::Hero()
 	IsHealing = false;
 
 	_skillOneUnlock = true;
-	_skillTwoUnlock = true;
-	_skillThreeUnlock = true;
+	_skillTwoUnlock = false;
+	_skillThreeUnlock = false;
 
 	_unitOneUnlock = true;
 	_unitTwoUnlock = false ;
