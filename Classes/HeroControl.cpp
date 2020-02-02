@@ -402,7 +402,6 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		}
 		if (AudioEngine::getCurrentTime(_audioId1) >= 0.5f)
 		{
-			log("사운드체크");
 			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", false, 1.0f);
 		}
 	}
@@ -428,7 +427,6 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		}
 		if (AudioEngine::getCurrentTime(_audioId1) >= 0.5f)
 		{
-			log("사운드체크");
 			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", false, 1.0f);
 		}
 	}
@@ -661,7 +659,6 @@ void HeroControl::UnitVecErase()
 			_heroUnitVec[i]->getSprite()->removeChild(_heroUnitVec[i]->getUnitHpBarBack(), false);
 			//_layer->removeChild(_heroUnitVec[i]->getSprite(), false);
 			_heroUnitVec.erase(_heroUnitVec.begin() + i);
-			log("d");
 		}
 	}
 
