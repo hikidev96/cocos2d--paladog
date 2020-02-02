@@ -20,7 +20,7 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 		_delay = 2.0f;
 		_speed = 0.5f;
 		_exp = 5;
-		_money = 10;
+		_money = 100;
 		break;
 	case 강화좀비:
 		cache->addSpriteFramesWithFile("Monster/monster/Uzombie.plist");
@@ -32,7 +32,7 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 		_delay = 1.8f;
 		_speed = 0.6f;
 		_exp = 10;
-		_money = 20;
+		_money = 200;
 		break;
 	case 광부좀비:
 		cache->addSpriteFramesWithFile("Monster/monster/Mzombie.plist");
@@ -44,7 +44,7 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 		_delay = 2.5f;
 		_speed = 0.4f;
 		_exp = 15;
-		_money = 30;
+		_money = 300;
 		break;
 	case 일반미라:
 		cache->addSpriteFramesWithFile("Monster/monster/mummy.plist");
@@ -57,7 +57,7 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 		_delay = 2.0f;
 		_speed = 0.5f;
 		_exp = 20;
-		_money = 40;
+		_money = 400;
 		break;
 	case 핑크미라:
 		cache->addSpriteFramesWithFile("Monster/monster/Pmummy.plist");
@@ -70,7 +70,7 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 		_delay = 1.7f;
 		_speed = 0.7f;
 		_exp = 30;
-		_money = 50;
+		_money = 500;
 		break;
 	case 좀비킹:
 		cache->addSpriteFramesWithFile("Monster/monster/Zomking.plist");
@@ -82,7 +82,7 @@ Monster::Monster(Scene* scene, Layer* layer, vector<HeroUnit*> unit, Mob mob)
 		_delay = 3.0f;
 		_speed = 0.6f;
 		_exp = 50;
-		_money = 100;
+		_money = 1000;
 		break;
 	}
 	_hp = _hpm;
@@ -226,13 +226,18 @@ void Monster::Hit(float atk)
 	if (_hp == _hpm) {
 		_monsterHpBar = ProgressTimer::create(Sprite::create("UI/MonsterUnitHpBar.png"));
 		_monsterHpBar->setType(ProgressTimer::Type::BAR);
-		_monsterHpBar->setPosition({ _monster->getContentSize().width / 2 - 3, _monster->getContentSize().height - 90 });
+		if (_monsterCode == "b01") {
+			_monsterHpBar->setPosition( _monster->getContentSize().width / 2 - 3, _monster->getContentSize().height - 50 );
+		}
+		else {
+			_monsterHpBar->setPosition( _monster->getContentSize().width / 2 - 3, _monster->getContentSize().height - 90);
+		}
 		_monsterHpBar->setMidpoint({ 0, 0 });
 		_monsterHpBar->setBarChangeRate({ 1,0 });
 		_monster->addChild(_monsterHpBar);
 
 		_monsterHpBarBack = Sprite::create("UI/UnitHpBarBack.png");
-		_monsterHpBarBack->setPosition({ _monster->getContentSize().width / 2 - 3, _monster->getContentSize().height - 90 });
+		_monsterHpBarBack->setPosition(_monsterHpBar->getPosition());
 		_monster->addChild(_monsterHpBarBack, -10);
 	}
 	if (_hp > 0) {

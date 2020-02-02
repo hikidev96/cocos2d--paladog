@@ -22,6 +22,8 @@ bool UpgradeScene::init() {
 		
 	}*/
 
+	//Hero::getInstance()->setGold(3000);
+
 	_cache = SpriteFrameCache::getInstance();
 
 	_cache->addSpriteFramesWithFile("UI/Upgrade/upgrade_equip_02.plist");
@@ -60,18 +62,18 @@ bool UpgradeScene::init() {
 	_upgrade->setPosition(200, 130);
 	this->addChild(_upgrade);
 	
-
+	
 	_unit00 = Sprite::createWithSpriteFrameName("btn_unit_00_up.png");
 	_unit00->setScale(0.54);
 	_unit00->setPosition(33.3, 246);
 	this->addChild(_unit00);
 
-	_unit02 = Sprite::createWithSpriteFrameName("btn_unit_02_up.png");
+	_unit02 = Sprite::createWithSpriteFrameName(Hero::getInstance()->getUnitTwoUnlock() ? "btn_unit_02_up.png" : "btn_unit_02_down.png");
 	_unit02->setScale(0.54);
 	_unit02->setPosition(89.4, 246);
 	this->addChild(_unit02);
 
-	_unit03 = Sprite::createWithSpriteFrameName("btn_unit_03_up.png");
+	_unit03 = Sprite::createWithSpriteFrameName(Hero::getInstance()->getUnitTwoUnlock() ? Hero::getInstance()->getUnitThreeUnlock() ? "btn_unit_03_up.png" : "btn_unit_03_down.png" : "btn_unit_03_disable.png");
 	_unit03->setScale(0.54);
 	_unit03->setPosition(145.5, 246);
 	this->addChild(_unit03);
@@ -133,7 +135,7 @@ bool UpgradeScene::init() {
 
 	ttfConfig.fontSize = 13;
 
-	_gold = Label::createWithTTF(ttfConfig, "500");
+	_gold = Label::createWithTTF(ttfConfig, "250");
 	_gold->setPosition(Vec2(410, 143));
 	_gold->setColor(Color3B::YELLOW);
 	this->addChild(_gold);
@@ -212,21 +214,44 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 			}
 			break;
 		case 2:
-			if (Hero::getInstance()->getGold() < 10000) {
+			if (Hero::getInstance()->getGold() < 1000) {
 				_upgrade->setSpriteFrame("btn_upgrade_disable.png");
 			}
 			else {
-				_upgrade->setSpriteFrame("btn_upgrade_down.png");
 				AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
+				_upgrade->setSpriteFrame("btn_upgrade_down.png");
+				if (Hero::getInstance()->getUnitTwoUnlock()) {
+
+				}
+				else {
+					Hero::getInstance()->setGold(Hero::getInstance()->getGold() - 1000);
+					Hero::getInstance()->setUnitTwoUnlock(true);
+					_unit02->setSpriteFrame("btn_unit_02_up.png");
+					_unit03->setSpriteFrame("btn_unit_03_down.png");
+				}
+				if (Hero::getInstance()->getGold() < 1000) {
+					_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+				}
 			}
 			break;
 		case 3:
-			if (Hero::getInstance()->getGold() < 20000) {
+			if (Hero::getInstance()->getGold() < 1500 || !Hero::getInstance()->getUnitTwoUnlock()) {
 				_upgrade->setSpriteFrame("btn_upgrade_disable.png");
 			}
 			else {
-				_upgrade->setSpriteFrame("btn_upgrade_down.png");
 				AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
+				_upgrade->setSpriteFrame("btn_upgrade_down.png");
+				if (Hero::getInstance()->getUnitThreeUnlock()) {
+					
+				}
+				else {
+					Hero::getInstance()->setGold(Hero::getInstance()->getGold() - 1500);
+					Hero::getInstance()->setUnitThreeUnlock(true);
+					_unit03->setSpriteFrame("btn_unit_03_up.png");
+				}
+				if (Hero::getInstance()->getGold() < 1500 || !Hero::getInstance()->getUnitTwoUnlock()) {
+					_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+				}
 			}
 			break;
 		}
@@ -234,6 +259,12 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 
 	if (_unit00->getBoundingBox().containsPoint(touch->getLocation()))
 	{
+		if (Hero::getInstance()->getGold() < 250) {
+			_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+		}
+		else {
+			_upgrade->setSpriteFrame("btn_upgrade_up.png");
+		}
 		_unitSelect->setPosition(240, 161);
 		_select = 0;
 		_unit->cleanup();
@@ -260,6 +291,13 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 	}
 	if (_unit02->getBoundingBox().containsPoint(touch->getLocation()))
 	{
+		if (Hero::getInstance()->getGold() < 1000) {
+			_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+		}
+		else {
+			_upgrade->setSpriteFrame("btn_upgrade_up.png");
+		}
+	
 		_unitSelect->setPosition(296, 161);
 		_select = 2;
 		_unit->cleanup();
@@ -276,7 +314,7 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 		_attack->setString("400");
 		_speed->setString("23");
 		_delay->setString("226");
-		_gold->setString("10000");
+		_gold->setString("1000");
 
 		_hpBar->setScaleX(20);
 		_attackBar->setScaleX(6);
@@ -286,6 +324,12 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 	}
 	if (_unit03->getBoundingBox().containsPoint(touch->getLocation()))
 	{
+		if (Hero::getInstance()->getGold() < 1500 || !Hero::getInstance()->getUnitTwoUnlock()) {
+			_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+		}
+		else {
+			_upgrade->setSpriteFrame("btn_upgrade_up.png");
+		}
 		_unitSelect->setPosition(352, 161);
 		_select = 3;
 		_unit->cleanup();
@@ -302,7 +346,7 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 		_attack->setString("200");
 		_speed->setString("27");
 		_delay->setString("20");
-		_gold->setString("20000");
+		_gold->setString("1500");
 
 		_hpBar->setScaleX(26);
 		_attackBar->setScaleX(3);
@@ -310,6 +354,7 @@ bool UpgradeScene::onTouchBegan(Touch * touch, Event * event)
 		_delayBar->setScaleX(3);
 		AudioEngine::play2d("Sound/ok_button.mp3", false, 0.6);
 	}
+	_myGold->setString(StringUtils::format("%d", (int)Hero::getInstance()->getGold()));
 	return true;
 }
 
@@ -324,23 +369,23 @@ void UpgradeScene::onTouchEnded(Touch * touch, Event * event)
 	switch (_select) {
 	case 0:
 		if (Hero::getInstance()->getGold() < 250) {
-			_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+			//_upgrade->setSpriteFrame("btn_upgrade_disable.png");
 		}
 		else {
 			_upgrade->setSpriteFrame("btn_upgrade_up.png");
 		}
 		break;
 	case 2:
-		if (Hero::getInstance()->getGold() < 10000) {
-			_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+		if (Hero::getInstance()->getGold() < 1000) {
+			//_upgrade->setSpriteFrame("btn_upgrade_disable.png");
 		}
 		else {
 			_upgrade->setSpriteFrame("btn_upgrade_up.png");
 		}
 		break;
 	case 3:
-		if (Hero::getInstance()->getGold() < 20000) {
-			_upgrade->setSpriteFrame("btn_upgrade_disable.png");
+		if (Hero::getInstance()->getGold() < 1500 || !Hero::getInstance()->getUnitTwoUnlock()) {
+			//_upgrade->setSpriteFrame("btn_upgrade_disable.png");
 		}
 		else {
 			_upgrade->setSpriteFrame("btn_upgrade_up.png");
