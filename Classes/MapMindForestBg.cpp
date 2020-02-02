@@ -61,10 +61,32 @@ void MapMindForestBg::setStSelMapNow(Scene * pScene) {
   pScene->addChild(_stSelMapNow);
 }
 
-void MapMindForestBg::setIconSmallStar(Scene * pScene) {
-  _iconSmallStar = Sprite::createWithSpriteFrameName(
-    "icon_small_star.png");
-  _iconSmallStar->setAnchorPoint(Vec2(0, 0));
-  _iconSmallStar->setPosition(Vec2(0, 0));
-  pScene->addChild(_iconSmallStar);
+void MapMindForestBg::setStage1IconSmallStar(Scene * pScene) {
+  for (byte i = 0; i < 3; i++) {
+    _stage1IconSmallStar[i] = Sprite::createWithSpriteFrameName(
+      "icon_small_star.png");
+    _stage1IconSmallStar[i]->setAnchorPoint(Vec2(0, 0));
+    _stage1IconSmallStar[i]->setPosition(Vec2(90, i * 15 + 205));
+    pScene->addChild(_stage1IconSmallStar[i]);
+  }
+}
+
+void MapMindForestBg::setStage2IconSmallStar(Scene * pScene) {
+  for (byte i = 0; i < 3; i++) {
+    _stage2IconSmallStar[i] = Sprite::createWithSpriteFrameName(
+      "icon_small_star.png");
+    _stage2IconSmallStar[i]->setAnchorPoint(Vec2(0, 0));
+    _stage2IconSmallStar[i]->setPosition(Vec2(155, i * 15 + 205));
+    pScene->addChild(_stage2IconSmallStar[i]);
+  }
+}
+
+void MapMindForestBg::setStage3IconSmallStar(Scene * pScene) {
+  for (byte i = 0; i < 3; i++) {
+    _stage3IconSmallStar[i] = Sprite::createWithSpriteFrameName(
+      "icon_small_star.png");
+    _stage3IconSmallStar[i]->setAnchorPoint(Vec2(0, 0));
+    _stage3IconSmallStar[i]->setPosition(Vec2(220, i * 15 + 205));
+    pScene->addChild(_stage3IconSmallStar[i]);
+  }
 }

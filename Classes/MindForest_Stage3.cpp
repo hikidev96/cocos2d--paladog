@@ -1,5 +1,7 @@
 #include "MindForest_Stage3.h"
 
+bool MindForest_Stage3::_isComplete = false;
+
 Scene* MindForest_Stage3::createScene() {
 	return MindForest_Stage3::create();
 }
@@ -18,8 +20,6 @@ bool MindForest_Stage3::init() {
 	_heroControl = new HeroControl(this, _bgLayer, _dungeon);
 	_dungeon = new Dungeon(this, _bgLayer, 30000.0f); //3번째 인자에 체력 넣음
 	_servecScene = new ServiceScene(this);
-
-	Hero::getInstance()->getHeroBuffOra()->runAction(Hero::getInstance()->getOraAct());
 
 	this->schedule(schedule_selector(MindForest_Stage3::tick));
 	this->schedule(schedule_selector(MindForest_Stage3::HeroManaRegen), Hero::getInstance()->getManaRegenSpeed());
@@ -85,6 +85,8 @@ bool MindForest_Stage3::init() {
 
 	Hero::getInstance()->setStageKind(Stage3);
 
+	Hero::getInstance()->getHeroBuffOra()->runAction(Hero::getInstance()->getOraAct());
+
 	return true;
 }
 
@@ -141,6 +143,7 @@ void MindForest_Stage3::tick(float delta)
 		AudioEngine::end();
 		AudioEngine::stopAll();
 		AudioEngine::uncacheAll();
+        _isComplete = true;
 
 		Hero::getInstance()->setSceneChange(false);
 

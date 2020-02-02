@@ -43,4 +43,6 @@ public:
 	void HeroMeatRegen(float delta);
 
 	void MonsterTick();
+
+    static bool _isComplete;
 };

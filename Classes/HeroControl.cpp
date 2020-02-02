@@ -402,7 +402,6 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		}
 		if (AudioEngine::getCurrentTime(_audioId1) >= 0.5f)
 		{
-			log("사운드체크");
 			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", false, 1.0f);
 		}
 	}
@@ -428,7 +427,6 @@ void HeroControl::HeroMove(Dungeon* dungeon)
 		}
 		if (AudioEngine::getCurrentTime(_audioId1) >= 0.5f)
 		{
-			log("사운드체크");
 			_audioId1 = AudioEngine::play2d("Sound/horse_run.mp3", false, 1.0f);
 		}
 	}
@@ -661,7 +659,6 @@ void HeroControl::UnitVecErase()
 			_heroUnitVec[i]->getSprite()->removeChild(_heroUnitVec[i]->getUnitHpBarBack(), false);
 			//_layer->removeChild(_heroUnitVec[i]->getSprite(), false);
 			_heroUnitVec.erase(_heroUnitVec.begin() + i);
-			log("d");
 		}
 	}
 
@@ -778,6 +775,9 @@ void HeroControl::LevelUp()
 
 		Hero::getInstance()->setExp(0);
 		Hero::getInstance()->setLv(Hero::getInstance()->getLv() + 1);
+
+		Hero::getInstance()->setMaxMeat(Hero::getInstance()->getMaxMeat() + 10);
+		Hero::getInstance()->setMaxMana(Hero::getInstance()->getMaxMana() + 5);
 
 		// 레벨업 텍스트, 날개 액션
 		_levelUpText->runAction(Sequence::create(ScaleTo::create(0.1f, 0.5, 0.5),DelayTime::create(2.4), MoveBy::create(0.2,Vec2(0,200)), nullptr));

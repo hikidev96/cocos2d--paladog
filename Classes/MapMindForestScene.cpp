@@ -21,7 +21,6 @@ bool MapMindForestScene::init() {
   _mapMindForestBg->setStSelBoardBottom(this);
   _mapMindForestBg->setStSelBoardTop(this);
   _mapMindForestBg->setStSelMapNow(this);
-  _mapMindForestBg->setIconSmallStar(this);
 
   _mapMindForestUI = new (std::nothrow) MapMindForestUI;  
   _mapMindForestUI->setBtnExit(this);
@@ -33,6 +32,18 @@ bool MapMindForestScene::init() {
   _mapMindForestUI->getStSelPointUp1()->setVisible(false);
   _mapMindForestUI->setStSelPointUp2(this);
   _mapMindForestUI->getStSelPointUp2()->setVisible(false);
+  _mapMindForestUI->setUpgrade(this);
+
+  // º° Ãß°¡
+  if (MindForest_Stage1::_isComplete) {
+    _mapMindForestBg->setStage1IconSmallStar(this);
+  }
+  if (MindForest_Stage2::_isComplete) {
+    _mapMindForestBg->setStage2IconSmallStar(this);
+  }
+  if (MindForest_Stage3::_isComplete) {
+    _mapMindForestBg->setStage3IconSmallStar(this);
+  }
 
   return true;
 }
@@ -66,6 +77,8 @@ bool MapMindForestScene::onTouchBegan(Touch * touch, Event * event) {
     getBoundingBox().containsPoint(touchPoint);
   bool touchStage3 = _mapMindForestUI->getStSelPointUp2()->
     getBoundingBox().containsPoint(touchPoint);
+  bool touchUpgrade = _mapMindForestUI->getUpgrade()->
+    getBoundingBox().containsPoint(touchPoint);
 
   if (touchExit) {
     auto pScene = IntroScene::createScene();
@@ -91,6 +104,11 @@ bool MapMindForestScene::onTouchBegan(Touch * touch, Event * event) {
 
     auto pScene = MindForest_Stage3::createScene();
     Director::getInstance()->replaceScene(pScene);
+  }
+
+  if (touchUpgrade) {
+    auto pScene = UpgradeScene::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(2,pScene));
   }
 
   return true;
