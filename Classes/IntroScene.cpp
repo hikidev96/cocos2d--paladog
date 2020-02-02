@@ -265,7 +265,7 @@ bool IntroScene::onTouchBegan(Touch * touch, Event * event) {
     AudioEngine::stop(_bgStageSound);
     // ¾À ÀüÈ¯
     auto pScene = MindForest_Stage1::createScene();
-    Director::getInstance()->replaceScene(pScene);
+    Director::getInstance()->replaceScene(TransitionFade::create(2,pScene));
   }
 
   return true;

@@ -25,12 +25,17 @@ class MapMindForestUI
   Sprite* getStSelPointUp2() {
     return _stSelPointUp[2];
   }
+  void setUpgrade(Scene* pScene);
+  Sprite* getUpgrade() {
+    return _upgrade;
+  }
  private:
   SpriteFrameCache* _cache;
   Sprite* _btnExitUp;
   Sprite* _iconStageLocked[24];
   Sprite* _numBoard;
   Sprite* _stSelPointUp[3];
+  Sprite* _upgrade;
 };
 
 #endif // __MAP_MINDFORESTUI_H__
